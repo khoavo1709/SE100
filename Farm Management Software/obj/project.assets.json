@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Documents\\Farm Management Software\\Farm Management Software.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Farm Management Software\\Farm Management Software.csproj",
       "projectName": "Farm Management Software",
-      "projectPath": "C:\\Users\\Admin\\Documents\\Farm Management Software\\Farm Management Software.csproj",
+      "projectPath": "C:\\Users\\Admin\\Desktop\\Farm Management Software\\Farm Management Software.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Documents\\Farm Management Software\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Desktop\\Farm Management Software\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -59,7 +59,7 @@
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           },
-          "Microsoft.WindowsDesktop.App.WindowsForms": {
+          "Microsoft.WindowsDesktop.App.WPF": {
             "privateAssets": "none"
           }
         },
