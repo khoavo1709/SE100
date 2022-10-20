@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:FarmManagementSoftware"
+                    xmlns:viewModel="clr-namespace:FarmManagementSoftware.ViewModel"
+                    >
+    <viewModel:MainWindowVM x:Key="MainWindowVM"></viewModel:MainWindowVM>
+    <viewModel:LoginVM x:Key="LoginVM"></viewModel:LoginVM>
+</ResourceDictionary>
