@@ -29,3 +29,37 @@ C:\Users\Admin\Desktop\FarmManagementSoftware\bin\Debug\System.Windows.Interacti
 C:\Users\Admin\Desktop\FarmManagementSoftware\obj\Debug\ResourceXAML\MainResource.baml
 C:\Users\Admin\Desktop\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.CopyComplete
 C:\Users\Admin\Desktop\FarmManagementSoftware\obj\Debug\App.baml
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\FarmManagementSoftware.exe.config
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\FarmManagementSoftware.exe
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\FarmManagementSoftware.pdb
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\MaterialDesignColors.dll
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\MaterialDesignColors.pdb
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.AssemblyReference.cache
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.SuggestedBindingRedirects.cache
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Login.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\wMainWindow.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\App.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware_MarkupCompile.cache
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware_MarkupCompile.lref
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\App.baml
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\ResourceXAML\MainResource.baml
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Login.baml
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\wMainWindow.baml
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.g.resources
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.Properties.Resources.resources
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.GenerateResource.cache
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.CoreCompileInputs.cache
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.CopyComplete
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.exe
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.pdb
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Login.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\Quanlychucvu.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\ThemChucVu.g.cs
