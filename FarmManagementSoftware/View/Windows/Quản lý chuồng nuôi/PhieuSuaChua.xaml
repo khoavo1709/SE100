@@ -1,0 +1,105 @@
+﻿<Window x:Class="FarmManagementSoftware.View.Windows.PhieuSuaChua"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyTraiHeo"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Tạo phiếu mới"
+        Height="480"
+        Width="720">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <materialDesign:Card Margin="10"
+                                 Padding="5,0">
+                <StackPanel Margin="0,10">
+
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Mã phiếu"
+                             Margin="0,0,5,5" />
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Mã nhân viên"
+                             Margin="0,0,5,5" />
+                    <DatePicker Grid.Column="1"
+                                materialDesign:HintAssist.Hint="Ngày">
+                    </DatePicker>
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Ghi chú"
+                             Margin="0,0,5,5" />
+
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Tổng tiền"
+                             Margin="0,0,5,5" />
+                    <ComboBox    materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}">
+
+                        <ComboBoxItem Content="Mới tạo"
+                                      IsSelected="True" />
+                        <ComboBoxItem Content="Đã thanh toán" />
+                        <ComboBoxItem Content="Đã bị hủy" />
+
+                    </ComboBox>
+
+                </StackPanel>
+            </materialDesign:Card>
+
+            <Button Margin="20,10"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Background="#3ab19b"
+                    Content="Hoàn tất"></Button>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <materialDesign:Card Margin="10"
+                                 Padding="5,0">
+                <StackPanel Margin="0,10">
+
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Mã chuồng"
+                             Margin="0,0,5,5" />
+
+                    <RichTextBox Style="{StaticResource MaterialDesignRichTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Mô tả"
+                            Height="200"
+                             Margin="0,0,5,5" />
+                </StackPanel>
+            </materialDesign:Card>
+
+            <Button  Margin="20,10"
+                     Style="{StaticResource MaterialDesignRaisedButton}"
+                     Background="#3ab19b"
+                     Content="Thêm"></Button>
+        </StackPanel>
+
+        <DataGrid Grid.Column="2"
+                  Name="DanhSachHeo"
+                  HeadersVisibility="All"
+                  SelectionUnit="{Binding ElementName=selectionUnitComboBox, Path=SelectedValue}">
+            <DataGrid.Resources>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Binding="{Binding Code}"
+                                    Header="Mã chuồng"
+                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                <DataGridTextColumn Binding="{Binding Code}"
+                                    Header="Mô tả"
+                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

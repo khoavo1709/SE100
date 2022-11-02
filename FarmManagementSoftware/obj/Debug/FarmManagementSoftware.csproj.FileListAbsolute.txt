@@ -63,3 +63,7 @@ C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\De
 C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Login.g.cs
 C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\Quanlychucvu.g.cs
 C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\ThemChucVu.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Lập lịch\LapLichTiem.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Lập lịch\LichPhoiGiongWindow.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoSuaChuaWindow.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\SuaChucVu.g.cs

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\App.xaml
-81023025057
+28-1100493269
 
-15-699400301
+351632680849
 17-1339689632
-ResourceXAML\MainResource.xaml;View\Windows\Login.xaml;View\Windows\Lập lịch\LapLichTiem.xaml;View\Windows\Lập lịch\LichPhoiGiongWindow.xaml;View\Windows\Quản lý chức vụ\Quanlychucvu.xaml;View\Windows\Quản lý chức vụ\SuaChucVu.xaml;View\Windows\Quản lý chức vụ\ThemChucVu.xaml;wMainWindow.xaml;
+ResourceXAML\MainResource.xaml;View\Windows\Login.xaml;View\Windows\Lập lịch\LapLichTiem.xaml;View\Windows\Lập lịch\LichPhoiGiongWindow.xaml;View\Windows\Quản lý báo cáo\BaoCaoSuaChuaWindow.xaml;View\Windows\Quản lý báo cáo\BaoCaoThuChiWindow.xaml;View\Windows\Quản lý báo cáo\BaoCaoTinhTrangDanHeoWindow.xaml;View\Windows\Quản lý báo cáo\BaoCaoTonKhoWindow.xaml;View\Windows\Quản lý chuồng nuôi\LapPhieuSuaChuaWindow.xaml;View\Windows\Quản lý chuồng nuôi\PhieuSuaChua.xaml;View\Windows\Quản lý chuồng nuôi\QuanLyThongTinChuong.xaml;View\Windows\Quản lý chuồng nuôi\SuaChuong.xaml;View\Windows\Quản lý chuồng nuôi\ThemChuong.xaml;View\Windows\Quản lý chuồng nuôi\ThongTinChuong.xaml;View\Windows\Quản lý chức vụ\Quanlychucvu.xaml;View\Windows\Quản lý chức vụ\SuaChucVu.xaml;View\Windows\Quản lý chức vụ\ThemChucVu.xaml;View\Windows\Quản lý giống heo\QuanLyGiongHeo.xaml;View\Windows\Quản lý giống heo\SuaGiongHeo.xaml;View\Windows\Quản lý giống heo\ThemGiongHeo.xaml;View\Windows\Quản lý đàn heo\LapLichWindow.xaml;View\Windows\Quản lý đàn heo\LapPhieuBanNhapHeoWindow.xaml;View\Windows\Quản lý đàn heo\PhieuNhapBanHeo.xaml;View\Windows\Quản lý đàn heo\QuanLyThongTinCaTheWindow.xaml;View\Windows\Quản lý đàn heo\SuaTTHeo.xaml;View\Windows\Quản lý đàn heo\ThemTTHeo.xaml;View\Windows\Quản lý đàn heo\ThongTinHeo.xaml;wMainWindow.xaml;
 
 True
 
