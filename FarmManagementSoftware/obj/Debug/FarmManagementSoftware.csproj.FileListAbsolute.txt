@@ -103,3 +103,23 @@ C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoft
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware_MarkupCompile.lref
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.exe
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.pdb
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý giống heo\SuaGiongHeo.baml
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoThuChiWindow.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoTinhTrangDanHeoWindow.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoTonKhoWindow.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\LapPhieuSuaChuaWindow.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\PhieuSuaChua.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\QuanLyThongTinChuong.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\SuaChuong.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ThemChuong.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ThongTinChuong.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý giống heo\QuanLyGiongHeo.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý giống heo\SuaGiongHeo.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý giống heo\ThemGiongHeo.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\LapLichWindow.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\LapPhieuBanNhapHeoWindow.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\PhieuNhapBanHeo.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\QuanLyThongTinCaTheWindow.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\SuaTTHeo.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThemTTHeo.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThongTinHeo.g.cs

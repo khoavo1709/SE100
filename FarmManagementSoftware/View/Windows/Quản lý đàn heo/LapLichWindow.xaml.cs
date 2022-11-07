@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FarmManagementSoftware.View.Windows.Quản_lý_đàn_heo
+namespace FarmManagementSoftware.View.Windows
 {
     /// <summary>
     /// Interaction logic for LapLichWindow.xaml

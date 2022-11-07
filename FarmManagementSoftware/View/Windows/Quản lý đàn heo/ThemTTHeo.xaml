@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QuanLyTraiHeo.View.Windows.Quản_lý_đàn_heo" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        xmlns:viewmodel="clr-namespace:QuanLyTraiHeo.ViewModel"
+        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:viewmodel="clr-namespace:FarmManagementSoftware.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:ThemTTHeoVM}"
         mc:Ignorable="d"
         Title="Thêm cá thể heo" Height="700" Width="1124"  
@@ -24,7 +25,7 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
+            <Image Source="/Image/background.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
             <StackPanel Margin="5" VerticalAlignment="Center">
                 <materialDesign:Card Grid.Row="0" Margin="5" VerticalAlignment="Center">
                     <StackPanel VerticalAlignment="Center">
