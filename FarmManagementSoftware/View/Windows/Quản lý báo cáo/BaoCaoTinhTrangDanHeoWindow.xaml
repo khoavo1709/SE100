@@ -21,7 +21,9 @@
         Height="768"
         Width="1024"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
-    <!--<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+    <Grid>
+        <Label>Báo cáo đàn</Label>
+        <!--<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <Grid Background="#f3f3f9" Margin="20,0,20,0" DataContext="{StaticResource BaoCaoTinhTrangHeoVM}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
@@ -266,5 +268,7 @@
         </Grid>
 
     </ScrollViewer>-->
+
+    </Grid>
 </Window>   
 

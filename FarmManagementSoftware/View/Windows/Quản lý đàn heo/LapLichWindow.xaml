@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="LapLichWindow" Height="450" Width="800">
     <Grid>
-        
+        <Label>Lập lịch</Label>
     </Grid>
 </Window>

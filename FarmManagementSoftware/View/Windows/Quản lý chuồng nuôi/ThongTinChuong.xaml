@@ -29,6 +29,6 @@
         <TextBlock Margin=" 99 0 0 0" HorizontalAlignment="Left" Grid.Row="3" Text="{Binding SucChuaToiDa}"></TextBlock>
         <TextBlock Grid.Row="4" HorizontalAlignment="Left">Số lượng heo</TextBlock>
         <TextBlock Margin=" 99 0 0 0" Grid.Row="4" Text="{Binding SoLuongHeo}"></TextBlock>
-        <Button Grid.Row="10" Width="100" Background="#3ab19b" HorizontalAlignment="Center" Click="btn_Thoat_Click">Thoát</Button>
+        <Button Grid.Row="10" Width="100" Background="#3ab19b" HorizontalAlignment="Center">Thoát</Button>
     </Grid>
 </Window>

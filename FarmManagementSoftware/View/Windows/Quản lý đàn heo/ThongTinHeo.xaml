@@ -47,6 +47,6 @@
         <TextBlock Margin=" 99 0 0 0" Grid.Row="8" Text="{Binding TinhTrang}"></TextBlock>
         <TextBlock Grid.Row="9" HorizontalAlignment="Left">Nguồn gốc</TextBlock>
         <TextBlock Margin=" 99 0 0 0" Grid.Row="9" Text="{Binding NguonGoc}"></TextBlock>
-        <Button Grid.Row="10" Width="100" Background="#3ab19b" HorizontalAlignment="Center" Click="btn_Thoat_Click">Thoát</Button>
+        <Button Grid.Row="10" Width="100" Background="#3ab19b" HorizontalAlignment="Center" >Thoát</Button>
     </Grid>
 </Window>

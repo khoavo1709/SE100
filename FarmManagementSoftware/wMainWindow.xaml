@@ -14,10 +14,11 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="MainWindow"
-        Height="450"
-        Width="800"
+        Title="Farm Management"
+        Height="768"
+        Width="1024"
         Name="MainWindow"
+        WindowState="Maximized"
         DataContext="{StaticResource MainWindowVM}"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
 
@@ -29,7 +30,7 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="70"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -75,12 +76,29 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TreeViewItem>
-
                                 <TreeViewItem Name="Tree_menu_detail_CaThe"
                                         Header="Quản lý thông tin cá thể" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Selected">
                                             <i:InvokeCommandAction Command="{Binding OpenQuanLyThongTinCaTheWindow}"
+                                                        CommandParameter="{Binding ElementName=grb_TabWindow}"></i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TreeViewItem>
+                                <TreeViewItem Name="Tree_menu_detail_Loaiheo"
+                                    Header="Quản lý loại heo">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Selected">
+                                            <i:InvokeCommandAction Command="{Binding OpenQuanLyLoaiHeo}"
+                                                        CommandParameter="{Binding ElementName=grb_TabWindow}"></i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TreeViewItem>
+                                <TreeViewItem Name="Tree_menu_detail_Giongheo"
+                                    Header="Quản lý giống heo">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Selected">
+                                            <i:InvokeCommandAction Command="{Binding OpenQuanLyGiongHeo}"
                                                         CommandParameter="{Binding ElementName=grb_TabWindow}"></i:InvokeCommandAction>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
@@ -96,12 +114,24 @@
                                 </TreeViewItem>
                                 <TreeViewItem Name="Tree_menu_detail_LapLich"
                                         Header="Lập lịch" >
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="Selected">
-                                            <i:InvokeCommandAction Command="{Binding OpenLapLichWindow}"
+                                    <TreeViewItem Name="Tree_menu_detail_Laplichtiem"
+                                                  Header="Lập lịch tiêm">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Selected">
+                                                <i:InvokeCommandAction Command="{Binding OpenLapLichTiemWindow}"
                                                         CommandParameter="{Binding ElementName=grb_TabWindow}"></i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TreeViewItem>
+                                    <TreeViewItem Name="Tree_menu_detail_Laplichphoigiong"
+                                                  Header="Lập lịch phối giống">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Selected">
+                                                <i:InvokeCommandAction Command="{Binding OpenLaplichPhoiGiongWindow}"
+                                                        CommandParameter="{Binding ElementName=grb_TabWindow}"></i:InvokeCommandAction>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TreeViewItem>
                                 </TreeViewItem>
 
 
@@ -182,7 +212,6 @@
                                     </i:Interaction.Triggers>
                                 </TreeViewItem>
 
-
                                 <TreeViewItem Name="Tree_menu_detail_NhanVien"
                                         Header="Quản lý thông tin nhân viên">
                                     <i:Interaction.Triggers>
@@ -193,15 +222,16 @@
                                     </i:Interaction.Triggers>
                                 </TreeViewItem>
 
-                                <TreeViewItem Name="Tree_menu_detail_TraCuu"  
-                                        Header="Tra cứu phiếu thu chi">
+                                <TreeViewItem Name="Tree_menu_detail_ChucVu"
+                                        Header="Quản lý chức vụ">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Selected">
-                                            <i:InvokeCommandAction Command="{Binding OpenTraCuuPhieuThuChiWindow}"
-                                                           CommandParameter="{Binding ElementName=grb_TabWindow}"></i:InvokeCommandAction>
+                                            <i:InvokeCommandAction Command="{Binding OpenQuanLyChucVu}"
+                                                        CommandParameter="{Binding ElementName=grb_TabWindow}"></i:InvokeCommandAction>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TreeViewItem>
+
                                 <TreeViewItem Name="Tree_menu_detail_NhatKy"
                                         Header="Quản lý nhật ký">
                                     <i:Interaction.Triggers>
@@ -228,29 +258,27 @@
                 </StackPanel>
             </Expander>
         </Grid>
-        <StackPanel Grid.Column="0" Width="50" HorizontalAlignment="Center" Background="#3ab19b">
-            <Image  Source="/Image/leaves_icon_white.jpg" Height="60"/>
+        <StackPanel Grid.Column="0" Width="70" HorizontalAlignment="Center" Background="#3ab19b">
+            <Image Source="/Image/leaves_icon_white.jpg" Height="60"/>
             <ListBox Margin="7,7,7,7" Name="lB_Menu" HorizontalAlignment="Center"
                     SelectedIndex="-1">
 
                 <ListBoxItem Name="Menu_Manhinhchinh"
-                        Content="{materialDesign:PackIcon Kind=Home}" Foreground="White" Background="#41c4ac" ToolTip="Màn hình chính" Selected="MenuHome_Selected"/>
+                        Content="{materialDesign:PackIcon Kind=Home,Size=25}" Foreground="White" Background="#41c4ac" ToolTip="Màn hình chính" Selected="MenuHome_Selected"/>
                 <ListBoxItem Name="Menu_DanHeo"
-                        Content="{materialDesign:PackIcon Kind=PiggyBank}" Foreground="LightGray" ToolTip="Quản lý đàn heo" Selected="MenuDanHeo_Selected"/>
+                        Content="{materialDesign:PackIcon Kind=PiggyBank,Size=25}" Foreground="LightGray" ToolTip="Quản lý đàn heo" Selected="MenuDanHeo_Selected"/>
                 <ListBoxItem Name="Menu_ChuongNuoi"
-                        Content="{materialDesign:PackIcon Kind=Fence}" Foreground="LightGray" ToolTip="Quản lý chuồng nuôi" Selected="MenuChuongNuoi_Selected"/>
+                        Content="{materialDesign:PackIcon Kind=Fence,Size=25}" Foreground="LightGray" ToolTip="Quản lý chuồng nuôi" Selected="MenuChuongNuoi_Selected"/>
                 <ListBoxItem Name="Menu_Kho"
-                        Content="{materialDesign:PackIcon Kind=Warehouse}" Foreground="LightGray" ToolTip="Quản lý kho" Selected="MenuKho_Selected"/>
+                        Content="{materialDesign:PackIcon Kind=Warehouse,Size=25}" Foreground="LightGray" ToolTip="Quản lý kho" Selected="MenuKho_Selected"/>
                 <ListBoxItem Name="Menu_BaoCao"
-                        Content="{materialDesign:PackIcon Kind=Finance}" Foreground="LightGray" ToolTip="Quản lý báo cáo" Selected="MenuBaoCao_Selected"/>
+                        Content="{materialDesign:PackIcon Kind=Finance,Size=25}" Foreground="LightGray" ToolTip="Quản lý báo cáo" Selected="MenuBaoCao_Selected"/>
                 <ListBoxItem Name="Menu_NhanVien"
-                        Content="{materialDesign:PackIcon Kind=AccountTie}" Foreground="LightGray" ToolTip="Quản lý nhân viên" Selected="MenuNhanVien_Selected"/>
-                <ListBoxItem Name="Menu_TraCuu"
-                        Content="{materialDesign:PackIcon Kind=ReceiptTextCheck}" Foreground="LightGray" ToolTip="Tra cứu phiếu thu chi" Selected="MenuPhieuThuChi_Selected"/>
+                        Content="{materialDesign:PackIcon Kind=AccountTie,Size=25}" Foreground="LightGray" ToolTip="Quản lý nhân viên" Selected="MenuNhanVien_Selected"/>
                 <ListBoxItem Name="Menu_NhatKy"
-                        Content="{materialDesign:PackIcon Kind=Notebook}" Foreground="LightGray" ToolTip="Quản lý nhật lý" Selected="MenuNhatKy_Selected"/>
+                        Content="{materialDesign:PackIcon Kind=Notebook,Size=25}" Foreground="LightGray" ToolTip="Quản lý nhật lý" Selected="MenuNhatKy_Selected"/>
                 <ListBoxItem Name="Menu_CayMucTieu"
-                        Content="{materialDesign:PackIcon Kind=BullseyeArrow}" Foreground="LightGray" ToolTip="Thiết lập cây mục tiêu" Selected="MenuCayMucTieu_Selected"/>
+                        Content="{materialDesign:PackIcon Kind=BullseyeArrow,Size=25}" Foreground="LightGray" ToolTip="Thiết lập cây mục tiêu" Selected="MenuCayMucTieu_Selected"/>
 
             </ListBox>
 
@@ -290,23 +318,29 @@
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition Width="30"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Margin="15,0,0,0" FontWeight="Bold" FontSize="16">Hồ sơ của bạn</TextBlock>
-                                <StackPanel Grid.Column="1" Width="30">
-                                    <materialDesign:PopupBox
-                                                StaysOpen="True" 
-                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                <TextBlock Grid.Column="0"
+                                           Margin="15,0,0,0"
+                                           FontWeight="Bold"
+                                           FontSize="16">Hồ sơ của bạn</TextBlock>
+                                <StackPanel Grid.Column="1"
+                                            Width="30">
+                                    <materialDesign:PopupBox StaysOpen="True"
+                                                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                                         <StackPanel Width="150">
-                                            <Button Name="btn_CapNhatMatKhau" Click="btn_CapNhatMatKhau_Click">
+                                            <Button Name="btn_CapNhatTaiKhoan"
+                                                    Command="{Binding OpenCapNhatTaiKhoan}"
+                                                    CommandParameter="{Binding ElementName=MainWindow}">
                                                 Cập nhật thông tin
                                             </Button>
-                                            <Button Name="btn_DoiMatKhau" Click="btn_DoiMatKhau_Click">
+                                            <Button Name="btn_DoiMatKhau"
+                                                    Command="{Binding OpenDoiMatKhau}"
+                                                    CommandParameter="{Binding ElementName=MainWindow}">
                                                 Đổi mật khẩu
                                             </Button>
                                         </StackPanel>
                                     </materialDesign:PopupBox>
                                 </StackPanel>
                             </Grid>
-
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="110"></ColumnDefinition>
@@ -315,8 +349,9 @@
                                 <Button Width="100" Height="100" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFloatingActionSecondaryButton}"
                                     ToolTip="Ảnh đại diện"
+                                        Background="Transparent"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
-                                    <Image Source="/Image/avatar.jpg"></Image>
+                                    <Image Source="{Binding MyImage}"></Image>
                                 </Button>
                                 <Grid Grid.Column="1">
                                     <Grid.RowDefinitions>
@@ -328,8 +363,9 @@
                                         <TextBlock Foreground="Green">Online</TextBlock>
                                     </StackPanel>
                                     <StackPanel Grid.Row="1" Orientation="Vertical">
-                                        <TextBlock FontWeight="Bold" FontSize="16">Trần Trung Thành</TextBlock>
-                                        <TextBlock FontStyle="Italic">Chủ trang trại</TextBlock>
+                                        <TextBlock FontWeight="Bold"
+                                                   FontSize="16" Text="{Binding NhanVien.HoTen, Mode=OneWay}"></TextBlock>
+                                        <TextBlock FontStyle="Italic" Text="{Binding NhanVien.CHUCVU.TenChucVu}"></TextBlock>
                                     </StackPanel>
                                 </Grid>
 
@@ -338,15 +374,18 @@
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="GenderMaleFemale"/>
-                                        <TextBlock Margin="10,0,0,0">Nam</TextBlock>
+                                        <TextBlock Margin="10,0,0,0"
+                                                   Text="{Binding NhanVien.GioiTinh}"></TextBlock>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                         <materialDesign:PackIcon Kind="CakeVariantOutline"/>
-                                        <TextBlock  Margin="10,0,0,0">13/11/2002</TextBlock>
+                                        <TextBlock  Margin="10,0,0,0"
+                                                    Text="{Binding NhanVien.NgaySinh}"></TextBlock>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                         <materialDesign:PackIcon Kind="BriefcaseOutline"/>
-                                        <TextBlock  Margin="10,0,0,0">25/09/2022</TextBlock>
+                                        <TextBlock  Margin="10,0,0,0"
+                                                    Text="{Binding NhanVien.NgayVaoLam}"></TextBlock>
                                     </StackPanel>
                                 </StackPanel>
 
@@ -355,15 +394,17 @@
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="PhoneMessage"/>
-                                        <TextBlock Margin="10,0,0,0">0123456789</TextBlock>
+                                        <TextBlock Margin="10,0,0,0" Text="{Binding NhanVien.SDT}"></TextBlock>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                         <materialDesign:PackIcon Kind="Email"/>
-                                        <TextBlock  Margin="10,0,0,0">Thanhpro1312@gmail.com</TextBlock>
+                                        <TextBlock  Margin="10,0,0,0"
+                                                    Text="{Binding NhanVien.email}"></TextBlock>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                         <materialDesign:PackIcon Kind="MapMarker"/>
-                                        <TextBlock  Margin="10,0,0,0">Ktx A, DHQG, Thành phố Thủ Đức</TextBlock>
+                                        <TextBlock  Margin="10,0,0,0"
+                                                    Text="{Binding NhanVien.DiaChi}"></TextBlock>
                                     </StackPanel>
                                 </StackPanel>
 
@@ -376,25 +417,57 @@
                     <materialDesign:ColorZone DockPanel.Dock="Top" Mode="PrimaryMid" Padding="16" Background="#3ab19b">
                         <DockPanel>
                             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                                <Button 
-                        Style="{StaticResource MaterialDesignToolForegroundButton}"
-                        Margin="8 0 8 0"
-                        ToolTip="Xem thông báo"
-                        Panel.ZIndex="0">
+                                <materialDesign:Badged Margin="8 0 8 0" VerticalAlignment="Center"
+                                        Badge="2" BadgeBackground="Red" BadgeForeground="White">
+                                    <materialDesign:PopupBox Foreground="White"
+                                                StaysOpen="True" 
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                        <materialDesign:PopupBox.ToggleContent>
+                                            <materialDesign:PackIcon Kind="BellRing" Foreground="White" Width="20" Height="20">
+                                            </materialDesign:PackIcon>
+                                        </materialDesign:PopupBox.ToggleContent>
+                                        <ListBox Width="450" Padding="0" ItemsSource="{Binding listTHONGBAO}" SelectedItem="{Binding selectedItem, Mode=TwoWay}">
+
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock FontWeight="Bold" TextWrapping="Wrap" Text="{Binding TieuDe}"></TextBlock>
+                                                        <TextBlock FontStyle="Italic" FontSize="10" Text="{Binding ThoiGian}"></TextBlock>
+                                                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,0" Text="{Binding NoiDung}"></TextBlock>
+                                                    </StackPanel>
+                                                   
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectionChanged">
+                                                    <i:InvokeCommandAction Command="{Binding OpenCTThongBao}"></i:InvokeCommandAction>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ListBox>
+                                 
+                                    </materialDesign:PopupBox>
+                                </materialDesign:Badged>
+                                <Button
+                                    Foreground="White"
+                                        Style="{StaticResource MaterialDesignIconButton}"
+                                        ToolTip="Tạo thông báo mới"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="btn_TaoThongBao_Click">
                                     <materialDesign:PackIcon
-                            Kind="BellRing" />
+                                                Kind="MessagePlusOutline" />
                                 </Button>
                                 <Rectangle Margin="8,0,8,0" HorizontalAlignment="Stretch" Fill="White" Width="2"/>
                                 <Button
-                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                        ToolTip="TendouHakai"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
-                                    <Image Source="/Image/avatar.jpg"/>
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                    ToolTip="{Binding NhanVien.HoTen}"
+                                    Background="Transparent"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                    <Image Source="{Binding MyImage}"/>
                                 </Button>
                                 <TextBlock
                             VerticalAlignment="Center"
                             Margin="8 0 8 0"
-                            Text="TendouHakai" />
+                            Text="{Binding NhanVien.HoTen}" />
                                 <ToggleButton
                                 Style="{StaticResource MaterialDesignActionToggleButton}"
                                 ToolTip="Xem tài khoản"
@@ -436,4 +509,8 @@
             </materialDesign:DrawerHost>
         </Grid>
     </Grid>
+
+
+
 </Window>
+    

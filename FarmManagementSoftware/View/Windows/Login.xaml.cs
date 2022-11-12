@@ -22,6 +22,16 @@ namespace FarmManagementSoftware.View
         public Login()
         {
             InitializeComponent();
+
+            Tb_Username.Text = FarmManagementSoftware.Properties.Settings.Default.Username;
+            PasswordBox.Password = FarmManagementSoftware.Properties.Settings.Default.Password;
+
+            btn_DangNhap.KeyDown += Btn_DangNhap_KeyDown;
+        }
+
+        private void Btn_DangNhap_KeyDown(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
