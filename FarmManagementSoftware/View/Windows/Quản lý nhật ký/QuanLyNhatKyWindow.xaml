@@ -3,10 +3,208 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows"
+        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="QuanLyNhatKyWindow" Height="450" Width="800">
-    <Grid>
-        <Label>Quản lý nhật ký</Label>
+    <Grid Background="#f3f3f9" Margin="20,0,20,0" DataContext="{StaticResource QuanLyNhatKyVM}">
+        <Grid Grid.Row="2" Margin="0,0,0,0">
+            <materialDesign:Card>
+                <DockPanel>
+                    <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+                        <materialDesign:Card>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,5,0,5">Quản lý nhật ký</TextBlock>
+
+                                <Grid Grid.Row="1" Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Width="180"
+                                            materialDesign:HintAssist.Hint="Tháng"
+                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                            VerticalAlignment="Center" />
+                                        <TextBox Grid.Column="1" Width="180"
+                                            materialDesign:HintAssist.Hint="Năm"
+                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                            VerticalAlignment="Center" />
+                                        <ComboBox Grid.Column="2"
+                                                Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                                materialDesign:ColorZoneAssist.Mode="SecondaryLight"
+                                                materialDesign:HintAssist.Hint="Loại phiếu"
+                                                Width="135">
+                                            <ComboBoxItem
+                                                Content="Tất cả" />
+                                            <ComboBoxItem
+                                                Content="Phiếu nhập heo" />
+                                            <ComboBoxItem
+                                                Content="Phiếu bán heo" />
+                                            <ComboBoxItem
+                                                Content="Phiếu nhập kho" />
+                                            <ComboBoxItem
+                                                Content="Phiếu xuất kho" />
+                                            <ComboBoxItem
+                                                Content="Phiếu kiểm kho" />
+                                        </ComboBox>
+                                    </Grid>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                                        <Button
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Height="30"
+                                    Width="120"
+                                    BorderBrush="White"
+                                    Content="Tìm"
+                                    FontSize="16"
+                                    Background="#00de1e"
+                                    materialDesign:ButtonAssist.CornerRadius="5"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+
+                                        </Button>
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </materialDesign:Card>
+                        <StackPanel>
+                            <Expander IsExpanded="True"
+                                HorizontalAlignment="Stretch"
+                                Header="Ngày 16/10/2022">
+                                <StackPanel
+                                    Orientation="Vertical"
+                                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                    Margin="24,8,24,16">
+                                    <Grid>
+                                        <Rectangle HorizontalAlignment="Left" Width="0.3" Margin="20,8,0,8" Stroke="Black" />
+                                        <StackPanel Orientation="Vertical">
+                                            <ListView Margin="-10,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                                    ItemsSource="{Binding lstNhatKy}">
+                                                <ListView.Resources>
+                                                    <Style TargetType="GridViewColumnHeader">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </Style>
+                                                </ListView.Resources>
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn>
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <Button Grid.Column="1" Background="#d8edf9" Foreground="#4aace1" Width="30" Height="30"
+                                                            Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                                            ToolTip="MaterialDesignIconForegroundButton"
+                                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                                                        <materialDesign:PackIcon
+                                                            Kind="{Binding icon}" />
+                                                                    </Button>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+                                                        <GridViewColumn>
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock FontWeight="Bold" Margin="0,10,0,0" Height="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding TenNhanVien}"></TextBlock>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+                                                        <GridViewColumn>
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock Margin="0,10,0,0" Height="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Mota}"></TextBlock>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+                                                        <GridViewColumn>
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock Margin="0,10,0,0" Height="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding MaPhieu}"></TextBlock>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                        </StackPanel>
+                                    </Grid>
+
+                                </StackPanel>
+                            </Expander>
+                            <Expander IsExpanded="True"
+                                HorizontalAlignment="Stretch"
+                                Header="Ngày 17/10/2022">
+                                <StackPanel
+                                    Orientation="Vertical"
+                                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                    Margin="24,8,24,16">
+                                    <TextBlock
+                                        Text="Không có lịch sử nhật ký" />
+
+                                </StackPanel>
+                            </Expander>
+                            <Expander IsExpanded="True"
+                                HorizontalAlignment="Stretch"
+                                Header="Ngày 18/10/2022">
+                                <StackPanel
+                                    Orientation="Vertical"
+                                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                    Margin="24,8,24,16">
+                                    <TextBlock
+                                        Text="Không có lịch sử nhật ký" />
+                                </StackPanel>
+                            </Expander>
+                        </StackPanel>
+
+                    </StackPanel>
+                    <ToolBarTray DockPanel.Dock="Bottom" Height="50" VerticalAlignment="Bottom">
+                        <ToolBar
+                                Style="{StaticResource MaterialDesignToolBar}"
+                                ClipToBounds="False">
+                            <Button
+                                ToolTip="Follow me on Twitter"
+                                Content="Trang đầu" />
+                            <Button
+                                ToolTip="Save"
+                                Content="Trở lại" />
+                            <Button
+                                ToolTip="Save"
+                                Content="1" />
+                            <Button
+                                ToolTip="Save"
+                                Content="2" />
+                            <Button
+                                ToolTip="Save"
+                                Content="3" />
+                            <Button
+                                ToolTip="Save"
+                                Content="4" />
+                            <Button
+                                ToolTip="Save"
+                                Content="5" />
+                            <Button
+                                ToolTip="Save"
+                                Content="Tiếp theo" />
+                            <Button
+                                ToolTip="Save"
+                                Content="Trang cuối" />
+                        </ToolBar>
+                    </ToolBarTray>
+                </DockPanel>
+
+            </materialDesign:Card>
+        </Grid>
+
     </Grid>
 </Window>

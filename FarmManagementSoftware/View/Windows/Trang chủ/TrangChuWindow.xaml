@@ -15,12 +15,13 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         ScrollViewer.CanContentScroll="True"
-        Title="Báo cáo tính trạng đàn heo"
+        Title="Trang chủ"
         Height="768"
         Width="1024"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
-    <Grid Background="#f3f3f9" >
-        <!--<Grid.RowDefinitions>
+    <Label>Trang chủ</Label>
+    <!--<Grid Background="#f3f3f9" >
+        <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
@@ -355,6 +356,6 @@
                     </lvc:CartesianChart>
                 </StackPanel>
             </materialDesign:Card>
-        </Grid>-->
-    </Grid>
+        </Grid>
+    </Grid>-->
 </Window>

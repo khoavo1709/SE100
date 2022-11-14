@@ -3,10 +3,98 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows"
+        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="ChitTietThongBaoWindow" Height="450" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding CloseChiTietThongBaoW}"
+                                   CommandParameter="{Binding ElementName=ChiTietThongBaoW}"></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
-        <Label>Chi tiết thông báo</Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <materialDesign:Card Grid.Column="0">
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <materialDesign:Card Grid.Row="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <materialDesign:PackIcon Kind="Search" Margin="10 15 0 0 "/>
+                            <TextBox materialDesign:HintAssist.Hint="Tìm kiếm" Name="Txt_TimMaTen" Height="30" Margin="35,0,15,0">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding TimKiemTheoMa_TenCommand}"
+                                                                       CommandParameter="{Binding ElementName=Txt_TimMaTen}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
+                        </Grid>
+                        <DockPanel Grid.Row="1">
+                            <TextBlock DockPanel.Dock="Left" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0">THÔNG BÁO</TextBlock>
+                            <ComboBox DockPanel.Dock="Right" Margin="0,0,10,0" Width="130" HorizontalAlignment="Right"
+                                    materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}">
+                                <ComboBoxItem
+                                      IsSelected="True"
+                                      Content="Tất cả" />
+                                <ComboBoxItem
+                                      Content="Chưa đọc" />
+                                <ComboBoxItem
+                                      Content="Đã gửi" />
+                                <Rectangle Margin="5,5,5,0" VerticalAlignment="Stretch" Fill="Black" Height="1"/>
+                                <ComboBoxItem
+                                      Content="Sắp xếp theo ngày" />
+                                <ComboBoxItem
+                                      Content="Sắp xếp theo tên" />
+                            </ComboBox>
+                        </DockPanel>
+                    </Grid>
+
+                </materialDesign:Card>
+                <StackPanel Grid.Row="1">
+                    <Expander IsExpanded="True"
+                                HorizontalAlignment="Stretch"
+                                Header="Ngày 16/10/2022">
+                        <ListBox ItemsSource="{Binding listTHONGBAOs}" SelectedItem="{Binding SelectedItem}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" Width="310">
+                                        <TextBlock FontWeight="Bold" TextWrapping="Wrap" Text="{Binding C_UserName}"></TextBlock>
+                                        <TextBlock FontStyle="Italic" FontSize="10" Text="{Binding TieuDe}"></TextBlock>
+                                        <Rectangle Margin="5,5,10,0" VerticalAlignment="Stretch" Fill="Black" Height="1"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding OpenCTThongBao}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
+                    </Expander>
+                </StackPanel>
+            </Grid>
+
+        </materialDesign:Card>
+        <StackPanel Grid.Column="1">
+            <TextBlock TextWrapping="WrapWithOverflow" FontWeight="Bold" FontSize="20" Margin="20,30,20,0"
+                       Text="{Binding SelectedItem.TieuDe}"></TextBlock>
+            <TextBlock Margin="20,20,20,0" FontWeight="Bold" FontSize="15"
+                       Text="{Binding SelectedItem.C_UserName}"></TextBlock>
+            <TextBlock Margin="20,0,20,0" FontSize="12"
+                       Text="{Binding SelectedItem.ThoiGian}"></TextBlock>
+            <TextBlock FontSize="15" Margin="20,20,20,0"
+                       Text="{Binding SelectedItem.NoiDung}"></TextBlock>
+        </StackPanel>
     </Grid>
 </Window>
