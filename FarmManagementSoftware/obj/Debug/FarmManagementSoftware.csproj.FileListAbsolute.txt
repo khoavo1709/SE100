@@ -126,3 +126,133 @@ C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quả
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\SuaNhanVien.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\ThemNhanVien.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Thông Báo\ChonNguoiNhan.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.AssemblyReference.cache
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.SuggestedBindingRedirects.cache
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\LapPhieuSuaChuaWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý giống heo\SuaGiongHeo.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\LapPhieuBanNhapHeoWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Trang chủ\TrangChuWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\UC\UClistThongBaoTrongNgay.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\CapNhatTaiKhoanWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý hàng hoá\TaoPhieuKho.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý hàng hoá\TaoPhieuKiemKho.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý loại heo\SuaLoaiHeo.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý loại heo\ThemLoaiHeo.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\SuaNhanVien.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\ThemNhanVien.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Thông Báo\ChitTietThongBaoWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\DoiMatKhau.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\QuanLyThongTinNhanVienWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý hàng hoá\LapPhieuKhoWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Login.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Lập lịch\LapLichTiem.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Lập lịch\LichPhoiGiongWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý hàng hoá\QuanLyHangHoaWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý loại heo\Quanlyloaiheo.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoSuaChuaWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoThuChiWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoTinhTrangDanHeoWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoTonKhoWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\LapPhieuSuaChuaWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\PhieuSuaChua.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\QuanLyThongTinChuong.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\SuaChuong.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ThemChuong.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ThongTinChuong.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\Quanlychucvu.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\SuaChucVu.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\ThemChucVu.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý giống heo\QuanLyGiongHeo.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý giống heo\SuaGiongHeo.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý giống heo\ThemGiongHeo.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhật ký\QuanLyNhatKyWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\LapLichWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\LapPhieuBanNhapHeoWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\PhieuNhapBanHeo.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\QuanLyThongTinCaTheWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\SuaTTHeo.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThemTTHeo.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThongTinHeo.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Cây mục tiêu\ThietLapCayMucTieuWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Thông Báo\ChonNguoiGui.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Thông Báo\TaoThongBaoWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Trang chủ\TrangChuWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\wMainWindow.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\App.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware_Content.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware_MarkupCompile.cache
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware_MarkupCompile.lref
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.exe
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.pdb
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\FarmManagementSoftware.exe.config
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\FarmManagementSoftware.exe
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\FarmManagementSoftware.pdb
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\EntityFramework.dll
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\EntityFramework.SqlServer.dll
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\LiveCharts.dll
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\LiveCharts.Wpf.dll
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\MaterialDesignColors.dll
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\MaterialDesignThemes.Wpf.dll
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\System.Windows.Interactivity.dll
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\EntityFramework.xml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\EntityFramework.SqlServer.xml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\LiveCharts.pdb
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\LiveCharts.xml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\LiveCharts.Wpf.pdb
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\LiveCharts.Wpf.xml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\MaterialDesignColors.pdb
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\MaterialDesignThemes.Wpf.pdb
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\MaterialDesignThemes.Wpf.xml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\Microsoft.Expression.Interactions.xml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\bin\Debug\System.Windows.Interactivity.xml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\App.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\ResourceXAML\MainResource.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\UC\UClistThongBaoTrongNgay.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\CapNhatTaiKhoanWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý hàng hoá\TaoPhieuKho.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý hàng hoá\TaoPhieuKiemKho.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý loại heo\SuaLoaiHeo.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý loại heo\ThemLoaiHeo.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\SuaNhanVien.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\ThemNhanVien.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Thông Báo\ChitTietThongBaoWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\DoiMatKhau.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\QuanLyThongTinNhanVienWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý hàng hoá\LapPhieuKhoWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Login.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Lập lịch\LapLichTiem.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Lập lịch\LichPhoiGiongWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý hàng hoá\QuanLyHangHoaWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý loại heo\Quanlyloaiheo.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoSuaChuaWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoThuChiWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoTinhTrangDanHeoWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý báo cáo\BaoCaoTonKhoWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\PhieuSuaChua.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\QuanLyThongTinChuong.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\SuaChuong.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ThemChuong.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ThongTinChuong.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\Quanlychucvu.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\SuaChucVu.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\ThemChucVu.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý giống heo\QuanLyGiongHeo.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý giống heo\ThemGiongHeo.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhật ký\QuanLyNhatKyWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\LapLichWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\PhieuNhapBanHeo.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\QuanLyThongTinCaTheWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\SuaTTHeo.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThemTTHeo.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThongTinHeo.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Cây mục tiêu\ThietLapCayMucTieuWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Thông Báo\ChonNguoiGui.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Thông Báo\TaoThongBaoWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\wMainWindow.baml
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.g.resources
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.Properties.Resources.resources
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.GenerateResource.cache
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.CoreCompileInputs.cache
+D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.CopyComplete

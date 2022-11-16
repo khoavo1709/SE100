@@ -1,6 +1,7 @@
-﻿D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\App.xaml;;
 FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\ResourceXAML\MainResource.xaml;;
+FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\View\UC\UClistThongBaoTrongNgay.xaml;;
 FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\View\Windows\CapNhatTaiKhoanWindow.xaml;;
 FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\View\Windows\Quản lý hàng hoá\TaoPhieuKho.xaml;;
 FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\View\Windows\Quản lý hàng hoá\TaoPhieuKiemKho.xaml;;
@@ -39,7 +40,7 @@ FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftwa
 FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\View\Windows\Quản lý đàn heo\ThemTTHeo.xaml;;
 FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\View\Windows\Quản lý đàn heo\ThongTinHeo.xaml;;
 FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\View\Windows\Cây mục tiêu\ThietLapCayMucTieuWindow.xaml;;
-FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\View\Windows\Thông Báo\ChonNguoiNhan.xaml;;
+FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\View\Windows\Thông Báo\ChonNguoiGui.xaml;;
 FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\View\Windows\Thông Báo\TaoThongBaoWindow.xaml;;
 FD:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\wMainWindow.xaml;;
 

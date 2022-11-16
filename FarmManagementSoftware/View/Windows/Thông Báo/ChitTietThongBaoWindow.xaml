@@ -92,7 +92,7 @@
                         </ListBox.ItemContainerStyle>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <!--<UC:UClistThongBaoTrongNgay></UC:UClistThongBaoTrongNgay>-->
+                                <UC:UClistThongBaoTrongNgay></UC:UClistThongBaoTrongNgay>
                             </DataTemplate>
                         </ListBox.ItemTemplate>A
                         <!--<Expander IsExpanded="True"
