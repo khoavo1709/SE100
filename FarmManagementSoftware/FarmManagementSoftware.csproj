@@ -195,10 +195,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Windows\Quản lý chuồng nuôi\ThongTinChuong.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Windows\Quản lý chức vụ\Quanlychucvu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -474,9 +470,6 @@
     </Compile>
     <Compile Include="View\Windows\Quản lý chuồng nuôi\ThemChuong.xaml.cs">
       <DependentUpon>ThemChuong.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Windows\Quản lý chuồng nuôi\ThongTinChuong.xaml.cs">
-      <DependentUpon>ThongTinChuong.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\Quản lý chức vụ\Quanlychucvu.xaml.cs">
       <DependentUpon>Quanlychucvu.xaml</DependentUpon>

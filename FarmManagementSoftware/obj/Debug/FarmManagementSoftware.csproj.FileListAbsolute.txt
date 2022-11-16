@@ -45,7 +45,6 @@ C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quả
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\QuanLyThongTinChuong.g.cs
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\SuaChuong.g.cs
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ThemChuong.g.cs
-C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ThongTinChuong.g.cs
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\Quanlychucvu.g.cs
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\SuaChucVu.g.cs
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\ThemChucVu.g.cs
@@ -89,7 +88,6 @@ C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quả
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\QuanLyThongTinChuong.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\SuaChuong.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ThemChuong.baml
-C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ThongTinChuong.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\Quanlychucvu.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\SuaChucVu.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chức vụ\ThemChucVu.baml
