@@ -118,14 +118,12 @@ C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quả
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý loại heo\ThemLoaiHeo.g.cs
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\SuaNhanVien.g.cs
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\ThemNhanVien.g.cs
-C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Thông Báo\ChonNguoiNhan.g.cs
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý hàng hoá\TaoPhieuKho.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý hàng hoá\TaoPhieuKiemKho.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý loại heo\SuaLoaiHeo.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý loại heo\ThemLoaiHeo.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\SuaNhanVien.baml
 C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý nhân viên\ThemNhanVien.baml
-C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Thông Báo\ChonNguoiNhan.baml
 D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.AssemblyReference.cache
 D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.SuggestedBindingRedirects.cache
 D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\LapPhieuSuaChuaWindow.baml
@@ -256,3 +254,7 @@ D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftwar
 D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.GenerateResource.cache
 D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.CoreCompileInputs.cache
 D:\Learn\Advanced software engineering\Project SE214\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.CopyComplete
+C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\UC\UClistThongBaoTrongNgay.g.cs
+C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Thông Báo\ChonNguoiGui.g.cs
+C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\UC\UClistThongBaoTrongNgay.baml
+C:\Users\Admin\Desktop\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Thông Báo\ChonNguoiGui.baml
