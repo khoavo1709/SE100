@@ -91,6 +91,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UC\UClistThongBaoTrongNgay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\CapNhatTaiKhoanWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -255,7 +259,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Windows\Thông Báo\ChonNguoiNhan.xaml">
+    <Page Include="View\Windows\Thông Báo\ChonNguoiGui.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -336,6 +340,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\NguoiGui.cs" />
     <Compile Include="Model\NHANVIEN.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -390,7 +395,11 @@
     <Compile Include="ViewModel\TrangChuVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\ChiTietThongBaoVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\ChonNguoiGuiVM.cs" />
+    <Compile Include="ViewModel\Tạo thông báo\listThongBaoTrongNgayVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\TaoThongBaoVM.cs" />
+    <Compile Include="View\UC\UClistThongBaoTrongNgay.xaml.cs">
+      <DependentUpon>UClistThongBaoTrongNgay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\CapNhatTaiKhoanWindow.xaml.cs">
       <DependentUpon>CapNhatTaiKhoanWindow.xaml</DependentUpon>
     </Compile>
@@ -514,8 +523,8 @@
     <Compile Include="View\Windows\Cây mục tiêu\ThietLapCayMucTieuWindow.xaml.cs">
       <DependentUpon>ThietLapCayMucTieuWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Windows\Thông Báo\ChonNguoiNhan.xaml.cs">
-      <DependentUpon>ChonNguoiNhan.xaml</DependentUpon>
+    <Compile Include="View\Windows\Thông Báo\ChonNguoiGui.xaml.cs">
+      <DependentUpon>ChonNguoiGui.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\Thông Báo\TaoThongBaoWindow.xaml.cs">
       <DependentUpon>TaoThongBaoWindow.xaml</DependentUpon>
@@ -564,7 +573,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\Nhật ký\" />
-    <Folder Include="View\UC\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\background.jpg" />

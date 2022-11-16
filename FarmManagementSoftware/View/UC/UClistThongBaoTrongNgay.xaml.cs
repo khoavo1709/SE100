@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FarmManagementSoftware.View.Windows
+namespace FarmManagementSoftware.View.UC
 {
     /// <summary>
-    /// Interaction logic for ChonNguoiNhan.xaml
+    /// Interaction logic for UClistThongBaoTrongNgay.xaml
     /// </summary>
-    public partial class ChonNguoiNhan : Window
+    public partial class UClistThongBaoTrongNgay : UserControl
     {
-        public ChonNguoiNhan()
+        public UClistThongBaoTrongNgay()
         {
             InitializeComponent();
         }

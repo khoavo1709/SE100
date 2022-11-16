@@ -3,9 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:FarmManagementSoftware"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:UC="clr-namespace:FarmManagementSoftware.View.UC"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="ChitTietThongBaoWindow" Height="450" Width="800">
+        Icon="/Image/leaves_icon.png"
+        Title="Chi tiết thông báo"
+        Height="768"
+        Width="1024"
+        Name="ChiTietThongBaoW"
+        DataContext="{StaticResource ChiTietThongBaoVM}"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding CloseChiTietThongBaoW}"
@@ -31,18 +47,18 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <materialDesign:PackIcon Kind="Search" Margin="10 15 0 0 "/>
-                            <TextBox materialDesign:HintAssist.Hint="Tìm kiếm" Name="Txt_TimMaTen" Height="30" Margin="35,0,15,0">
+                            <TextBox materialDesign:HintAssist.Hint="Tìm kiếm" Name="Txt_TimTieuDe" Height="30" Margin="35,0,15,0">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">
-                                        <i:InvokeCommandAction Command="{Binding TimKiemTheoMa_TenCommand}"
-                                                                       CommandParameter="{Binding ElementName=Txt_TimMaTen}"></i:InvokeCommandAction>
+                                        <i:InvokeCommandAction Command="{Binding TimKiemTheoTieuDeCommand}"
+                                                                       CommandParameter="{Binding ElementName=Txt_TimTieuDe}"></i:InvokeCommandAction>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </TextBox>
                         </Grid>
                         <DockPanel Grid.Row="1">
                             <TextBlock DockPanel.Dock="Left" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0">THÔNG BÁO</TextBlock>
-                            <ComboBox DockPanel.Dock="Right" Margin="0,0,10,0" Width="130" HorizontalAlignment="Right"
+                            <ComboBox Name="cb_TinhTrang" DockPanel.Dock="Right" Margin="0,0,10,0" Width="130" HorizontalAlignment="Right" SelectedItem="{Binding cbTinhTrang}"
                                     materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}">
                                 <ComboBoxItem
                                       IsSelected="True"
@@ -51,18 +67,35 @@
                                       Content="Chưa đọc" />
                                 <ComboBoxItem
                                       Content="Đã gửi" />
-                                <Rectangle Margin="5,5,5,0" VerticalAlignment="Stretch" Fill="Black" Height="1"/>
-                                <ComboBoxItem
-                                      Content="Sắp xếp theo ngày" />
-                                <ComboBoxItem
-                                      Content="Sắp xếp theo tên" />
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding TimKiemTheoTinhTrangCommand}"
+                                                                       CommandParameter="{Binding ElementName=cb_TinhTrang}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </ComboBox>
                         </DockPanel>
                     </Grid>
 
                 </materialDesign:Card>
-                <StackPanel Grid.Row="1">
-                    <Expander IsExpanded="True"
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                    <ListBox Grid.Row="1" ItemsSource="{Binding thongBaoTheoNgays}" 
+                         Padding="0">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsActive}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <!--<UC:UClistThongBaoTrongNgay></UC:UClistThongBaoTrongNgay>-->
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>A
+                        <!--<Expander IsExpanded="True"
                                 HorizontalAlignment="Stretch"
                                 Header="Ngày 16/10/2022">
                         <ListBox ItemsSource="{Binding listTHONGBAOs}" SelectedItem="{Binding SelectedItem}">
@@ -81,18 +114,35 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </ListBox>
-                    </Expander>
-                </StackPanel>
+                    </Expander>-->
+                    </ListBox>
+
+                </ScrollViewer>
             </Grid>
 
         </materialDesign:Card>
         <StackPanel Grid.Column="1">
+            <Button
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    ToolTip="Tạo thông báo mới"
+                    HorizontalAlignment="Right"
+                    Margin="0,10,40,0"
+                    Command="{Binding deleteThongBao}"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                <materialDesign:PackIcon Foreground="Black"
+                            Kind="BinOutline" />
+            </Button>
             <TextBlock TextWrapping="WrapWithOverflow" FontWeight="Bold" FontSize="20" Margin="20,30,20,0"
                        Text="{Binding SelectedItem.TieuDe}"></TextBlock>
             <TextBlock Margin="20,20,20,0" FontWeight="Bold" FontSize="15"
-                       Text="{Binding SelectedItem.C_UserName}"></TextBlock>
+                       Text="{Binding SelectedItem.NHANVIEN.HoTen}"></TextBlock>
             <TextBlock Margin="20,0,20,0" FontSize="12"
                        Text="{Binding SelectedItem.ThoiGian}"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="20,20,10,0" FontSize="13">Đến:</TextBlock>
+                <TextBlock Margin="0,20,20,0" FontSize="13"
+                       Text="{Binding SelectedItem.NHANVIEN1.HoTen}"></TextBlock>
+            </StackPanel>
             <TextBlock FontSize="15" Margin="20,20,20,0"
                        Text="{Binding SelectedItem.NoiDung}"></TextBlock>
         </StackPanel>
