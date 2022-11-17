@@ -8,12 +8,10 @@
         xmlns:viewmodel="clr-namespace:FarmManagementSoftware.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:ThemTTHeoVM}"
         mc:Ignorable="d"
-        Title="Thêm cá thể heo" Height="700" Width="1124"  
+        Title="Thêm cá thể heo" Height="750" Width="1124"  
         Name="ThemTTHeoW"
-        WindowStartupLocation="CenterScreen"
-        DataContext="{StaticResource ThemTTHeoVM}"
-        >
-    <Grid>
+        WindowStartupLocation="CenterScreen" >
+    <Grid DataContext="{StaticResource ThemTTHeoVM}">
         <Grid.Background>
             <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
                 <GradientStop Color="#3ab19b" Offset="0.05"/>
@@ -25,20 +23,73 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <Image Source="/Image/background.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
+            <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
             <StackPanel Margin="5" VerticalAlignment="Center">
                 <materialDesign:Card Grid.Row="0" Margin="5" VerticalAlignment="Center">
                     <StackPanel VerticalAlignment="Center">
-                        <TextBox x:Name="txt_Ma" Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Text="{Binding MaHeo, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                        <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Giới tính" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Text="{Binding GioiTinh}"/>
-                        <DatePicker Margin="10 5 10 10" materialDesign:HintAssist.Hint="Ngày sinh" materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Text="{Binding NgaySinh}"/>
-                        <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã loại heo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Text="{Binding MaLoaiHeo}"/>
-                        <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã giống heo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Text="{Binding MaGiongHeo}"/>
+                        <TextBox x:Name="txt_MaHeo" Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding MaHeo}" IsReadOnly="True"/>
+                        <ComboBox Margin="10 5 10 10"
+                                  Text="{Binding GioiTinh}"
+                                  materialDesign:HintAssist.Hint="Giới tính"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  SelectedItem="{Binding GioiTinh}"
+                                  >
+                            <ComboBoxItem>Đực</ComboBoxItem>
+                            <ComboBoxItem>Cái</ComboBoxItem>
+                        </ComboBox>
+                        <DatePicker Margin="10 5 10 10" materialDesign:HintAssist.Hint="Ngày sinh" materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding NgaySinh}"/>
+                        <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Trọng lượng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding TrongLuong}"/>
+
+                        <ComboBox Margin="10 5 10 10"
+                                  Name="CBLoaiHeo"
+                                  materialDesign:HintAssist.Hint="Tên loại heo"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  ItemsSource="{Binding ListLoai, Mode=OneWay}"
+                                  DisplayMemberPath="TenLoaiHeo"
+                                  SelectedItem="{Binding SelectedLoai, Mode=TwoWay}">
+                        </ComboBox>
+                        <ComboBox Margin="10 5 10 10"
+                                  Name="CBGiongHeo"
+                                  materialDesign:HintAssist.Hint="Tên giống heo"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  ItemsSource="{Binding ListGiong, Mode=OneWay}"
+                                  DisplayMemberPath="TenGiongHeo"
+                                  SelectedItem="{Binding SelectedGiong, Mode=TwoWay}">
+                        </ComboBox>
                         <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo mẹ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding MaHeoMe}"/>
                         <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo cha" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding MaHeoCha}"/>
-                        <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã chuồng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding MaChuong}"/>
-                        <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Tình trạng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding TinhTrang}"/>
-                        <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Nguồn gốc" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding NguonGoc}"/>
+                        <ComboBox Margin="10 5 10 10"
+                                  materialDesign:HintAssist.Hint="Mã chuồng"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  ItemsSource="{Binding ListChuong, Mode=OneWay}"
+                                  DisplayMemberPath="MaChuong"
+                                  SelectedItem="{Binding SelectedChuong, Mode=TwoWay}">
+                        </ComboBox>
+                        <ComboBox Margin="10 5 10 10"
+                                  materialDesign:HintAssist.Hint="Tình trạng"
+                                                                    Text="{Binding TinhTrang}"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  SelectedItem="{Binding TinhTrang}"
+                                  >
+                            <ComboBoxItem>Sức khoẻ tốt</ComboBoxItem>
+                            <ComboBoxItem>Đang mang thai</ComboBoxItem>
+                            <ComboBoxItem>Đang bị bệnh</ComboBoxItem>
+                            <ComboBoxItem>Đã đào thải</ComboBoxItem>
+                        </ComboBox>
+                        <ComboBox Margin="10 5 10 10"
+                                  materialDesign:HintAssist.Hint="Nguồn gốc"
+                                  Text="{Binding NguonGoc}"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  SelectedItem="{Binding NguonGoc}">
+                            <ComboBoxItem>Nhập ngoài</ComboBoxItem>
+                            <ComboBoxItem>Sinh trong trang trại</ComboBoxItem>
+                        </ComboBox>
                     </StackPanel>
                 </materialDesign:Card>
                 <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">
@@ -54,7 +105,7 @@
                         materialDesign:ButtonAssist.CornerRadius="5"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                         Command="{Binding AddCommand}" 
-                        CommandParameter="{Binding ElementName=txt_Ma}">
+                        CommandParameter="{Binding ElementName=txt_MaHeo}">
                             </Button>
                             <Button Margin="20,10,20,0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
@@ -111,29 +162,32 @@
                         </Grid>
 
                     </materialDesign:Card>
-                    <ListView ItemsSource="{Binding ListHeoAdd}" SelectedItem="{Binding SelectedHeo}" HorizontalAlignment="Stretch">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Mã heo" DisplayMemberBinding="{Binding MaHeo,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding GioiTinh,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding NgaySinh,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                <GridViewColumn Header="Mã loại heo" DisplayMemberBinding="{Binding MaLoaiHeo,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                <GridViewColumn Header="Mã giống heo" DisplayMemberBinding="{Binding MaGiongHeo,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                <GridViewColumn Header="Mã heo mẹ" DisplayMemberBinding="{Binding MaHeoMe,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                <GridViewColumn Header="Mã heo cha" DisplayMemberBinding="{Binding MaHeoCha,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding TinhTrang,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                <GridViewColumn Header="Nguồn gốc" DisplayMemberBinding="{Binding NguonGoc,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <Menu>
-                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"  Width="48" Height="37" DataContext="{StaticResource QuanLyThongTinCaTheVM}" Command="{Binding DeleteCommand}"></MenuItem>
-                                </Menu>
-                            </ContextMenu>
-                        </ListView.ContextMenu>
-                    </ListView>
+                    <ScrollViewer Height="600" Width="auto">
+                        <ListView ItemsSource="{Binding ListHeoAdd}" SelectedItem="{Binding SelectedHeo}" HorizontalAlignment="Stretch">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã heo" DisplayMemberBinding="{Binding MaHeo,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding GioiTinh,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding NgaySinh,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Header="Trọng lượng" DisplayMemberBinding="{Binding TrongLuong,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã loại heo" DisplayMemberBinding="{Binding MaLoaiHeo,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã giống heo" DisplayMemberBinding="{Binding MaGiongHeo,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã heo mẹ" DisplayMemberBinding="{Binding MaHeoMe,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã heo cha" DisplayMemberBinding="{Binding MaHeoCha,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding TinhTrang,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Header="Nguồn gốc" DisplayMemberBinding="{Binding NguonGoc,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <Menu>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"  Width="48" Height="37" Command="{Binding DeleteCommand}"></MenuItem>
+                                    </Menu>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                        </ListView>
+                    </ScrollViewer>
                 </StackPanel>
             </materialDesign:Card>
 
@@ -156,3 +210,4 @@
         </Grid>
     </Grid>
 </Window>
+

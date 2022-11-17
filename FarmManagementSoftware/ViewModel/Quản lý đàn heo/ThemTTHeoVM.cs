@@ -143,6 +143,5 @@ namespace FarmManagementSoftware.ViewModel
             return MaCu;
         }
     }
-
 }
 

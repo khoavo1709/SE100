@@ -111,10 +111,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Windows\Quản lý loại heo\ThemLoaiHeo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Windows\Quản lý nhân viên\SuaNhanVien.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -216,10 +212,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Windows\Quản lý giống heo\SuaGiongHeo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Windows\Quản lý giống heo\ThemGiongHeo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -412,9 +404,6 @@
     <Compile Include="View\Windows\Quản lý loại heo\SuaLoaiHeo.xaml.cs">
       <DependentUpon>SuaLoaiHeo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Windows\Quản lý loại heo\ThemLoaiHeo.xaml.cs">
-      <DependentUpon>ThemLoaiHeo.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Windows\Quản lý nhân viên\SuaNhanVien.xaml.cs">
       <DependentUpon>SuaNhanVien.xaml</DependentUpon>
     </Compile>
@@ -492,9 +481,6 @@
     </Compile>
     <Compile Include="View\Windows\Quản lý giống heo\SuaGiongHeo.xaml.cs">
       <DependentUpon>SuaGiongHeo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Windows\Quản lý giống heo\ThemGiongHeo.xaml.cs">
-      <DependentUpon>ThemGiongHeo.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\Quản lý nhật ký\QuanLyNhatKyWindow.xaml.cs">
       <DependentUpon>QuanLyNhatKyWindow.xaml</DependentUpon>
