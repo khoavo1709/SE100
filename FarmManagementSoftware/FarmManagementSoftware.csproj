@@ -282,6 +282,7 @@
     <Compile Include="Model\CHUCVU.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ChucVuModel.cs" />
     <Compile Include="Model\CHUONGTRAI.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
