@@ -384,3 +384,7 @@ C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\FarmManagementSoftwar
 C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.CopyComplete
 C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.exe
 C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.pdb
+C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ChonHeoXuat.g.cs
+C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThemHeoPhieu.g.cs
+C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ChonHeoXuat.baml
+C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThemHeoPhieu.baml

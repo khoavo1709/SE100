@@ -4,12 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FarmManagementSoftware"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Icon="/Image/leaves_icon.png"
         Title="Tạo phiếu mới"
-        Height="768"
-        Width="1024">
+        x:Name="TaoPhieuMoiW"
+        Height="800"
+        Width="1024"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{StaticResource PhieuBanNhapHeoVM}"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -41,12 +45,13 @@
                                     Height="30"
                                     Width="200"
                                     BorderBrush="White"
-                                    Content="Nhập cá thể heo mới"
+                                    Content="Thêm heo vào phiếu"
                                     FontSize="16"
                                     Background="#00de1e"
                                     materialDesign:ButtonAssist.CornerRadius="5"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
-
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Command="{Binding ThemHeo}"   
+                                        >
                                     </Button>
                                 </StackPanel>
 
@@ -55,44 +60,23 @@
                         </Grid>
 
                     </materialDesign:Card>
-                    <ListView Margin="25 0" Name="Listview" HorizontalAlignment="Left">
-
+                    <ListView Margin="25 0" Name="Listview" HorizontalAlignment="Left" ItemsSource="{Binding ListHeo}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Mã heo"/>
-                                <GridViewColumn Header="Giới tính"/>
-                                <GridViewColumn Header="Ngày sinh"/>
-                                <GridViewColumn Header="Mã loại heo"/>
-                                <GridViewColumn Header="Mã giống heo"/>
-                                <GridViewColumn Header="Mã heo mẹ"/>
-                                <GridViewColumn Header="Mã heo cha"/>
-                                <GridViewColumn Header="Mã chuồng"/>
-                                <GridViewColumn Header="Tình trạng"/>
-                                <GridViewColumn Header="Nguồn gốc"/>
-                                <GridViewColumn Header="Thao tác" Width="160">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Menu>
-                                                <MenuItem Icon="{materialDesign:PackIcon Kind=Show}" Width="48"></MenuItem>
-                                                <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"  Width="48"></MenuItem>
-                                                <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"  Width="48"></MenuItem>
-                                            </Menu>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                                <GridViewColumn Header="Mã heo" DisplayMemberBinding="{Binding MaHeo}" />
+                                <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding GioiTinh}"/>
+                                <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding NgaySinh, StringFormat= {} {0: dd/MM/yyyy}}"/>
+                                <GridViewColumn Header="Trọng lượng" DisplayMemberBinding="{Binding TrongLuong}"/>
+                                <GridViewColumn Header="Tên loại heo" DisplayMemberBinding="{Binding LOAIHEO.TenLoaiHeo}"/>
+                                <GridViewColumn Header="Tên giống heo" DisplayMemberBinding="{Binding GIONGHEO.TenGiongHeo}"/>
+                                <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong}"/>
+                                <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding TinhTrang}"/>
+                                <GridViewColumn Header="Nguồn gốc" DisplayMemberBinding="{Binding NguonGoc}"/>
                             </GridView>
                         </ListView.View>
                         <ListView.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Icon="{materialDesign:PackIcon Kind=Show}">
-                                    <MenuItem.Header>Show</MenuItem.Header>
-                                </MenuItem>
-                                <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}">
-                                    <MenuItem.Header>Edit</MenuItem.Header>
-                                </MenuItem>
-                                <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}">
-                                    <MenuItem.Header>Delete</MenuItem.Header>
-                                </MenuItem>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Delete" Command="{Binding DeleteCommand}" />
                             </ContextMenu>
                         </ListView.ContextMenu>
                     </ListView>
@@ -114,7 +98,7 @@
                     </materialDesign:Card>
                     <Grid>
                         <materialDesign:PackIcon Kind="Account" Margin="10 15 0 0 "/>
-                        <TextBox materialDesign:HintAssist.Hint="Tên nhân viên" Height="30" Margin="30,10,20,11" />
+                        <TextBox materialDesign:HintAssist.Hint="Tên nhân viên" Height="30" Margin="30,10,20,11" Text="{Binding TenNV}" IsReadOnly="True"/>
                     </Grid>
                 </StackPanel>
             </materialDesign:Card>
@@ -125,19 +109,27 @@
                     </materialDesign:Card>
                     <Grid>
                         <materialDesign:PackIcon Kind="AccountTie" Margin="10 15 0 0 "/>
-                        <TextBox materialDesign:HintAssist.Hint="Mã khách hàng" Height="30" Margin="30,10,20,11" />
+                        <TextBox x:Name="txt_MaKH" materialDesign:HintAssist.Hint="Mã khách hàng" Height="30" Margin="30,10,20,11" Text="{Binding MaKH}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding ThayDoiMaHK}"
+                                                           CommandParameter="{Binding ElementName=txt_MaKH}"
+                                    ></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
                     <Grid>
                         <materialDesign:PackIcon Kind="RenameBox" Margin="10 5 0 0 "/>
-                        <TextBox materialDesign:HintAssist.Hint="Tên khách hàng" Height="30" Margin="30,0,20,11" />
+                        <TextBox materialDesign:HintAssist.Hint="Tên khách hàng" Height="30" Margin="30,0,20,11" Text="{Binding Ten}"/>
                     </Grid>
                     <Grid>
                         <materialDesign:PackIcon Kind="Email" Margin="10 5 0 0 "/>
-                        <TextBox materialDesign:HintAssist.Hint="Email" Height="30" Margin="30,0,20,11" />
+                        <TextBox materialDesign:HintAssist.Hint="Email" Height="30" Margin="30,0,20,11" Text="{Binding Mail, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <Grid>
                         <materialDesign:PackIcon Kind="Phone" Margin="10 5 0 0 "/>
-                        <TextBox materialDesign:HintAssist.Hint="Số điện thoại" Height="30" Margin="30,0,20,11" />
+                        <TextBox materialDesign:HintAssist.Hint="Số điện thoại" Height="30" Margin="30,0,20,11" Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <Grid>
                         <materialDesign:PackIcon Kind="MapMarker" Margin="10 5 0 0 "/>
@@ -149,7 +141,8 @@
                             TextWrapping="Wrap"
                             VerticalScrollBarVisibility="Auto"
                             materialDesign:HintAssist.Hint="Địa chỉ liên lạc"
-                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" />
+                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                                 Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </StackPanel>
             </materialDesign:Card>
@@ -160,27 +153,51 @@
                     </materialDesign:Card>
                     <Grid>
                         <materialDesign:PackIcon Kind="Barcode" Margin="10 15 0 0 "/>
-                        <TextBox materialDesign:HintAssist.Hint="Mã phiếu" Height="30" Margin="30,10,20,11" />
+                        <TextBox materialDesign:HintAssist.Hint="Mã phiếu" Height="30" Margin="30,10,20,11" Text="{Binding MaPhieu}"/>
                     </Grid>
                     <Grid>
                         <materialDesign:PackIcon Kind="ReceiptText" Margin="10 5 0 0 "/>
-                        <ComboBox Height="30" Margin="30,0,20,11"
+                        <ComboBox Name="loaiphieu" Height="30" Margin="30,0,20,11"
                                 materialDesign:HintAssist.Hint="Loại phiếu">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectedLoaiPhieu}" CommandParameter="{Binding ElementName=loaiphieu}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <ComboBoxItem
                                     Content="Phiếu nhập heo" />
                             <ComboBoxItem
-                                    Content="Phiếu xuất heo" />
+                                    Content="Phiếu xuất heo"  />
+
                         </ComboBox>
                     </Grid>
                     <Grid>
                         <materialDesign:PackIcon Kind="CalendarCheck" Margin="10 5 0 0 "/>
                         <DatePicker Grid.Column="1" Height="30" Margin="30,0,20,11"
-                                    materialDesign:HintAssist.Hint="Ngày lập phiếu">
+                                    materialDesign:HintAssist.Hint="Ngày lập phiếu"
+                                    SelectedDate="{Binding NgayLap}"
+                                    >
                         </DatePicker>
                     </Grid>
                     <Grid>
                         <materialDesign:PackIcon Kind="CurrencyUsd" Margin="10 5 0 0 "/>
-                        <TextBox materialDesign:HintAssist.Hint="Tổng tiền" Height="30" Margin="30,0,20,11" />
+                        <TextBox materialDesign:HintAssist.Hint="Đơn giá" Height="30" Margin="30,0,20,11"
+                                 Text="{Binding DonGia}" x:Name="txt_DonGia"
+                         >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding DonGiaChanged}"
+                                                                       CommandParameter="{Binding ElementName=txt_DonGia}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+
+                    </Grid>
+
+                    <Grid>
+                        <materialDesign:PackIcon Kind="CurrencyUsd" Margin="10 5 0 0 "/>
+                        <TextBox materialDesign:HintAssist.Hint="Tổng tiền" Height="30" Margin="30,0,20,11" IsReadOnly="True"
+                                 Text="{Binding TongTien}"/>
                     </Grid>
                     <Button Margin="20,20,20,0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
@@ -190,7 +207,10 @@
                         FontSize="16"
                         Background="#00de1e"
                         materialDesign:ButtonAssist.CornerRadius="5"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Command="{Binding HoanTatCommand}" 
+                            CommandParameter="{Binding ElementName=TaoPhieuMoiW}"
+                            >
 
                     </Button>
                     <Button Margin="20,10,20,0"
@@ -202,265 +222,13 @@
                         materialDesign:ButtonAssist.CornerRadius="5"
                         Foreground="#00de1e"
                         Background="#dcf7e0"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
-
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                                 Command="{Binding HuyBoCommand}" 
+   
+                                                        CommandParameter="{Binding ElementName=TaoPhieuMoiW}">
                     </Button>
                 </StackPanel>
             </materialDesign:Card>
         </Grid>
     </Grid>
-
-
-    <!--<Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <materialDesign:Card Margin="10"
-                                 Padding="5,0">
-                <StackPanel Margin="0,10">
-                    <ComboBox    materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}">
-
-                        <ComboBoxItem Content="Phiếu nhập heo"
-                                      IsSelected="True" />
-                        <ComboBoxItem Content="Phiếu xuất heo" />
-                    </ComboBox>
-
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã phiếu"
-                             Margin="0,0,5,5" />
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã nhân viên"
-                             Margin="0,0,5,5" />
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã khách hàng"
-                             Margin="0,0,5,5" />
-                    <DatePicker Grid.Column="1"
-                                materialDesign:HintAssist.Hint="Ngày">
-                    </DatePicker>
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Tổng tiền"
-                             Margin="0,0,5,5" />
-                    <ComboBox    materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}">
-
-                        <ComboBoxItem Content="Mới tạo"
-                                      IsSelected="True" />
-                        <ComboBoxItem Content="Đã thanh toán" />
-                        <ComboBoxItem Content="Đã bị hủy" />
-
-                    </ComboBox>
-
-                </StackPanel>
-            </materialDesign:Card>
-
-            <Button Margin="20,10"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Background="#3ab19b"
-                    Content="Hoàn tất"></Button>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1">
-            <materialDesign:Card Margin="10"
-                                 Padding="5,0">
-                <StackPanel Margin="0,10">
-
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã heo"
-                             Margin="0,0,5,5" />
-                    <ComboBox    materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}"
-                                 Margin="0,0,0,5">
-
-                        <ComboBoxItem Content="CH001"
-                                      IsSelected="True" />
-                        <ComboBoxItem Content="CH002" />
-                    </ComboBox>
-                    <ComboBox    materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}"
-                                 Margin="0,0,0,5">
-                        <ComboBoxItem Content="Heo ta"
-                                      IsSelected="True" />
-                        <ComboBoxItem Content="Heo rừng" />
-                    </ComboBox>
-                    <ComboBox    materialDesign:ComboBoxAssist.ClassicMode="{Binding IsChecked, ElementName=ClassicModeCheckBox}">
-
-                        <ComboBoxItem Content="Đực"
-                                      IsSelected="True" />
-                        <ComboBoxItem Content="Cái" />
-                    </ComboBox>
-
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã heo cha"
-                             Margin="0,0,5,5" />
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã heo mẹ"
-                             Margin="0,0,5,5" />
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Nguồn gốc"
-                             Margin="0,0,5,5" />
-
-                    <DatePicker Grid.Column="1"
-                                materialDesign:HintAssist.Hint="Ngày sinh">
-                    </DatePicker>
-
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Cân nặng"
-                             Margin="0,0,5,5" />
-
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Giá"
-                             Margin="0,0,5,5" />
-                </StackPanel>
-            </materialDesign:Card>
-
-            <Button  Margin="20,10"
-                     Style="{StaticResource MaterialDesignRaisedButton}"
-                     Background="#3ab19b"
-                     Content="Thêm"></Button>
-        </StackPanel>
-
-        <DataGrid Grid.Column="2"
-                  Name="DanhSachHeo"
-                  HeadersVisibility="All"
-                  SelectionUnit="{Binding ElementName=selectionUnitComboBox, Path=SelectedValue}">
-            <DataGrid.Resources>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Code}"
-                                    Header="Mã heo"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                <materialDesign:DataGridComboBoxColumn Header="Chuồng"
-                                                       IsEditable="True"
-                                                       SelectedValueBinding="{Binding Food}"
-                                                       ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Foods}">
-                    -->
-    <!--Setting the editing element style allows access to all of the combo box's properties
-                      <materialDesign:MaterialDataGridComboBoxColumn.EditingElementStyle>
-                          <Style TargetType="ComboBox" BasedOn="{StaticResource {ComponentResourceKey TypeInTargetAssembly={x:Type ComboBox}, ResourceId=MaterialDataGridComboBoxColumnEditingStyle}}" >
-                              <Setter Property="IsEditable" Value="True" />
-                          </Style>
-                      </materialDesign:MaterialDataGridComboBoxColumn.EditingElementStyle>
-                      -->
-    <!--
-                </materialDesign:DataGridComboBoxColumn>
-
-                -->
-    <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
-    <!--
-                <materialDesign:DataGridComboBoxColumn Header="Giống"
-                                                       IsEditable="True"
-                                                       SelectedValueBinding="{Binding Food}"
-                                                       ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Foods}">
-                    -->
-    <!--Setting the editing element style allows access to all of the combo box's properties
-                      <materialDesign:MaterialDataGridComboBoxColumn.EditingElementStyle>
-                          <Style TargetType="ComboBox" BasedOn="{StaticResource {ComponentResourceKey TypeInTargetAssembly={x:Type ComboBox}, ResourceId=MaterialDataGridComboBoxColumnEditingStyle}}" >
-                              <Setter Property="IsEditable" Value="True" />
-                          </Style>
-                      </materialDesign:MaterialDataGridComboBoxColumn.EditingElementStyle>
-                      -->
-    <!--
-                </materialDesign:DataGridComboBoxColumn>
-                <DataGridCheckBoxColumn Header="Giới tính"
-                                        Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
-                                        ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                                        EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
-                    <DataGridCheckBoxColumn.HeaderStyle>
-                        <Style TargetType="{x:Type DataGridColumnHeader}"
-                               BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Center" />
-                        </Style>
-                    </DataGridCheckBoxColumn.HeaderStyle>
-                </DataGridCheckBoxColumn>
-
-                <DataGridTextColumn Binding="{Binding Code}"
-                                    Header="Heo cha"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                <DataGridTextColumn Binding="{Binding Code}"
-                                    Header="Heo mẹ"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-
-                <DataGridTextColumn Binding="{Binding Code}"
-                                    Header="Nguồn gốc"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-
-                -->
-    <!-- set a max length to get an indicator in the editor -->
-    <!--
-                <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
-                                                   Header="Cân nặng"
-                                                   EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="{x:Type DataGridColumnHeader}"
-                               BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Right" />
-                            <Setter Property="ContentTemplate">
-                                <Setter.Value>
-                                    <DataTemplate>
-                                        <TextBlock TextWrapping="Wrap"
-                                                   Text="{Binding}"
-                                                   TextAlignment="Right" />
-                                    </DataTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}"
-                               BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}">
-                            <Setter Property="HorizontalAlignment"
-                                    Value="Right" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </materialDesign:DataGridTextColumn>
-                <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
-                                                   Header="Giá"
-                                                   EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="{x:Type DataGridColumnHeader}"
-                               BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Right" />
-                            <Setter Property="ContentTemplate">
-                                <Setter.Value>
-                                    <DataTemplate>
-                                        <TextBlock TextWrapping="Wrap"
-                                                   Text="{Binding}"
-                                                   TextAlignment="Right" />
-                                    </DataTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}"
-                               BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}">
-                            <Setter Property="HorizontalAlignment"
-                                    Value="Right" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </materialDesign:DataGridTextColumn>
-
-                -->
-    <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
-    <!--
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>-->
 </Window>

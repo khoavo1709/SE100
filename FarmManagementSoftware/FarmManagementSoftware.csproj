@@ -119,6 +119,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Windows\Quản lý đàn heo\ChonHeoXuat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Quản lý đàn heo\ThemHeoPhieu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\Thông Báo\ChitTietThongBaoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -302,6 +310,7 @@
     <Compile Include="Model\HEO.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\HEOXUAT.cs" />
     <Compile Include="Model\LICHPHOIGIONG.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -363,6 +372,8 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CapNhatTaiKhoanVM.cs" />
     <Compile Include="ViewModel\DoiMatKhauVM.cs" />
+    <Compile Include="ViewModel\Quản lý đàn heo\ChonHeoXuatVM.cs" />
+    <Compile Include="ViewModel\Quản lý đàn heo\LapPhieuBanNhapHeoVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\Phieu\PhieuBanHeoVM.cs" />
@@ -381,8 +392,10 @@
     <Compile Include="ViewModel\Quản lý nhân viên\NhanVienVM.cs" />
     <Compile Include="ViewModel\Quản lý nhân viên\SuaNhanVienVM.cs" />
     <Compile Include="ViewModel\Quản lý nhân viên\ThemNhanVienVM.cs" />
+    <Compile Include="ViewModel\Quản lý đàn heo\PhieuNhapBanHeoVM.cs" />
     <Compile Include="ViewModel\Quản lý đàn heo\QuanLyThongTinCaTheVM.cs" />
     <Compile Include="ViewModel\Quản lý đàn heo\SuaTTHeoVM.cs" />
+    <Compile Include="ViewModel\Quản lý đàn heo\ThemHeoPhieuVM.cs" />
     <Compile Include="ViewModel\Quản lý đàn heo\ThemTTHeoVM.cs" />
     <Compile Include="ViewModel\TrangChuVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\ChiTietThongBaoVM.cs" />
@@ -409,6 +422,12 @@
     </Compile>
     <Compile Include="View\Windows\Quản lý nhân viên\ThemNhanVien.xaml.cs">
       <DependentUpon>ThemNhanVien.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Quản lý đàn heo\ChonHeoXuat.xaml.cs">
+      <DependentUpon>ChonHeoXuat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Quản lý đàn heo\ThemHeoPhieu.xaml.cs">
+      <DependentUpon>ThemHeoPhieu.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\Thông Báo\ChitTietThongBaoWindow.xaml.cs">
       <DependentUpon>ChitTietThongBaoWindow.xaml</DependentUpon>
