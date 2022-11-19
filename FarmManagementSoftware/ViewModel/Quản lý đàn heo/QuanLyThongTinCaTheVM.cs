@@ -29,6 +29,7 @@ namespace FarmManagementSoftware.ViewModel
         public List<string> ListNguonGoc { get; set; }
 
         public ICommand AddCommand { get; set; }
+        public ICommand ShowCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand TimKiemTheoMa_TenCommand { get; set; }
