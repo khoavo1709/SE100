@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="QuanLyThongTinNhanVienWindow" Height="450" Width="800">
+        Title="QuanLyThongTinNhanVienWindow" Height="768" Width="1024">
     <Grid Margin="20,0,20,0"
           DataContext="{StaticResource NhanVienVM}">
         <Grid.ColumnDefinitions>
@@ -16,27 +18,37 @@
         <materialDesign:Card Grid.Column="0"
                              Margin="0,0,10,0">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="75"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <materialDesign:Card Height="75"
-                                     Margin="0,5,0,0">
-                    <TextBlock Grid.Column="0"
-                               Grid.Row="0"
-                               FontWeight="Bold"
-                               FontSize="16"
-                               Margin="10,0,0,0">Tìm kiếm thông tin nhân viên</TextBlock>
-                </materialDesign:Card>
-                <ScrollViewer Grid.Row="1"
-                              VerticalScrollBarVisibility="Auto"
+                <ScrollViewer  VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Auto">
                     <StackPanel  Orientation="Vertical">
-                        <Expander IsExpanded="True"
-                                  Header="Chức vụ"
+                        <!--<Expander IsExpanded="True"
+                                  Header="Ngày vào làm"
                                   FontWeight="Bold"
                                   Background="White">
-                            <ListView ItemsSource="{Binding listChucVu}"
+                            <StackPanel Orientation="Vertical"
+                                        Margin="10,0,0,0">
+                                <DatePicker Grid.Column="0"
+                                            HorizontalAlignment="Left"
+                                            Width="250"
+                                            materialDesign:HintAssist.Hint="Từ ngày"
+                                            materialDesign:TextFieldAssist.HasClearButton="True"
+                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                            FontWeight="Normal" />
+
+                                <DatePicker Grid.Column="1"
+                                            Width="250"
+                                            HorizontalAlignment="Left"
+                                            materialDesign:HintAssist.Hint="Đến ngày"
+                                            materialDesign:TextFieldAssist.HasClearButton="True"
+                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                            FontWeight="Normal" />
+                            </StackPanel>
+                        </Expander>-->
+                        <Expander IsExpanded="True"
+                                  Header="Lọc theo chức vụ vụ"
+                                  FontWeight="Bold"
+                                  Background="White">
+                            <ListView ItemsSource="{Binding lstChucVu}"
                                       Name="LVChucVu"
                                       Margin="10">
                                 <ListView.View>
@@ -52,7 +64,8 @@
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn DisplayMemberBinding="{Binding TenChucVu}" />
+                                        <GridViewColumn Header="Chức vụ "
+                                                        DisplayMemberBinding="{Binding TenChucVu}" />
                                     </GridView>
                                 </ListView.View>
                             </ListView>
@@ -96,7 +109,7 @@
                             <TextBox materialDesign:HintAssist.Hint="Tìm kiếm"
                                      Height="30"
                                      Margin="30,10,20,11"
-                                     Text="{Binding textTimKiem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                     Text="{Binding TextTimKiem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">
                                         <i:InvokeCommandAction Command="{Binding TextTimKiemChangeCommand}"
@@ -129,47 +142,46 @@
                 </Grid>
 
             </materialDesign:Card>
-            <ScrollViewer Grid.Row="1"
-                          VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Auto">
-                <Grid Margin="10,10">
-                    <ListView Margin="5"
+            <Grid Margin="10,10"
+                      Grid.Row="1">
+                <ListView Margin="5"
                               x:Name="ListNhanVien"
-                              ItemsSource="{Binding listNhanvien, Mode=TwoWay}"
-                              SelectedIndex="{Binding listviewSelectedIndex, Mode=TwoWay}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Mã nhân viên"
+                              ItemsSource="{Binding lstNhanvien, Mode=TwoWay}"
+                              SelectedIndex="{Binding ListViewSelectedIndex, Mode=TwoWay}"
+                          ScrollViewer.CanContentScroll="True"
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã nhân viên"
                                                 DisplayMemberBinding="{Binding MaNhanVien}" />
-                                <GridViewColumn Header="Họ tên"
+                            <GridViewColumn Header="Họ tên"
                                                 DisplayMemberBinding="{Binding HoTen}" />
-                                <GridViewColumn Header="Chức vụ"
+                            <GridViewColumn Header="Chức vụ"
                                                 DisplayMemberBinding="{Binding CHUCVU.TenChucVu}" />
-                                <GridViewColumn Header="Số điện thoại"
+                            <GridViewColumn Header="Số điện thoại"
                                                 DisplayMemberBinding="{Binding SDT}" />
-                                <GridViewColumn Header="Hệ số lương"
+                            <GridViewColumn Header="Hệ số lương"
                                                 DisplayMemberBinding="{Binding HeSoLuong}" />
-                                <GridViewColumn Header="Username"
+                            <GridViewColumn Header="Username"
                                                 DisplayMemberBinding="{Binding C_Username}" />
-                            </GridView>
-                        </ListView.View>
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
                                           Command="{Binding EditCommand}">
-                                    <MenuItem.Header>Xem và chỉnh sửa</MenuItem.Header>
-                                </MenuItem>
-                                <!--<MenuItem Icon="{materialDesign:PackIcon Kind=Delete}">
+                                <MenuItem.Header>Xem và chỉnh sửa</MenuItem.Header>
+                            </MenuItem>
+                            <!--<MenuItem Icon="{materialDesign:PackIcon Kind=Delete}">
                                     <MenuItem.Header>Xóa</MenuItem.Header>
                                 </MenuItem>-->
-                            </ContextMenu>
-                        </ListView.ContextMenu>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
 
-                    </ListView>
+                </ListView>
 
-                </Grid>
+            </Grid>
 
-            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>
