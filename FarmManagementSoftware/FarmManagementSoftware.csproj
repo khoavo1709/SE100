@@ -99,6 +99,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Windows\Quản lý chuồng nuôi\LoaiChuongWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\Quản lý hàng hoá\TaoPhieuKho.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Windows\Quản lý nhân viên\ThemNhanVien.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Quản lý chuồng nuôi\SuaLoaiChuong.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -399,6 +407,9 @@
     <Compile Include="View\Windows\CapNhatTaiKhoanWindow.xaml.cs">
       <DependentUpon>CapNhatTaiKhoanWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Windows\Quản lý chuồng nuôi\LoaiChuongWindow.xaml.cs">
+      <DependentUpon>LoaiChuongWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\Quản lý hàng hoá\TaoPhieuKho.xaml.cs">
       <DependentUpon>TaoPhieuKho.xaml</DependentUpon>
     </Compile>
@@ -416,6 +427,9 @@
     </Compile>
     <Compile Include="View\Windows\Quản lý nhân viên\ThemNhanVien.xaml.cs">
       <DependentUpon>ThemNhanVien.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Quản lý chuồng nuôi\SuaLoaiChuong.xaml.cs">
+      <DependentUpon>SuaLoaiChuong.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\Thông Báo\ChitTietThongBaoWindow.xaml.cs">
       <DependentUpon>ChitTietThongBaoWindow.xaml</DependentUpon>
