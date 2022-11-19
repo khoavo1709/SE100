@@ -3,9 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows" 
         mc:Ignorable="d"
-        Title="Quanlyloaiheo" Height="450" Width="800">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        ScrollViewer.CanContentScroll="True"
+        Title="Quản lý loại heo"
+        Height="768"
+        Width="1024"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
     <Grid Margin="20,0,20,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"></ColumnDefinition>
@@ -46,19 +59,7 @@
                         FontSize="16"
                         Background="#00de1e"
                         materialDesign:ButtonAssist.CornerRadius="5"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
-
-                </Button>
-                <Button Margin="20,10,20,0"
-                        Style="{StaticResource MaterialDesignRaisedButton}"
-                        Height="30"
-                        BorderBrush="White"
-                        Content="Sửa"
-                        FontSize="16"
-                        materialDesign:ButtonAssist.CornerRadius="5"
-                        Foreground="#00de1e"
-                        Background="#dcf7e0"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="btn_ThemClick">
 
                 </Button>
             </StackPanel>
@@ -92,7 +93,7 @@
                                     FontSize="16"
                                     Background="#00de1e"
                                     materialDesign:ButtonAssist.CornerRadius="5"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="Find_button_Click">
 
                                     </Button>
                                 </StackPanel>
@@ -102,18 +103,37 @@
                         </Grid>
 
                     </materialDesign:Card>
-                  
-                    <DataGrid x:Name="Datagrid_loaiheo"
-                        ItemsSource="{Binding i}"
+                    <!--<DataGrid 
+                        ItemsSource="{Binding Items2}"
                         CanUserAddRows="False"
-                        HeadersVisibility="All" Cursor="Arrow" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã loại heo" Binding="{Binding MaLoaiHeo}"/>
-                            <DataGridTextColumn Header="Tên loại heo" Binding="{Binding TenLoaiHeo}"/>
-                            <DataGridTextColumn Header="Mô tả" Binding="{Binding MoTa}"/>
-                        </DataGrid.Columns>
-                    
-                    </DataGrid>
+                        SelectionUnit="Cell"
+                        SelectionMode="Extended" ClipboardCopyMode="IncludeHeader" HeadersVisibility="None" />
+-->
+                    <ListView x:Name="listviewHeo" ItemsSource="{Binding Basegiongheo}" SelectedItem="{Binding MaGiongHeo, Mode=OneWayToSource}" Margin="15,0,10,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Mã loại heo" DisplayMemberBinding="{Binding MaLoaiHeo}"/>
+                                <GridViewColumn Header="Tên loại heo" DisplayMemberBinding="{Binding TenLoaiHeo}"/>
+                                <GridViewColumn Header="Mô tả" DisplayMemberBinding="{Binding MoTa}"/>
+                                <GridViewColumn Header="" Width="160">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Menu>
+                                                <MenuItem x:Name="fixB" Icon="{materialDesign:PackIcon Kind=Pen}"  Width="48" Click="btnFix_Click"></MenuItem>
+                                                <MenuItem x:Name="deleteB" Icon="{materialDesign:PackIcon Kind=Delete}"  Width="48" Click="btnDelete_Click"></MenuItem>
+                                            </Menu>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                                <EventSetter Event="PreviewMouseLeftButtonUp" Handler="ListViewItem_PreviewMouseLeftButtonUp" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
                 </StackPanel>
 
             </materialDesign:Card>
@@ -121,3 +141,4 @@
 
     </Grid>
 </Window>
+

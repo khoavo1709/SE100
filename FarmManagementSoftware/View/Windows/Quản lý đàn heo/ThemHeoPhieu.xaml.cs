@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FarmManagementSoftware.View.Windows.Quản_lý_loại_heo
+namespace FarmManagementSoftware.View.Windows
 {
     /// <summary>
-    /// Interaction logic for ThemLoaiHeo.xaml
+    /// Interaction logic for ThemHeoPhieu.xaml
     /// </summary>
-    public partial class ThemLoaiHeo : Window
+    public partial class ThemHeoPhieu : Window
     {
-        public ThemLoaiHeo()
+        public ThemHeoPhieu()
         {
             InitializeComponent();
         }

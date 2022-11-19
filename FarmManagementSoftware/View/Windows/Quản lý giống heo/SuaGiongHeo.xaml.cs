@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FarmManagementSoftware.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,37 @@ namespace FarmManagementSoftware.View.Windows
     /// </summary>
     public partial class SuaGiongHeo : Window
     {
-        public SuaGiongHeo()
+         
+        public SuaGiongHeo(GIONGHEO GH)
         {
             InitializeComponent();
+            textcode.Text = GH.MaGiongHeo;
+            textname.Text = GH.TenGiongHeo;
+            textmota.Text = GH.MoTa;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (textcode.Text == "")
+            {
+                MessageBox.Show("Chưa nhập mã loại heo.", "", MessageBoxButton.OK);
+                return;
+            }
+            if (textname.Text == "" || textmota.Text == "")
+            {
+                MessageBox.Show("Chưa nhập đầy đủ thông tin.", "", MessageBoxButton.OK);
+                return;
+            }
+            this.Close();
+        }
+
+        public GIONGHEO tranferCode()
+        {
+            GIONGHEO GH = new GIONGHEO();
+            GH.MaGiongHeo = textcode.Text;
+            GH.TenGiongHeo = textname.Text;
+            GH.MoTa = textmota.Text;
+            return GH;
         }
     }
 }

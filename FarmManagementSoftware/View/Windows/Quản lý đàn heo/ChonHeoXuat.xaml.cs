@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace FarmManagementSoftware.View.Windows
 {
     /// <summary>
-    /// Interaction logic for ThemGiongHeo.xaml
+    /// Interaction logic for ChonHeoXuat.xaml
     /// </summary>
-    public partial class ThemGiongHeo : Window
+    public partial class ChonHeoXuat : Window
     {
-        public ThemGiongHeo()
+        public ChonHeoXuat()
         {
             InitializeComponent();
         }

@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows.Quản_lý_loại_heo" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="SuaLoaiHeo" Height="300" Width="350">
+        Title="SuaLoaiHeo" Height="350" Width="350"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
@@ -13,6 +15,7 @@
                 <GradientStop Color="#2d708c" Offset="0.25"/>
             </LinearGradientBrush>
         </Grid.Background>
+        <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
         <StackPanel VerticalAlignment="Center" Margin="5">
             <materialDesign:Card Margin="5" VerticalAlignment="Center">
                 <StackPanel VerticalAlignment="Center">
@@ -23,9 +26,10 @@
             </materialDesign:Card>
             <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">
                 <Border Margin="20" BorderBrush="#3ab19b" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                    <Button Background="#3ab19b" Content="Xác nhận" Width="150" Height="40" VerticalAlignment="Bottom"></Button>
+                    <Button Background="#3ab19b" Content="Xác nhận" Width="150" Height="40" VerticalAlignment="Bottom" Click="Button_Click"></Button>
                 </Border>
             </materialDesign:Card>
         </StackPanel>
     </Grid>
 </Window>
+                           
