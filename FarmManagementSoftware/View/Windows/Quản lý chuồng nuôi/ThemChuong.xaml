@@ -23,7 +23,7 @@
             <ColumnDefinition Width="2.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <Image Source="/Image/background.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
+            <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
             <StackPanel Margin="5" VerticalAlignment="Center">
                 <materialDesign:Card Grid.Row="0" Margin="5" VerticalAlignment="Center">
                     <StackPanel VerticalAlignment="Center">
