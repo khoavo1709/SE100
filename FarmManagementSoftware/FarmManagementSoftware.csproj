@@ -373,6 +373,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CapNhatTaiKhoanVM.cs" />
     <Compile Include="ViewModel\DoiMatKhauVM.cs" />
+    <Compile Include="ViewModel\Lập lịch\LaplichtiemVM.cs" />
     <Compile Include="ViewModel\Quản lý đàn heo\ChonHeoXuatVM.cs" />
     <Compile Include="ViewModel\Quản lý đàn heo\LapPhieuBanNhapHeoVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
