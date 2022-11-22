@@ -7,174 +7,259 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Tạo phiếu mới"
-        Height="480"
-        Width="720">
+        Height="768"
+        Width="1024">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="350"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <materialDesign:Card Margin="10"
-                                 Padding="5,0">
-                <StackPanel Margin="0,10">
-                    <ComboBox    materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}">
+        <Grid Grid.Column="0">
+            <materialDesign:Card>
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       FontWeight="Bold"
+                                       FontSize="16"
+                                       VerticalAlignment="Center"
+                                       Margin="10,5,0,5">Danh sách phiếu</TextBlock>
 
-                        <ComboBoxItem Content="Phiếu nhập kho"
-                                      IsSelected="True" />
-                        <ComboBoxItem Content="Phiếu xuất kho" />
-                    </ComboBox>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"
+                                      Margin="10,0,10,0">
+                                    <materialDesign:PackIcon Kind="Search"
+                                                             Margin="0 15 0 0 " />
+                                    <TextBox materialDesign:HintAssist.Hint="Tìm kiếm"
+                                             Height="30"
+                                             Margin="30,10,20,11" />
+                                </Grid>
+                                <StackPanel Grid.Column="1"
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right"
+                                            Margin="0,0,10,0">
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                                            Height="30"
+                                            Width="200"
+                                            BorderBrush="White"
+                                            Content="Tạo phiếu mới"
+                                            FontSize="16"
+                                            Background="#00de1e"
+                                            materialDesign:ButtonAssist.CornerRadius="5"
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
 
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã phiếu"
-                             Margin="0,0,5,5" />
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã nhân viên"
-                             Margin="0,0,5,5" />
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã khách hàng"
-                             Margin="0,0,5,5" />
-                    <DatePicker Grid.Column="1"
-                                materialDesign:HintAssist.Hint="Ngày">
-                    </DatePicker>
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Tổng tiền"
-                             Margin="0,0,5,5" />
-                    <ComboBox    materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}">
+                                    </Button>
+                                </StackPanel>
 
-                        <ComboBoxItem Content="Mới tạo"
-                                      IsSelected="True" />
-                        <ComboBoxItem Content="Đã thanh toán" />
-                        <ComboBoxItem Content="Đã bị hủy" />
+                            </Grid>
 
-                    </ComboBox>
+                        </Grid>
+
+                    </materialDesign:Card>
+
+                    <Grid>
+                        <ListView Margin="25 0"
+                                  Name="Listview"
+                                 >
+
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã" />
+                                    <GridViewColumn Header="Tên mặt hàng" />
+                                    <GridViewColumn Header="Số lượng" />
+                                    <GridViewColumn Header="Giá" />
+                                    <GridViewColumn Header="Thao tác"
+                                                    Width="160">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Menu>
+                                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Show}"
+                                                              Width="48"></MenuItem>
+                                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
+                                                              Width="48"></MenuItem>
+                                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"
+                                                              Width="48"></MenuItem>
+                                                </Menu>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Show}">
+                                        <MenuItem.Header>Show</MenuItem.Header>
+                                    </MenuItem>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}">
+                                        <MenuItem.Header>Edit</MenuItem.Header>
+                                    </MenuItem>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}">
+                                        <MenuItem.Header>Delete</MenuItem.Header>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                        </ListView>
+
+                    </Grid>
 
                 </StackPanel>
+
             </materialDesign:Card>
-
-            <Button Margin="20,10"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Background="#3ab19b"
-                    Content="Hoàn tất"></Button>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1">
-            <materialDesign:Card Margin="10"
-                                 Padding="5,0">
-                <StackPanel Margin="0,10">
-
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã mặt hàng"
-                             Margin="0,0,5,5" />
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mặt hàng"
-                             Margin="0,0,5,5" />
-
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Số lượng"
-                             Margin="0,0,5,5" />
-
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Giá"
-                             Margin="0,0,5,5" />
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="315"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Grid.Row="0"
+                                 Margin="0,0,10,0">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0"
+                                   FontWeight="Bold"
+                                   FontSize="16"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0">Nhân viên thực hiện</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Account"
+                                                 Margin="10 15 0 0 " />
+                        <TextBox materialDesign:HintAssist.Hint="Tên nhân viên"
+                                 Height="30"
+                                 Margin="30,10,20,11" />
+                    </Grid>
                 </StackPanel>
             </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1"
+                                 Margin="0,20,10,0">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0"
+                                   FontWeight="Bold"
+                                   FontSize="16"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0">Khách hàng</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="AccountTie"
+                                                 Margin="10 15 0 0 " />
+                        <TextBox materialDesign:HintAssist.Hint="Mã khách hàng"
+                                 Height="30"
+                                 Margin="30,10,20,11" />
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="RenameBox"
+                                                 Margin="10 5 0 0 " />
+                        <TextBox materialDesign:HintAssist.Hint="Tên khách hàng"
+                                 Height="30"
+                                 Margin="30,0,20,11" />
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Email"
+                                                 Margin="10 5 0 0 " />
+                        <TextBox materialDesign:HintAssist.Hint="Email"
+                                 Height="30"
+                                 Margin="30,0,20,11" />
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Phone"
+                                                 Margin="10 5 0 0 " />
+                        <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
+                                 Height="30"
+                                 Margin="30,0,20,11" />
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="MapMarker"
+                                                 Margin="10 5 0 0 " />
+                        <TextBox Margin="30,0,20,11"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 VerticalAlignment="Top"
+                                 Height="80"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"
+                                 materialDesign:HintAssist.Hint="Địa chỉ liên lạc"
+                                 IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" />
+                    </Grid>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="3"
+                                 Margin="0,10,10,0">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0"
+                                   FontWeight="Bold"
+                                   FontSize="16"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0">Thông tin phiếu</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Barcode"
+                                                 Margin="10 15 0 0 " />
+                        <TextBox materialDesign:HintAssist.Hint="Mã phiếu"
+                                 Height="30"
+                                 Margin="30,10,20,11" />
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="ReceiptText"
+                                                 Margin="10 5 0 0 " />
+                        <ComboBox Height="30"
+                                  Margin="30,0,20,11"
+                                  materialDesign:HintAssist.Hint="Loại phiếu">
+                            <ComboBoxItem Content="Phiếu nhập heo" />
+                            <ComboBoxItem Content="Phiếu xuất heo" />
+                        </ComboBox>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="CalendarCheck"
+                                                 Margin="10 5 0 0 " />
+                        <DatePicker Grid.Column="1"
+                                    Height="30"
+                                    Margin="30,0,20,11"
+                                    materialDesign:HintAssist.Hint="Ngày lập phiếu">
+                        </DatePicker>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="CurrencyUsd"
+                                                 Margin="10 5 0 0 " />
+                        <TextBox materialDesign:HintAssist.Hint="Tổng tiền"
+                                 Height="30"
+                                 Margin="30,0,20,11" />
+                    </Grid>
+                    <Button Margin="20,20,20,0"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Height="30"
+                            BorderBrush="White"
+                            Content="Hoàn tất"
+                            FontSize="16"
+                            Background="#00de1e"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
 
-            <Button  Margin="20,10"
-                     Style="{StaticResource MaterialDesignRaisedButton}"
-                     Background="#3ab19b"
-                     Content="Thêm"></Button>
-        </StackPanel>
+                    </Button>
+                    <Button Margin="20,10,20,0"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Height="30"
+                            BorderBrush="White"
+                            Content="Huỷ bỏ"
+                            FontSize="16"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            Foreground="#00de1e"
+                            Background="#dcf7e0"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
 
-        <DataGrid Grid.Column="2"
-                  Name="DanhSachHeo"
-                  HeadersVisibility="All"
-                  SelectionUnit="{Binding ElementName=selectionUnitComboBox, Path=SelectedValue}">
-            <DataGrid.Resources>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Code}"
-                                    Header="Mã mặt hàng"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                <materialDesign:DataGridComboBoxColumn Header="Mặt hàng"
-                                                       IsEditable="True"
-                                                       SelectedValueBinding="{Binding Food}"
-                                                       ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Foods}">
-                    <!--Setting the editing element style allows access to all of the combo box's properties
-                      <materialDesign:MaterialDataGridComboBoxColumn.EditingElementStyle>
-                          <Style TargetType="ComboBox" BasedOn="{StaticResource {ComponentResourceKey TypeInTargetAssembly={x:Type ComboBox}, ResourceId=MaterialDataGridComboBoxColumnEditingStyle}}" >
-                              <Setter Property="IsEditable" Value="True" />
-                          </Style>
-                      </materialDesign:MaterialDataGridComboBoxColumn.EditingElementStyle>
-                      -->
-                </materialDesign:DataGridComboBoxColumn>
-
-                <!-- set a max length to get an indicator in the editor -->
-                <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
-                                                   Header="Số lượng"
-                                                   EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="{x:Type DataGridColumnHeader}"
-                               BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Right" />
-                            <Setter Property="ContentTemplate">
-                                <Setter.Value>
-                                    <DataTemplate>
-                                        <TextBlock TextWrapping="Wrap"
-                                                   Text="{Binding}"
-                                                   TextAlignment="Right" />
-                                    </DataTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}"
-                               BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}">
-                            <Setter Property="HorizontalAlignment"
-                                    Value="Right" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </materialDesign:DataGridTextColumn>
-                <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
-                                                   Header="Giá"
-                                                   EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="{x:Type DataGridColumnHeader}"
-                               BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Right" />
-                            <Setter Property="ContentTemplate">
-                                <Setter.Value>
-                                    <DataTemplate>
-                                        <TextBlock TextWrapping="Wrap"
-                                                   Text="{Binding}"
-                                                   TextAlignment="Right" />
-                                    </DataTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}"
-                               BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}">
-                            <Setter Property="HorizontalAlignment"
-                                    Value="Right" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </materialDesign:DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                    </Button>
+                </StackPanel>
+            </materialDesign:Card>
+        </Grid>
     </Grid>
 </Window>
