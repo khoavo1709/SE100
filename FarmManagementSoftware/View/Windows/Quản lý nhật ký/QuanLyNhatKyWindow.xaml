@@ -6,206 +6,238 @@
         xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="QuanLyNhatKyWindow" Height="450" Width="800">
-    <Grid Background="#f3f3f9" Margin="20,0,20,0" DataContext="{StaticResource QuanLyNhatKyVM}">
-        <Grid Grid.Row="2" Margin="0,0,0,0">
-            <materialDesign:Card>
-                <DockPanel>
-                    <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-                        <materialDesign:Card>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,5,0,5">Quản lý nhật ký</TextBlock>
+         Height="768"
+        Width="1024"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+    <Grid Background="#f3f3f9"
+          DataContext="{StaticResource QuanLyNhatKyVM}">
 
-                                <Grid Grid.Row="1" Margin="0,0,0,10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
 
-                                        </Grid.ColumnDefinitions>
-                                        <TextBox Grid.Column="0" Width="180"
-                                            materialDesign:HintAssist.Hint="Tháng"
-                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                            VerticalAlignment="Center" />
-                                        <TextBox Grid.Column="1" Width="180"
-                                            materialDesign:HintAssist.Hint="Năm"
-                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                            VerticalAlignment="Center" />
-                                        <ComboBox Grid.Column="2"
-                                                Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                                materialDesign:ColorZoneAssist.Mode="SecondaryLight"
-                                                materialDesign:HintAssist.Hint="Loại phiếu"
-                                                Width="135">
-                                            <ComboBoxItem
-                                                Content="Tất cả" />
-                                            <ComboBoxItem
-                                                Content="Phiếu nhập heo" />
-                                            <ComboBoxItem
-                                                Content="Phiếu bán heo" />
-                                            <ComboBoxItem
-                                                Content="Phiếu nhập kho" />
-                                            <ComboBoxItem
-                                                Content="Phiếu xuất kho" />
-                                            <ComboBoxItem
-                                                Content="Phiếu kiểm kho" />
-                                        </ComboBox>
-                                    </Grid>
-                                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-                                        <Button
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Height="30"
-                                    Width="120"
-                                    BorderBrush="White"
-                                    Content="Tìm"
-                                    FontSize="16"
-                                    Background="#00de1e"
-                                    materialDesign:ButtonAssist.CornerRadius="5"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+        <materialDesign:Card>
+            <DockPanel>
+                <ToolBarTray Height="50"
+                             VerticalAlignment="Bottom"
+                             DockPanel.Dock="Bottom">
+                    <ToolBar Style="{StaticResource MaterialDesignToolBar}"
+                             ClipToBounds="False">
+                        <Button  Content="Trang đầu"
+                                 Width="100">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding FirstPageCommand}"
+                                                           CommandParameter="{Binding Source={x:Reference ListNhatKy}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
 
-                                        </Button>
-                                    </StackPanel>
+                        </Button>
+                        <Button  Content="Trở lại"
+                                 Width="100">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding PreviousPageCommand}"
+                                                           CommandParameter="{Binding Source={x:Reference ListNhatKy}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
 
-                                </Grid>
+                        </Button>
+                        <TextBox Text="{Binding SelectedPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectPageChangedCommand}"
+                                                           CommandParameter="{Binding Source={x:Reference ListNhatKy}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                        <TextBlock Text="/"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
 
-                            </Grid>
+                        <TextBlock Text="{Binding TotalPage, Mode=OneWay}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
 
-                        </materialDesign:Card>
-                        <StackPanel>
-                            <Expander IsExpanded="True"
-                                HorizontalAlignment="Stretch"
-                                Header="Ngày 16/10/2022">
-                                <StackPanel
-                                    Orientation="Vertical"
-                                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-                                    Margin="24,8,24,16">
-                                    <Grid>
-                                        <Rectangle HorizontalAlignment="Left" Width="0.3" Margin="20,8,0,8" Stroke="Black" />
-                                        <StackPanel Orientation="Vertical">
-                                            <ListView Margin="-10,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                                    ItemsSource="{Binding lstNhatKy}">
-                                                <ListView.Resources>
-                                                    <Style TargetType="GridViewColumnHeader">
-                                                        <Setter Property="Visibility" Value="Collapsed" />
-                                                    </Style>
-                                                </ListView.Resources>
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn>
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <Button Grid.Column="1" Background="#d8edf9" Foreground="#4aace1" Width="30" Height="30"
-                                                            Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                                            ToolTip="MaterialDesignIconForegroundButton"
-                                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
-                                                                        <materialDesign:PackIcon
-                                                            Kind="{Binding icon}" />
-                                                                    </Button>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn>
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <TextBlock FontWeight="Bold" Margin="0,10,0,0" Height="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding TenNhanVien}"></TextBlock>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn>
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <TextBlock Margin="0,10,0,0" Height="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Mota}"></TextBlock>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn>
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <TextBlock Margin="0,10,0,0" Height="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding MaPhieu}"></TextBlock>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
+                        <Button Content="Tiếp theo"
+                                Width="100">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding NextPageCommand}"
+                                                           CommandParameter="{Binding Source={x:Reference ListNhatKy}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
 
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                        </StackPanel>
-                                    </Grid>
+                        </Button>
+                        <Button Content="Trang cuối"
+                                Width="100">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding LastPageCommand}"
+                                                           CommandParameter="{Binding Source={x:Reference ListNhatKy}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
 
-                                </StackPanel>
-                            </Expander>
-                            <Expander IsExpanded="True"
-                                HorizontalAlignment="Stretch"
-                                Header="Ngày 17/10/2022">
-                                <StackPanel
-                                    Orientation="Vertical"
-                                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-                                    Margin="24,8,24,16">
-                                    <TextBlock
-                                        Text="Không có lịch sử nhật ký" />
+                        </Button>
+                    </ToolBar>
+                </ToolBarTray>
 
-                                </StackPanel>
-                            </Expander>
-                            <Expander IsExpanded="True"
-                                HorizontalAlignment="Stretch"
-                                Header="Ngày 18/10/2022">
-                                <StackPanel
-                                    Orientation="Vertical"
-                                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-                                    Margin="24,8,24,16">
-                                    <TextBlock
-                                        Text="Không có lịch sử nhật ký" />
-                                </StackPanel>
-                            </Expander>
-                        </StackPanel>
+                <Grid Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:Card Grid.Column="0">
+                    </materialDesign:Card>
+                    <StackPanel>
+                        <DatePicker Margin="10"
+                                    Width="280"
+                                    SelectedDate="{Binding TuNgay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    HorizontalAlignment="Center"
+                                    Grid.Column="0"
+                                    materialDesign:HintAssist.Hint="Từ ngày"
+                                    materialDesign:TextFieldAssist.HasClearButton="True"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedDateChanged">
+                                    <i:InvokeCommandAction Command="{Binding TimKiemCommand}"
+                                                           CommandParameter="{Binding Source={x:Reference ListNhatKy}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DatePicker>
+                        <DatePicker Width="280"
+                                    SelectedDate="{Binding DenNgay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    materialDesign:HintAssist.Hint="Đến ngày"
+                                    materialDesign:TextFieldAssist.HasClearButton="True"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedDateChanged">
+                                    <i:InvokeCommandAction Command="{Binding TimKiemCommand}"
+                                                           CommandParameter="{Binding Source={x:Reference ListNhatKy}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </DatePicker>
+
+                        <ListView ItemsSource="{Binding lstActions , Mode=TwoWay}"
+                                  Name="LVChucVu"
+                                  Margin="10">
+                            <ListView.ItemBindingGroup>
+                                <BindingGroup />
+                            </ListView.ItemBindingGroup>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="40">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding ischecked,  UpdateSourceTrigger=PropertyChanged}"
+                                                          Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                                                    AncestorType={x:Type ItemsControl}},
+                                                                                                    Path= DataContext.TimKiemCommand }"
+                                                          CommandParameter="{Binding Source={x:Reference ListNhatKy}}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Hành động"
+                                                    DisplayMemberBinding="{Binding TenHanhDong}" />
+                                </GridView>
+                            </ListView.View>
+
+                        </ListView>
 
                     </StackPanel>
-                    <ToolBarTray DockPanel.Dock="Bottom" Height="50" VerticalAlignment="Bottom">
-                        <ToolBar
-                                Style="{StaticResource MaterialDesignToolBar}"
-                                ClipToBounds="False">
-                            <Button
-                                ToolTip="Follow me on Twitter"
-                                Content="Trang đầu" />
-                            <Button
-                                ToolTip="Save"
-                                Content="Trở lại" />
-                            <Button
-                                ToolTip="Save"
-                                Content="1" />
-                            <Button
-                                ToolTip="Save"
-                                Content="2" />
-                            <Button
-                                ToolTip="Save"
-                                Content="3" />
-                            <Button
-                                ToolTip="Save"
-                                Content="4" />
-                            <Button
-                                ToolTip="Save"
-                                Content="5" />
-                            <Button
-                                ToolTip="Save"
-                                Content="Tiếp theo" />
-                            <Button
-                                ToolTip="Save"
-                                Content="Trang cuối" />
-                        </ToolBar>
-                    </ToolBarTray>
-                </DockPanel>
 
-            </materialDesign:Card>
-        </Grid>
+                    <ListView Name="ListNhatKy"
+                              Grid.Column="1"
+                              Margin="0,0,0,0"
+                              VerticalContentAlignment="Center"
+                              ItemsSource="{Binding lstNhatKy, Mode=OneWay}"
+                              ScrollViewer.CanContentScroll="True"
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button  Background="#d8edf9"
+                                                     Foreground="#4aace1"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                                     ToolTip="MaterialDesignIconForegroundButton"
+                                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                                <materialDesign:PackIcon Kind="{Binding icon}" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
 
+                                <GridViewColumn x:Name="ThoiGian">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Margin="0,10,0,0"
+                                                       Height="15"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       Text="{Binding ThoiGian, StringFormat='{}{0:HH:mm}' }"></TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Nhân Viên">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock FontWeight="Bold"
+                                                       Margin="0,10,0,0"
+                                                       Height="15"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       Text="{Binding TenNhanVien}"></TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Hành động">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Margin="0,10,0,0"
+                                                       Height="15"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       Text="{Binding HanhDong}"></TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Mã Phiếu">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Margin="0,10,0,0"
+                                                       Height="15"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       Text="{Binding MaPhieu}"></TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                        <ListView.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid   Background="#c8edec">
+                                            <Label Content="{Binding Name}"
+                                                   FontSize="14"
+                                                   FontWeight="Bold"
+                                                   Margin="50,5,0,5" />
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ListView.GroupStyle>
+                    </ListView>
+                </Grid>
+            </DockPanel>
+        </materialDesign:Card>
     </Grid>
 </Window>
