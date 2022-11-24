@@ -388,3 +388,5 @@ C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản l
 C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThemHeoPhieu.g.cs
 C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ChonHeoXuat.baml
 C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThemHeoPhieu.baml
+C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Cây mục tiêu\CayMucTieu.g.cs
+C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Cây mục tiêu\CayMucTieu.baml

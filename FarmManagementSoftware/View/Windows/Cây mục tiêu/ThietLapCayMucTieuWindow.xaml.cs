@@ -19,9 +19,19 @@ namespace FarmManagementSoftware.View.Windows
     /// </summary>
     public partial class ThietLapCayMucTieuWindow : Window
     {
+        CayMucTieu cmt = new CayMucTieu();
+        Object obj;
+        static int check = 0;
         public ThietLapCayMucTieuWindow()
         {
             InitializeComponent();
+            cmt.Close();
+            obj = cmt.Content;
+            cmt.Content = null;
+            showmake.Children.Clear();
+            showmake.Children.Add(obj as UIElement);
         }
+
     }
+
 }
