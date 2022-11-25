@@ -34,7 +34,9 @@ namespace FarmManagementSoftware.ViewModel
         DateTime? maxdate;
         int minTL = 0;
         int maxTL = 0;
-        public ChonHeoXuatVM(PhieuBanNhapHeoVM vm)
+        public ChonHeoXuatVM()
+        { }
+            public ChonHeoXuatVM(PhieuBanNhapHeoVM vm)
         {
             goc = vm;
             var AllHEO = new ObservableCollection<HEO>(DataProvider.Ins.DB.HEOs);

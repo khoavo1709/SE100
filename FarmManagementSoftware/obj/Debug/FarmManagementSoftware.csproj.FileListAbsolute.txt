@@ -518,3 +518,5 @@ C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\obj\Debug\FarmManagement
 C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.CopyComplete
 C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.exe
 C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.pdb
+C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ChiTietPhieuSuaChua.g.cs
+C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ChiTietPhieuSuaChua.baml

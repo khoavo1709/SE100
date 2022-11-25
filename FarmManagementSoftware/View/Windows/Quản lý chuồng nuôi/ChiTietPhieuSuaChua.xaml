@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="ChiTietPhieuSuaChua" Height="450" Width="350" WindowStartupLocation="CenterScreen" Left = "920" Top = "35">
-    <Grid DataContext="{StaticResource ChiTietPhieuSuaChuaVM}">
+        Title="ChiTietPhieuSuaChua" Height="450" Width="350" WindowStartupLocation="CenterScreen" Left = "920" Top = "35"
+        Name="ctWinDow"
+        >
+    <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
                 <GradientStop Color="#3ab19b" Offset="0.05"/>
@@ -19,7 +21,6 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="9*"/>
             </Grid.ColumnDefinitions>
-            <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2" Grid.ColumnSpan="2"></Image>
             <StackPanel Margin="5,0,5,0" VerticalAlignment="Center" Grid.ColumnSpan="2">
                 <materialDesign:Card Grid.Row="0" Margin="5" Background="White" VerticalAlignment="Center">
                     <StackPanel VerticalAlignment="Center">
@@ -54,7 +55,7 @@
                         Background="#00de1e"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                        Command="{Binding XacNhanCommand}">
+                        Command="{Binding XacNhanCommand}" CommandParameter="{Binding ElementName=ctWinDow}">
                             </Button>
                             <Button Margin="20,10,20,0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
@@ -66,7 +67,7 @@
                         Foreground="#00de1e"
                         Background="#dcf7e0"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                        Command="{Binding HuyCommand}">
+                        Command="{Binding HuyCommand}"  CommandParameter="{Binding ElementName=ctWinDow}">
                             </Button>
                         </StackPanel>
                     </Border>

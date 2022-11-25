@@ -65,7 +65,8 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="253*"/>
-                            <ColumnDefinition Width="84*"/>
+                            <ColumnDefinition Width="12*"/>
+                            <ColumnDefinition Width="72*"/>
                         </Grid.ColumnDefinitions>
                         <ListView 
                             Name="Listview"

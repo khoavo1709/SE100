@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Controls;
+using System.Collections.ObjectModel;
 
 namespace FarmManagementSoftware.ViewModel
 {
@@ -30,11 +32,14 @@ namespace FarmManagementSoftware.ViewModel
 
         public ChiTietPhieuSuaChuaVM()
         {
+           
+        }
+        public ChiTietPhieuSuaChuaVM(ObservableCollection<CT_PHIEUSUACHUA> a)
+        {
             XacNhanCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 CT_PHIEUSUACHUA cT_PHIEUSUACHUA = new CT_PHIEUSUACHUA() { SoPhieu = SoPhieu, MaChuong = MaChuong, MoTa = Mota };
-                DataProvider.Ins.DB.CT_PHIEUSUACHUA.Add(cT_PHIEUSUACHUA);
-                DataProvider.Ins.DB.SaveChanges();
+                a.Add(cT_PHIEUSUACHUA);
                 MessageBox.Show("Đã thêm thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 p.Close();
             });

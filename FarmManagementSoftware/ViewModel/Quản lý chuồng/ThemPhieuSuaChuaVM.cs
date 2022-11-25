@@ -7,13 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Controls;
+using System.Collections.ObjectModel;
 
 namespace FarmManagementSoftware.ViewModel
 {
     public class ThemPhieuSuaChuaVM : BaseViewModel
     {
         #region Attributes
-        private List<CT_PHIEUSUACHUA> cT_PHIEUSUACHUAs = new List<CT_PHIEUSUACHUA>();
+        private ObservableCollection <CT_PHIEUSUACHUA> cT_PHIEUSUACHUAs;
         private string _TenNhanVien = "";
         private string _MaDoiTac = "";
         private string _TenDoiTac = "";
@@ -28,7 +30,7 @@ namespace FarmManagementSoftware.ViewModel
         #endregion
 
         #region Property
-        public List<CT_PHIEUSUACHUA> CT_PHIEUSUACHUAs { get => cT_PHIEUSUACHUAs; set { cT_PHIEUSUACHUAs = value; OnPropertyChanged(); } }
+        public ObservableCollection <CT_PHIEUSUACHUA> CT_PHIEUSUACHUAs { get => cT_PHIEUSUACHUAs; set { cT_PHIEUSUACHUAs = value; OnPropertyChanged(); } }
         public string TenNhanVien { get => _TenNhanVien; set { _TenNhanVien = value; OnPropertyChanged(); } }
         public string MaDoiTac { get => _MaDoiTac; set { _MaDoiTac = value; OnPropertyChanged(); } }
         public string TenDoiTac { get => _TenDoiTac; set { _TenDoiTac = value; OnPropertyChanged(); } }
@@ -50,12 +52,17 @@ namespace FarmManagementSoftware.ViewModel
 
         public ThemPhieuSuaChuaVM()
         {
-            cT_PHIEUSUACHUAs = DataProvider.Ins.DB.CT_PHIEUSUACHUA.ToList();
+            cT_PHIEUSUACHUAs = new ObservableCollection<CT_PHIEUSUACHUA>(DataProvider.Ins.DB.CT_PHIEUSUACHUA);
             _SoPhieu = TaoSoPhieu();
-            AddCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            AddCommand = new RelayCommand<ListView>((p) => { return true; }, (p) =>
             {
-                ChiTietPhieuSuaChua ctphieuSuaChua = new ChiTietPhieuSuaChua();
+                ChiTietPhieuSuaChuaVM vm = new ChiTietPhieuSuaChuaVM(cT_PHIEUSUACHUAs);
+                ChiTietPhieuSuaChua ctphieuSuaChua = new ChiTietPhieuSuaChua
+                {
+                    DataContext = vm
+                };
                 ctphieuSuaChua.ShowDialog();
+
             });
             XacNhanCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {

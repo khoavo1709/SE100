@@ -42,8 +42,11 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand HTCommand { get; set; }
 
+        public ThemHeoPhieuVM()
+        {
+        }
 
-        public ThemHeoPhieuVM(ObservableCollection<HEO> a)
+            public ThemHeoPhieuVM(ObservableCollection<HEO> a)
         {
             ListHeoAdd = new ObservableCollection<HEO>();
             ListLoai = new ObservableCollection<LOAIHEO>(DataProvider.Ins.DB.LOAIHEOs);
