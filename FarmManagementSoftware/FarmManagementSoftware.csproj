@@ -99,6 +99,26 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Windows\Lập lịch\DanhSachHeo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Lập lịch\DanhSachHeoCai.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Lập lịch\DanhSachHeoDuc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Lập lịch\DanhSachThuoc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Lập lịch\SuaLichHeo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\Quản lý hàng hoá\TaoPhieuKho.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -409,6 +429,21 @@
     </Compile>
     <Compile Include="View\Windows\CapNhatTaiKhoanWindow.xaml.cs">
       <DependentUpon>CapNhatTaiKhoanWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Lập lịch\DanhSachHeo.xaml.cs">
+      <DependentUpon>DanhSachHeo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Lập lịch\DanhSachHeoCai.xaml.cs">
+      <DependentUpon>DanhSachHeoCai.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Lập lịch\DanhSachHeoDuc.xaml.cs">
+      <DependentUpon>DanhSachHeoDuc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Lập lịch\DanhSachThuoc.xaml.cs">
+      <DependentUpon>DanhSachThuoc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Lập lịch\SuaLichHeo.xaml.cs">
+      <DependentUpon>SuaLichHeo.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\Quản lý hàng hoá\TaoPhieuKho.xaml.cs">
       <DependentUpon>TaoPhieuKho.xaml</DependentUpon>

@@ -1,0 +1,86 @@
+﻿<Window x:Class="FarmManagementSoftware.View.Windows.Lập_lịch.DanhSachHeo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows.Lập_lịch" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="" Height="350" Width="350"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                <GradientStop Color="#3ab19b" Offset="0.05"/>
+                <GradientStop Color="#2d708c" Offset="0.25"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Image Source="/Image/background.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
+        <StackPanel VerticalAlignment="Center" Margin="5">
+            <materialDesign:Card Margin="5" VerticalAlignment="Center">
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBox x:Name="textcode" Width="190"
+                            materialDesign:HintAssist.Hint="Nhập danh sách mã heo"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        <Button x:Name="ListHeo_button" Margin="10,0,10,0"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Height="30"
+                            Width="80"
+                            BorderBrush="White"
+                            Content="Tìm"
+                            FontSize="16"
+                            Background="#00de1e"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="ListHeo_button_Click">
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBox x:Name="Drugcode_text" Width="190"
+                            materialDesign:HintAssist.Hint="Nhập mã thuốc"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        <Button x:Name="ListThuoc_button" Margin="10,0,10,0"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Height="30"
+                            Width="80"
+                            BorderBrush="White"
+                            Content="Tìm"
+                            FontSize="16"
+                            Background="#00de1e"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="ListThuoc_button_Click">
+                        </Button>
+                    </StackPanel>
+
+                    <DatePicker x:Name="Datepicker_Ngaytiem" Margin="0,10,0,0"
+                          Width="200" HorizontalAlignment="Left"
+                          materialDesign:HintAssist.Hint="Nhập ngày tiêm"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                    <TextBox x:Name="Lieuluong_text"  Margin="0,10,0,0"
+                          Width="200" HorizontalAlignment="Left"
+                          materialDesign:HintAssist.Hint="Nhập liều lượng"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center" />
+                    <ComboBox x:Name="Trangthai_combobox" Margin="0,10,0,0" Height="35" VerticalContentAlignment="Bottom"
+                          Width="200" HorizontalAlignment="Left"
+                          materialDesign:HintAssist.Hint="Trạng thái">
+                        <ComboBoxItem
+                            IsSelected="True"
+                            Content="Chưa tiêm" />
+                        <ComboBoxItem
+                            Content="Đã tiêm" />
+                    </ComboBox>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">
+                <Border Margin="20" BorderBrush="#3ab19b" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Button x:Name="Confirm_button" Background="#3ab19b" Content="Xác nhận" Width="150" Height="40" VerticalAlignment="Bottom" Click="Confirm_button_Click"></Button>
+                </Border>
+            </materialDesign:Card>
+        </StackPanel>
+    </Grid>
+</Window>
