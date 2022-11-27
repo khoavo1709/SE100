@@ -27,6 +27,7 @@
     <viewModel:PhieuBanNhapHeoVM x:Key="PhieuBanNhapHeoVM"></viewModel:PhieuBanNhapHeoVM>
     <viewModel:ThemHeoPhieuVM x:Key="ThemHeoPhieuVM"></viewModel:ThemHeoPhieuVM>
     <viewModel:ChonHeoXuatVM x:Key="ChonHeoXuatVM"></viewModel:ChonHeoXuatVM>
+    <viewModel:ChiTietPhieuVM x:Key="ChiTietPhieuVM"></viewModel:ChiTietPhieuVM>
     <viewModel:SuaChuongVM x:Key="SuaChuongVM"></viewModel:SuaChuongVM>
     <viewModel:QuanLyThongTinChuongVM x:Key="QuanLyThongTinChuongVM"></viewModel:QuanLyThongTinChuongVM>
     <viewModel:ThemChuongVM x:Key="ThemChuongVM"></viewModel:ThemChuongVM>

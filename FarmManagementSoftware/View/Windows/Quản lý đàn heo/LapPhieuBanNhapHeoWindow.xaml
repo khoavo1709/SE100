@@ -18,8 +18,7 @@
         Height="768"
         Width="1024"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
-    <Grid Margin="20,0,20,0" DataContext="{StaticResource LapPhieuBanNhapHeoVM}"
->
+    <Grid Margin="20,0,20,0" DataContext="{StaticResource LapPhieuBanNhapHeoVM}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition  Width="300"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -150,17 +149,23 @@
                     </materialDesign:Card>
                     <materialDesign:Card >
                         <Expander IsExpanded="True" Header="Danh sách phiếu nhập heo" FontWeight="Bold" Background="White">
-                            <ListView AllowDrop="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListPhieuNhap}">
+                            <ListView AllowDrop="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListPhieuNhap}" SelectedItem="{Binding SelectedPhieu}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Số phiếu" DisplayMemberBinding="{Binding SoPhieu}"/>
-                                        <GridViewColumn Header="Ngày lập" DisplayMemberBinding="{Binding NgayLap}"/>
+                                        <GridViewColumn Header="Ngày lập" DisplayMemberBinding="{Binding NgayLap, StringFormat= {} {0: dd/MM/yyyy}}"/>
                                         <GridViewColumn Header="Nhân viên" DisplayMemberBinding="{Binding NHANVIEN.HoTen}"/>
                                         <GridViewColumn Header="Khách hàng" DisplayMemberBinding="{Binding DOITAC.TenDoiTac}"/>
                                         <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"/>
                                         <GridViewColumn Header="Tổng tiền" DisplayMemberBinding="{Binding TongTien}"/>
                                     </GridView>
+
                                 </ListView.View>
+                                <ListView.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}" Header="Chi tiết" Command="{Binding EditCommand}" />
+                                    </ContextMenu>
+                                </ListView.ContextMenu>
                             </ListView>
                         </Expander>
 
@@ -168,17 +173,22 @@
 
                     <materialDesign:Card Margin="0,20">
                         <Expander IsExpanded="False" Header="Danh sách phiếu xuất heo" FontWeight="Bold" Background="White">
-                            <ListView AllowDrop="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListPhieuXuat}">
+                            <ListView AllowDrop="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListPhieuXuat}" SelectedItem="{Binding SelectedPhieu}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Số phiếu" DisplayMemberBinding="{Binding SoPhieu}"/>
-                                        <GridViewColumn Header="Ngày lập" DisplayMemberBinding="{Binding NgayLap}"/>
+                                        <GridViewColumn Header="Ngày lập" DisplayMemberBinding="{Binding NgayLap, StringFormat= {} {0: dd/MM/yyyy}}"/>
                                         <GridViewColumn Header="Nhân viên" DisplayMemberBinding="{Binding NHANVIEN.HoTen}"/>
                                         <GridViewColumn Header="Khách hàng" DisplayMemberBinding="{Binding DOITAC.TenDoiTac}"/>
                                         <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"/>
                                         <GridViewColumn Header="Tổng tiền" DisplayMemberBinding="{Binding TongTien}"/>
                                     </GridView>
                                 </ListView.View>
+                                <ListView.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}" Header="Chi tiết" Command="{Binding EditCommand}" />
+                                    </ContextMenu>
+                                </ListView.ContextMenu>
                             </ListView>
                         </Expander>
                     </materialDesign:Card>
