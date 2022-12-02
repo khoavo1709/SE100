@@ -7,99 +7,240 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Tạo phiếu mới"
-        Height="480"
-        Width="720">
-    <Grid>
+        Height="788"
+        Width="1024"
+        WindowStartupLocation="CenterScreen">
+    <Grid DataContext="{StaticResource ThemPhieuSuaChuaVM}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="350"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <materialDesign:Card Margin="10"
-                                 Padding="5,0">
-                <StackPanel Margin="0,10">
+        <Grid Grid.Column="0">
+            <materialDesign:Card>
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       FontWeight="Bold"
+                                       FontSize="16"
+                                       VerticalAlignment="Center"
+                                       Margin="10,5,0,5">Danh sách heo</TextBlock>
 
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã phiếu"
-                             Margin="0,0,5,5" />
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã nhân viên"
-                             Margin="0,0,5,5" />
-                    <DatePicker Grid.Column="1"
-                                materialDesign:HintAssist.Hint="Ngày">
-                    </DatePicker>
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Ghi chú"
-                             Margin="0,0,5,5" />
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"
+                                      Margin="10,0,10,0">
+                                    <materialDesign:PackIcon Kind="Search"
+                                                             Margin="0 15 0 0 " />
+                                    <TextBox materialDesign:HintAssist.Hint="Tìm kiếm"
+                                             Height="30"
+                                             Margin="30,10,20,11" />
+                                </Grid>
+                                <StackPanel Grid.Column="1"
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right"
+                                            Margin="0,0,10,0">
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                                            Height="30"
+                                            Width="200"
+                                            BorderBrush="White"
+                                            Content="Thêm chi tiết phiếu sửa chữa"
+                                            FontSize="16"
+                                            Background="#00de1e"
+                                            materialDesign:ButtonAssist.CornerRadius="5"
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                            Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=listviewk}">
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </materialDesign:Card>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="253*"/>
+                            <ColumnDefinition Width="12*"/>
+                            <ColumnDefinition Width="72*"/>
+                        </Grid.ColumnDefinitions>
+                        <ListView 
+                            Name="Listview"
+                            Margin="20,15,20,15"
+                            ItemsSource="{Binding CT_PHIEUSUACHUAs}" >
+                            <!--SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" Grid.ColumnSpan="2"-->
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong}"></GridViewColumn>
+                                    <GridViewColumn Header="Mô tả" DisplayMemberBinding="{Binding MoTa}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Show}">
+                                        <MenuItem.Header>Show</MenuItem.Header>
+                                    </MenuItem>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}">
+                                        <MenuItem.Header>Edit</MenuItem.Header>
+                                    </MenuItem>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}">
+                                        <MenuItem.Header>Delete</MenuItem.Header>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                        </ListView>
 
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Tổng tiền"
-                             Margin="0,0,5,5" />
-                    <ComboBox    materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}">
+                    </Grid>
 
-                        <ComboBoxItem Content="Mới tạo"
-                                      IsSelected="True" />
-                        <ComboBoxItem Content="Đã thanh toán" />
-                        <ComboBoxItem Content="Đã bị hủy" />
+                </StackPanel>
 
-                    </ComboBox>
-
+            </materialDesign:Card>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="320"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Grid.Row="0"
+                                 Margin="0,0,10,0">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0"
+                                   FontWeight="Bold"
+                                   FontSize="16"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0">Nhân viên thực hiện</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Account"
+                                                 Margin="10 15 0 0 " />
+                        <TextBox materialDesign:HintAssist.Hint="Tên nhân viên"
+                                 Height="30"
+                                 Margin="30,10,20,11"
+                                 Text="{Binding TenNhanVien}"/>
+                    </Grid>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Margin="0,20,10,0">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0">Đối tác sửa chửa</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="AccountTie" Margin="10 15 0 0 "/>
+                        <TextBox x:Name="txt_MaKH" materialDesign:HintAssist.Hint="Mã đối tác" Height="30" Margin="30,10,20,11" Text="{Binding MaDoiTac}">
+                        </TextBox>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="RenameBox" Margin="10 5 0 0 "/>
+                        <TextBox materialDesign:HintAssist.Hint="Tên đối tác" Height="30" Margin="30,0,20,11" Text="{Binding TenDoiTac}"/>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Email" Margin="10 5 0 0 "/>
+                        <TextBox materialDesign:HintAssist.Hint="Email" Height="30" Margin="30,0,20,11" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Phone" Margin="10 5 0 0 "/>
+                        <TextBox materialDesign:HintAssist.Hint="Số điện thoại" Height="30" Margin="30,0,20,11" Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="MapMarker" Margin="10 5 0 0 "/>
+                        <TextBox Margin="30,0,20,11"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            VerticalAlignment="Top"
+                            Height="80"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Auto"
+                            materialDesign:HintAssist.Hint="Địa chỉ liên lạc"
+                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                                 Text="{Binding DiaChiLienLac, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
                 </StackPanel>
             </materialDesign:Card>
 
-            <Button Margin="20,10"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Background="#3ab19b"
-                    Content="Hoàn tất"></Button>
-        </StackPanel>
+            <materialDesign:Card Grid.Row="2"
+                                 Margin="0,10,10,0">
 
-        <StackPanel Grid.Column="1">
-            <materialDesign:Card Margin="10"
-                                 Padding="5,0">
-                <StackPanel Margin="0,10">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0"
+                                   FontWeight="Bold"
+                                   FontSize="16"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0">Thông tin phiếu</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Barcode"
+                                                 Margin="10 15 0 0 " />
+                        <TextBox materialDesign:HintAssist.Hint="Số phiếu"
+                                 Height="30"
+                                 Margin="30,10,20,11" 
+                                 Text="{Binding SoPhieu}"/>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="CalendarCheck"
+                                                 Margin="10 5 0 0 " />
+                        <DatePicker Grid.Column="1"
+                                    Height="30"
+                                    Margin="30,0,20,11"
+                                    Text="{Binding NgayLapPhieu}"
+                                    materialDesign:HintAssist.Hint="Ngày lập phiếu">
+                        </DatePicker>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="NoteAddOutline" Margin="10 5 0 0 "/>
+                        <TextBox Margin="30,0,20,11"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            VerticalAlignment="Top"
+                            Height="80"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Auto"
+                            materialDesign:HintAssist.Hint="Ghi chú"
+                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                                 Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="CurrencyUsd"
+                                                 Margin="10 5 0 0 " />
+                        <TextBox materialDesign:HintAssist.Hint="Tổng tiền"
+                                 Height="30"
+                                 Margin="30,0,20,11" 
+                                 Text="{Binding TongTien}"/>
+                    </Grid>
+                    <Button Margin="20,0,20,0"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Height="30"
+                            BorderBrush="White"
+                            Content="Hoàn tất"
+                            FontSize="16"
+                            Background="#00de1e"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                            Command="{Binding XacNhanCommand}">
 
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mã chuồng"
-                             Margin="0,0,5,5" />
+                    </Button>
+                    <Button Margin="20,10,20,0"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Height="30"
+                            BorderBrush="White"
+                            Content="Huỷ bỏ"
+                            FontSize="16"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            Foreground="#00de1e"
+                            Background="#dcf7e0"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                            Command="{Binding HuyCommand}">
 
-                    <RichTextBox Style="{StaticResource MaterialDesignRichTextBox}"
-                             Grid.Column="1"
-                             materialDesign:HintAssist.Hint="Mô tả"
-                            Height="200"
-                             Margin="0,0,5,5" />
+                    </Button>
                 </StackPanel>
             </materialDesign:Card>
-
-            <Button  Margin="20,10"
-                     Style="{StaticResource MaterialDesignRaisedButton}"
-                     Background="#3ab19b"
-                     Content="Thêm"></Button>
-        </StackPanel>
-
-        <DataGrid Grid.Column="2"
-                  Name="DanhSachHeo"
-                  HeadersVisibility="All"
-                  SelectionUnit="{Binding ElementName=selectionUnitComboBox, Path=SelectedValue}">
-            <DataGrid.Resources>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-
-                <DataGridTextColumn Binding="{Binding Code}"
-                                    Header="Mã chuồng"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                <DataGridTextColumn Binding="{Binding Code}"
-                                    Header="Mô tả"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-
-            </DataGrid.Columns>
-        </DataGrid>
+        </Grid>
     </Grid>
 </Window>

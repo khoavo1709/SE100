@@ -30,4 +30,7 @@
     <viewModel:SuaChuongVM x:Key="SuaChuongVM"></viewModel:SuaChuongVM>
     <viewModel:QuanLyThongTinChuongVM x:Key="QuanLyThongTinChuongVM"></viewModel:QuanLyThongTinChuongVM>
     <viewModel:ThemChuongVM x:Key="ThemChuongVM"></viewModel:ThemChuongVM>
+    <viewModel:LapPhieuSuaChuaVM x:Key="LapPhieuSuaChuaVM"></viewModel:LapPhieuSuaChuaVM>
+    <viewModel:ThemPhieuSuaChuaVM x:Key="ThemPhieuSuaChuaVM"></viewModel:ThemPhieuSuaChuaVM>
+    <viewModel:ChiTietPhieuSuaChuaVM x:Key="ChiTietPhieuSuaChuaVM"></viewModel:ChiTietPhieuSuaChuaVM>
 </ResourceDictionary>

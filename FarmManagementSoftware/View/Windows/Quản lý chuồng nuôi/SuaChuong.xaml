@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="SuaChuong" Height="450" Width="350"
+         Title="SuaChuong" Height="450" Width="350"
         ResizeMode="NoResize"
         Name="SuaChuongw"
         WindowStartupLocation="CenterScreen">
@@ -17,7 +17,7 @@
                 <GradientStop Color="#2d708c" Offset="0.25"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Image Source="/Image/background.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
+        <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
         <StackPanel VerticalAlignment="Center" Margin="5">
             <materialDesign:Card Margin="5" VerticalAlignment="Center">
                 <StackPanel VerticalAlignment="Center">

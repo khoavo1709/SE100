@@ -5,235 +5,171 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FarmManagementSoftware" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:viewmodel="clr-namespace:FarmManagementSoftware.ViewModel" 
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" d:DataContext="d:DesignInstance Type=viewmodel:QuanLyThongTinChuongVM"     
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="QuanLyThongTinChuong" 
         Name="QuanLyThongTinChuongw"
         Height="768"
         Width="1024">
 
-    <Grid Margin="20,0,20,0" DataContext="{StaticResource QuanLyThongTinCaTheVM}">
+    <Grid Margin="20,0,20,0" DataContext="{StaticResource QuanLyThongTinChuongVM}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition  Width="300"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <materialDesign:Card Grid.Column="0" Margin="0,0,10,0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="83"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <materialDesign:Card Grid.Row="0" Height="75" Margin="0,5,0,0">
-                    <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" Margin="10,0,0,0">Tìm kiếm thông tin đàn heo</TextBlock>
+            <StackPanel Orientation="Vertical">
+                <materialDesign:Card Height="75" Margin="0,5,0,0">
+                    <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" Margin="10,0,0,0">Tìm kiếm thông tin chuồng nuôi</TextBlock>
                 </materialDesign:Card>
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel Orientation="Vertical">
-                        <Expander IsExpanded="False" Header="Ngày sinh" FontWeight="Bold">
-                            <StackPanel x:Name="MinDay" Orientation="Vertical" Margin="0,0,0,0">
-                                <DatePicker Grid.Column="0" Margin="20,0,0,0" FontWeight="Normal"
-                                Name="dtp_DateMin"
-                                HorizontalAlignment="Left"
-                                Width="250"
-                                materialDesign:HintAssist.Hint="Từ ngày"
-                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectedDateChanged">
-                                            <i:InvokeCommandAction Command="{Binding TimKiemTheoNgaySinhMinCommand}"
-                                                                   CommandParameter="{Binding ElementName=dtp_DateMin}"
-                                                                   ></i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </DatePicker>
-
-
-                                <DatePicker Grid.Column="1" Margin="20,0,0,0" FontWeight="Normal"
-                                Width="250"
-                                Name="dtp_DateMax"
-                                HorizontalAlignment="Left"
-                                materialDesign:HintAssist.Hint="Đến ngày"
-                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectedDateChanged">
-                                            <i:InvokeCommandAction Command="{Binding TimKiemTheoNgaySinhMaxCommand}"
-                                                                   CommandParameter="{Binding ElementName=dtp_DateMax}"></i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </DatePicker>
-                            </StackPanel>
-                        </Expander>
-                        <Expander IsExpanded="False" Header="Trọng lượng" FontWeight="Bold" Background="White">
-                            <StackPanel Orientation="Vertical" Margin="10,0,0,0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" 
-                                             Name="tb_TLMin"
-                                             materialDesign:HintAssist.Hint="Trọng lượng tối thiểu"
-                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                             FontWeight="Normal">
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="TextChanged">
-                                                <i:InvokeCommandAction Command="{Binding TimKiemTheoTrongLuongMinCommand}"
-                                                                   CommandParameter="{Binding ElementName=tb_TLMin}"></i:InvokeCommandAction>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </TextBox>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" 
-                                             Name="tb_TLMax"
-                                             materialDesign:HintAssist.Hint="Trọng lượng tối đa"
-                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                             FontWeight="Normal">
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="TextChanged">
-                                                <i:InvokeCommandAction Command="{Binding TimKiemTheoTrongLuongMaxCommand}"
-                                                                   CommandParameter="{Binding ElementName=tb_TLMax}"></i:InvokeCommandAction>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </TextBox>
-                                </StackPanel>
-                            </StackPanel>
-                        </Expander>
-
-                        <Expander IsExpanded="False" Header="Loại heo" FontWeight="Bold" Background="White">
-                            <StackPanel Orientation="Vertical" Margin="20,0,0,0">
-                                <ListBox ItemsSource="{Binding ListLoai}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <CheckBox x:Name="cb_Loai" Margin="0 5" Content="{Binding TenLoaiHeo}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
-                                                                                                    AncestorType={x:Type ItemsControl}},
-                                                                                                    Path= DataContext.TimKiemTheoLoaiCommand }" 
-                                                      CommandParameter="{Binding ElementName=cb_Loai}"
-                                                      ></CheckBox>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-                        </Expander>
-                        <Expander IsExpanded="False" Header="Giống heo" FontWeight="Bold" Background="White">
-                            <StackPanel Orientation="Vertical" Margin="20,0,0,0">
-                                <ListBox ItemsSource="{Binding ListGiong}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <CheckBox x:Name="cb_Giong" Margin="0 5" Content="{Binding TenGiongHeo}" 
-                                                      Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
-                                                                                                    AncestorType={x:Type ItemsControl}},
-                                                                                                    Path= DataContext.TimKiemTheoGiongCommand }"
-                                                      CommandParameter="{Binding ElementName=cb_Giong}"
-                                                      ></CheckBox>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-                        </Expander>
-
-                        <Expander IsExpanded="False" Header="Tình trạng" FontWeight="Bold" Background="White">
-                            <StackPanel Orientation="Vertical" Margin="20,0,0,0">
-                                <CheckBox x:Name="cb_TT1" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT1}" >
-                                    Sức khoẻ tốt
-                                </CheckBox>
-                                <CheckBox x:Name="cb_TT2" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT2}">
-                                    Đang mang thai
-                                </CheckBox>
-                                <CheckBox x:Name="cb_TT3" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT3}">
-                                    Đang bị bệnh
-                                </CheckBox>
-                                <CheckBox x:Name="cb_TT4" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT4}">
-                                    Đã đào thải
-                                </CheckBox>
-                            </StackPanel>
-                        </Expander>
-
-                        <Expander IsExpanded="False" Header="Nguồn gốc" FontWeight="Bold" Background="White">
-                            <StackPanel Orientation="Vertical" Margin="20,0,0,0">
-                                <CheckBox x:Name="cb_NG1" Margin="0 5" Command="{Binding NGCheck}" CommandParameter="{Binding ElementName=cb_NG1}">
-                                    Nhập ngoài
-                                </CheckBox>
-                                <CheckBox x:Name="cb_NG2" Margin="0 5" Command="{Binding NGCheck}" CommandParameter="{Binding ElementName=cb_NG2}">
-                                    Sinh trong trang trại
-                                </CheckBox>
-                            </StackPanel>
-                        </Expander>
+                <Expander IsExpanded="True" Header="Loại chuồng nuôi" FontWeight="Bold" Background="White">
+                    <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="81*"/>
+                                <ColumnDefinition Width="12*"/>
+                                <ColumnDefinition Width="47*"/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox ItemsSource="{Binding ListLoaiChuong}" Grid.ColumnSpan="3">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox x:Name="Check_LoaiChuong" Content="{Binding TenLoai}">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="IsChecked">
+                                                    <i:InvokeCommandAction
+                                                    Command="{Binding TimKiemTheoLoaiChuongCommand}"
+                                                    CommandParameter="{Binding ElementName=Check_LoaiChuong}">
+                                                    </i:InvokeCommandAction>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </CheckBox>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
                     </StackPanel>
-                </ScrollViewer>
-            </Grid>
+                </Expander>
+                <Expander IsExpanded="True" Header="Sức chứa" FontWeight="Bold" Background="White">
+                    <Grid>
+                        <Label Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal">0</Label>
+                        <Slider x:Name="Slider_SucChua" Value="{Binding SucChuaCanTim}" Width="230" HorizontalAlignment="Right" VerticalAlignment="Top" Maximum="{Binding MaxSC, UpdateSourceTrigger=PropertyChanged, Mode= TwoWay}" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="0" Margin="0,0,30,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="ValueChanged">
+                                    <i:InvokeCommandAction
+                                                    Command="{Binding TimKiemTheoSucChuaCommand}"
+                                                    CommandParameter="{Binding ElementName=Slider_SucChua}">
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Slider>
+                        <Label Margin="265 0 0 0 " VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Normal" Content="{Binding MaxSC, UpdateSourceTrigger=PropertyChanged, Mode= TwoWay}"></Label>
+                    </Grid>
+                </Expander>
+                <Expander IsExpanded="True" Header="Số heo trong chuồng" FontWeight="Bold" Background="White">
+                    <Grid>
+                        <Label Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal">0</Label>
+                        <Slider x:Name="Slider_SoHeo" Value="{Binding SoHeoCanTim}" Width="230" HorizontalAlignment="Center" VerticalAlignment="Top" Maximum="{Binding MaxSH, UpdateSourceTrigger=PropertyChanged, Mode= TwoWay}" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="ValueChanged">
+                                    <i:InvokeCommandAction
+                                                    Command="{Binding TimKiemTheoSoHeoCommand}"
+                                                    CommandParameter="{Binding ElementName=Slider_SoHeo}">
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Slider>
+                        <Label Margin="265 0 0 0 " VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Normal" Content="{Binding MaxSH, UpdateSourceTrigger=PropertyChanged, Mode= TwoWay}"></Label>
+                    </Grid>
+                </Expander>
+            </StackPanel>
         </materialDesign:Card>
 
         <Grid Grid.Column="1">
+
             <materialDesign:Card>
                 <StackPanel Orientation="Vertical">
                     <materialDesign:Card>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,5,0,5">Danh sách các cá thể heo</TextBlock>
+                            <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,5,0,5">Tìm kiếm trong chuồng trại</TextBlock>
 
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Margin="10,0,10,0">
+                                <Grid Grid.Column="0" Margin="10,0,10,0" Grid.ColumnSpan="2">
                                     <materialDesign:PackIcon Kind="Search" Margin="0 15 0 0 "/>
-                                    <TextBox materialDesign:HintAssist.Hint="Tìm kiếm" Name="Txt_TimMaTen" Height="30" Margin="30,10,20,11">
+                                    <TextBox x:Name="Txt_MaChuong" materialDesign:HintAssist.Hint="Tìm kiếm theo mã chuồng"
+                                             Height="30"
+                                             Margin="30,10,20,11" 
+                                             Text="{Binding MaChuongCanTim}">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="TextChanged">
-                                                <i:InvokeCommandAction Command="{Binding TimKiemTheoMa_TenCommand}"
-                                                                       CommandParameter="{Binding ElementName=Txt_TimMaTen}"></i:InvokeCommandAction>
+                                                <i:InvokeCommandAction
+                                                    Command="{Binding TimKiemTheoMaChuongCommand}"
+                                                    CommandParameter="{Binding ElementName=Txt_MaChuong}">
+                                                </i:InvokeCommandAction>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </TextBox>
                                 </Grid>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="18,0,0,0">
                                     <Button
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Height="30"
                                     Width="200"
                                     BorderBrush="White"
-                                    Content="Thêm cá thể heo mới"
+                                    Content="Thêm chuồng nuôi mới"
                                     FontSize="16"
                                     Background="#00de1e"
                                     materialDesign:ButtonAssist.CornerRadius="5"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
-                                    Command="{Binding AddCommand}">
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=listviewk}">
                                     </Button>
                                 </StackPanel>
                             </Grid>
                         </Grid>
                     </materialDesign:Card>
-                    <ScrollViewer Height="600" Width="auto">
-                        <ListView x:Name="listviewHeo" HorizontalAlignment="Left" SelectionMode="Single"
-                                  ItemsSource="{Binding ListHeo}" SelectedItem="{Binding SelectedHeo, Mode=OneWayToSource}" 
-                                  ScrollViewer.CanContentScroll="True"
-                                  >
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Mã heo" DisplayMemberBinding="{Binding MaHeo}" />
-                                    <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding GioiTinh}" />
-                                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding NgaySinh, StringFormat= {} {0: dd/MM/yyyy}}"/>
-                                    <GridViewColumn Header="Trọng lượng" DisplayMemberBinding="{Binding TrongLuong}"/>
-                                    <GridViewColumn Header="Tên loại heo" DisplayMemberBinding="{Binding LOAIHEO.TenLoaiHeo}"/>
-                                    <GridViewColumn Header="Tên giống heo" DisplayMemberBinding="{Binding GIONGHEO.TenGiongHeo}"/>
-                                    <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong}"/>
-                                    <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding TinhTrang}"/>
-                                    <GridViewColumn Header="Nguồn gốc" DisplayMemberBinding="{Binding NguonGoc}"/>
-                                </GridView>
-                            </ListView.View>
-                            <ListView.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}" Header="Show and Edit" Command="{Binding EditCommand}" />
-                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Delete" Command="{Binding DeleteCommand}" />
-                                </ContextMenu>
-                            </ListView.ContextMenu>
-                        </ListView>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <Grid Height="700">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="82*"/>
+                                <ColumnDefinition Width="391*"/>
+                                <ColumnDefinition Width="473*"/>
+                            </Grid.ColumnDefinitions>
+                            <ListView Margin="25,0,25,0" x:Name="listviewk" ItemsSource="{Binding ListChuongTrai}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" Grid.ColumnSpan="3">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong}"></GridViewColumn>
+                                        <GridViewColumn Header="Mã loại chuồng" DisplayMemberBinding="{Binding MaLoaiChuong}"></GridViewColumn>
+                                        <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding TinhTrang}"></GridViewColumn>
+                                        <GridViewColumn Header="Sức chứa tối đa" DisplayMemberBinding="{Binding SuaChuaToiDa}"></GridViewColumn>
+                                        <GridViewColumn Header="Số heo hiện có" DisplayMemberBinding="{Binding SoLuongHeo}"></GridViewColumn>
+                                        <GridViewColumn Header="Thao tác" Width="160">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Menu>
+                                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Show}" Width="48" DataContext="{StaticResource QuanLyThongTinChuongVM}" Command="{Binding ShowCommand}"></MenuItem>
+                                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"  Width="48" DataContext="{StaticResource QuanLyThongTinChuongVM}" Command="{Binding EditCommand}"></MenuItem>
+                                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"  Width="48" DataContext="{StaticResource QuanLyThongTinChuongVM}" Command="{Binding DeleteCommand}"></MenuItem>
+                                                    </Menu>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
                     </ScrollViewer>
-
                 </StackPanel>
             </materialDesign:Card>
+
         </Grid>
     </Grid>
 </Window>
