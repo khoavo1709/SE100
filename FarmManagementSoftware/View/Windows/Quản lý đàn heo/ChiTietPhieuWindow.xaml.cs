@@ -15,23 +15,13 @@ using System.Windows.Shapes;
 namespace FarmManagementSoftware.View.Windows
 {
     /// <summary>
-    /// Interaction logic for ThietLapCayMucTieuWindow.xaml
+    /// Interaction logic for ChiTietPhieuWindow.xaml
     /// </summary>
-    public partial class ThietLapCayMucTieuWindow : Window
+    public partial class ChiTietPhieuWindow : Window
     {
-        CayMucTieu cmt = new CayMucTieu();
-        Object obj;
-        static int check = 0;
-        public ThietLapCayMucTieuWindow()
+        public ChiTietPhieuWindow()
         {
             InitializeComponent();
-            cmt.Close();
-            obj = cmt.Content;
-            cmt.Content = null;
-            showmake.Children.Clear();
-            showmake.Children.Add(obj as UIElement);
         }
-
     }
-
 }

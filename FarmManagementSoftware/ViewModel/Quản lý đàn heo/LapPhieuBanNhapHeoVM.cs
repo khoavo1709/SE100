@@ -14,9 +14,14 @@ namespace FarmManagementSoftware.ViewModel
 {
     public class LapPhieuBanNhapHeoVM : BaseViewModel
     {
-        public ObservableCollection<PHIEUHEO> ListPhieuNhap { get; set; }
-        public ObservableCollection<PHIEUHEO> ListPhieuXuat { get; set; }
+        private ObservableCollection<PHIEUHEO> _ListPhieuXuat;
+        private ObservableCollection<PHIEUHEO> _ListPhieuNhap;
 
+        public ObservableCollection<PHIEUHEO> ListPhieuNhap { get => _ListPhieuNhap; set { _ListPhieuNhap = value; OnPropertyChanged(); } }
+        public ObservableCollection<PHIEUHEO> ListPhieuXuat { get => _ListPhieuXuat; set { _ListPhieuXuat = value; OnPropertyChanged(); } }
+
+        private PHIEUHEO selectedPhieu;
+        public PHIEUHEO SelectedPhieu { get => selectedPhieu; set => selectedPhieu = value; }
         public List<string> ListTrangThai { get; set; }
         public string TenNV { get; set; }
         public string TenKH { get; set; }
@@ -29,6 +34,7 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand TimKiemTheoNgayMaxCommand { get; set; }
         public ICommand TimKiemTheoTenKHCommand { get; set; }
         public ICommand TTCheck { get; set; }
+        public ICommand EditCommand { get; set; }
 
         public LapPhieuBanNhapHeoVM()
         {
@@ -38,9 +44,9 @@ namespace FarmManagementSoftware.ViewModel
 
             TaoPhieuCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                PhieuNhapBanHeo Phieu = new PhieuNhapBanHeo();
+                PhieuNhapBanHeo PhieuNhapBanHeo = new PhieuNhapBanHeo();
 
-                Phieu.ShowDialog();
+                PhieuNhapBanHeo.ShowDialog();
             });
             TimKiemTheoNgayMinCommand = new RelayCommand<DatePicker>((p) => { return true; }, p =>
             {
@@ -74,6 +80,14 @@ namespace FarmManagementSoftware.ViewModel
                     ListTrangThai.Add(p.Content.ToString());
                 else ListTrangThai.Remove(p.Content.ToString());
                 TimKiem();
+            });
+            EditCommand = new RelayCommand<Window>((p) => { return true; }, p =>
+            {
+                ChiTietPhieuVM vm = new ChiTietPhieuVM(SelectedPhieu);
+
+                ChiTietPhieuWindow chiTietPhieuWindow = new ChiTietPhieuWindow();
+                chiTietPhieuWindow.DataContext = vm;
+                chiTietPhieuWindow.ShowDialog();
             });
         }
         void TimKiem()

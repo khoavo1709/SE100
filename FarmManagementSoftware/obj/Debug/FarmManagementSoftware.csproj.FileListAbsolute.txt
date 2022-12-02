@@ -388,6 +388,7 @@ C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản l
 C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThemHeoPhieu.g.cs
 C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ChonHeoXuat.baml
 C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ThemHeoPhieu.baml
+<<<<<<< HEAD
 C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\bin\Debug\FarmManagementSoftware.exe.config
 C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\bin\Debug\FarmManagementSoftware.exe
 C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\bin\Debug\FarmManagementSoftware.pdb
@@ -520,3 +521,9 @@ C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\obj\Debug\FarmManagement
 C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.pdb
 C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ChiTietPhieuSuaChua.g.cs
 C:\Users\Admin\Desktop\Loi\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\ChiTietPhieuSuaChua.baml
+=======
+C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Cây mục tiêu\CayMucTieu.g.cs
+C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Cây mục tiêu\CayMucTieu.baml
+C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ChiTietPhieuWindow.g.cs
+C:\Users\Admin\Desktop\Tu\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý đàn heo\ChiTietPhieuWindow.baml
+>>>>>>> tu_qlgiongheo

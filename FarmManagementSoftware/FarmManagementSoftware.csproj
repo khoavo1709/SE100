@@ -91,6 +91,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Windows\Quản lý đàn heo\ChiTietPhieuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Cây mục tiêu\CayMucTieu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UC\UClistThongBaoTrongNgay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -376,7 +384,11 @@
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CapNhatTaiKhoanVM.cs" />
+<<<<<<< HEAD
     <Compile Include="ViewModel\Quản lý chuồng\ChiTietPhieuSuaChuaVM.cs" />
+=======
+    <Compile Include="ViewModel\Phieu\ChiTietPhieuVM.cs" />
+>>>>>>> tu_qlgiongheo
     <Compile Include="ViewModel\DoiMatKhauVM.cs" />
     <Compile Include="ViewModel\Quản lý đàn heo\ChonHeoXuatVM.cs" />
     <Compile Include="ViewModel\Quản lý đàn heo\LapPhieuBanNhapHeoVM.cs" />
@@ -409,6 +421,12 @@
     <Compile Include="ViewModel\Tạo thông báo\ChonNguoiGuiVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\listThongBaoTrongNgayVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\TaoThongBaoVM.cs" />
+    <Compile Include="View\Windows\Quản lý đàn heo\ChiTietPhieuWindow.xaml.cs">
+      <DependentUpon>ChiTietPhieuWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Cây mục tiêu\CayMucTieu.xaml.cs">
+      <DependentUpon>CayMucTieu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UC\UClistThongBaoTrongNgay.xaml.cs">
       <DependentUpon>UClistThongBaoTrongNgay.xaml</DependentUpon>
     </Compile>
