@@ -1,0 +1,167 @@
+﻿<Window x:Class="QuanLyTraiHeo.View.Windows.Quản_lý_kho.TaoPhieuKiemKho"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyTraiHeo"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Tạo phiếu kiểm kho"
+        Height="480"
+        Width="720">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <materialDesign:Card Margin="10"
+                                 Padding="5,0">
+                <StackPanel Margin="0,10">
+
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Mã phiếu"
+                             Margin="0,0,5,5" />
+                    <DatePicker Grid.Column="1"
+                                materialDesign:HintAssist.Hint="Ngày">
+                    </DatePicker>
+
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Mã nhân viên"
+                             Margin="0,0,5,5" />
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Ghi chú"
+                             Margin="0,0,5,5" />
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Kết quả"
+                             Margin="0,0,5,5" />
+
+                </StackPanel>
+            </materialDesign:Card>
+
+            <Button Margin="20,10"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Background="#3ab19b"
+                    Content="Hoàn tất"></Button>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <materialDesign:Card Margin="10"
+                                 Padding="5,0">
+                <StackPanel Margin="0,10">
+
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Mã mặt hàng"
+                             Margin="0,0,5,5" />
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Mặt hàng"
+                             Margin="0,0,5,5" />
+
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Số lượng còn lại"
+                             Margin="0,0,5,5" />
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             materialDesign:HintAssist.Hint="Số lượng thực tế"
+                             Margin="0,0,5,5" />
+                </StackPanel>
+            </materialDesign:Card>
+
+            <Button  Margin="20,10"
+                     Style="{StaticResource MaterialDesignRaisedButton}"
+                     Background="#3ab19b"
+                     Content="Thêm"></Button>
+        </StackPanel>
+
+        <DataGrid Grid.Column="2"
+                  Name="DanhSachHeo"
+                  HeadersVisibility="All"
+                  SelectionUnit="{Binding ElementName=selectionUnitComboBox, Path=SelectedValue}"
+                  MaxColumnWidth="120">
+            <DataGrid.Resources>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Code}"
+                                    Header="Mã mặt hàng"
+                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                <materialDesign:DataGridComboBoxColumn Header="Mặt hàng"
+                                                       IsEditable="True"
+                                                       SelectedValueBinding="{Binding Food}"
+                                                       ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Foods}">
+                    <!--Setting the editing element style allows access to all of the combo box's properties
+                      <materialDesign:MaterialDataGridComboBoxColumn.EditingElementStyle>
+                          <Style TargetType="ComboBox" BasedOn="{StaticResource {ComponentResourceKey TypeInTargetAssembly={x:Type ComboBox}, ResourceId=MaterialDataGridComboBoxColumnEditingStyle}}" >
+                              <Setter Property="IsEditable" Value="True" />
+                          </Style>
+                      </materialDesign:MaterialDataGridComboBoxColumn.EditingElementStyle>
+                      -->
+                </materialDesign:DataGridComboBoxColumn>
+
+                <!-- set a max length to get an indicator in the editor -->
+                <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
+                                                   Header="Số lượng còn lại"
+                                                   EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}"
+                               BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Right" />
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <TextBlock TextWrapping="Wrap"
+                                                   Text="{Binding}"
+                                                   TextAlignment="Right" />
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}"
+                               BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}">
+                            <Setter Property="HorizontalAlignment"
+                                    Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </materialDesign:DataGridTextColumn>
+                <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
+                                                   Header="Số lượng thực tế"
+                                                   EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}"
+                               BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Right" />
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <TextBlock TextWrapping="Wrap"
+                                                   Text="{Binding}"
+                                                   TextAlignment="Right" />
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}"
+                               BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}">
+                            <Setter Property="HorizontalAlignment"
+                                    Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </materialDesign:DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

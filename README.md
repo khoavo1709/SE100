@@ -1,2 +1,6 @@
-# SE100.N13 - Nhóm 12
-Farm management software
+# Trang_Trai_Nuoi_Heo
+# Thành viên:
+ Võ Văn Đăng Khoa - 20521476
+ Lê Đoàn Đại Lợi
+ Triệu Tuấn Tú
+.

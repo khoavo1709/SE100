@@ -1,0 +1,118 @@
+﻿<Window x:Class="QuanLyTraiHeo.View.Windows.wThemLichMoi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:QuanLyTraiHeo.View.Windows"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Name="window"
+        
+        DataContext="{StaticResource ThemLichMoiVM}"
+        Title="wThemLichMoi" Height="500" Width="350">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8.5*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0"
+                BorderThickness="1"
+                BorderBrush="#54acf3"
+                Background="Transparent"
+                CornerRadius="10,10,10,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <TextBox x:Name="tb_TieuDe"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             FontSize="15"
+                             materialDesign:HintAssist.Hint="Nhập tên lịch">
+                    </TextBox>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Người tạo: "
+                                   FontSize="15"
+                                   VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="."
+                                   Name="tb_NguoiTao"
+                                   FontSize="15"
+                                   VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker x:Name="dtp_ChonNgay"
+                                    Width="330"
+                                    materialDesign:HintAssist.Hint="Chọn ngày làm"
+                                    materialDesign:CalendarAssist.IsHeaderVisible="False">
+                        </DatePicker>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Border BorderThickness="3"
+                            BorderBrush="AliceBlue"
+                            Background="Transparent"
+                            CornerRadius="10,10,10,10">
+                        <RichTextBox x:Name="rtb_ChiTiet" ScrollViewer.VerticalScrollBarVisibility="Visible">
+
+                        </RichTextBox>
+                    </Border>
+                </Grid>
+
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <StackPanel Grid.Row="4"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        >
+                <Button Name="btn_Save"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Height="40"
+                        Width="150"
+                        BorderBrush="White"
+                        Content="Lưu"
+                        FontSize="16"
+                        Background="#00de1e"
+                        Command="{Binding AddCommand}"
+                        CommandParameter="{Binding ElementName=window}"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+
+                </Button>
+
+                <Button Name="btn_Huybo"
+                        Margin="20,0,0,0"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Height="40"
+                        Width="150"
+                        BorderBrush="White"
+                        Content="Huỷ bỏ"
+                        FontSize="16"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        Foreground="#00de1e"
+                        Background="#dcf7e0"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Command="{Binding CancelCommand}"
+                        CommandParameter="{Binding ElementName=window}">
+
+                </Button>
+            </StackPanel>
+        </Grid>
+        
+    </Grid>
+</Window>

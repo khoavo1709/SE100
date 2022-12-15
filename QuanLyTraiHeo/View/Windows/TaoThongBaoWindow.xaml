@@ -1,0 +1,117 @@
+﻿<Window x:Class="QuanLyTraiHeo.View.Windows.TaoThongBaoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp_MVVM.View.Windows"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Image/leaves_icon.png"
+        ResizeMode="NoResize"
+        Title="Tạo thông báo mới"
+        Height="500"
+        Width="800"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="280"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" FontSize="15" FontWeight="Bold">Tạo thông báo mới</TextBlock>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">Đến: </TextBlock>
+                <ComboBox Margin="28,0,0,0" Width="600"
+                            materialDesign:HintAssist.Hint="Nhập bộ phận">
+                    <ComboBoxItem
+                            Content="Tất cả" />
+                    <ComboBoxItem
+                            Content="Bộ phận chăm sóc heo" />
+                    <ComboBoxItem
+                            Content="Bộ phận kế toán" />
+                    <ComboBoxItem
+                            Content="Bộ phận kho" />
+                    <ComboBoxItem
+                            Content="Bộ phận kỹ thuật" />
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">Cụ thể:</TextBlock>
+                <TextBox Height="25" Margin="15,0,0,0" Width="600"
+                        materialDesign:HintAssist.Hint="Nhập danh sách người nhận">
+                </TextBox>
+                <Button Margin="20,0,0,0"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Height="30"
+                    Width="100"
+                    BorderBrush="White"
+                    Content="Chọn"
+                    FontSize="16"
+                    Background="#00de1e"
+                    materialDesign:ButtonAssist.CornerRadius="5"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">Tiêu đề:</TextBlock>
+                <TextBox Height="25" Margin="10,0,0,0" Width="600"
+                        materialDesign:HintAssist.Hint="Nhập tiêu đề">
+                </TextBox>
+            </StackPanel>
+        </Grid>
+        <TextBox Grid.Row="1"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                VerticalAlignment="Top"
+                Height="270"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                VerticalScrollBarVisibility="Auto"
+                materialDesign:HintAssist.Hint="Nhập nội dung thông báo"
+                IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" />
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,20,0">
+            <Button
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Height="30"
+                                    Width="120"
+                                    BorderBrush="White"
+                                    Content="Tạo"
+                                    FontSize="16"
+                                    Background="#00de1e"
+                                    materialDesign:ButtonAssist.CornerRadius="5"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+
+            </Button>
+
+            <Button
+                                    Margin="20,0,0,0"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Height="30"
+                                    Width="120"
+                                    BorderBrush="White"
+                                    Content="Huỷ bỏ"
+                                    FontSize="16"
+                                    materialDesign:ButtonAssist.CornerRadius="5"
+                                    Foreground="#00de1e"
+                                    Background="#dcf7e0"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

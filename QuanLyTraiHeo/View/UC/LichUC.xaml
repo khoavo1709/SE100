@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="QuanLyTraiHeo.View.UC.LichUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:QuanLyTraiHeo.View.UC"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignWidth="520"
+             Height="100">
+    <Border x:Name="border_Lich"
+            BorderThickness="4"
+            BorderBrush="#54acf3"
+            Background="AliceBlue"
+            CornerRadius="10,10,10,10"
+            Margin="0,0,0,5"
+            Padding="0">
+        <Button x:Name="btn_Lich"
+                Click="onButtonClick"
+                Width="520"
+                Height="100"
+                Margin="0,-8,0,0"
+                BorderBrush="Transparent"
+                Background="Transparent">
+            <Grid Width="520"
+                  Height="80">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="5*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <materialDesign:PackIcon Width="50"
+                                             Height="50"
+                                             Foreground="#1f4fa0"
+                                             Kind="CalendarTextOutline"
+                                             VerticalAlignment="Center" />
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock x:Name="tb_NguoiLap"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Text="Vinh"
+                                   Foreground="Black"
+                                   FontSize="20">
+
+                        </TextBlock>
+
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                            <TextBlock x:Name="tb_TieuDeLich"
+                                       Text="Tách chuồng"
+                                       Foreground="Black"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       FontSize="20">
+
+                            </TextBlock>
+                            <TextBlock Foreground="AliceBlue" FontSize="20" Text="::"></TextBlock>
+                            <TextBlock x:Name="tb_ChiTietLich"
+                                       Height="20"
+                                       VerticalAlignment="Bottom"
+                                       Foreground="#6b607a"
+                                       Text="Aabc">
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <TextBlock VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Foreground="Black"
+                                   FontSize="15">Tình trạng:</TextBlock>
+                        <TextBlock x:Name="tb_TinhTrang"
+                                   Text="Xong"
+                                   Foreground="Black"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="15">
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <TextBlock x:Name="tb_ThoiGian"
+                               Foreground="Black"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               FontSize="20"
+                               Text="12/12/2022"></TextBlock>
+                </Grid>
+
+            </Grid>
+        </Button>
+    </Border>
+</UserControl>

@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="QuanLyTraiHeo.View.UC.IconChuongUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:QuanLyTraiHeo.View.UC"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             Background="White"
+             Margin="50"
+             Name="IconChuong"
+             DataContext="ChuongUC_VM"
+             d:DesignHeight="270"
+             d:DesignWidth="250">
+    <Grid>
+        <Button x:Name="btn"
+                Height="270"
+                Width="250"
+                BorderBrush="Transparent"
+                Background="Transparent"
+                Command="{Binding OpenListHeoCommand}"
+                CommandParameter="{Binding ElementName=IconChuong}">
+            <Grid Margin="-15, -35, -5, -50"
+                  Background="White">
+                <materialDesign:PackIcon Height="62"
+                                         Width="52"
+                                         Foreground="#FFAB91"
+                                         Kind="Pig"
+                                         Margin="0,-66,0,0" />
+                <Image  Source="/Image/ChuongHeo.png"
+                        Margin="0,-23,-52,-68">
+
+                </Image>
+                <TextBlock Height="25"
+                           FontSize="20"
+                           Name="tb_TenChuong"
+                           FontWeight="Black"
+                           Foreground="White"
+                           Text="F100"
+                           HorizontalAlignment="Left"
+                           Margin="18,56,0,57"></TextBlock>
+                <TextBlock FontSize="30"
+                           Name="tb_SoLuongHeo"
+                           Text="0"
+                           FontWeight="Black"
+                           Foreground="#FFAB91"
+                           Margin="63,-60,126,171"></TextBlock>
+            </Grid>
+        </Button>
+        <Button VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Command="{Binding OpenLichChuongCommand}"
+                CommandParameter="{Binding ElementName=IconChuong}"
+                Height="100"
+                Width="100">
+            <materialDesign:PackIcon Kind="CalendarTextOutline"
+                                     ToolTip="Nhấn để xem lịch"
+                                     Height="100"
+                                     Width="100"
+                                     Foreground="Blue"
+                                     Background="AliceBlue"
+                                     Margin="-19">
+            </materialDesign:PackIcon>
+        </Button>
+
+        <materialDesign:PackIcon Height="30"
+                                 Width="30"
+                                 Visibility="Hidden"
+                                 Foreground="#F57C00"
+                                 Name="IconChamThan"
+                                 Kind="ExclamationThick"
+                                 Margin="110,0,0,0" />
+
+    </Grid>
+</UserControl>

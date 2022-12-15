@@ -1,0 +1,210 @@
+﻿<Window x:Class="QuanLyTraiHeo.View.Windows.wDSHeo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyTraiHeo.View.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Name="DSHeo"
+        mc:Ignorable="d"
+        Title="wDSHeo"
+        Height="450"
+        Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
+                                   CommandParameter="{Binding ElementName=DSHeo}"></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              Background="#c5def3">
+            <TextBlock FontSize="20"
+                       VerticalAlignment="Center"
+                       Text="Chuồng:"></TextBlock>
+            <TextBlock x:Name="tb_Chuong"
+                       FontWeight="Black"
+                       FontSize="20"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="F001"></TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0"
+                  Background="White">
+                <TextBlock VerticalAlignment="Center"
+                           FontSize="15"
+                           TextAlignment="Center"
+                           FontWeight="Bold"
+                           Text="Danh sách heo">
+                </TextBlock>
+            </Grid>
+
+            <Border Grid.Column="1"
+                    Margin="0,0,17,0"
+                    BorderThickness="4"
+                    BorderBrush="#54acf3"
+                    Background="AliceBlue"
+                    CornerRadius="10,10,10,10">
+                <Grid >
+                    <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                            Height="30"
+                            Width="200"
+                            BorderBrush="White"
+                            Content="Thêm lịch mới"
+                            FontSize="16"
+                            Background="#00de1e"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                            Command="{Binding AddCommand}"
+                            CommandParameter="{Binding ElementName=listviewk}">
+                    </Button>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Column="2"
+                  Margin="0, 0, 0 , 20">
+
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0"
+                  Background="White">
+                <ScrollViewer>
+                    <StackPanel x:Name="sp_ListHeo">
+                        
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <ScrollViewer>
+                    <StackPanel x:Name="sp_ListLich">
+
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <Border Grid.Column="2"
+                    Margin="0, -20, 0, 0"
+                    BorderThickness="1"
+                    BorderBrush="#54acf3"
+                    Background="Transparent"
+                    CornerRadius="10,10,10,10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0"
+                          HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal">
+
+                            <Button Name="btn_Tick"
+                                    BorderThickness="0"
+                                    Height="20"
+                                    Width="20"
+                                    Visibility="Hidden"
+                                    Background="Transparent">
+                                <materialDesign:PackIcon Kind="CheckOutline"
+                                                         Foreground="#75e900"
+                                                         Margin="-15,-5,-15, -5"
+                                                         ToolTip="đánh dấu đã làm" />
+                            </Button>
+                            <Button Name="btn_Delete"
+                                    Margin="10,0,10,0"
+                                    BorderThickness="0"
+                                    Height="20"
+                                    Width="20"
+                                    Visibility="Hidden"
+                                    Background="Transparent">
+                                <materialDesign:PackIcon Kind="Delete"
+                                                         ToolTip="xóa lịch"
+                                                         Margin="-15,-5,-15, -5"
+                                                         Foreground="#9965f4" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <TextBlock Text="  "
+                                   Name="tb_Lich"
+                                   FontWeight="Bold"
+                                   FontSize="15"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="tb_nguoiTao"
+                                       Text="Người tạo: "
+                                       FontSize="15"
+                                       Visibility="Hidden"
+                                       VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="  "
+                                       Name="tb_NguoiTao"
+                                       FontSize="15"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="3">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="tb_thoiGian"
+                                       Text="Thời gian thực hiện: "
+                                       Visibility="Hidden"
+                                       FontSize="15"
+                                       VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="  "
+                                       Name="tb_ThoiGian"
+                                       FontSize="15"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="4">
+                        <Border BorderThickness="3"
+                                BorderBrush="AliceBlue"
+                                Background="Transparent"
+                                CornerRadius="10,10,10,10">
+                            <RichTextBox x:Name="rtb_ChiTiet"
+                                         IsReadOnly="True">
+
+                            </RichTextBox>
+                        </Border>
+                    </Grid>
+
+                </Grid>
+            </Border>
+
+        </Grid>
+
+    </Grid>
+</Window>

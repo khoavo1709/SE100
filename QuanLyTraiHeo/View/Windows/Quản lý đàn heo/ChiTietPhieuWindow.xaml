@@ -1,0 +1,176 @@
+﻿<Window x:Class="QuanLyTraiHeo.View.Windows.ChiTietPhieuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyTraiHeo.View.Windows" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="ChiTietPhieuWindow" Height="800" Width="800"
+        Name="CTW"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="315"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Grid.Row="0" Margin="0,0,10,0">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0">Nhân viên thực hiện</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Account" Margin="10 15 0 0 "/>
+                        <TextBox materialDesign:HintAssist.Hint="Tên nhân viên" Height="30" Margin="30,10,20,11" Text="{Binding TenNV}" IsReadOnly="True"/>
+                    </Grid>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Margin="0,20,10,0">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0">Khách hàng</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="AccountTie" Margin="10 15 0 0 "/>
+                        <TextBox x:Name="txt_MaKH" materialDesign:HintAssist.Hint="Mã khách hàng" Height="30" Margin="30,10,20,11" Text="{Binding MaKH}" IsReadOnly="True">
+                        </TextBox>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="RenameBox" Margin="10 5 0 0 "/>
+                        <TextBox materialDesign:HintAssist.Hint="Tên khách hàng" Height="30" Margin="30,0,20,11" Text="{Binding Ten}"/>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Email" Margin="10 5 0 0 "/>
+                        <TextBox materialDesign:HintAssist.Hint="Email" Height="30" Margin="30,0,20,11" Text="{Binding Mail, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Phone" Margin="10 5 0 0 "/>
+                        <TextBox materialDesign:HintAssist.Hint="Số điện thoại" Height="30" Margin="30,0,20,11" Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="MapMarker" Margin="10 5 0 0 "/>
+                        <TextBox Margin="30,0,20,11"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            VerticalAlignment="Top"
+                            Height="80"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Auto"
+                            materialDesign:HintAssist.Hint="Địa chỉ liên lạc"
+                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                                 Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="3" Margin="0,10,10,0">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0">Thông tin phiếu</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Barcode" Margin="10 15 0 0 "/>
+                        <TextBox materialDesign:HintAssist.Hint="Mã phiếu" Height="30" Margin="30,10,20,11" Text="{Binding MaPhieu}" IsReadOnly="True"/>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="ReceiptText" Margin="10 5 0 0 "/>
+                        <TextBox Name="loaiphieu" Height="30" Margin="30,0,20,11"
+                                materialDesign:HintAssist.Hint="Loại phiếu"
+                                  Text="{Binding LoaiPhieu}">
+                        </TextBox>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="25*"/>
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:PackIcon Kind="CalendarCheck" Margin="10 5 0 0 "/>
+                        <TextBox Height="30" Margin="30,0,20,0"
+                                    materialDesign:HintAssist.Hint="Ngày lập phiếu"
+                                    Text="{Binding NgayLap,StringFormat= {} {0: dd/MM/yyyy}}" Grid.ColumnSpan="2" VerticalAlignment="Top" IsReadOnly="True"
+                                    />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="19*"/>
+                            <ColumnDefinition Width="49*"/>
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:PackIcon Kind="ListStatus" Margin="10 15 0 0 " />
+                        <ComboBox Name="trangthai" Height="30" Margin="30,10,20,0"
+                                materialDesign:HintAssist.Hint="Trạng thái" Text="{Binding TrangThai}" IsReadOnly="True" Grid.ColumnSpan="2" VerticalAlignment="Top">
+                            <ComboBoxItem
+                                    Content="Đã hoàn thành" />
+                            <ComboBoxItem
+                                    Content="Chưa hoàn thành"  />
+                            <ComboBoxItem
+                                    Content="Đã huỷ" />
+                        </ComboBox>
+                    </Grid>
+
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="13*"/>
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:PackIcon Kind="CurrencyUsd" Margin="10 15 0 0 "/>
+                        <TextBox materialDesign:HintAssist.Hint="Tổng tiền" Height="30" Margin="30,10,20,11" IsReadOnly="True"
+                                 Text="{Binding TongTien}" Grid.ColumnSpan="2"/>
+                    </Grid>
+                    <Button Margin="20,20,20,0"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Height="30"
+                        BorderBrush="White"
+                        Content="Hoàn tất"
+                        FontSize="16"
+                        Background="#00de1e"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Command="{Binding HoanTatCommand}" 
+                            CommandParameter="{Binding ElementName=CTW}"
+                            >
+
+                    </Button>
+                    <Button Margin="20,10,20,0"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Height="30"
+                        BorderBrush="White"
+                        Content="Huỷ bỏ"
+                        FontSize="16"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        Foreground="#00de1e"
+                        Background="#dcf7e0"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                                 Command="{Binding HuyBoCommand}" 
+   
+                                                        CommandParameter="{Binding ElementName=CTW}"
+>
+
+                    </Button>
+                </StackPanel>
+            </materialDesign:Card>
+
+        </Grid>
+        <Grid Grid.Column="1">
+            <ListView Margin="25 0" Name="Listview" HorizontalAlignment="Left" ItemsSource="{Binding CT}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Mã heo" DisplayMemberBinding="{Binding MaHeo}" />
+                        <GridViewColumn Header="Trọng lượng" DisplayMemberBinding="{Binding TrongLuong}"/>
+                        <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding DonGia}"/>
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Delete" Command="{Binding DeleteCommand}" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
+
+        </Grid>
+    </Grid>
+</Window>

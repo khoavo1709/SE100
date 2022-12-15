@@ -1,0 +1,150 @@
+﻿<Window x:Class="QuanLyTraiHeo.View.Windows.Thiết_lập_cây_mục_tiêu.DatMucTieu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyTraiHeo.View.Windows.Thiết_lập_cây_mục_tiêu"
+        mc:Ignorable="d"
+        Title="" Height="770" Width="526"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" WindowStyle="None">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="267*"/>
+            <ColumnDefinition Width="80*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                <GradientStop Color="#3ab19b" Offset="0.05"/>
+                <GradientStop Color="#2d708c" Offset="0.25"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2" Grid.ColumnSpan="3"></Image>
+        <StackPanel Margin="5,18,5,22" Grid.ColumnSpan="3">
+            <materialDesign:Card Margin="5" Height="631" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+                <Grid Margin="0,0,0,-7">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="295*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,0,-225" Grid.Column="1">
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Tỷ lệ đẻ: " VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu12"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="122" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Số heo con sinh ra/lứa" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu2" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Ổ đẻ ít con" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu1" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Tỷ lệ thay đàn" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu3" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Số heo con sinh ra còn sống/lứa" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Tỷ lệ heo con chết trước khi cai sữa/lứa" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu4" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Số heo con cai sữa/nái" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu5" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Trung bình lứa đẻ/nái/năm" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu6" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Thời gian cho con bú/lứa" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu7" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Thời gian mang thai/lứa" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu8" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Số ngày heo nái không làm việc" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu9" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Số heo con cai sữa/nái/năm" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu10" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Doanh thu ước tính" VerticalAlignment="Bottom"/>
+                            <TextBox x:Name="muctieu11" Width="190"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+                        
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">
+                <Border Margin="20" BorderBrush="#3ab19b" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Grid Width="270">
+                        <Button x:Name="Confirm_button_Copy" Background="#3ab19b" Content="Xác nhận" Height="40" VerticalAlignment="Center" Click="Confirm_button_Click" Margin="0,0,140,0"/>
+                        <Button x:Name="huy_button"  Background="#FFB13A3A" Content="Hủy" Height="40" VerticalAlignment="Center" Click="Huy_button_Click" Margin="140,0,0,0" Width="130"/>
+                    </Grid>
+                </Border>
+            </materialDesign:Card>
+        </StackPanel>
+    </Grid>
+</Window>

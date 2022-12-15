@@ -1,0 +1,52 @@
+﻿<Window x:Class="QuanLyTraiHeo.ThongTinHeo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyTraiHeo"
+        mc:Ignorable="d"
+        Title="Thông Tin Heo" Height="450" Width="500"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="25,10,0,10" >
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left"> Mã heo</TextBlock>
+        <TextBlock Margin=" 99 0 0 0" Grid.Row="0" Text="{Binding MaHeo}"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Left">Giới tính</TextBlock>
+        <TextBlock Margin=" 99 0 0 0" Grid.Row="1" Text="{Binding GioiTinh}"></TextBlock>
+        <TextBlock Grid.Row="2" HorizontalAlignment="Left">Ngày sinh</TextBlock>
+        <TextBlock Margin=" 99 0 0 0" Grid.Row="2" Text="{Binding NgaySinh}"></TextBlock>
+        <TextBlock Grid.Row="3" HorizontalAlignment="Left" >Mã loại heo</TextBlock>
+        <TextBlock Margin=" 99 0 0 0" HorizontalAlignment="Left" Grid.Row="3" Text="{Binding MaLoaiHeo}"></TextBlock>
+        <TextBlock Grid.Row="3" Margin=" 250 0 0 0"  HorizontalAlignment="Left">Tên loại heo</TextBlock>
+        <TextBlock Margin=" 350 0 0 0" HorizontalAlignment="Left" Grid.Row="3" Text="{Binding LOAIHEO.TenLoaiHeo}"></TextBlock>
+        <TextBlock Grid.Row="4" HorizontalAlignment="Left">Mã giống heo</TextBlock>
+        <TextBlock Margin=" 99 0 0 0" Grid.Row="4" Text="{Binding MaGiongHeo}"></TextBlock>
+        <TextBlock Grid.Row="4" Margin=" 250 0 0 0"  HorizontalAlignment="Left">Tên giống heo</TextBlock>
+        <TextBlock Margin=" 350 0 0 0" HorizontalAlignment="Left" Grid.Row="4" Text="{Binding GIONGHEO.TenGiongHeo}"></TextBlock>
+
+        <TextBlock Grid.Row="5" HorizontalAlignment="Left">Mã heo mẹ</TextBlock>
+        <TextBlock Margin=" 99 0 0 0" Grid.Row="5" Text="{Binding MaHeoMe}"></TextBlock>
+        <TextBlock Grid.Row="6" HorizontalAlignment="Left">Mã heo cha</TextBlock>
+        <TextBlock Margin=" 99 0 0 0" Grid.Row="6" Text="{Binding MaHeoCha}"></TextBlock>
+        <TextBlock Grid.Row="7" HorizontalAlignment="Left">Mã chuồng</TextBlock>
+        <TextBlock Margin=" 99 0 0 0" Grid.Row="7" Text="{Binding MaChuong}"></TextBlock>
+        <TextBlock Grid.Row="8" HorizontalAlignment="Left">Tình trạng</TextBlock>
+        <TextBlock Margin=" 99 0 0 0" Grid.Row="8" Text="{Binding TinhTrang}"></TextBlock>
+        <TextBlock Grid.Row="9" HorizontalAlignment="Left">Nguồn gốc</TextBlock>
+        <TextBlock Margin=" 99 0 0 0" Grid.Row="9" Text="{Binding NguonGoc}"></TextBlock>
+        <Button Grid.Row="10" Width="100" Background="#3ab19b" HorizontalAlignment="Center" Click="btn_Thoat_Click">Thoát</Button>
+    </Grid>
+</Window>

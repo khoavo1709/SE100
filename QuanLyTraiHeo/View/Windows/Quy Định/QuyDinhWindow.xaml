@@ -1,0 +1,420 @@
+﻿<Window x:Class="QuanLyTraiHeo.View.Windows.Quy_Định.QuyDinhWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        DataContext="{StaticResource QuyDinhVM}"
+        WindowStartupLocation="CenterScreen"
+        ScrollViewer.CanContentScroll="True"
+        Title="Quy định"
+        Height="768"
+        Width="1024"
+        xmlns:local="clr-namespace:QuanLyTraiHeo.View.Windows"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+    <Window.Resources>
+        <Style TargetType="DatePickerTextBox">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <TextBox IsEnabled="False"
+                                 Text="{Binding Path=SelectedDate, 
+                            StringFormat='yyyy/MM', 
+                            RelativeSource={RelativeSource AncestorType=DatePicker}}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#f3f3f9"
+          DataContext="{StaticResource QuyDinhVM}">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <StackPanel>
+            <Expander IsExpanded="False"
+                      Header="Quy định về heo"
+                      FontWeight="Bold"
+                      Background="White">
+                <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Trọng lượng xuất chuồng từ  :   "
+                               VerticalAlignment="Center" />
+                    <TextBox Name="tb_TrongLuongMin" 
+                        Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top" 
+                             Text="{Binding ThamSo.XuatChuongMin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                             
+                            </TextBox>
+                    <TextBlock Text=" Đến  "
+                               VerticalAlignment="Center" />
+                            <TextBox Name="tb_TrongLuongMax"
+                                     Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding ThamSo.XuatChuongMax, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </TextBox>
+                            <TextBlock Text=" KG  "
+                               VerticalAlignment="Center" />
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Tuổi xuất chuồng từ  :   "
+                               VerticalAlignment="Center" />
+                            <TextBox Name="tb_MonthMin"
+                                     Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding ThamSo.MonthXuatChuongMin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </TextBox>
+                            <TextBlock Text="  đến  "
+                               VerticalAlignment="Center" />
+                            <TextBox Name="tb_MonthMax"
+                                     Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding ThamSo.MonthXuatChuongMax, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </TextBox>
+                            <TextBlock Text=" ngày  "
+                               VerticalAlignment="Center" />
+
+                </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Tuổi nhập đàn tối thiểu  :   "
+                                   VerticalAlignment="Center" />
+                            <TextBox Name="tb_NhapDan"
+                                     Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding ThamSo.TuoiNhapDan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </TextBox>
+                            <TextBlock Text="  ngày tuổi  "
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Giao phối cận huyết tối thiểu  :   "
+                                   VerticalAlignment="Center" />
+                            <TextBox Name="tb_CanHuyet"
+                                     Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding ThamSo.CanHuyet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </TextBox>
+                            <TextBlock Text="  thế hệ  "
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Tuổi phổi giống của heo đực phải lớn hơn :   "
+                                   VerticalAlignment="Center" />
+                            <TextBox Name="tb_GiaoPhoiDuc"
+                                     Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding ThamSo.TuoiPhoiGiongDuc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </TextBox>
+                            <TextBlock Text=" tháng tuổi,    Số ngày đề phối giống lại là  "
+                                   VerticalAlignment="Center" />
+                            <TextBox Name="tb_RePhoiGiongDuc"
+                                     Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding ThamSo.RePhoiGiongDuc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </TextBox>
+                            <TextBlock Text=" ngày  "
+                                   VerticalAlignment="Center" />
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Tuổi phổi giống của heo cái phải lớn hơn :   "
+                                   VerticalAlignment="Center" />
+                            <TextBox Name="tb_GiaoPhoiCai"
+                                     Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding ThamSo.TuoiPhoiGiongCai, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </TextBox>
+                            <TextBlock Text=" tháng tuổi,    Số ngày đề phối giống lại là  "
+                                   VerticalAlignment="Center" />
+                            <TextBox Name="tb_RePhoiGiongCai"
+                                     Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding ThamSo.RePhoiGiongCai, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </TextBox>
+                            <TextBlock Text=" ngày sau khi tách heo con  "
+                                   VerticalAlignment="Center" />
+
+                    </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Lượng thức ăn trung bình 1 ngày  :   "
+                                       VerticalAlignment="Center" />
+                            <TextBox Name="tb_ThucAnTB"
+                                     Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding ThamSo.ThucAnMotNgay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </TextBox>
+                            <TextBlock Text="  KG  "
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Lượng thức ăn tối đa 1 ngày  :   "
+                                       VerticalAlignment="Center" />
+                            <TextBox Name="tb_ThucAnMax"
+                                     Margin="0,5,0,0"
+                                     PreviewTextInput="CheckIsNumber"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding ThamSo.ThucAnMax, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </TextBox>
+                            <TextBlock Text="  KG  "
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                        <Button Content="Lưu thay đổi"  
+                                Command="{Binding LuuThamSoCommand}"/>
+                    </StackPanel>
+            </Expander>
+            <Expander IsExpanded="False"
+                      Header="Quy định về Vacxin"
+                      FontWeight="Bold"
+                      Background="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <ComboBox Margin="10"
+                                  materialDesign:HintAssist.Hint="Mã Vacxin"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  ItemsSource="{Binding listVacxin, Mode=OneWay}"
+                                  DisplayMemberPath="TenHangHoa"
+                                 
+                                  SelectedItem="{Binding ModifyQDTH.HANGHOA, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBox Name="tbLuongCoBan"
+                                 Margin="10"
+                                 materialDesign:HintAssist.Hint="Tuổi tiêm"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 VerticalAlignment="Center"
+                                 Text="{Binding ModifyQDTH.TuoiTiem , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        </TextBox>
+                        <TextBox Margin="10,0,10,0"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 VerticalAlignment="Top"
+                                 Height="150"
+                                 Text="{Binding ModifyQDTH.MoTa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"
+                                 materialDesign:HintAssist.Hint="Mô tả" />
+                            <Button Content="Thêm quy định"
+                                    Command="{Binding LuuQDTHCommand}" />
+
+                        </StackPanel>
+                    <ListView x:Name="ListChucVu"
+                              Grid.Column="1"
+                              ItemsSource="{Binding listQDTH}"
+                              ScrollViewer.CanContentScroll="True"
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                  SelectedIndex="{Binding listQDTHSelectedIndex, Mode=TwoWay}">
+                        <ListView.View>
+                            <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding MaVaxin}" 
+                                                    Header="Mã vacxin"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding TuoiTiem, StringFormat=\{0:#\,##0\} ngày tuổi}"
+                                                Header="Tuổi tiêm" />
+                                <GridViewColumn DisplayMemberBinding="{Binding MoTa}"
+                                                Header="Mô tả " />
+                            </GridView>
+
+                        </ListView.View>
+
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
+                                              Command="{Binding BindingToModifyQDTH}">
+                                    <MenuItem.Header>Chỉnh sửa</MenuItem.Header>
+                                </MenuItem>
+                                <!--<MenuItem Icon="{materialDesign:PackIcon Kind=Delete}">
+                                    <MenuItem.Header>Xóa</MenuItem.Header>
+                                </MenuItem>-->
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+
+                    </ListView>
+                </Grid>
+
+            </Expander>
+            <Expander IsExpanded="True"
+                      Header="Mùa dịch bênh trong năm"
+                      FontWeight="Bold"
+                      Background="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+
+                            <TextBox 
+                                     Margin="10"
+                                     materialDesign:HintAssist.Hint="Tên loại bệnh"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     VerticalAlignment="Center"
+                                     Text="{Binding ModifyMDB.TenDichBenh,  StringFormat={}{0:N0} , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            </TextBox>
+                            
+                            <DatePicker
+                                        Width="180"
+                                        materialDesign:HintAssist.Hint="Ngày bắt đầu"
+                                        materialDesign:HintAssist.HelperText="Helper text"
+                                        Style="{StaticResource MaterialDesignOutlinedDatePicker}">
+                                <DatePicker.SelectedDate>
+                                    <Binding Path="ModifyMDB.NgayBatDau"
+                                             UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:NotEmptyValidationRule    ValidatesOnTargetUpdated="True" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DatePicker.SelectedDate>
+
+                                <DatePicker.Resources>
+                                    <Style TargetType="DatePickerTextBox">
+                                        <Setter Property="IsReadOnly"
+                                                Value="True" />
+                                        <Setter Property="Text"
+                                                Value="{Binding Path=SelectedDate, StringFormat='yyyy/MM', RelativeSource={RelativeSource AncestorType=DatePicker}}"></Setter>
+                                    </Style>
+                                </DatePicker.Resources>
+                            </DatePicker>
+                            <DatePicker Width="180"
+                                        materialDesign:HintAssist.Hint="Ngày kết thúc"
+                                        materialDesign:HintAssist.HelperText="Helper text"
+                                        Style="{StaticResource MaterialDesignOutlinedDatePicker}">
+                                <DatePicker.SelectedDate>
+                                    <Binding Path="ModifyMDB.NgayKetThuc"
+                                             UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:NotEmptyValidationRule    ValidatesOnTargetUpdated="True" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DatePicker.SelectedDate>
+
+                                <DatePicker.Resources>
+                                    <Style TargetType="DatePickerTextBox">
+                                        <Setter Property="IsReadOnly"
+                                                Value="True" />
+                                        <Setter Property="Text"
+                                                Value="{Binding Path=SelectedDate, StringFormat='yyyy/MM', RelativeSource={RelativeSource AncestorType=DatePicker}}"></Setter>
+                                    </Style>
+                                </DatePicker.Resources>
+                            </DatePicker>
+
+                            <TextBox Margin="10,0,10,0"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Height="150"
+                                     Text="{Binding ModifyMDB.NguyenNhan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap"
+                                     VerticalScrollBarVisibility="Auto"
+                                     materialDesign:HintAssist.Hint="Nguyên nhân" />
+                            <TextBox Margin="10,0,10,0"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Top"
+                                     Height="150"
+                                     Text="{Binding ModifyMDB.BienPhap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap"
+                                     VerticalScrollBarVisibility="Auto"
+                                     materialDesign:HintAssist.Hint="Biện pháp" />
+                            <Button Content="Thêm lưu ý"
+                                    Command="{Binding LuuMDBCommand}" />
+
+                        </StackPanel>
+                        <ListView 
+                                  Grid.Column="1"
+                                  ItemsSource="{Binding listMuaDichBenh}"
+                                  ScrollViewer.CanContentScroll="True"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                  SelectedIndex="{Binding ListViewSelectedIndex, Mode=TwoWay}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding TenDichBenh}"
+                                                    Header="Tên dịch bệnh" />
+
+                                    <GridViewColumn Header="Bắt đầu">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Margin="0,10,0,0"
+                                                           Height="15"
+                                                           VerticalAlignment="Center"
+                                                           HorizontalAlignment="Center"
+                                                           Text="{Binding NgayBatDau,StringFormat= {} {0: dd/MM/yyyy}}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Kết thúc">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Margin="0,10,0,0"
+                                                           Height="15"
+                                                           VerticalAlignment="Center"
+                                                           HorizontalAlignment="Center"
+                                                           Text="{Binding NgayKetThuc ,StringFormat= {} {0: dd/MM/yyyy}}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn DisplayMemberBinding="{Binding NguyenNhan}"
+                                                    Header="Nguyên nhân" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding BienPhap}"
+                                                    Header="Biện pháp " />
+
+                                </GridView>
+
+                            </ListView.View>
+
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
+                                              Command="{Binding BindingToModifyQDTH}">
+                                        <MenuItem.Header>Xem và chỉnh sửa</MenuItem.Header>
+                                    </MenuItem>
+                                    <!--<MenuItem Icon="{materialDesign:PackIcon Kind=Delete}">
+                                    <MenuItem.Header>Xóa</MenuItem.Header>
+                                </MenuItem>-->
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+
+                        </ListView>
+                    </Grid>
+
+                </Expander>
+
+        </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
