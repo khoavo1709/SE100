@@ -1,0 +1,98 @@
+﻿<Window x:Class="FarmManagementSoftware.View.Windows.SuaTTHeo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows.Quản_lý_đàn_heo" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:viewmodel="clr-namespace:FarmManagementSoftware.ViewModel" 
+        mc:Ignorable="d"
+        Name="SuaTTHeoW"
+        Title="SuaTTHeo" Height="700" Width="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                <GradientStop Color="#3ab19b" Offset="0.05"/>
+                <GradientStop Color="#2d708c" Offset="0.25"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
+        <StackPanel VerticalAlignment="Center" Margin="5">
+            <materialDesign:Card Margin="5" VerticalAlignment="Center">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding SelectedHeo.MaHeo}" IsReadOnly="True"/>
+                    <ComboBox Margin="10 5 10 10"
+                                  Text="{Binding SelectedHeo.GioiTinh, Mode=TwoWay}"
+                                  materialDesign:HintAssist.Hint="Giới tính"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  >
+                        <ComboBoxItem>Đực</ComboBoxItem>
+                        <ComboBoxItem>Cái</ComboBoxItem>
+                    </ComboBox>
+                    <DatePicker Margin="10 5 10 10" materialDesign:HintAssist.Hint="Ngày sinh" materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding SelectedHeo.NgaySinh}"/>
+                    <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Trọng lượng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding SelectedHeo.TrongLuong}"/>
+
+                    <ComboBox Margin="10 5 10 10"
+                                  Name="CBLoaiHeo"
+                                  materialDesign:HintAssist.Hint="Tên loại heo"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  ItemsSource="{Binding ListLoai, Mode=OneWay}"
+                                  DisplayMemberPath="TenLoaiHeo"
+                                  SelectedItem="{Binding SelectedLoai, Mode=TwoWay}">
+                    </ComboBox>
+                    <ComboBox Margin="10 5 10 10"
+                                  Name="CBGiongHeo"
+                                  materialDesign:HintAssist.Hint="Tên giống heo"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  ItemsSource="{Binding ListGiong, Mode=OneWay}"
+                                  DisplayMemberPath="TenGiongHeo"
+                                  SelectedItem="{Binding SelectedGiong, Mode=TwoWay}">
+                    </ComboBox>
+                    <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo mẹ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding MaHeoMe}"/>
+                    <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo cha" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding MaHeoCha}"/>
+                    <ComboBox Margin="10 5 10 10"
+                                  materialDesign:HintAssist.Hint="Mã chuồng"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  ItemsSource="{Binding ListChuong, Mode=OneWay}"
+                                  DisplayMemberPath="MaChuong"
+                                  SelectedItem="{Binding SelectedChuong, Mode=TwoWay}">
+                    </ComboBox>
+                    <ComboBox Margin="10 5 10 10"
+                                  Text="{Binding SelectedHeo.TinhTrang, Mode=TwoWay}"
+                                  materialDesign:HintAssist.Hint="Tình trạng"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  >
+                        <ComboBoxItem>Sức khoẻ tốt</ComboBoxItem>
+                        <ComboBoxItem>Đang mang thai</ComboBoxItem>
+                        <ComboBoxItem>Đang bị bệnh</ComboBoxItem>
+                        <ComboBoxItem>Đã xuất</ComboBoxItem>
+                        <ComboBoxItem>Đã đào thải</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox Margin="10 5 10 10"
+                                  Text="{Binding SelectedHeo.NguonGoc, Mode=TwoWay}"
+                                  materialDesign:HintAssist.Hint="Nguồn gốc"
+                                  VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  >
+                        <ComboBoxItem>Nhập ngoài</ComboBoxItem>
+                        <ComboBoxItem>Sinh trong trang trại</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">
+                <Border Margin="20" BorderBrush="#3ab19b" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Button Background="#3ab19b" Content="Xác nhận" Width="150" Height="40" VerticalAlignment="Bottom" 
+                            Command="{Binding XacNhanCommand}"
+                            CommandParameter="{Binding ElementName=SuaTTHeoW}"></Button>
+                </Border>
+            </materialDesign:Card>
+        </StackPanel>
+    </Grid>
+</Window>
