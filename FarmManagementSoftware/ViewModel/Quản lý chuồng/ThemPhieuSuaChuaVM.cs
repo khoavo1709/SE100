@@ -29,7 +29,7 @@ namespace FarmManagementSoftware.ViewModel
         private DateTime _NgayLapPhieu = DateTime.Now;
         private string _GhiChu = "";
         private int _TongTien = 0;
-        private string _TrangThai = "";
+        private string _TrangThai = "Đang sửa chữa";
         private string _MaChuongCanTim = "";
         private bool _Flag = false;
         #endregion
@@ -51,10 +51,12 @@ namespace FarmManagementSoftware.ViewModel
         public int TongTien { get => _TongTien; set { _TongTien = value; OnPropertyChanged(); } }
         public string TrangThai { get => _TrangThai; set { _TrangThai = value; OnPropertyChanged(); } }
         public string MaChuongCanTim { get => _MaChuongCanTim; set { _MaChuongCanTim = value; OnPropertyChanged(); } }
+        public int listviewSelectedIndex { get; set; }
         #endregion
 
         #region Command
         public ICommand AddCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand HuyCommand { get; set; }
         public ICommand XacNhanCommand { get; set; }
         public ICommand TimKiemTheoMaChuongCommand { get; set; }
@@ -63,6 +65,7 @@ namespace FarmManagementSoftware.ViewModel
 
         public ThemPhieuSuaChuaVM()
         {
+            listviewSelectedIndex = 0;
             cT_PHIEUSUACHUAs = DataProvider.Ins.DB.CT_PHIEUSUACHUA.ToList();
             ListNhanVien = new ObservableCollection<NHANVIEN>(DataProvider.Ins.DB.NHANVIENs);
             _SoPhieu = TaoSoPhieu();
@@ -91,6 +94,13 @@ namespace FarmManagementSoftware.ViewModel
                 }
                 MessageBox.Show("Đã thêm thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 p.Close();
+            });
+            DeleteCommand = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            {
+                if (listviewSelectedIndex < 0)
+                    return;
+                var x = cTPhieuModels[listviewSelectedIndex];
+                cTPhieuModels.Remove(x);
             });
             HuyCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {

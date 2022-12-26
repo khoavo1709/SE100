@@ -18,7 +18,7 @@ namespace FarmManagementSoftware.ViewModel
     public class ThemChuongVM : BaseViewModel
     {
         #region Attributes
-        List<CHUONGTRAI> _ChuongTrais = new List<CHUONGTRAI>();
+        ObservableCollection<CHUONGTRAI> _ChuongTrais = new ObservableCollection<CHUONGTRAI>();
         List<string> listLoaiChuong;
         Themchuong tc;
         string _MaChuong;
@@ -30,12 +30,13 @@ namespace FarmManagementSoftware.ViewModel
 
         #region Property
         public List<string> ListLoaiChuong { get => listLoaiChuong; set { listLoaiChuong = value; OnPropertyChanged(); } }
-        public List<CHUONGTRAI> CHUONGTRAIs { get => _ChuongTrais; set { _ChuongTrais = value; OnPropertyChanged(); } }
+        public ObservableCollection<CHUONGTRAI> CHUONGTRAIs { get => _ChuongTrais; set { _ChuongTrais = value; OnPropertyChanged(); } }
         public string MaChuong { get => _MaChuong; set { _MaChuong = value; OnPropertyChanged(); } }
         public string MaLoaiChuong { get => _MaLoaiChuong; set { _MaLoaiChuong = value; OnPropertyChanged(); } }
         public string TinhTrang { get => _TinhTrang; set { _TinhTrang = value; OnPropertyChanged(); } }
         public int SucChuaToiDa { get => _SucChuaToiDa; set { _SucChuaToiDa = value; OnPropertyChanged(); } }
         public int SoLuongHeo { get => _SoLuongHeo; set { _SoLuongHeo = value; OnPropertyChanged(); } }
+        public int listviewSelectedIndex { get; set; }
         #endregion
 
         #region Command
@@ -43,10 +44,12 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand XacNhanCommand { get; set; }
         public ICommand TaoMaChuong { get; set; }
+        public ICommand DeleteCommand { get; set; }
         #endregion
 
         public ThemChuongVM()
         {
+            listviewSelectedIndex = 0;
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, p => { tc = p as Themchuong; Load(); MaChuong = CreatMaChuong(tc.MaLC.SelectedItem as string); });
             TaoMaChuong = new RelayCommand<ComboBox>((p) => { return true; }, (p) =>
             {
@@ -67,7 +70,13 @@ namespace FarmManagementSoftware.ViewModel
             {
                 var ChuongTrai = new CHUONGTRAI() { MaChuong = MaChuong, MaLoaiChuong = MaLoaiChuong, TinhTrang = TinhTrang, SuaChuaToiDa = SucChuaToiDa, SoLuongHeo = SoLuongHeo };
                 _ChuongTrais.Add(ChuongTrai);
-                p.Items.Refresh();
+            });
+            DeleteCommand = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            {
+                if (listviewSelectedIndex < 0)
+                    return;
+                var ChuongTrai = _ChuongTrais[listviewSelectedIndex];
+                _ChuongTrais.Remove(ChuongTrai);
             });
         }
 

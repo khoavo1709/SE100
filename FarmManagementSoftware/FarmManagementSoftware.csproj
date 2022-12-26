@@ -250,6 +250,7 @@
     <Compile Include="ViewModel\QuyDinhVM.cs" />
     <Compile Include="ViewModel\Quản lý chuồng\ChiTietPhieuSuaChuaVM.cs" />
     <Compile Include="ViewModel\Quản lý chuồng\LapPhieuSuaChuaVM.cs" />
+    <Compile Include="ViewModel\Quản lý chuồng\SuaTrangThaiVM.cs" />
     <Compile Include="ViewModel\Quản lý chuồng\ThemPhieuSuaChuaVM.cs" />
     <Compile Include="ViewModel\Quản lý giống heo\QuanlygiongheoVM.cs" />
     <Compile Include="ViewModel\Quản lý kho\LapPhieuKhoWindowVM.cs" />
