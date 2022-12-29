@@ -282,6 +282,9 @@
     <Compile Include="ViewModel\Quản lý báo cáo\BaoCaoTinhTrangHeoVM.cs" />
     <Compile Include="ViewModel\QL thông tin cá nhân\CapNhatTaiKhoanVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\TaoThongBaoVM.cs" />
+    <Compile Include="View\Windows\Quản lý chuồng nuôi\SuaTrangThai.xaml.cs">
+      <DependentUpon>SuaTrangThai.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\Quản lý đàn heo\DonGia.xaml.cs" />
     <Compile Include="View\Windows\Quy Định\QuyDinhWindow.xaml.cs">
       <DependentUpon>QuyDinhWindow.xaml</DependentUpon>
@@ -499,6 +502,10 @@
     <Compile Include="View\Windows\wLogin.xaml.cs">
       <DependentUpon>wLogin.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Windows\Quản lý chuồng nuôi\SuaTrangThai.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\Quản lý đàn heo\DonGia.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

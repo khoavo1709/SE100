@@ -198,3 +198,5 @@ C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\De
 C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\FarmManagementSoftware.csproj.CopyComplete
 C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\QuanLyTraiHeo.exe
 C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\QuanLyTraiHeo.pdb
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\SuaTrangThai.g.cs
+C:\Users\dkhoa\OneDrive\Tài liệu\GitHub\SE100\FarmManagementSoftware\obj\Debug\View\Windows\Quản lý chuồng nuôi\SuaTrangThai.baml

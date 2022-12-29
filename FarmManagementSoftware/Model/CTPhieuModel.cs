@@ -11,13 +11,16 @@ namespace FarmManagementSoftware.Model
     {
         private string maChuong = "";
         private string moTa = "";
+        private string tienSuaChua = "";
         public string MaChuong { get => maChuong; set { maChuong = value; OnPropertyChanged(); } }
         public string MoTa { get => moTa; set { moTa = value; OnPropertyChanged(); } }
+        public string TienSuaChua { get => tienSuaChua; set { tienSuaChua = value; OnPropertyChanged(); } }
         public CTPhieuModel() { }
-        public CTPhieuModel(string a, string b)
+        public CTPhieuModel(string a, string b, string c)
         {
             MaChuong = a;
             MoTa = b;
+            TienSuaChua = c;
         }
     }
 }
