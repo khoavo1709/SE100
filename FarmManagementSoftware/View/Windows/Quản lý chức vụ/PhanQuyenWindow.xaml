@@ -1,0 +1,131 @@
+﻿<Window x:Class="QuanLyTraiHeo.View.Windows.PhanQuyenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyTraiHeo.View.Windows" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d" DataContext="{StaticResource PhanQuyenVM }"
+        ResizeMode="NoResize"
+        Width="700"
+        Height="430">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5"
+                                 StartPoint="0,0.5">
+                <GradientStop Color="#3ab19b"
+                              Offset="0.05" />
+                <GradientStop Color="#2d708c"
+                              Offset="0.25" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <materialDesign:Card Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="320" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <ListView x:Name="ListChucVu"
+                                  ItemsSource="{Binding lstPermission, Mode=OneWay}"
+                                  ScrollViewer.CanContentScroll="True"
+                                  Margin="10"
+                                  SelectedIndex="{Binding lstPermissionIndex, Mode=OneWayToSource}"
+                                  SelectedItem="{Binding ModifyPermission, Mode=TwoWay}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Name_Permision}"
+                                                    Header="Quyền" />
+                                </GridView>
+
+                            </ListView.View>
+
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"
+                                              Command="{Binding DeleteCommand}" >
+                                        <MenuItem.Header>Xóa</MenuItem.Header>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding permissionSelectionChangedCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListView>
+
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="80" />
+                            <RowDefinition  />
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <TextBox materialDesign:HintAssist.Hint="Tên chức vụ"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     Width="200"
+                                     HorizontalAlignment="Left"
+                                     Margin="10,0,0,0"
+                                     VerticalAlignment="Center"
+                                     Text="{Binding PermissionName , Mode=TwoWay}" />
+                            <Button Command="{Binding AddPerCommand}"
+                                    Background="#3ab19b"
+                                    Content="Thêm"
+                                    Width="80"
+                                    Height="40"
+                                    HorizontalAlignment="Left"
+                                    Margin="235,20,0,20" />
+
+
+                        </Grid>
+                        <ListBox Grid.Row="1" ItemsSource="{Binding permissionModels}"
+                                 Margin="10,10,10,10">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding isSelected, Mode=TwoWay}"
+                                              Content="{Binding ActionDetail, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                    </Grid>
+
+                </Grid>
+                <StackPanel Grid.Row="1"
+                            Margin="10"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+
+                    <Button Command="{Binding ChinhSuaPermissionCommand}"
+                            Background="#3ab19b"
+                            Content="Chỉnh sửa"
+                            Width="150"
+                            Height="40" />
+
+                    <Button Name="btn_Huybo"
+                            Margin="20,0,0,0"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Height="40"
+                            Width="150"
+                            BorderBrush="White"
+                            Content="Thoát"
+                            Foreground="#00de1e"
+                            Background="#dcf7e0"
+                            Command="{Binding CloseCommand}"
+                            CommandParameter="{Binding ElementName=PhanQuyenW}">
+
+                    </Button>
+
+                </StackPanel>
+
+            </Grid>
+
+        </materialDesign:Card>
+    </Grid>
+</Window>
