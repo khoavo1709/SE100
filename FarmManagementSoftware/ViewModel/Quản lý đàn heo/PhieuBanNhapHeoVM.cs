@@ -16,18 +16,16 @@ namespace FarmManagementSoftware.ViewModel
 {
     public class PhieuBanNhapHeoVM : BaseViewModel
     {
-        private ObservableCollection<HEO> _ListHeo;
+        public ObservableCollection<HEOPHIEU> ListHeo { get => _ListHeo; set { _ListHeo = value; OnPropertyChanged(); } }
 
-        public ObservableCollection<HEO> ListHeo { get => _ListHeo; set { _ListHeo = value; OnPropertyChanged(); } }
-        public ObservableCollection<HEONHAP> ListHeoN { get; set; }
-        public ObservableCollection<HEOXUAT> ListHeoX { get; set; }
+        public HEOPHIEU SelectedHeo { get => _SelectedHeo; set { _SelectedHeo = value; } }
 
         public PHIEUHEO PhieuHeo { get; set; }
         private string _MaPhieu;
         public string MaPhieu { get => _MaPhieu; set { _MaPhieu = value; OnPropertyChanged(); } }
         public string loaiPhieu = null;
         public DateTime? NgayLap { get; set; }
-        public int DonGia { get; set; }
+        public int _dongia { get; set; }
 
         private int? _TongTien = 0;
         public int? TongTien { get => _TongTien; set { _TongTien = value; OnPropertyChanged(); } }
@@ -47,6 +45,11 @@ namespace FarmManagementSoftware.ViewModel
         public string SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }
 
         private string _DiaChi;
+        private ObservableCollection<HEOPHIEU> _ListHeo;
+        private HEOPHIEU _SelectedHeo;
+
+        public int DonGia { get => _dongia; set { _dongia = value; OnPropertyChanged(); } }
+
         public string DiaChi { get => _DiaChi; set { _DiaChi = value; OnPropertyChanged(); } }
 
         public NHANVIEN NhanVien { get; set; }
@@ -55,15 +58,17 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand ThemHeo { get; set; }
         public ICommand DonGiaChanged { get; set; }
         public ICommand ThayDoiMaHK { get; set; }
+        public ICommand DonGiaCommand2 { get; set; }
+        public ICommand DeleteCommand { get; set; }
+
+
         public ICommand HoanTatCommand { get; set; }
         public ICommand HuyBoCommand { get; set; }
 
         public PhieuBanNhapHeoVM()
         {
-            ListHeoN = new ObservableCollection<HEONHAP>();
-            ListHeoX = new ObservableCollection<HEOXUAT>();
-
-            ListHeo = new ObservableCollection<HEO>();
+            NgayLap = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            ListHeo = new ObservableCollection<HEOPHIEU>();
             PhieuHeo = new PHIEUHEO();
             KhachHang = new DOITAC();
             NhanVien = new NHANVIEN();
@@ -84,7 +89,7 @@ namespace FarmManagementSoftware.ViewModel
                     MessageBox.Show("Vui lòng chọn loại phiếu trước");
                     return;
                 }
-                else if(ListHeo.Count>0 && loaiPhieu== "Phiếu xuất heo")
+                else if (ListHeo.Count > 0 && loaiPhieu == "Phiếu xuất heo")
                 {
                     MessageBox.Show("Chỉ được thêm heo vào một lần mỗi phiếu");
                     return;
@@ -93,27 +98,23 @@ namespace FarmManagementSoftware.ViewModel
                 {
                     ThemHeoPhieu them = new ThemHeoPhieu
                     {
-                        DataContext = new ThemHeoPhieuVM(ListHeoN)
+                        DataContext = new ThemHeoPhieuVM(this),
                     };
                     them.ShowDialog();
-                    foreach(HEONHAP h in ListHeoN)
+                    foreach (HEOPHIEU h in ListHeo)
                     {
-                        ListHeo.Add(h.heo);
                         TongTien += h.DonGia * h.heo.TrongLuong;
-
                     }
                 }
                 if (loaiPhieu == "Phiếu xuất heo")
                 {
-                    ChonHeoXuatVM vm = new ChonHeoXuatVM(this);
                     ChonHeoXuat chon = new ChonHeoXuat
                     {
-                        DataContext = vm
+                        DataContext = new ChonHeoXuatVM(this),
                     };
                     chon.ShowDialog();
-                    foreach (HEOXUAT h in ListHeoX)
+                    foreach (HEOPHIEU h in ListHeo)
                     {
-                        ListHeo.Add(h.heo);
                         TongTien += h.DonGia * h.heo.TrongLuong;
                     }
                 }
@@ -144,6 +145,17 @@ namespace FarmManagementSoftware.ViewModel
                 return true;
             }, (p) =>
             {
+                if (MaKH == null || Ten == null || SDT == null || Mail == null || DiaChi == null)
+                {
+                    MessageBox.Show("Vui lùng nhập đủ thông tin khách hàng");
+                    return;
+                }
+                if (ListHeo.Count < 0)
+                {
+                    MessageBox.Show("Phiếu phải có ít nhất một cá thể heo");
+                    return;
+                }
+
                 if (DataProvider.Ins.DB.DOITACs.Where(x => x.MaDoiTac == KhachHang.MaDoiTac).Count() != 1)
                 {
                     KhachHang.MaDoiTac = MaKH;
@@ -151,7 +163,6 @@ namespace FarmManagementSoftware.ViewModel
                     KhachHang.TenDoiTac = Ten;
                     KhachHang.SDT = SDT;
                     KhachHang.Email = Mail;
-                    KhachHang.SDT = SDT;
                     KhachHang.DiaChi = DiaChi;
                     DataProvider.Ins.DB.DOITACs.Add(KhachHang);
                 }
@@ -161,26 +172,38 @@ namespace FarmManagementSoftware.ViewModel
                 PhieuHeo.MaDoiTac = KhachHang.MaDoiTac;
                 PhieuHeo.NgayLap = NgayLap;
                 PhieuHeo.TrangThai = "Chưa hoàn thành";
+
                 if (loaiPhieu == "Phiếu nhập heo")
                 {
-                    foreach (HEONHAP x in ListHeoN)
+                    foreach (HEOPHIEU x in ListHeo)
                     {
-                        DataProvider.Ins.DB.HEOs.Add(x.heo);
-                        CT_PHIEUHEO CT = new CT_PHIEUHEO
+                        if (x.heo.CHUONGTRAI.SoLuongHeo < x.heo.CHUONGTRAI.SuaChuaToiDa)
                         {
-                            MaHeo = x.heo.MaHeo,
-                            SoPhieu = MaPhieu,
-                            DonGia = x.DonGia,
-                            TrongLuong = x.heo.TrongLuong
-                        };
-                        DataProvider.Ins.DB.CT_PHIEUHEO.Add(CT);
+                            x.heo.CHUONGTRAI.SoLuongHeo += 1;
+                            DataProvider.Ins.DB.HEOs.Add(x.heo);
+                            CT_PHIEUHEO CT = new CT_PHIEUHEO
+                            {
+                                MaHeo = x.heo.MaHeo,
+                                SoPhieu = MaPhieu,
+                                DonGia = x.DonGia,
+                                TrongLuong = x.heo.TrongLuong
+                            };
+                            DataProvider.Ins.DB.CT_PHIEUHEO.Add(CT);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sức chứa của chuồng không đủ. Heo" + x.heo.MaHeo + " chưa được lưu");
+                            ListHeo.Remove(x);
+                        }
+
                     }
                 }
                 if (loaiPhieu == "Phiếu xuất heo")
                 {
-                    foreach (HEOXUAT x in ListHeoX)
+                    foreach (HEOPHIEU x in ListHeo)
                     {
                         x.heo.TinhTrang = "Đã xuất";
+                        x.heo.CHUONGTRAI.SoLuongHeo -= 1;
                         CT_PHIEUHEO CT = new CT_PHIEUHEO
                         {
                             MaHeo = x.heo.MaHeo,
@@ -191,8 +214,6 @@ namespace FarmManagementSoftware.ViewModel
                         DataProvider.Ins.DB.CT_PHIEUHEO.Add(CT);
                     }
                 }
-
-
                 PhieuHeo.TongTien = TongTien;
                 DataProvider.Ins.DB.PHIEUHEOs.Add(PhieuHeo);
                 try
@@ -202,11 +223,22 @@ namespace FarmManagementSoftware.ViewModel
                 }
                 catch
                 {
-                    MessageBox.Show("LOI");
+                    MessageBox.Show("Lỗi khi thêm vào csdl");
 
                 }
                 p.Close();
                 p.DataContext = null;
+            });
+
+            DonGiaCommand2 = new RelayCommand<ListView>((p) => { return true; }, p =>
+            {
+                SelectedHeo.DonGia = DonGia;
+                DonGia = 0;
+                foreach (HEOPHIEU h in ListHeo)
+                {
+                    TongTien += h.DonGia * h.heo.TrongLuong;
+                }
+
             });
             HuyBoCommand = new RelayCommand<Window>((p) =>
             {
@@ -217,6 +249,19 @@ namespace FarmManagementSoftware.ViewModel
                 p.DataContext = null;
             }
             );
+            DeleteCommand = new RelayCommand<ListView>((p) => { return true; }, p =>
+            {
+                ListHeo.Remove(SelectedHeo);
+                if (ListHeo.Count > 0)
+                {
+                    foreach (HEOPHIEU h in ListHeo)
+                    {
+                        TongTien += h.DonGia * h.heo.TrongLuong;
+                    }
+                }
+                else TongTien = 0;
+
+            });
         }
         string CreatPhieuHeo(int lan)
         {

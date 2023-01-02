@@ -60,22 +60,34 @@
                         </Grid>
 
                     </materialDesign:Card>
-                    <ListView Margin="25 0" Name="Listview" HorizontalAlignment="Left" ItemsSource="{Binding ListHeo}">
+                    <ListView Margin="25 0" Name="Listview" HorizontalAlignment="Left" ItemsSource="{Binding ListHeo}" SelectedItem="{Binding SelectedHeo}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Mã heo" DisplayMemberBinding="{Binding MaHeo}" />
-                                <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding GioiTinh}"/>
-                                <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding NgaySinh, StringFormat= {} {0: dd/MM/yyyy}}"/>
-                                <GridViewColumn Header="Trọng lượng" DisplayMemberBinding="{Binding TrongLuong}"/>
-                                <GridViewColumn Header="Tên loại heo" DisplayMemberBinding="{Binding LOAIHEO.TenLoaiHeo}"/>
-                                <GridViewColumn Header="Tên giống heo" DisplayMemberBinding="{Binding GIONGHEO.TenGiongHeo}"/>
-                                <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong}"/>
-                                <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding TinhTrang}"/>
-                                <GridViewColumn Header="Nguồn gốc" DisplayMemberBinding="{Binding NguonGoc}"/>
+                                <GridViewColumn Header="Mã heo" DisplayMemberBinding="{Binding heo.MaHeo}" />
+                                <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding heo.GioiTinh}"/>
+                                <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding heo.NgaySinh, StringFormat= {} {0: dd/MM/yyyy}}"/>
+                                <GridViewColumn Header="Trọng lượng" DisplayMemberBinding="{Binding heo.TrongLuong}"/>
+                                <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding DonGia, StringFormat={}{0:#,#}}"/>
+                                <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding heo.TinhTrang}"/>
+
                             </GridView>
                         </ListView.View>
                         <ListView.ContextMenu>
                             <ContextMenu>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}" Command="{Binding DonGiaCommand}">
+                                    <MenuItem.Header>Sửa đơn giá</MenuItem.Header>
+                                    <TextBox materialDesign:HintAssist.Hint="Nhập đơn giá mới" Height="30"
+                                         VerticalContentAlignment="Bottom"
+                                         PreviewTextInput="NumberValidationTextBox"
+                                                 Text="{Binding DonGia, StringFormat={}{0:N0}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }">
+                                    </TextBox>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SubmenuClosed">
+                                            <i:InvokeCommandAction Command="{Binding DonGiaCommand2}"
+                                            CommandParameter="{Binding ElementName=txtll}"></i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </MenuItem>
                                 <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Delete" Command="{Binding DeleteCommand}" />
                             </ContextMenu>
                         </ListView.ContextMenu>
@@ -168,7 +180,7 @@
                                     Content="Phiếu nhập heo" />
                             <ComboBoxItem
                                     Content="Phiếu xuất heo"  />
-                            
+
                         </ComboBox>
                     </Grid>
                     <Grid>
@@ -181,23 +193,8 @@
                     </Grid>
                     <Grid>
                         <materialDesign:PackIcon Kind="CurrencyUsd" Margin="10 5 0 0 "/>
-                        <TextBox materialDesign:HintAssist.Hint="Đơn giá" Height="30" Margin="30,0,20,11"
-                                 Text="{Binding DonGia}" x:Name="txt_DonGia"
-                         >
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding DonGiaChanged}"
-                                                                       CommandParameter="{Binding ElementName=txt_DonGia}"></i:InvokeCommandAction>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
-
-                    </Grid>
-
-                    <Grid>
-                        <materialDesign:PackIcon Kind="CurrencyUsd" Margin="10 5 0 0 "/>
                         <TextBox materialDesign:HintAssist.Hint="Tổng tiền" Height="30" Margin="30,0,20,11" IsReadOnly="True"
-                                 Text="{Binding TongTien}"/>
+                                 Text="{Binding TongTien, StringFormat={}{0:#,#}}"/>
                     </Grid>
                     <Button Margin="20,20,20,0"
                         Style="{StaticResource MaterialDesignRaisedButton}"

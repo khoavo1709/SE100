@@ -173,8 +173,7 @@
     <Compile Include="Model\HEO.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\HEONHAP.cs" />
-    <Compile Include="Model\HEOXUAT.cs" />
+    <Compile Include="Model\HEOPHIEU.cs" />
     <Compile Include="Model\LICHCHUONG.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -281,7 +280,6 @@
     <Compile Include="ViewModel\Quản lý báo cáo\BaoCaoTinhTrangHeoVM.cs" />
     <Compile Include="ViewModel\QL thông tin cá nhân\CapNhatTaiKhoanVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\TaoThongBaoVM.cs" />
-    <Compile Include="View\Windows\Quản lý đàn heo\DonGia.xaml.cs" />
     <Compile Include="View\Windows\Quy Định\QuyDinhWindow.xaml.cs">
       <DependentUpon>QuyDinhWindow.xaml</DependentUpon>
     </Compile>
@@ -498,10 +496,6 @@
     <Compile Include="View\Windows\wLogin.xaml.cs">
       <DependentUpon>wLogin.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\Windows\Quản lý đàn heo\DonGia.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\Windows\Quy Định\QuyDinhWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
