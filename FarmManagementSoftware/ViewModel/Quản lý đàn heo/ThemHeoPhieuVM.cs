@@ -42,8 +42,6 @@ namespace FarmManagementSoftware.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand HTCommand { get; set; }
-
-
         public ThemHeoPhieuVM(ObservableCollection <HEONHAP> a)
         {
             

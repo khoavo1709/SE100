@@ -12,8 +12,6 @@
     <viewModel:BaoCaoTonKhoVM x:Key="BaoCaoTonKhoVM"></viewModel:BaoCaoTonKhoVM>
     <viewModel:LapPhieuBanNhapHeoVM x:Key="LapPhieuBanNhapHeoVM"></viewModel:LapPhieuBanNhapHeoVM>
     <viewModel:PhieuBanNhapHeoVM x:Key="PhieuBanNhapHeoVM"></viewModel:PhieuBanNhapHeoVM>
-    <viewModel:ThemHeoPhieuVM x:Key="ThemHeoPhieuVM"></viewModel:ThemHeoPhieuVM>
-    <viewModel:ChonHeoXuatVM x:Key="ChonHeoXuatVM"></viewModel:ChonHeoXuatVM>
     <viewModel:QuanLyNhatKyVM x:Key="QuanLyNhatKyVM"></viewModel:QuanLyNhatKyVM>
     <viewModel:LapLichTiemVM x:Key="LapLichTiemVM"></viewModel:LapLichTiemVM>
     <viewModel:DoiMatKhauVM x:Key="DoiMatKhauVM"></viewModel:DoiMatKhauVM>
@@ -39,9 +37,13 @@
     <viewModel:ThemPhieuSuaChuaVM x:Key="ThemPhieuSuaChuaVM"></viewModel:ThemPhieuSuaChuaVM>
     <viewModel:QuyDinhVM x:Key="QuyDinhVM"></viewModel:QuyDinhVM>
     <viewModel:QuanLyHangHoaWindowVM x:Key="QuanLyHangHoaWindowVM"></viewModel:QuanLyHangHoaWindowVM>
+    <viewModel:LapPhieuKhoVM x:Key="LapPhieuKhoVM"></viewModel:LapPhieuKhoVM>
+    <viewModel:ChiTietPhieuKhoVM x:Key="ChiTietPhieuKhoVM"></viewModel:ChiTietPhieuKhoVM>
+
     <viewModel:ThongTinHangHoaVM x:Key="ThongTinHangHoaVM"></viewModel:ThongTinHangHoaVM>
     <viewModel:ThemHangHoaVM x:Key="ThemHangHoaVM"></viewModel:ThemHangHoaVM>
-    <viewModel:LapPhieuKhoWindowVM x:Key="LapPhieuKhoWindowVM"></viewModel:LapPhieuKhoWindowVM>
-
-    <viewModel:ThemLichMoiVM x:Key="ThemLichMoiVM"></viewModel:ThemLichMoiVM>
+    <viewModel:ChonHangHoaVM x:Key="ChonHangHoaVM"></viewModel:ChonHangHoaVM>
+    
+    
+    <viewModel:SuaNhanVienVM x:Key="SuaNhanVienVM"></viewModel:SuaNhanVienVM>
 </ResourceDictionary>
