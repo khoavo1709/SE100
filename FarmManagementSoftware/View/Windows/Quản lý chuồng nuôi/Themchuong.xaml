@@ -33,14 +33,14 @@
             <StackPanel Margin="5" VerticalAlignment="Center">
                 <materialDesign:Card Grid.Row="0" Margin="5" VerticalAlignment="Center">
                     <StackPanel VerticalAlignment="Center">
-                        <TextBox Margin="20 15 20 10" IsReadOnly="True" materialDesign:HintAssist.Hint="Mã chuồng" Text="{Binding MaChuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                        <TextBox Name="MaChuongg" Margin="20 15 20 10" IsReadOnly="True" materialDesign:HintAssist.Hint="Mã chuồng" Text="{Binding MaChuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
                         <ComboBox Margin="20 10 20 10"
                                   Name="MaLC"
-                                  materialDesign:HintAssist.Hint="Mã loại chuồng"
+                                  materialDesign:HintAssist.Hint="Tên loại chuồng"
                                   VerticalAlignment="Center"
                                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                   ItemsSource="{Binding ListLoaiChuong, Mode=OneWay}"
-                                  Text="{Binding MaLoaiChuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                  Text="{Binding TenLoaiChuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction
@@ -51,6 +51,7 @@
                             </i:Interaction.Triggers>
                         </ComboBox>
                         <ComboBox Margin="20 10 20 10"
+                                  Name="TinhTrangg"
                                   materialDesign:HintAssist.Hint="Tình trạng"
                                   VerticalAlignment="Center"
                                   Text="{Binding TinhTrang, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -60,8 +61,8 @@
                             <ComboBoxItem>Đang sửa chữa</ComboBoxItem>
                             <ComboBoxItem>Không sử dụng</ComboBoxItem>
                         </ComboBox>
-                        <TextBox Margin="20 10 20 10" materialDesign:HintAssist.Hint="Sức chứa tối đa" Text="{Binding SucChuaToiDa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
-                        <TextBox Margin="20 10 20 15" materialDesign:HintAssist.Hint="Số heo hiện có" Text="{Binding SoLuongHeo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                        <TextBox Name="SCToiDa" Margin="20 10 20 10" PreviewTextInput="IsNumberic_only" materialDesign:HintAssist.Hint="Sức chứa tối đa" Text="{Binding SucChuaToiDa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                        <TextBox Name="SHToiDa" Margin="20 10 20 15" IsReadOnly="True" materialDesign:HintAssist.Hint="Số heo hiện có" Text="{Binding SoLuongHeo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </materialDesign:Card>
                 <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">
@@ -99,7 +100,9 @@
         <Grid Grid.Column="1">
             <materialDesign:Card Margin="5">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <ListView x:Name="listVieww" ItemsSource="{Binding CHUONGTRAIs}" HorizontalAlignment="Stretch">
+                    <ListView x:Name="listVieww" 
+                              SelectedIndex="{Binding listviewSelectedIndex, Mode=TwoWay}"
+                              ItemsSource="{Binding CHUONGTRAIs}" HorizontalAlignment="Stretch">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong}"></GridViewColumn>
@@ -109,6 +112,16 @@
                                 <GridViewColumn Header="Số heo hiện có" DisplayMemberBinding="{Binding SoLuongHeo}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <Menu>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"  
+                                              Header="Xóa"
+                                              Command="{Binding DeleteCommand}" 
+                                              CommandParameter="{Binding ElementName=listVieww}"></MenuItem>
+                                </Menu>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                     </ListView>
                 </ScrollViewer>
             </materialDesign:Card>

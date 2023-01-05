@@ -20,20 +20,12 @@
         <StackPanel VerticalAlignment="Center" Margin="5">
             <materialDesign:Card Margin="5" VerticalAlignment="Center">
                 <StackPanel VerticalAlignment="Center">
-                    <TextBox Margin="20 15 20 10" materialDesign:HintAssist.Hint="Mã chuồng" IsReadOnly="True" Text="{Binding MaChuong}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
-                    <TextBox Margin="20 10 20 10" materialDesign:HintAssist.Hint="Mã loại chuồng" IsReadOnly="True" Text="{Binding MaLoaiChuong}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
-                    <!--<ComboBox Margin="20 10 20 10"
-                                  materialDesign:HintAssist.Hint="Mã loại chuồng"
-                                  VerticalAlignment="Center"
-                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                                  ItemsSource="{Binding ListLoaiChuong, Mode=OneWay}"
-                                  Text="{Binding MaLoaiChuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                  DisplayMemberPath="MaLoaiChuong">
-                    </ComboBox>-->
+                    <TextBox Margin="20 15 20 10" materialDesign:HintAssist.Hint="Mã chuồng" IsReadOnly="True" Text="{Binding cHUONGTRAI.MaChuong}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                    <TextBox Margin="20 10 20 10" materialDesign:HintAssist.Hint="Tên loại chuồng" IsReadOnly="True" Text="{Binding cHUONGTRAI.LOAICHUONG.TenLoai}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
                     <ComboBox Margin="20 10 20 10"
                                   materialDesign:HintAssist.Hint="Tình trạng"
                                   VerticalAlignment="Center"
-                                  Text="{Binding TinhTrang}"
+                                  Text="{Binding cHUONGTRAI.TinhTrang, Mode=OneWayToSource}"
                                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                   SelectedIndex="0">
                         <ComboBoxItem>Bình thường</ComboBoxItem>
@@ -41,13 +33,13 @@
                         <ComboBoxItem>Không sử dụng</ComboBoxItem>
                         <ComboBoxItem>Đã hư</ComboBoxItem>
                     </ComboBox>
-                    <TextBox Margin="20 10 20 10" materialDesign:HintAssist.Hint="Sức chứa tối đa" Text="{Binding SuaChuaToiDa}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
-                    <TextBox Margin="20 10 20 15" materialDesign:HintAssist.Hint="Số heo hiện có" Text="{Binding SoLuongHeo}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                    <TextBox Margin="20 10 20 10" PreviewTextInput="IsNumberic_only" materialDesign:HintAssist.Hint="Sức chứa tối đa" Text="{Binding cHUONGTRAI.SuaChuaToiDa, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                    <TextBox Margin="20 10 20 15" IsReadOnly="True" materialDesign:HintAssist.Hint="Số heo hiện có" Text="{Binding cHUONGTRAI.SoLuongHeo}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">
                 <Border Margin="20" BorderBrush="#3ab19b" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                    <Button Background="#3ab19b" Content="Xác nhận" Width="150" Height="40" VerticalAlignment="Bottom" Command="{Binding XacNhanCommand}" CommandParameter="{Binding ElementName=SuaChuongw}"  DataContext="{StaticResource SuaChuongVM}"></Button>
+                    <Button Background="#3ab19b" Content="Xác nhận" Width="150" Height="40" VerticalAlignment="Bottom" Command="{Binding XacNhanCommand}" CommandParameter="{Binding ElementName=SuaChuongw}"></Button>
                 </Border>
             </materialDesign:Card>
         </StackPanel>

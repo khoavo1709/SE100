@@ -24,5 +24,13 @@ namespace FarmManagementSoftware
         {
             InitializeComponent();
         }
+
+        private void IsNumberic_only(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            var fullText = textBox.Text.Insert(textBox.SelectionStart, e.Text);
+            double val;
+            e.Handled = !double.TryParse(fullText, out val);
+        }
     }
 }

@@ -42,6 +42,7 @@
                             materialDesign:HintAssist.Hint="Mô tả"
                             IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
                                  Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox materialDesign:HintAssist.Hint="Tổng tiền" Height="30" Margin="30,0,20,11" Text="{Binding TienSuaChua, StringFormat={}{0:#,##0}}"/>
                     </StackPanel>
                 </materialDesign:Card>
                 <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">
