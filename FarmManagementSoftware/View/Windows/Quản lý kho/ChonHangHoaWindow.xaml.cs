@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace FarmManagementSoftware.View.Windows.Quản_lý_kho
 {
     /// <summary>
-    /// Interaction logic for TaoPhieuKho.xaml
+    /// Interaction logic for ChonHangHoaWindow.xaml
     /// </summary>
-    public partial class TaoPhieuKho : Window
+    public partial class ChonHangHoaWindow : Window
     {
-        public TaoPhieuKho()
+        public ChonHangHoaWindow()
         {
             InitializeComponent();
         }

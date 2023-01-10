@@ -21,57 +21,30 @@
                              Margin="0,0,10,0">
             <Grid>
                 <ScrollViewer  VerticalScrollBarVisibility="Auto"
-                              HorizontalScrollBarVisibility="Auto">
+                               HorizontalScrollBarVisibility="Auto">
                     <StackPanel  Orientation="Vertical">
-                        <!--<Expander IsExpanded="True"
-                                  Header="Ngày vào làm"
-                                  FontWeight="Bold"
-                                  Background="White">
-                            <StackPanel Orientation="Vertical"
-                                        Margin="10,0,0,0">
-                                <DatePicker Grid.Column="0"
-                                            HorizontalAlignment="Left"
-                                            Width="250"
-                                            materialDesign:HintAssist.Hint="Từ ngày"
-                                            materialDesign:TextFieldAssist.HasClearButton="True"
-                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                                            FontWeight="Normal" />
-
-                                <DatePicker Grid.Column="1"
-                                            Width="250"
-                                            HorizontalAlignment="Left"
-                                            materialDesign:HintAssist.Hint="Đến ngày"
-                                            materialDesign:TextFieldAssist.HasClearButton="True"
-                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                                            FontWeight="Normal" />
-                            </StackPanel>
-                        </Expander>-->
-                        <Expander IsExpanded="True"
-                                  Header="Lọc theo chức vụ vụ"
-                                  FontWeight="Bold"
-                                  Background="White">
-                            <ListView ItemsSource="{Binding lstChucVu}"
-                                      Name="LVChucVu"
-                                      Margin="10">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="">
-                                            <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <CheckBox IsChecked="{Binding isSelected }"
-                                                              Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                        <materialDesign:Card Height="48"
+                                             Margin="0,5,0,0">
+                            <TextBlock FontWeight="Bold"
+                                       FontSize="16"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="Tìm kiếm nhân viên"/>
+                        </materialDesign:Card>
+                        <ListBox ItemsSource="{Binding lstChucVu}"
+                                 Margin="20,20">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate >
+                                    <CheckBox 
+                                        Content="{Binding TenChucVu}"
+                                              IsChecked="{Binding isSelected }"
+                                              Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                                                                                     AncestorType={x:Type ItemsControl}},
                                                                                                     Path= DataContext.TextTimKiemChangeCommand }">
-                                                    </CheckBox>
-                                                </DataTemplate>
-                                            </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
-                                        <GridViewColumn Header="Chức vụ "
-                                                        DisplayMemberBinding="{Binding TenChucVu}" />
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </Expander>
+                                    </CheckBox>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </StackPanel>
 
                 </ScrollViewer>
@@ -144,45 +117,46 @@
                 </Grid>
 
             </materialDesign:Card>
-                <Grid Margin="10,10"
-                      Grid.Row="1">
-                    <ListView Margin="5"
-                              x:Name="ListNhanVien"
-                              ItemsSource="{Binding lstNhanvien, Mode=TwoWay}"
-                              SelectedIndex="{Binding ListViewSelectedIndex, Mode=TwoWay}"
+            <Grid Margin="10,10"
+                  Grid.Row="1">
+                <ListView Margin="5"
+                          x:Name="ListNhanVien"
+                          ItemsSource="{Binding lstNhanvien, Mode=TwoWay}"
+                          SelectedIndex="{Binding ListViewSelectedIndex, Mode=TwoWay}"
                           ScrollViewer.CanContentScroll="True"
                           ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Mã nhân viên"
-                                                DisplayMemberBinding="{Binding MaNhanVien}" />
-                                <GridViewColumn Header="Họ tên"
-                                                DisplayMemberBinding="{Binding HoTen}" />
-                                <GridViewColumn Header="Chức vụ"
-                                                DisplayMemberBinding="{Binding CHUCVU.TenChucVu}" />
-                                <GridViewColumn Header="Số điện thoại"
-                                                DisplayMemberBinding="{Binding SDT}" />
-                                <GridViewColumn Header="Hệ số lương"
-                                                DisplayMemberBinding="{Binding HeSoLuong}" />
-                                <GridViewColumn Header="Username"
-                                                DisplayMemberBinding="{Binding C_Username}" />
-                            </GridView>
-                        </ListView.View>
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
-                                          Command="{Binding EditCommand}">
-                                    <MenuItem.Header>Xem và chỉnh sửa</MenuItem.Header>
-                                </MenuItem>
-                                <!--<MenuItem Icon="{materialDesign:PackIcon Kind=Delete}">
-                                    <MenuItem.Header>Xóa</MenuItem.Header>
-                                </MenuItem>-->
-                            </ContextMenu>
-                        </ListView.ContextMenu>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã nhân viên"
+                                            DisplayMemberBinding="{Binding MaNhanVien}" />
+                            <GridViewColumn Header="Họ tên"
+                                            DisplayMemberBinding="{Binding HoTen}" />
+                            <GridViewColumn Header="Chức vụ"
+                                            DisplayMemberBinding="{Binding CHUCVU.TenChucVu}" />
+                            <GridViewColumn Header="Số điện thoại"
+                                            DisplayMemberBinding="{Binding SDT}" />
+                            <GridViewColumn Header="Hệ số lương"
+                                            DisplayMemberBinding="{Binding HeSoLuong ,StringFormat={}{0:N0}}" />
+                            <GridViewColumn Header="Username"
+                                            DisplayMemberBinding="{Binding C_Username}" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
+                                      Command="{Binding EditCommand}">
+                                <MenuItem.Header>Xem và chỉnh sửa</MenuItem.Header>
+                            </MenuItem>
+                            <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"
+                                      Command="{Binding DeleteCommand}">
+                                <MenuItem.Header>Xóa</MenuItem.Header>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
 
-                    </ListView>
+                </ListView>
 
-                </Grid>
+            </Grid>
 
         </Grid>
     </Grid>

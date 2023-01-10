@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,18 +15,13 @@ using System.Windows.Shapes;
 namespace FarmManagementSoftware.View.Windows.Quản_lý_kho
 {
     /// <summary>
-    /// Interaction logic for TaoPhieuKho.xaml
+    /// Interaction logic for ChiTietPhieuKhoWindow.xaml
     /// </summary>
-    public partial class TaoPhieuKho : Window
+    public partial class ChiTietPhieuKhoWindow : Window
     {
-        public TaoPhieuKho()
+        public ChiTietPhieuKhoWindow()
         {
             InitializeComponent();
-        }
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

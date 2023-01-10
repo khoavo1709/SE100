@@ -43,6 +43,7 @@ namespace FarmManagementSoftware.ViewModel
         DateTime? maxdate;
         int minTL = 0;
         int maxTL = 0;
+
         public ChonHeoXuatVM(PhieuBanNhapHeoVM vm)
         {
             goc = vm;
