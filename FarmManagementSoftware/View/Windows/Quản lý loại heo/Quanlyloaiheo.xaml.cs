@@ -25,39 +25,57 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_loại_heo
         public Quanlyloaiheo()
         {
             InitializeComponent();
-
-            reloadUsingDTProvider();
+            BaseLoaiHeo = DataProvider.Ins.DB.LOAIHEOs.ToList();
+            listviewHeo.ItemsSource = BaseLoaiHeo;
         }
 
         private void btn_ThemClick(object sender, RoutedEventArgs e)
         {
-            if (Pigcode_textbox.Text == "")
+            /*if (Pigcode_textbox.Text == "")
             {
                 MessageBox.Show("Chưa nhập mã loại heo.", "", MessageBoxButton.OK);
                 return;
-            }
+            }*/
+            string temp = MaLoaiHeo_CodeGenerate();
             if (Pigname_textbox.Text == "" || Mota_textbox.Text == "")
             {
                 MessageBox.Show("Chưa nhập đầy đủ thông tin.", "", MessageBoxButton.OK);
                 return;
             }
-            if (Pigcode_textbox.Text != "")
+            if (Pigname_textbox.Text != "")
             {
-                if (Isexist(Pigcode_textbox.Text) == false)
+                if (Isexist(Pigname_textbox.Text) == false)
                 {
                     var t = new LOAIHEO
                     {
-                        MaLoaiHeo = Pigcode_textbox.Text,
+                        MaLoaiHeo = temp,
                         TenLoaiHeo = Pigname_textbox.Text,
                         MoTa = Mota_textbox.Text
                     };
                     Add_ustomer(t);
+                    MessageBox.Show("Thêm thành công.", "", MessageBoxButton.OK);
+                    Pigname_textbox.Clear();
+                    Mota_textbox.Clear();
                 }
                 else
                 {
-                    MessageBox.Show("Đã tồn tại mã loại heo trên", "", MessageBoxButton.OK);
+                    MessageBox.Show("Đã tồn tại tên loại heo trên.", "", MessageBoxButton.OK);
+                    Pigname_textbox.Clear();
+                    Mota_textbox.Clear();
                 }
+                reloadUsingDTProvider();
             }
+        }
+
+        string MaLoaiHeo_CodeGenerate()
+        {
+            //create a function to generate random string
+            Random random = new Random();
+            string chars = "0123456789";
+            string result = "LH";
+            result += (new string(Enumerable.Repeat(chars, 14)
+              .Select(s => s[random.Next(s.Length)]).ToArray()));
+            return result;
         }
 
         private void Find_button_Click(object sender, RoutedEventArgs e)
@@ -68,15 +86,19 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_loại_heo
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             LOAIHEO lOAIHEO = (LOAIHEO)listviewHeo.SelectedItem;
-            Delete(lOAIHEO);
+            if (lOAIHEO != null)
+                Delete(lOAIHEO);
         }
 
         private void btnFix_Click(object sender, RoutedEventArgs e)
         {
             LOAIHEO loaiheo = (LOAIHEO)listviewHeo.SelectedItem;
-            SuaLoaiHeo sua = new SuaLoaiHeo(loaiheo);
-            sua.ShowDialog();
-            updating(sua.tranferCode());
+            if (loaiheo != null)
+            {
+                SuaLoaiHeo sua = new SuaLoaiHeo(loaiheo);
+                sua.ShowDialog();
+                updating(sua.tranferCode());
+            }
         }
 
 
@@ -92,7 +114,7 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_loại_heo
                 DataProvider.Ins.DB.SaveChanges();
                 reloadUsingDTProvider();
             }
-            
+
             catch (Exception)
             {
 
@@ -125,7 +147,7 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_loại_heo
         }
 
         private void Delete(LOAIHEO lOAIHEO)
-        {          
+        {
             try
             {
                 DataProvider.Ins.DB.LOAIHEOs.Remove(lOAIHEO);
@@ -163,7 +185,7 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_loại_heo
         private void Timkiem(string a)
         {
 
-            var BaseLoaiHeotemp = DataProvider.Ins.DB.LOAIHEOs.Where(s => s.MaLoaiHeo.Contains(a)).ToList();
+            var BaseLoaiHeotemp = DataProvider.Ins.DB.LOAIHEOs.Where(s => s.TenLoaiHeo.Contains(a)).ToList();
             if (BaseLoaiHeotemp != null)
             {
                 BaseLoaiHeo.Clear();
@@ -183,19 +205,28 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_loại_heo
 
         private bool Isexist(string check)
         {
-            var BaseLoaiHeotemp = DataProvider.Ins.DB.LOAIHEOs.Where(s => s.MaLoaiHeo.Contains(check)).ToList();
-            if (BaseLoaiHeotemp != null)
+            var BaseLoaiHeotemp = DataProvider.Ins.DB.LOAIHEOs.FirstOrDefault(s => s.TenLoaiHeo.Contains(check));
+            if (BaseLoaiHeotemp == null)
             {
                 return false;
             }
-            return true;
+            else
+            {
+                return true;
+            }
         }
 
         void reloadUsingDTProvider()
         {
             listviewHeo.ItemsSource = null;
+            BaseLoaiHeo.Clear();
             BaseLoaiHeo = DataProvider.Ins.DB.LOAIHEOs.ToList();
             listviewHeo.ItemsSource = BaseLoaiHeo;
+        }
+
+        private void Find_textbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Timkiem(Find_textbox.Text);
         }
     }
 }

@@ -31,10 +31,10 @@
                 <materialDesign:Card Height="64" Margin="0,5,0,0">
                     <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" Margin="10,0,0,0">Thông tin giống heo</TextBlock>
                 </materialDesign:Card>
-                <TextBox x:Name="text1" Margin="10,0,0,0" Width="250" HorizontalAlignment="Left"
+                <!--TextBox x:Name="text1" Margin="10,0,0,0" Width="250" HorizontalAlignment="Left"
                             materialDesign:HintAssist.Hint="Nhập mã giống heo"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                            VerticalAlignment="Center" /-->
                 <TextBox x:Name="text2" Margin="10,0,0,0" Width="250" HorizontalAlignment="Left"
                             materialDesign:HintAssist.Hint="Nhập tên giống heo"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -61,7 +61,7 @@
                         Background="#00de1e"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="btn_ThemClick">
-
+                        
                 </Button>
             </StackPanel>
         </materialDesign:Card>
@@ -83,7 +83,7 @@
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <materialDesign:PackIcon Kind="Search" Margin="10 5 0 0 "/>
-                                <TextBox x:Name="Find_textbox" materialDesign:HintAssist.Hint="Tìm kiếm" Height="30" Margin="30,0,20,0" />
+                                <TextBox x:Name="Find_textbox" materialDesign:HintAssist.Hint="Tìm kiếm" Height="30" Margin="30,0,20,0" TextChanged="Find_textbox_TextChanged" />
 
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
                                     <Button x:Name="Find_button"
@@ -105,13 +105,13 @@
                         </Grid>
 
                     </materialDesign:Card>
-                    <ListView x:Name="listviewHeo" ItemsSource="{Binding Basegiongheo}" SelectedItem="{Binding MaGiongHeo, Mode=OneWayToSource}" Margin="15,0,10,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ListView x:Name="listviewHeo" ItemsSource="{Binding Basegiongheo}" SelectedItem="{Binding MaGiongHeo, Mode=OneWayToSource}" Margin="15,0,10,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="666">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Mã giống heo" DisplayMemberBinding="{Binding MaGiongHeo}"/>
                                 <GridViewColumn Header="Tên giống heo" DisplayMemberBinding="{Binding TenGiongHeo}"/>
                                 <GridViewColumn Header="Mô tả" DisplayMemberBinding="{Binding MoTa}"/>
-                                <GridViewColumn Header="" Width="160">
+                                <!--GridViewColumn Header="" Width="160">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Menu>
@@ -120,15 +120,27 @@
                                             </Menu>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                                </GridViewColumn-->
                             </GridView>
                         </ListView.View>
-                        <ListView.ItemContainerStyle>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
+                                          Click="btnFix_Click">
+                                    <MenuItem.Header>Sửa</MenuItem.Header>
+                                </MenuItem>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"
+                                    Click="btnDelete_Click">
+                                    <MenuItem.Header>Xóa</MenuItem.Header>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <!--ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
                                 <EventSetter Event="PreviewMouseLeftButtonUp" Handler="ListViewItem_PreviewMouseLeftButtonUp" />
                             </Style>
-                        </ListView.ItemContainerStyle>
+                        </ListView.ItemContainerStyle-->
                     </ListView>
                 </StackPanel>
             </materialDesign:Card>

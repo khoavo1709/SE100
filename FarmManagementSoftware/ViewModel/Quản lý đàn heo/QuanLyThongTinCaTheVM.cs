@@ -17,7 +17,9 @@ namespace FarmManagementSoftware.ViewModel
 {
     public class QuanLyThongTinCaTheVM : BaseViewModel
     {
-        public ObservableCollection<HEO> ListHeo { get; set; }
+        private ObservableCollection<HEO> _ListHeo;
+
+        public ObservableCollection<HEO> ListHeo { get => _ListHeo; set { _ListHeo = value; OnPropertyChanged(); } }
         public ObservableCollection<LOAIHEO> ListLoai { get; set; }
         public ObservableCollection<GIONGHEO> ListGiong { get; set; }
 
@@ -28,7 +30,7 @@ namespace FarmManagementSoftware.ViewModel
         public GIONGHEO SelectedGiong { get; set; }
         public List<string> ListTenLoai { get; set; }
         public List<string> ListTenGiong { get; set; }
-        public List <string> ListTinhTrang { get; set; }
+        public List<string> ListTinhTrang { get; set; }
         public List<string> ListNguonGoc { get; set; }
 
         public ICommand AddCommand { get; set; }
@@ -47,34 +49,70 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand NGCheck { get; set; }
 
         string matim;
-        DateTime? mindate;
-        DateTime? maxdate;
-        int minTL=0;
-        int maxTL=0;
+        public DateTime? mindate { get => _mindate; set { _mindate = value; OnPropertyChanged(); } }
+        public DateTime? maxdate { get => _maxdate; set { _maxdate = value; OnPropertyChanged(); } }
+        public int minTL { get => _minTL; set { _minTL = value; OnPropertyChanged(); } }
+        public int maxTL { get => _maxTL; set { _maxTL = value; OnPropertyChanged(); } }
+
+        private DateTime? _maxdate;
+        private DateTime? _mindate;
+
+        private int _maxTL;
+        private int _minTL;
+
         public QuanLyThongTinCaTheVM()
         {
+            DateTime Now = DateTime.Now;
+            mindate = new DateTime(Now.Year, Now.Month, 1);
+            maxdate = new DateTime(Now.Year, Now.Month, Now.Day + 1);
             ListHeo = new ObservableCollection<HEO>(DataProvider.Ins.DB.HEOs);
-            ListLoai = new ObservableCollection<LOAIHEO>(DataProvider.Ins.DB.LOAIHEOs);
-            ListGiong = new ObservableCollection<GIONGHEO>(DataProvider.Ins.DB.GIONGHEOs);
-            ListTenLoai = new List<string>();
-            ListTenGiong = new List<string>();  
-            ListTinhTrang = new List<string>();
-            ListNguonGoc = new List<string>();
+            minTL = (int)ListHeo.Min(x => x.TrongLuong);
+            maxTL = (int)ListHeo.Max(x => x.TrongLuong);
 
+            ListLoai = new ObservableCollection<LOAIHEO>(DataProvider.Ins.DB.LOAIHEOs);
+            ListTenLoai = new List<string>();
+            foreach (LOAIHEO l in ListLoai)
+            {
+                ListTenLoai.Add(l.TenLoaiHeo);
+            }
+            ListGiong = new ObservableCollection<GIONGHEO>(DataProvider.Ins.DB.GIONGHEOs);
+            ListTenGiong = new List<string>();
+            foreach (GIONGHEO l in ListGiong)
+            {
+                ListTenGiong.Add(l.TenGiongHeo);
+            }
+            ListTinhTrang = new List<string>();
+            ListTinhTrang.Add("Sức khoẻ tốt");
+            ListTinhTrang.Add("Đang mang thai");
+            ListTinhTrang.Add("Đang bị bệnh");
+            ListTinhTrang.Add("Đã xuất");
+            ListTinhTrang.Add("Đã đào thải");
+
+            ListNguonGoc = new List<string>();
+            ListNguonGoc.Add("Nhập ngoài");
+            ListNguonGoc.Add("Sinh trong trang trại");
+
+            TimKiem();
 
             AddCommand = new RelayCommand<Window>((p) => { return true; }, p =>
             {
                 ThemTTHeo themTTHeo = new ThemTTHeo();
+                ThemTTHeoVM vm = new ThemTTHeoVM();
+                themTTHeo.DataContext = vm;
                 themTTHeo.ShowDialog();
+                vm = null;
                 ListHeo = new ObservableCollection<HEO>(DataProvider.Ins.DB.HEOs);
-
+                TimKiem();
             });
             EditCommand = new RelayCommand<Window>((p) => { return true; }, p =>
             {
-                SuaTTHeoVM suaTTHeoVM = new SuaTTHeoVM(SelectedHeo);
-                SuaTTHeo suaTTHeo = new SuaTTHeo();
-                suaTTHeo.DataContext = suaTTHeoVM;
+                SuaTTHeoVM suaTTHeoVM = new SuaTTHeoVM(this);
+                SuaTTHeo suaTTHeo = new SuaTTHeo
+                {
+                    DataContext = suaTTHeoVM
+                };
                 suaTTHeo.ShowDialog();
+                suaTTHeoVM = null;
             });
             DeleteCommand = new RelayCommand<Window>((p) =>
             {
@@ -91,6 +129,7 @@ namespace FarmManagementSoftware.ViewModel
                 MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn xoá ?", "Cảnh báo", MessageBoxButton.OKCancel);
                 if (result == MessageBoxResult.OK)
                 {
+                    SelectedHeo.CHUONGTRAI.SoLuongHeo -= 1;
                     DataProvider.Ins.DB.HEOs.Remove(SelectedHeo);
                     ListHeo.Remove(SelectedHeo);
                     DataProvider.Ins.DB.SaveChanges();
@@ -102,43 +141,50 @@ namespace FarmManagementSoftware.ViewModel
             TimKiemTheoMa_TenCommand = new RelayCommand<TextBox>((p) => { return true; }, p =>
             {
                 matim = p.Text;
+                TimKiem();
             });
             TimKiemTheoNgaySinhMinCommand = new RelayCommand<DatePicker>((p) => { return true; }, p =>
             {
-                if (p.SelectedDate != DateTime.Today && p.SelectedDate != null)
+                if (p.Text.Count() > 0)
                 {
                     mindate = p.SelectedDate;
-                    TimKiem();
-                }         
+                }
+                else mindate = new DateTime(Now.Year, Now.Month, 1);
+                TimKiem();
+
             });
             TimKiemTheoNgaySinhMaxCommand = new RelayCommand<DatePicker>((p) => { return true; }, p =>
             {
-                if (p.SelectedDate != DateTime.Today && p.SelectedDate != null)
+                if (p.SelectedDate < mindate)
+                {
+                    MessageBox.Show("Ngày đến phải sau ngày từ");
+                    return;
+                }
+                if (p.Text.Count() > 0)
                 {
                     maxdate = p.SelectedDate;
-                    TimKiem();
                 }
+                else maxdate = new DateTime(Now.Year, Now.Month, Now.Day + 1);
+                TimKiem();
+
             });
             TimKiemTheoTrongLuongMinCommand = new RelayCommand<TextBox>((p) => {
-
-                if (int.TryParse(p.Text, out int n) && n > 0)
-                    return true;
-                return false;
+                return true;
             }, p =>
             {
-              minTL = int.Parse(p.Text);
+                if (p.Text.Count() > 0)
+                    minTL = int.Parse(p.Text);
+                else minTL = 0;
                 TimKiem();
             });
             TimKiemTheoTrongLuongMaxCommand = new RelayCommand<TextBox>((p) => {
-
-                if (int.TryParse(p.Text, out int n) && n > 0)
-                    return true;
-                return false;
+                return true;
             }, p =>
             {
-                maxTL=int.Parse(p.Text);
+                if (p.Text.Count() > 0)
+                    maxTL = int.Parse(p.Text);
+                else maxTL = 0;
                 TimKiem();
-
             });
             TimKiemTheoLoaiCommand = new RelayCommand<CheckBox>((p) => { return true; }, p =>
             {
@@ -158,8 +204,8 @@ namespace FarmManagementSoftware.ViewModel
             });
             TTCheck = new RelayCommand<CheckBox>((p) => { return true; }, p =>
             {
-               if(p.IsChecked==true)
-                   ListTinhTrang.Add(p.Content.ToString());
+                if (p.IsChecked == true)
+                    ListTinhTrang.Add(p.Content.ToString());
                 else ListTinhTrang.Remove(p.Content.ToString());
                 TimKiem();
             });
@@ -273,6 +319,7 @@ namespace FarmManagementSoftware.ViewModel
                                    on a.MaHeo equals h.MaHeo
                                    join HEO j in hEOs8
                                    on a.MaHeo equals j.MaHeo
+                                   orderby a.MaHeo descending
                                    select a;
 
             foreach (HEO h in heo)

@@ -37,6 +37,7 @@
                                 Width="250"
                                 materialDesign:HintAssist.Hint="Từ ngày"
                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                SelectedDate="{Binding mindate}"
                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectedDateChanged">
@@ -54,6 +55,7 @@
                                 HorizontalAlignment="Left"
                                 materialDesign:HintAssist.Hint="Đến ngày"
                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                SelectedDate="{Binding maxdate}"
                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectedDateChanged">
@@ -71,7 +73,11 @@
                                              Name="tb_TLMin"
                                              materialDesign:HintAssist.Hint="Trọng lượng tối thiểu"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                             FontWeight="Normal">
+                                             FontWeight="Normal" PreviewTextInput="NumberValidationTextBox"
+                                             MaxLength="9"
+                                             Text="{Binding minTL}"
+                                             
+                                            >
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="TextChanged">
                                                 <i:InvokeCommandAction Command="{Binding TimKiemTheoTrongLuongMinCommand}"
@@ -81,11 +87,13 @@
                                     </TextBox>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" 
+                                    <TextBox HorizontalAlignment="Left" Margin="10,0,0,15" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" 
                                              Name="tb_TLMax"
                                              materialDesign:HintAssist.Hint="Trọng lượng tối đa"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                             FontWeight="Normal">
+                                             FontWeight="Normal" PreviewTextInput="NumberValidationTextBox"
+                                             MaxLength="9"
+                                             Text="{Binding maxTL}">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="TextChanged">
                                                 <i:InvokeCommandAction Command="{Binding TimKiemTheoTrongLuongMaxCommand}"
@@ -105,7 +113,7 @@
                                             <CheckBox x:Name="cb_Loai" Margin="0 5" Content="{Binding TenLoaiHeo}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                                                                                     AncestorType={x:Type ItemsControl}},
                                                                                                     Path= DataContext.TimKiemTheoLoaiCommand }" 
-                                                      CommandParameter="{Binding ElementName=cb_Loai}"
+                                                      CommandParameter="{Binding ElementName=cb_Loai}" IsChecked="True"
                                                       ></CheckBox>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
@@ -117,7 +125,7 @@
                                 <ListBox ItemsSource="{Binding ListGiong}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <CheckBox x:Name="cb_Giong" Margin="0 5" Content="{Binding TenGiongHeo}" 
+                                            <CheckBox x:Name="cb_Giong" Margin="0 5" Content="{Binding TenGiongHeo}" IsChecked="True"
                                                       Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                                                                                     AncestorType={x:Type ItemsControl}},
                                                                                                     Path= DataContext.TimKiemTheoGiongCommand }"
@@ -128,33 +136,33 @@
                                 </ListBox>
                             </StackPanel>
                         </Expander>
-                        
+
                         <Expander IsExpanded="False" Header="Tình trạng" FontWeight="Bold" Background="White">
                             <StackPanel Orientation="Vertical" Margin="20,0,0,0">
-                                <CheckBox x:Name="cb_TT1" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT1}" >
+                                <CheckBox x:Name="cb_TT1" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT1}" IsChecked="True">
                                     Sức khoẻ tốt
                                 </CheckBox>
-                                <CheckBox x:Name="cb_TT2" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT2}">
-				                    Đang mang thai
+                                <CheckBox x:Name="cb_TT2" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT2}" IsChecked="True">
+                                    Đang mang thai
                                 </CheckBox>
-                                <CheckBox x:Name="cb_TT3" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT3}">
-				                    Đang bị bệnh
+                                <CheckBox x:Name="cb_TT3" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT3}" IsChecked="True">
+                                    Đang bị bệnh
                                 </CheckBox>
-                                <CheckBox x:Name="cb_TT4" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT4}">
+                                <CheckBox x:Name="cb_TT4" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT4}" IsChecked="True">
                                     Đã xuất
                                 </CheckBox>
-                                <CheckBox x:Name="cb_TT5" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT5}">
-				                    Đã đào thải
+                                <CheckBox x:Name="cb_TT5" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT5}" IsChecked="True">
+                                    Đã đào thải
                                 </CheckBox>
                             </StackPanel>
                         </Expander>
 
                         <Expander IsExpanded="False" Header="Nguồn gốc" FontWeight="Bold" Background="White">
                             <StackPanel Orientation="Vertical" Margin="20,0,0,0">
-                                <CheckBox x:Name="cb_NG1" Margin="0 5" Command="{Binding NGCheck}" CommandParameter="{Binding ElementName=cb_NG1}">
-				                    Nhập ngoài
+                                <CheckBox x:Name="cb_NG1" Margin="0 5" Command="{Binding NGCheck}" CommandParameter="{Binding ElementName=cb_NG1}" IsChecked="True">
+                                    Nhập ngoài
                                 </CheckBox>
-                                <CheckBox x:Name="cb_NG2" Margin="0 5" Command="{Binding NGCheck}" CommandParameter="{Binding ElementName=cb_NG2}">
+                                <CheckBox x:Name="cb_NG2" Margin="0 5" Command="{Binding NGCheck}" CommandParameter="{Binding ElementName=cb_NG2}" IsChecked="True">
                                     Sinh trong trang trại
                                 </CheckBox>
                             </StackPanel>
@@ -234,7 +242,6 @@
                             </ListView.ContextMenu>
                         </ListView>
                     </ScrollViewer>
-
                 </StackPanel>
             </materialDesign:Card>
         </Grid>

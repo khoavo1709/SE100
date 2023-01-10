@@ -39,14 +39,14 @@
                 </Grid.ColumnDefinitions>
                 <materialDesign:Card Grid.Column="0" Margin="0,0,10,0">
                     <StackPanel Orientation="Vertical">
-                        <materialDesign:Card Height="30">
+                        <materialDesign:Card Height="50">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition Width="100"></ColumnDefinition>
                                     <ColumnDefinition Width="100"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0">Cơ cấu đàn heo</TextBlock>
+                                <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,85,0" Grid.ColumnSpan="3">Cơ cấu đàn heo</TextBlock>
                                 <!--<TextBox Grid.Column="1" VerticalAlignment="Center" Width="80"
                                     materialDesign:HintAssist.Hint="Tháng"
                                      Margin="0,3,0,5">
@@ -57,21 +57,21 @@
                                 </TextBox>-->
                             </Grid>
                         </materialDesign:Card>
-                        <lvc:PieChart LegendLocation="Bottom" FontSize="10" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Height="250" Margin="10,10,10,0" FontStretch="Medium" Series="{Binding CoCauLoai}">
+                        <lvc:PieChart LegendLocation="Bottom" FontSize="10" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Height="250" Margin="10,10,10,0" FontStretch="Medium" Series="{Binding CoCauLoai}" >
 
                         </lvc:PieChart>
                     </StackPanel>
                 </materialDesign:Card>
                 <materialDesign:Card Grid.Column="1" Margin="10,0,10,0">
                     <StackPanel Orientation="Vertical">
-                        <materialDesign:Card Height="30">
+                        <materialDesign:Card Height="50">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition Width="100"></ColumnDefinition>
                                     <ColumnDefinition Width="100"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0">Cơ cấu giống heo</TextBlock>
+                                <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,76,0" Grid.ColumnSpan="3">Cơ cấu giống heo</TextBlock>
                                 <!--<TextBox Grid.Column="1" VerticalAlignment="Center" Width="80"
                                     materialDesign:HintAssist.Hint="Tháng"
                                      Margin="0,3,0,5">
@@ -83,30 +83,34 @@
                             </Grid>
                         </materialDesign:Card>
                         <lvc:PieChart LegendLocation="Bottom" FontSize="10" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Height="250" Margin="10,10,10,0" FontStretch="Medium" Series="{Binding CoCauGiong}">
-                           
+
                         </lvc:PieChart>
                     </StackPanel>
                 </materialDesign:Card>
                 <materialDesign:Card Grid.Column="2" Margin="10,0,0,0">
                     <StackPanel Orientation="Vertical">
-                        <materialDesign:Card Height="30">
+                        <materialDesign:Card Height="50">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition Width="135"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0">Biểu đồ thay đổi số lượng heo</TextBlock>
-                                <TextBox x:Name="txt_NamSL" Grid.Column="1" VerticalAlignment="Center"
-                                    materialDesign:HintAssist.Hint="Năm"
-                                     Margin="0,3,0,5"
-                                         Text="{Binding Nam}">
+                                <ComboBox Grid.Column="1"
+                                                Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                                materialDesign:ColorZoneAssist.Mode="SecondaryLight"
+                                                materialDesign:HintAssist.Hint="Năm"
+                                                Width="135"
+                                                ItemsSource="{Binding Nam, Mode=OneWay}"
+                                                SelectedItem="{Binding SelectedNam, Mode=TwoWay}">
                                     <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="TextChanged">
-                                            <i:InvokeCommandAction Command="{Binding SLNam}"
-                                                                   CommandParameter="{Binding ElementName=txt_NamSL}"></i:InvokeCommandAction>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SLNam}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
-                                </TextBox>
+
+                                </ComboBox>
                             </Grid>
 
                         </materialDesign:Card>
@@ -182,7 +186,13 @@
                                                 Width="135"
                                                 ItemsSource="{Binding ListLoai, Mode=OneWay}"
                                                 DisplayMemberPath="TenLoaiHeo"
-                                                SelectedItem="{Binding SelectedLoai, Mode=TwoWay}">
+                                                SelectedItem="{Binding SelectedLoai, Mode=TwoWay}"
+                                                >
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectionChanged">
+                                                    <i:InvokeCommandAction Command="{Binding LoaiChanged}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
                                         </ComboBox>
                                         <ComboBox Grid.Column="3"
                                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
@@ -193,24 +203,15 @@
                                                 ItemsSource="{Binding ListGiong, Mode=OneWay}"
                                                 DisplayMemberPath="TenGiongHeo"
                                                 SelectedItem="{Binding SelectedGiong, Mode=TwoWay}">
-                                          
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectionChanged">
+                                                    <i:InvokeCommandAction Command="{Binding GiongChanged}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+
                                         </ComboBox>
                                     </Grid>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-                                        <Button
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Height="30"
-                                    Width="120"
-                                    BorderBrush="White"
-                                    Content="Tìm"
-                                    FontSize="16"
-                                    Background="#00de1e"
-                                    materialDesign:ButtonAssist.CornerRadius="5"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                            Command="{Binding TimKiemCommand}">
-
-                                        </Button>
-
                                         <Button
                                     Margin="20,0,0,0"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
