@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C01674BF-5B81-4360-85AD-F052C9A21218}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>QuanLyTraiHeo</RootNamespace>
-    <AssemblyName>QuanLyTraiHeo</AssemblyName>
+    <RootNamespace>FarmManagementSoftware</RootNamespace>
+    <AssemblyName>FarmManagementSoftware</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -284,16 +284,12 @@
     <Compile Include="ViewModel\Quản lý báo cáo\BaoCaoTinhTrangHeoVM.cs" />
     <Compile Include="ViewModel\QL thông tin cá nhân\CapNhatTaiKhoanVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\TaoThongBaoVM.cs" />
-<<<<<<< HEAD
     <Compile Include="View\Windows\Quản lý kho\ChiTietPhieuKhoWindow.xaml.cs">
       <DependentUpon>ChiTietPhieuKhoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\Quản lý kho\ChonHangHoaWindow.xaml.cs">
       <DependentUpon>ChonHangHoaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Windows\Quản lý đàn heo\DonGia.xaml.cs" />
-=======
->>>>>>> Tú
     <Compile Include="View\Windows\Quy Định\QuyDinhWindow.xaml.cs">
       <DependentUpon>QuyDinhWindow.xaml</DependentUpon>
     </Compile>
@@ -510,7 +506,6 @@
     <Compile Include="View\Windows\wLogin.xaml.cs">
       <DependentUpon>wLogin.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Page Include="View\Windows\Quản lý kho\ChiTietPhieuKhoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -519,12 +514,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Windows\Quản lý đàn heo\DonGia.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-=======
->>>>>>> Tú
     <Page Include="View\Windows\Quy Định\QuyDinhWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

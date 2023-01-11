@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\TendouHakai\Desktop\dự án phần mềm quản lý trang trại nuôi heo\phần mềm\FarmManagementSoftware\Model\Model.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\tuant\Máy tính\SE100\FarmManagementSoftware\Model\Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

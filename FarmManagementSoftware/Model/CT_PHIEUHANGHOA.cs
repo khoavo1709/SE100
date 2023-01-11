@@ -9,11 +9,11 @@
 
 namespace FarmManagementSoftware.Model
 {
-    using FarmManagementSoftware.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class CT_PHIEUHANGHOA: BaseViewModel
+    using FarmManagementSoftware.ViewModel;
+
+    public partial class CT_PHIEUHANGHOA : BaseViewModel
     {
         public string SoPhieu { get; set; }
         public string MaHangHoa { get; set; }

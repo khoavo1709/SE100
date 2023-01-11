@@ -12,8 +12,8 @@ namespace FarmManagementSoftware.Model
     using FarmManagementSoftware.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class CT_PHIEUKIEMKHO: BaseViewModel
+
+    public partial class CT_PHIEUKIEMKHO : BaseViewModel
     {
         public string SoPhieu { get; set; }
         public string MaHangHoa { get; set; }

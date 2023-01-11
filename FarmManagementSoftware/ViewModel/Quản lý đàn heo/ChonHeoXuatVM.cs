@@ -59,12 +59,6 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand HuyBoCommand { get; set; }
         public ICommand HoanTatCommand { get; set; }
         string matim;
-<<<<<<< HEAD
-        DateTime? mindate;
-        DateTime? maxdate;
-        int minTL = 0;
-        int maxTL = 0;
-=======
         public DateTime? mindate { get => _mindate; set { _mindate = value; OnPropertyChanged(); } }
         public DateTime? maxdate { get => _maxdate; set { _maxdate = value; OnPropertyChanged(); } }
         public int minTL { get => _minTL; set { _minTL = value; OnPropertyChanged(); } }
@@ -80,7 +74,6 @@ namespace FarmManagementSoftware.ViewModel
         THAMSO thamso = DataProvider.Ins.DB.THAMSOes.First();
         private int _dongia;
         private HEOPHIEU _SelectedHeo;
->>>>>>> Tú
 
         public ChonHeoXuatVM(PhieuBanNhapHeoVM vm)
         {

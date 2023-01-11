@@ -44,10 +44,6 @@ namespace FarmManagementSoftware.ViewModel
         public string TinhTrang { get => _TinhTrang; set { _TinhTrang = value; OnPropertyChanged(); } }
 
         public ICommand AddCommand { get; set; }
-<<<<<<< HEAD
-        public ICommand HTCommand { get; set; }
-        public ThemHeoPhieuVM(ObservableCollection <HEONHAP> a)
-=======
         public ICommand HuyCommand { get; set; }
         private int _DonGia;
         public int DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
@@ -66,7 +62,6 @@ namespace FarmManagementSoftware.ViewModel
         private string _TinhTrang;
 
         public ThemHeoPhieuVM(PhieuBanNhapHeoVM a)
->>>>>>> Tú
         {
             goc = a;
             thamso = DataProvider.Ins.DB.THAMSOes.First();
