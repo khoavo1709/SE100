@@ -3,6 +3,7 @@ using FarmManagementSoftware.View.Windows.Quản_lý_kho;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using System.Windows.Input;
 
 namespace FarmManagementSoftware.ViewModel
 {
-    public class LapPhieuKhoVM : BaseViewModel
+    public class LapPhieuKhoVM:BaseViewModel
     {
         DateTime _dateMin;
         DateTime _dateMax;
@@ -83,7 +84,7 @@ namespace FarmManagementSoftware.ViewModel
                     p.SelectedDate = _dateMin;
                     if (p.SelectedDate > DateTime.Today)
                         MessageBox.Show("Thời gian tìm kiểm phải nhỏ hơn hoặc bằng ngày hôm nay");
-                    else if (p.SelectedDate == null) MessageBox.Show("Thời gian tìm kiểm không thể trống");
+                    else if(p.SelectedDate==null) MessageBox.Show("Thời gian tìm kiểm không thể trống");
                 }
             });
             #endregion
@@ -215,7 +216,7 @@ namespace FarmManagementSoftware.ViewModel
         {
             dsPhieuNhap.Clear();
             DateTime max = _dateMax.AddDays(1);
-            var phieuNhaps = DataProvider.Ins.DB.PHIEUHANGHOAs.Where(x => x.LoaiPhieu == "Phiếu nhập kho" && x.NgayLap >= _dateMin && x.NgayLap <= max).ToList();
+            var phieuNhaps = DataProvider.Ins.DB.PHIEUHANGHOAs.Where(x => x.LoaiPhieu == "Phiếu nhập kho" && x.NgayLap >= _dateMin && x.NgayLap<= max).ToList();
             phieuNhaps = phieuNhaps.Where(x => listTrangThai.Contains(x.TrangThai)).ToList();
             phieuNhaps = phieuNhaps.Where(x => x.NHANVIEN.HoTen.Contains(_NhanVienLapPhieu)).ToList();
             phieuNhaps = phieuNhaps.Where(x => x.DOITAC.TenDoiTac.Contains(_Khachhang)).ToList();
@@ -231,10 +232,10 @@ namespace FarmManagementSoftware.ViewModel
             dsPhieuXuat.Clear();
             DateTime max = _dateMax.AddDays(1);
             var phieuXuats = DataProvider.Ins.DB.PHIEUHANGHOAs.Where(x => x.LoaiPhieu != "Phiếu nhập kho" && x.NgayLap >= _dateMin && x.NgayLap <= max).ToList();
-            phieuXuats = phieuXuats.Where(x => listTrangThai.Contains(x.TrangThai)).ToList();
-            phieuXuats = phieuXuats.Where(x => x.NHANVIEN.HoTen.Contains(_NhanVienLapPhieu)).ToList();
-            phieuXuats = phieuXuats.Where(x => x.NHANVIEN1 == null || (x.NHANVIEN1 != null && x.NHANVIEN1.HoTen.Contains(_Khachhang))).ToList();
-            phieuXuats = phieuXuats.Where(x => x.DOITAC == null || (x.DOITAC != null && x.DOITAC.TenDoiTac.Contains(_Khachhang))).ToList();
+            phieuXuats = phieuXuats.Where(x=>listTrangThai.Contains(x.TrangThai)).ToList();
+            phieuXuats = phieuXuats.Where(x=>x.NHANVIEN.HoTen.Contains(_NhanVienLapPhieu)).ToList();
+            phieuXuats = phieuXuats.Where(x=>x.NHANVIEN1==null || (x.NHANVIEN1!=null && x.NHANVIEN1.HoTen.Contains(_Khachhang))).ToList();
+            phieuXuats = phieuXuats.Where(x=>x.DOITAC==null || (x.DOITAC!=null && x.DOITAC.TenDoiTac.Contains(_Khachhang))).ToList();
 
             foreach (var item in phieuXuats)
             {
@@ -245,7 +246,7 @@ namespace FarmManagementSoftware.ViewModel
         void LoadDSPhieuKiemKho()
         {
             dsPhieuKiem.Clear();
-            var phieuKiems = DataProvider.Ins.DB.PHIEUKIEMKHOes.Where(x => x.NgayLap >= _dateMin && x.NgayLap <= _dateMax).ToList();
+            var phieuKiems = DataProvider.Ins.DB.PHIEUKIEMKHOes.Where(x=>x.NgayLap >= _dateMin && x.NgayLap <= _dateMax).ToList();
             phieuKiems = phieuKiems.Where(x => x.NHANVIEN.HoTen.Contains(_NhanVienLapPhieu)).ToList();
 
             foreach (var item in phieuKiems)
@@ -255,3 +256,4 @@ namespace FarmManagementSoftware.ViewModel
         }
     }
 }
+

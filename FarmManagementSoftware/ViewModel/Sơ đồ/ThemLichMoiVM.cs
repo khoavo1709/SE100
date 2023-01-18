@@ -32,6 +32,15 @@ namespace FarmManagementSoftware.ViewModel
         {
             if(string.IsNullOrWhiteSpace(wd.tb_TieuDe.Text) || wd.dtp_ChonNgay.SelectedDate < DateTime.Today || wd.dtp_ChonNgay.SelectedDate == null)
             {
+                MessageBox.Show("Hãy nhập đủ thông tin và ngày thực hiện phải là từ hôm nay trở đi");
+                return;
+            }
+
+            DateTime ngayLam = wd.dtp_ChonNgay.SelectedDate.Value;
+            LICHCHUONG lc = DataProvider.Ins.DB.LICHCHUONGs.Where(x => x.MaChuong == MaChuong && x.NgayLam.Day == ngayLam.Day && x.TrangThai == "Chưa làm").SingleOrDefault();
+            if (lc != null)
+            {
+                MessageBox.Show(String.Format("Ngày {0} đã có lịch {1} chưa làm nên không thể tạo thêm lịch mới", lc.NgayLam, lc.TenLich));
                 return;
             }
 

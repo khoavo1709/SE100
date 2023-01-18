@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace QuanLyTraiHeo.View.Windows
+namespace FarmManagementSoftware.View.Windows.Quản_lý_chức_vụ
 {
     /// <summary>
     /// Interaction logic for PhanQuyenWindow.xaml

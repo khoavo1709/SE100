@@ -84,25 +84,23 @@
                         <ListView 
                             Name="Listview"
                             Margin="20,15,20,15"
-                            ItemsSource="{Binding CTPhieu}" Grid.ColumnSpan="3" >
-                            <!--SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" Grid.ColumnSpan="2"-->
+                            ItemsSource="{Binding CTPhieu}" Grid.ColumnSpan="3" 
+                            SelectedIndex="{Binding listviewSelectedIndex, Mode=TwoWay}">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong}"></GridViewColumn>
                                     <GridViewColumn Header="Mô tả" DisplayMemberBinding="{Binding MoTa}"></GridViewColumn>
+                                    <GridViewColumn Header="Tiền sửa chữa" DisplayMemberBinding="{Binding TienSuaChua, StringFormat={}{0:N0}}"></GridViewColumn>
                                 </GridView>
                             </ListView.View>
                             <ListView.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Show}">
-                                        <MenuItem.Header>Show</MenuItem.Header>
-                                    </MenuItem>
-                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}">
-                                        <MenuItem.Header>Edit</MenuItem.Header>
-                                    </MenuItem>
-                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}">
-                                        <MenuItem.Header>Delete</MenuItem.Header>
-                                    </MenuItem>
+                                    <Menu>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"  
+                                              Header="Xóa"
+                                              Command="{Binding DeleteCommand}" 
+                                              CommandParameter="{Binding ElementName=Listview}"></MenuItem>
+                                    </Menu>
                                 </ContextMenu>
                             </ListView.ContextMenu>
                         </ListView>
@@ -132,18 +130,19 @@
                     <Grid>
                         <materialDesign:PackIcon Kind="Account"
                                                  Margin="10 15 0 0 " />
-                        <!--<TextBox materialDesign:HintAssist.Hint="Tên nhân viên"
+                        <TextBox materialDesign:HintAssist.Hint="Tên nhân viên"
                                  Height="30"
                                  Margin="30,10,20,11"
-                                 Text="{Binding TenNhanVien}"/>-->
-                        <ComboBox Margin="30,0,20,11"
+                                 IsReadOnly="True"
+                                 Text="{Binding TenNhanVien}"/>
+                        <!--<ComboBox Margin="30,0,20,11"
                                   materialDesign:HintAssist.Hint="Tên nhân viên"
                                   VerticalAlignment="Center"
                                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                   ItemsSource="{Binding ListNhanVien, Mode=OneWay}"
                                   Text="{Binding TenNhanVien, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                   DisplayMemberPath="HoTen">
-                        </ComboBox>
+                        </ComboBox>-->
                     </Grid>
                 </StackPanel>
             </materialDesign:Card>
@@ -237,20 +236,16 @@
                                  Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <Grid>
-                        <materialDesign:PackIcon Kind="CurrencyUsd"
-                                                 Margin="10 5 0 0 " />
-                        <TextBox materialDesign:HintAssist.Hint="Trạng thái"
-                                 Height="30"
-                                 Margin="30,0,20,11" 
-                                 Text="{Binding TongTien}"/>
-                    </Grid>
-                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="11*"/>
+                        </Grid.ColumnDefinitions>
                         <materialDesign:PackIcon Kind="CurrencyUsd"
                                                  Margin="10 5 0 0 " />
                         <TextBox materialDesign:HintAssist.Hint="Tổng tiền"
                                  Height="30"
                                  Margin="30,0,20,11" 
-                                 Text="{Binding TongTien}"/>
+                                 Text="{Binding TongTien, StringFormat={}{0:N0}}" Grid.ColumnSpan="2"/>
                     </Grid>
                     <Button Margin="20,0,20,0"
                             Style="{StaticResource MaterialDesignRaisedButton}"

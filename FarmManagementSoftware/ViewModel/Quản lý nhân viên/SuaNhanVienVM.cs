@@ -21,6 +21,7 @@ namespace FarmManagementSoftware.ViewModel
 
         public SuaNhanVienVM()
         {
+
         }
 
         public SuaNhanVienVM(NHANVIEN nhanVien)

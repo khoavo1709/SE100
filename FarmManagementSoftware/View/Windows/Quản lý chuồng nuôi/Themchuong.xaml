@@ -9,9 +9,10 @@
         mc:Ignorable="d"
         Title="Themchuong" Height="650" Width="1050"
         ResizeMode="NoResize"
+        DataContext="{StaticResource ThemChuongVM}"
         Name="ThemChuongw"
         WindowStartupLocation="CenterScreen">
-    <Grid DataContext="{StaticResource ThemChuongVM}">
+    <Grid>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="Loaded">
                 <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
@@ -36,11 +37,13 @@
                         <TextBox Margin="20 15 20 10" IsReadOnly="True" materialDesign:HintAssist.Hint="Mã chuồng" Text="{Binding MaChuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
                         <ComboBox Margin="20 10 20 10"
                                   Name="MaLC"
-                                  materialDesign:HintAssist.Hint="Mã loại chuồng"
+                                  materialDesign:HintAssist.Hint="Tên loại chuồng"
                                   VerticalAlignment="Center"
                                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                                  ItemsSource="{Binding ListLoaiChuong, Mode=OneWay}"
-                                  Text="{Binding MaLoaiChuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                  ItemsSource="{Binding listLoaiChuong2, Mode=OneWay}"
+                                  SelectedItem="{Binding selectedLoaiChuong}"
+                                  DisplayMemberPath="TenLoai"
+                                  >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction
@@ -60,8 +63,8 @@
                             <ComboBoxItem>Đang sửa chữa</ComboBoxItem>
                             <ComboBoxItem>Không sử dụng</ComboBoxItem>
                         </ComboBox>
-                        <TextBox Margin="20 10 20 10" materialDesign:HintAssist.Hint="Sức chứa tối đa" Text="{Binding SucChuaToiDa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
-                        <TextBox Margin="20 10 20 15" materialDesign:HintAssist.Hint="Số heo hiện có" Text="{Binding SoLuongHeo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                        <TextBox Margin="20 10 20 10" PreviewTextInput="IsNumberic_only" materialDesign:HintAssist.Hint="Sức chứa tối đa" Text="{Binding SucChuaToiDa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                        <TextBox Margin="20 10 20 15" IsReadOnly="True" materialDesign:HintAssist.Hint="Số heo hiện có" Text="{Binding SoLuongHeo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </materialDesign:Card>
                 <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">
@@ -99,16 +102,28 @@
         <Grid Grid.Column="1">
             <materialDesign:Card Margin="5">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <ListView x:Name="listVieww" ItemsSource="{Binding CHUONGTRAIs}" HorizontalAlignment="Stretch">
+                    <ListView x:Name="listVieww" 
+                              SelectedIndex="{Binding listviewSelectedIndex, Mode=TwoWay}"
+                              ItemsSource="{Binding CHUONGTRAIs}" HorizontalAlignment="Stretch">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong}"></GridViewColumn>
-                                <GridViewColumn Header="Mã loại chuồng" DisplayMemberBinding="{Binding MaLoaiChuong}"></GridViewColumn>
+                                <GridViewColumn Header="Tên loại chuồng" DisplayMemberBinding="{Binding LOAICHUONG.TenLoai}"></GridViewColumn>
                                 <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding TinhTrang}"></GridViewColumn>
                                 <GridViewColumn Header="Sức chứa tối đa" DisplayMemberBinding="{Binding SuaChuaToiDa}"></GridViewColumn>
                                 <GridViewColumn Header="Số heo hiện có" DisplayMemberBinding="{Binding SoLuongHeo}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <Menu>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"  
+                                              Header="Xóa"
+                                              Command="{Binding DeleteCommand}" 
+                                              CommandParameter="{Binding ElementName=listVieww}"></MenuItem>
+                                </Menu>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                     </ListView>
                 </ScrollViewer>
             </materialDesign:Card>

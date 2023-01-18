@@ -35,6 +35,7 @@
                         <DatePicker Grid.Column="0"
                         HorizontalAlignment="Left"
                         Width="250"
+                                    SelectedDate="{Binding mindate}"
                                     Name="dtp_DateMin"
                         materialDesign:HintAssist.Hint="Từ ngày"
                         materialDesign:TextFieldAssist.HasClearButton="True"
@@ -49,7 +50,7 @@
                         </DatePicker>
 
                         <DatePicker Grid.Column="1"
-                        Width="250"
+                        Width="250" SelectedDate="{Binding maxdate}"
                                     x:Name="dtp_DateMax"
                         HorizontalAlignment="Left"
                         materialDesign:HintAssist.Hint="Đến ngày"
@@ -68,13 +69,13 @@
                 </Expander>
                 <Expander IsExpanded="True" Header="Trạng thái" FontWeight="Bold" Background="White">
                     <StackPanel Orientation="Vertical" Margin="10,0,0,0">
-                        <CheckBox x:Name="cb_TT1" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT1}" >
+                        <CheckBox x:Name="cb_TT1" IsChecked="True" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT1}" >
                             Đã hoàn thành
                         </CheckBox>
-                        <CheckBox x:Name="cb_TT2" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT2}">
+                        <CheckBox x:Name="cb_TT2" IsChecked="True" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT2}">
                             Chưa hoàn thành
                         </CheckBox>
-                        <CheckBox x:Name="cb_TT3" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT3}">
+                        <CheckBox x:Name="cb_TT3" IsChecked="True" Margin="0 5" Command="{Binding TTCheck}" CommandParameter="{Binding ElementName=cb_TT3}">
                            Đã huỷ
                         </CheckBox>
                     </StackPanel>
@@ -158,7 +159,7 @@
                                         <GridViewColumn Header="Nhân viên" DisplayMemberBinding="{Binding NHANVIEN.HoTen}"/>
                                         <GridViewColumn Header="Khách hàng" DisplayMemberBinding="{Binding DOITAC.TenDoiTac}"/>
                                         <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"/>
-                                        <GridViewColumn Header="Tổng tiền" DisplayMemberBinding="{Binding TongTien}"/>
+                                        <GridViewColumn Header="Tổng tiền" DisplayMemberBinding="{Binding TongTien, StringFormat={}{0:#,#}}"/>
                                     </GridView>
 
                                 </ListView.View>
@@ -173,7 +174,7 @@
                     </materialDesign:Card>
 
                     <materialDesign:Card Margin="0,20">
-                        <Expander IsExpanded="False" Header="Danh sách phiếu xuất heo" FontWeight="Bold" Background="White">
+                        <Expander IsExpanded="True" Header="Danh sách phiếu xuất heo" FontWeight="Bold" Background="White">
                             <ListView AllowDrop="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListPhieuXuat}" SelectedItem="{Binding SelectedPhieu}">
                                 <ListView.View>
                                     <GridView>
@@ -182,7 +183,7 @@
                                         <GridViewColumn Header="Nhân viên" DisplayMemberBinding="{Binding NHANVIEN.HoTen}"/>
                                         <GridViewColumn Header="Khách hàng" DisplayMemberBinding="{Binding DOITAC.TenDoiTac}"/>
                                         <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"/>
-                                        <GridViewColumn Header="Tổng tiền" DisplayMemberBinding="{Binding TongTien}"/>
+                                        <GridViewColumn Header="Tổng tiền" DisplayMemberBinding="{Binding TongTien, StringFormat={}{0:#,#}}"/>
                                     </GridView>
                                 </ListView.View>
                                 <ListView.ContextMenu>

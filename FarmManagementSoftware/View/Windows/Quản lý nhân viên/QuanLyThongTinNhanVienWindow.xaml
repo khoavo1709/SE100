@@ -150,7 +150,7 @@
                             <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"
                                       Command="{Binding DeleteCommand}">
                                 <MenuItem.Header>Xóa</MenuItem.Header>
-                            </MenuItem>
+                                </MenuItem>
                         </ContextMenu>
                     </ListView.ContextMenu>
 

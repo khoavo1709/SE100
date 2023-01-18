@@ -22,6 +22,8 @@ namespace FarmManagementSoftware
         public LapPhieuKhoWindow()
         {
             InitializeComponent();
+            dtp_DateMin.SelectedDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            dtp_DateMax.SelectedDate = DateTime.Today;
         }
     }
 }

@@ -1,9 +1,11 @@
-﻿using FarmManagementSoftware.ViewModel;
+﻿using FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu;
+using FarmManagementSoftware.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FarmManagementSoftware.Model
 {
@@ -11,10 +13,7 @@ namespace FarmManagementSoftware.Model
     {
         private bool _IsChecked;
         private int _DonGia;
-        public bool IsChecked
-        {
-            get => _IsChecked; set
-            {
+        public bool IsChecked { get => _IsChecked; set {
                 //if(value != false)
                 //{
                 //    string msg;
@@ -45,11 +44,9 @@ namespace FarmManagementSoftware.Model
                 //        return;
                 //    }
                 //}    
-
-                _IsChecked = value;
-                OnPropertyChanged();
-            }
-        }
+                
+                _IsChecked = value; 
+                OnPropertyChanged(); } }
         public HEO heo { get; set; }
 
         public int DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }

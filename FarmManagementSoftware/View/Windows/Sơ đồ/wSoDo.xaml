@@ -10,6 +10,7 @@
         Name="SoDoWD"
         Title="wSoDo"
         Height="450"
+        WindowState="Maximized"
         Width="800">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -67,23 +68,7 @@
 
                             <Grid Grid.Column="1">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Bottom"
-                                               Height="40"
-                                               Text="Khu  "
-                                               FontWeight="Bold"
-                                               FontSize="20"></TextBlock>
-                                    <ComboBox x:Name="cbb_ChonKhu"
-                                              ItemsSource="{Binding ListArea}"
-                                              FontWeight="Bold" 
-                                              materialDesign:HintAssist.Hint="chọn" 
-                                              FontSize="20">
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="SelectionChanged">
-                                                <i:InvokeCommandAction Command="{Binding SeacrhCommand}"
-                                                                       CommandParameter="{Binding ElementName=SoDoWD}"></i:InvokeCommandAction>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </ComboBox>
+                                    
 
                                     <TextBlock VerticalAlignment="Bottom"
                                                Height="40"

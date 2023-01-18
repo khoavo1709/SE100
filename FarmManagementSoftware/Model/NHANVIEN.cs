@@ -39,6 +39,7 @@ namespace FarmManagementSoftware.Model
         public string SDT { get; set; }
         public Nullable<System.DateTime> NgayVaoLam { get; set; }
         public Nullable<double> HeSoLuong { get; set; }
+        public string TrangThai { get; set; }
         public string C_Username { get; set; }
         public string C_PassWord { get; set; }
     

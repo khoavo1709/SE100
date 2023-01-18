@@ -13,21 +13,22 @@ namespace FarmManagementSoftware.ViewModel
 {
     public class ThemHangHoaVM : BaseViewModel
     {
-        private HANGHOA hHANGHOA;
 
         public ICommand ThemCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
         public ObservableCollection<LoaiHangHoaModel> listLoaiHangHoa { get; set; }
         public LoaiHangHoaModel loaihanghoa { get; set; }
         public HANGHOA newHangHoa { get; set; }
         public ThemHangHoaVM()
         {
             newHangHoa = new HANGHOA();
+            newHangHoa.MaHangHoa = TaoMa();
             listLoaiHangHoa = new ObservableCollection<LoaiHangHoaModel>();
             LoadListLoaiHangHoa();
             ThemCommand = new RelayCommand<Window>((p) => { return true; }, p => { Them(p); });
-
+            ExitCommand = new RelayCommand<Window>((p) => { return true; }, p => { p.Close(); });
         }
-
+  
         private void Them(Window p)
         {
             if (newHangHoa.TenHangHoa == String.Empty || newHangHoa.TenHangHoa == null)
@@ -37,7 +38,6 @@ namespace FarmManagementSoftware.ViewModel
             }
             newHangHoa.TenHangHoa.ToString().Replace(" ", "");
             newHangHoa.LoaiHangHoa = loaihanghoa.loaiHangHoa;
-            newHangHoa.MaHangHoa = ("HH" + DataProvider.Ins.DB.HANGHOAs.Count().ToString()).Replace(" ", "");
             DataProvider.Ins.DB.HANGHOAs.Add(newHangHoa);
             DataProvider.Ins.DB.SaveChanges();
             MessageBox.Show("Thêm hàng hoá mới thành công! ", "Thông báo!", MessageBoxButton.OK);
@@ -56,6 +56,34 @@ namespace FarmManagementSoftware.ViewModel
                 listLoaiHangHoa.Add(new LoaiHangHoaModel(true, items.LoaiHangHoa));
             }
 
+        }
+        string TaoMa()
+        {
+            string maHH = "";
+            var HHs = new ObservableCollection<HANGHOA>(DataProvider.Ins.DB.HANGHOAs).ToList();
+            var soHH = HHs.Count;
+            //var lastThongBao = DataProvider.Ins.DB.ThongBaos.First();
+            if (soHH == 0)
+            {
+                maHH = "HH000001";
+            }
+            else
+            {
+                int STT = soHH;
+                do
+                {
+                    STT++;
+                    string strSTT = STT.ToString();
+                    for (int i = strSTT.Length; i <= 6; i++)
+                    {
+                        strSTT = "0" + strSTT;
+                    }
+
+                    maHH = "TB" + strSTT;
+                }
+                while (DataProvider.Ins.DB.ThongBaos.Count(x => x.MaThongBao == maHH) > 0);
+            }
+            return maHH;
         }
     }
 }

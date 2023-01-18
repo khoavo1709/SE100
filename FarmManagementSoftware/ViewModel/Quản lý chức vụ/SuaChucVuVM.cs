@@ -18,6 +18,7 @@ namespace FarmManagementSoftware.ViewModel
 
         public ObservableCollection<PERMISION> listPermission { get; set; }
         public CHUCVU ChucVu { get; set; }
+        public ICommand CloseCommand { get; set; }
 
         public string TenChucVu { get; set; }
         public int HeSoLuong { get; set; }
@@ -39,7 +40,10 @@ namespace FarmManagementSoftware.ViewModel
             var list = DataProvider.Ins.DB.PERMISIONs.ToList();
             foreach (var items in list)
                 listPermission.Add(items);
+
             SuaCommand = new RelayCommand<Window>((p) => { return true; }, p => {  Sua( p); });
+            CloseCommand = new RelayCommand<Window>((p) => { return true; }, p => { p.Close(); });
+
         }
         private void Sua(Window p)
         {

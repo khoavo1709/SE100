@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows.Lập_lịch"
         mc:Ignorable="d"
-        Title="" Height="336" Width="326" HorizontalContentAlignment="Stretch" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="" Height="410" Width="372" HorizontalContentAlignment="Stretch" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
@@ -18,7 +18,7 @@
             <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
         </Grid>
         <Grid Grid.Column="1">
-            <materialDesign:Card Margin="5">
+            <materialDesign:Card Margin="5,5,5,120">
                 <ListView x:Name="ListThuoc">
                     <ListView.View>
                         <GridView>
@@ -42,6 +42,13 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
+            </materialDesign:Card>
+            <materialDesign:Card Margin="5,308,5,0" Height="80" VerticalAlignment="Top">
+                <Border Margin="20" BorderBrush="#3ab19b" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Grid Width="270">
+                        <Button x:Name="huy_button"  Background="#FFB13A3A" Content="Hủy" Height="40" VerticalAlignment="Top" Click="Huy_button_Click" Margin="70,-6,70,0" Width="130"/>
+                    </Grid>
+                </Border>
             </materialDesign:Card>
         </Grid>
     </Grid>

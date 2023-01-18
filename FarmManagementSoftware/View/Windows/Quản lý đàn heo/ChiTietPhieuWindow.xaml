@@ -42,7 +42,7 @@
                     </Grid>
                     <Grid>
                         <materialDesign:PackIcon Kind="RenameBox" Margin="10 5 0 0 "/>
-                        <TextBox materialDesign:HintAssist.Hint="Tên khách hàng" Height="30" Margin="30,0,20,11" Text="{Binding Ten}"/>
+                        <TextBox materialDesign:HintAssist.Hint="Tên khách hàng" Height="30" Margin="30,0,20,11" Text="{Binding Ten}" IsReadOnly="True"/>
                     </Grid>
                     <Grid>
                         <materialDesign:PackIcon Kind="Email" Margin="10 5 0 0 "/>
@@ -80,7 +80,7 @@
                         <materialDesign:PackIcon Kind="ReceiptText" Margin="10 5 0 0 "/>
                         <TextBox Name="loaiphieu" Height="30" Margin="30,0,20,11"
                                 materialDesign:HintAssist.Hint="Loại phiếu"
-                                  Text="{Binding LoaiPhieu}">
+                                  Text="{Binding LoaiPhieu}" IsReadOnly="True">
                         </TextBox>
                     </Grid>
                     <Grid>

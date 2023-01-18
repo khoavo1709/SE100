@@ -68,7 +68,7 @@
                           VerticalAlignment="Center" />
                     <ComboBox x:Name="Trangthai_combobox" Margin="0,10,0,0" Height="35" VerticalContentAlignment="Bottom"
                           Width="200" HorizontalAlignment="Left"
-                          materialDesign:HintAssist.Hint="Trạng thái">
+                          materialDesign:HintAssist.Hint="Trạng thái" SelectionChanged="Trangthai_combobox_SelectionChanged">
                         <ComboBoxItem
                             IsSelected="True"
                             Content="Chưa tiêm" />

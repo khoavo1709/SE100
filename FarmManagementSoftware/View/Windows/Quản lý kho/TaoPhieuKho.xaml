@@ -4,11 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FarmManagementSoftware"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Tạo phiếu mới"
+        x:Name="TaoPhieuKhoWindow"
+        WindowStartupLocation="CenterScreen"
         Height="768"
-        Width="1024">
+        Width="1024"
+        DataContext="{StaticResource TaoPhieuKhoVM}"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -56,7 +60,7 @@
                                             materialDesign:ButtonAssist.CornerRadius="5"
                                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                             Command="{Binding btnThemHHcommand}">
-
+                                            
                                     </Button>
                                 </StackPanel>
 
@@ -216,17 +220,17 @@
                                    VerticalAlignment="Center"
                                    Margin="10,0,0,0">
                             <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Text" Value="Khách hàng"></Setter>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding ElementName=cbb_LoaiPhieu, Path=SelectedItem.Content}" Value="Phiếu kiểm kho">
-                                            <Setter Property="Text" Value="Nhân viên nhận"></Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding ElementName=cbb_LoaiPhieu, Path=SelectedItem.Content}" Value="Phiếu xuất nội">
-                                            <Setter Property="Text" Value="Nhân viên nhận"></Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Text" Value="Khách hàng"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=cbb_LoaiPhieu, Path=SelectedItem.Content}" Value="Phiếu kiểm kho">
+                                        <Setter Property="Text" Value="Nhân viên nhận"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=cbb_LoaiPhieu, Path=SelectedItem.Content}" Value="Phiếu xuất nội">
+                                        <Setter Property="Text" Value="Nhân viên nhận"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
                             </TextBlock.Style>
                         </TextBlock>
                     </materialDesign:Card>

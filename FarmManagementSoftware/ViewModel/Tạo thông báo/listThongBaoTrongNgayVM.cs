@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -53,7 +54,8 @@ namespace FarmManagementSoftware.ViewModel
                         return;
                     }    
                     vmCTThongBao.SelectedItem = selectedThongBao.tb;
-                    selectedThongBao.tb.TinhTrang = "Đã đọc";
+                    selectedThongBao.tb._TinhTrang = "Đã đọc";
+                    OnPropertyChanged("selectedThongBao");
                     DataProvider.Ins.DB.SaveChanges();
                 }
                 selectedThongBao = null;
@@ -67,9 +69,11 @@ namespace FarmManagementSoftware.ViewModel
             foreach(var item in Thongbaotrongngay)
             {
                 THONGBAOCHITIET tb = new THONGBAOCHITIET();
-                if(vmCTThongBao.cbTinhTrang.Content.ToString() == "Đã gửi")
+                if (vmCTThongBao.cbTinhTrang.Content.ToString() == "Đã gửi")
                 {
                     tb.isTBGui = 1;
+                    if (checkTB(item))
+                        continue;
                 }
                 tb.tb = item;
                 thongbaotrongngay.Add(tb);  
@@ -84,6 +88,20 @@ namespace FarmManagementSoftware.ViewModel
                 IsActive = true;
             }
         }
+
+        bool checkTB(ThongBao tb)
+        {
+            
+            foreach(var item in thongbaotrongngay)
+            {
+                if(item.tb.ThoiGian.Value == tb.ThoiGian.Value)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public void TimKiem(string txtTieuDe, string tinhtrang)
         {
             thongbaotrongngay.Clear();
@@ -111,6 +129,8 @@ namespace FarmManagementSoftware.ViewModel
                 if(vmCTThongBao.cbTinhTrang.Content.ToString() == "Đã gửi")
                 {
                     tb.isTBGui = 1;
+                    if (!checkTB(thongbao))
+                        continue;
                 }
                 tb.tb = thongbao;
                 thongbaotrongngay.Add(tb);
@@ -126,10 +146,11 @@ namespace FarmManagementSoftware.ViewModel
             }
 
         }
-        public class THONGBAOCHITIET
+        public class THONGBAOCHITIET: BaseViewModel
         {
             public int isTBGui { get; set; }
-            public ThongBao tb { get; set; }
+            private ThongBao _tb;
+            public ThongBao tb { get=>_tb; set { _tb = value; OnPropertyChanged(); } }
             public THONGBAOCHITIET()
             {
                 isTBGui = 0;

@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using FarmManagementSoftware.Model;
 using FarmManagementSoftware.View.Windows.Quản_lý_nhân_viên;
 using ListView = System.Windows.Controls.ListView;
+using MessageBox = System.Windows.MessageBox;
 
 namespace FarmManagementSoftware.ViewModel
 {
@@ -36,7 +37,7 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand ThemNhanVienCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand TextTimKiemChangeCommand { get; set; }
-
+        public ICommand DeleteCommand { get; set; }
         #endregion
 
 
@@ -53,6 +54,8 @@ namespace FarmManagementSoftware.ViewModel
             ThemNhanVienCommand = new RelayCommand<Window>((p) => { return true; }, p => { ThemNhanVien(p); });
             EditCommand = new RelayCommand<Window>((p) => { return true; }, p => { Edit(p); });
             TextTimKiemChangeCommand = new RelayCommand<ListView>((p) => { return true; }, p => { TextTimKiemChanged(p); });
+            DeleteCommand = new RelayCommand<Window>((p) => { return true; }, p => { Delete(); });
+
             #endregion
 
             #region LoadData
@@ -66,6 +69,7 @@ namespace FarmManagementSoftware.ViewModel
         {
             ThemNhanVien themNhanVien = new ThemNhanVien();
             themNhanVien.ShowDialog();
+            LoadListNhanVien();
         }
 
         private void TextTimKiemChanged(ListView p)
@@ -77,7 +81,7 @@ namespace FarmManagementSoftware.ViewModel
         {
             lstNhanvien.Clear();
 
-            var listnhanvien = DataProvider.Ins.DB.NHANVIENs.Where(s => s.HoTen.Contains(TextTimKiem)).ToList();
+            var listnhanvien = DataProvider.Ins.DB.NHANVIENs.Where(s => s.HoTen.Contains(TextTimKiem) && s.TrangThai != "Đã ẩn").ToList();
             foreach (var items in listnhanvien)
             {
                 int flag = 0;
@@ -104,6 +108,20 @@ namespace FarmManagementSoftware.ViewModel
                 lstChucVu.Add(new ChucVuModel(true, items.TenChucVu));
 
         }
+        public void Delete()
+        {
+            if (ListViewSelectedIndex < 0)
+                return;
+            if (MessageBox.Show("Bạn có chắc muốn xóa nhân viên " + lstNhanvien[ListViewSelectedIndex].HoTen + " ?", "Chú ý", 
+                MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                lstNhanvien[ListViewSelectedIndex].TrangThai = "Đã ẩn";
+                DataProvider.Ins.DB.SaveChanges();
+                MessageBox.Show("Đã xóa thông tin nhân viên ! ", "Thông báo!", MessageBoxButton.OK);
+                LoadListNhanVien();
+            }
+        }
+
         public void Edit(Window p)
         {
             if(ListViewSelectedIndex <0)
@@ -112,6 +130,7 @@ namespace FarmManagementSoftware.ViewModel
             SuaNhanVien suaNhanVien = new SuaNhanVien();
             suaNhanVien.DataContext = suaNhanVienVM;
             suaNhanVien.ShowDialog();
+            LoadListNhanVien();
         }
         #endregion
     }

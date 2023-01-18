@@ -124,7 +124,17 @@
                                 <DataGridCheckBoxColumn.Header>
                                     <Border
                                             Background="Transparent">
-                                        <CheckBox />
+                                        <CheckBox Name="ckbSelectedAll" 
+                                          IsChecked="{Binding isAllitem, UpdateSourceTrigger=PropertyChanged}">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Checked" >
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.isAllselectedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" />
+                                                </i:EventTrigger>
+                                                <i:EventTrigger EventName="Unchecked" >
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.isAllunselectedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </CheckBox>
                                     </Border>
                                 </DataGridCheckBoxColumn.Header>
                                 <DataGridCheckBoxColumn.HeaderStyle>

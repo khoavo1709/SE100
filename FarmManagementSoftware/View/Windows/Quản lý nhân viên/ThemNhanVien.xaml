@@ -1,4 +1,5 @@
-﻿<Window x:Name="ThemTTNhanVien"
+﻿<Window x:Name="ThemnewNhanVien"
+        DataContext="{ DynamicResource ThemNhanVienVM}"
         x:Class="FarmManagementSoftware.View.Windows.Quản_lý_nhân_viên.ThemNhanVien"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,13 +8,247 @@
         xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows.Quản_lý_nhân_viên"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        DataContext="{ DynamicResource ThemNhanVienVM}"
-        Title="ThemNhanVien"
-        Width="400"
-        WindowStartupLocation="CenterScreen"
+        Title="SuaNhanVien"
+        Width="1024"
+        Height="660"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         ResizeMode="NoResize"
-        Height="650">
-        <Grid>
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5"
+                                 StartPoint="0,0.5">
+                <GradientStop Color="#3ab19b"
+                              Offset="0.05" />
+                <GradientStop Color="#2d708c"
+                              Offset="0.25" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0"
+                    Orientation="Vertical"
+                    Margin="20,20,0,0">
+            <materialDesign:Card>
+                <StackPanel Orientation="Vertical"
+                            HorizontalAlignment="Center">
+                    <Image Height="270"
+                           Width="270"
+                           Source="{Binding MyImage}"></Image>
+                    <TextBlock x:Name="btn_UpdateImage"
+                               FontWeight="Bold"
+                               TextDecorations="Underline"
+                               Cursor="Hand"
+                               Height="20"
+                               HorizontalAlignment="Center"
+                               Text="Cập nhật ảnh">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <i:InvokeCommandAction Command="{Binding ImageChangedCommand}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                    </TextBlock>
+
+                    <TextBlock FontWeight="Bold"
+                               Margin="20"
+                               HorizontalAlignment="Center"
+                               Text="{Binding newNhanVien.HoTen}"></TextBlock>
+                </StackPanel>
+            </materialDesign:Card>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <materialDesign:Card Margin="20,20,20,20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0"
+                          Margin="15,10,0,0">
+                        <TextBlock FontStyle="Italic"
+                                   FontWeight="Bold"
+                                   FontSize="12">Hồ sơ thông tin chi tiết</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0"
+                              Margin="0,0,10,0">
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Margin="10,15,0,0"
+                                           FontSize="12"
+                                           FontWeight="Bold"
+                                           Text="">Họ và Tên</TextBlock>
+                                <TextBox Text="{Binding newNhanVien.HoTen}"
+                                         materialDesign:HintAssist.Hint="Họ tên"
+                                         Margin="20,15,0,0"
+                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                         VerticalAlignment="Center" />
+                                <TextBlock Margin="10,15,0,0"
+                                           FontSize="12"
+                                           FontWeight="Bold">Giới tính</TextBlock>
+                                <ComboBox Margin="20,15,100,0"
+                                          Text="{Binding newNhanVien.GioiTinh, Mode=TwoWay}"
+                                          materialDesign:HintAssist.Hint="Giới tính"
+                                          VerticalAlignment="Center"
+                                          Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                          SelectedIndex="0">
+                                    <ComboBoxItem>Nam</ComboBoxItem>
+                                    <ComboBoxItem>Nữ</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Margin="10,15,0,0"
+                                           FontSize="12"
+                                           FontWeight="Bold">Số điện thoại</TextBlock>
+                                <TextBox Margin="20,15,50,0"
+                                         Text="{Binding newNhanVien.SDT, Mode=TwoWay}"
+                                         materialDesign:HintAssist.Hint="Số điện thoại"
+                                         PreviewTextInput="CheckIsNumber"
+                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                         VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Column="1"
+                              Margin="0,0,10,0">
+
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Margin="10 15 0 0"
+                                           FontSize="12"
+                                           FontWeight="Bold">Chức vụ</TextBlock>
+                                <ComboBox Margin="20 15 100 0"
+                                          Name="CBChuVu"
+                                          materialDesign:HintAssist.Hint="Chức vụ"
+                                          VerticalAlignment="Center"
+                                          Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                          ItemsSource="{Binding listChucVu, Mode=OneWay}"
+                                          DisplayMemberPath="TenChucVu"
+                                          SelectedIndex="0"
+                                          SelectedItem="{Binding chucvu, Mode=TwoWay}">
+                                </ComboBox>
+
+                                <TextBlock  Margin="10,15,0,0"
+                                            FontSize="12"
+                                            FontWeight="Bold">Ngày sinh</TextBlock>
+                                <DatePicker  Margin="20,15,100,0"
+                                             SelectedDate="{Binding newNhanVien.NgaySinh, Mode=TwoWay}"
+                                             materialDesign:HintAssist.Hint="Ngày sinh"
+                                             materialDesign:TextFieldAssist.HasClearButton="True"
+                                             Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                                <TextBlock Margin="10,15,0,0"
+                                           FontSize="12"
+                                           FontWeight="Bold">Email</TextBlock>
+                                <TextBox Margin="20 15 0 10"
+                                         Text="{Binding newNhanVien.email, Mode=TwoWay}"
+                                         materialDesign:HintAssist.Hint="Email"
+                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                         VerticalAlignment="Center" />
+                            </StackPanel>
+
+                        </Grid>
+
+                    </Grid>
+                    <Grid Grid.Row="2"
+                          Name="grb_diachi"
+                          Margin="10,0,30,0">
+                        <StackPanel Grid.Row="2"
+                                    Width="{Binding ElementName=grb_diachi, Path=ActualWidth}"
+                                    HorizontalAlignment="Left">
+                            <TextBlock Margin="0,20,0,0"
+                                       FontSize="12"
+                                       FontWeight="Bold">Địa chỉ</TextBlock>
+                            <TextBox Margin="10 5 0 10"
+                                     Text="{Binding newNhanVien.DiaChi, Mode=TwoWay}"
+                                     materialDesign:HintAssist.Hint="Địa chỉ"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     VerticalAlignment="Center" />
+                        </StackPanel>
+
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0"
+                              Name="grb_Ngayvaolam"
+                              Margin="10,0,0,0">
+                            <StackPanel>
+                                <TextBlock Margin="0,15,0,0"
+                                           FontSize="12"
+                                           FontWeight="Bold">Tên đăng nhập</TextBlock>
+                                <TextBox       Text="{Binding newNhanVien.C_Username, Mode=TwoWay}"
+                                         materialDesign:HintAssist.Hint="Tên đăng nhập"
+                                         Margin="20,15,0,0"
+                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                         VerticalAlignment="Center" />
+
+                            </StackPanel>
+
+                        </Grid>
+                        <Grid Grid.Column="1"
+                              Name="grb_Hesoluong"
+                              Margin="20,0,30,0">
+                            <StackPanel>
+                                <TextBlock Margin="0,15,0,0"
+                                           FontSize="12"
+                                           FontWeight="Bold">Hệ số lương</TextBlock>
+                                <TextBox Margin="10,15,0,0"
+                                         Text="{Binding newNhanVien.HeSoLuong, StringFormat={}{0:N0}, Mode=TwoWay}"
+                                         materialDesign:HintAssist.Hint="Hệ số lương"
+                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                         VerticalAlignment="Center"
+                                         PreviewTextInput="TextBox_PreviewTextInput" />
+                            </StackPanel>
+
+                        </Grid>
+
+                    </Grid>
+                    <StackPanel Grid.Row="4"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Margin="0,20,30,10">
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                                Height="40"
+                                Width="150"
+                                BorderBrush="White"
+                                Content="Thêm"
+                                FontSize="14"
+                                Background="#00de1e"
+                                Command="{Binding ThemCommand}"
+                                CommandParameter="{Binding ElementName=ThemnewNhanVien}" 
+                                materialDesign:ButtonAssist.CornerRadius="5">
+
+                        </Button>
+
+                        <Button Name="btn_Huybo"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Height="40"
+                                Width="150"
+                                BorderBrush="White"
+                                Content="Thoát"
+                                FontSize="14"
+                                materialDesign:ButtonAssist.CornerRadius="5"
+                                Foreground="#00de1e"
+                                Background="#dcf7e0"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                Command="{Binding CloseCommand}"
+                                CommandParameter="{Binding ElementName=ThemnewNhanVien}">
+
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Card>
+        </StackPanel>
+    </Grid>
+    <!--<Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="1,0.5"
                                  StartPoint="0,0.5">
@@ -103,9 +338,9 @@
                             Width="150"
                             VerticalAlignment="Bottom"
                             Command="{Binding ThemCommand}"
-                            CommandParameter="{Binding ElementName=ThemTTNhanVien}" />
+                            CommandParameter="{Binding ElementName=ThemnewNhanVien}" />
                 </Border>
             </StackPanel>
         </Grid>
-    </Grid>
+    </Grid>-->
 </Window>

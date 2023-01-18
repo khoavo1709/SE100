@@ -1,4 +1,7 @@
 ﻿using FarmManagementSoftware.Model;
+using FarmManagementSoftware.View.Windows.Quản_lý_giống_heo;
+using FarmManagementSoftware.View.Windows.Quản_lý_loại_heo;
+using FarmManagementSoftware.View.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu;
+using System.Windows.Documents;
 
 namespace FarmManagementSoftware.ViewModel
 {
@@ -46,7 +51,7 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand HuyCommand { get; set; }
         private int _DonGia;
-        public int DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
+        public int DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); }}
 
         PhieuBanNhapHeoVM goc;
         private HEO _SelectedMe;
@@ -105,7 +110,7 @@ namespace FarmManagementSoftware.ViewModel
                     MessageBox.Show("Vui lòng chọn ngày sinh");
                     return;
                 }
-                if (TrongLuong <= 0)
+                if ( TrongLuong <=   0)
                 {
                     MessageBox.Show("Vui lòng nhập đúng trọng lượng");
                     return;
@@ -249,12 +254,12 @@ namespace FarmManagementSoftware.ViewModel
             }
 
             if (HeoAdd.heo.LOAIHEO.TenLoaiHeo.Contains("nái"))
-                if (!HeoAdd.heo.CHUONGTRAI.MaChuong.Contains("HN") && !HeoAdd.heo.CHUONGTRAI.MaChuong.Contains("HD"))
-                {
-                    msg = "Chuồng hiện tại không phù hợp với loại heo nái";
-                    MessageBox.Show(msg);
-                    return false;
-                }
+                if(!HeoAdd.heo.CHUONGTRAI.MaChuong.Contains("HN") && !HeoAdd.heo.CHUONGTRAI.MaChuong.Contains("HD"))
+                    {
+                        msg = "Chuồng hiện tại không phù hợp với loại heo nái";
+                        MessageBox.Show(msg);
+                        return false;
+                    }
             if (HeoAdd.heo.LOAIHEO.TenLoaiHeo.Contains("con") && HeoAdd.heo.CHUONGTRAI.MaChuong.Contains("DG"))
             {
                 msg = "Heo con không thể ở chuồng đực giống";

@@ -21,6 +21,7 @@ namespace FarmManagementSoftware.View.Windows.Lập_lịch
     {
         List<HEO> Listheo { get; set; }
         public HEO heo { get; set; }
+        public int check = 0;
         public DanhsachHeoDuc()
         {
             InitializeComponent();
@@ -48,6 +49,18 @@ namespace FarmManagementSoftware.View.Windows.Lập_lịch
             {
 
             }
+        }
+
+        private void Confirm_button_Click(object sender, RoutedEventArgs e)
+        {
+            check = 1;
+            this.Close();
+        }
+
+        private void Huy_button_Click(object sender, RoutedEventArgs e)
+        {
+            check = 0;
+            this.Close();
         }
 
         private void check_click(object sender, RoutedEventArgs e)

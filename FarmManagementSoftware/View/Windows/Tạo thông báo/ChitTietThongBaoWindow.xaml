@@ -140,10 +140,10 @@
                        Text="{Binding SelectedItem.ThoiGian}"></TextBlock>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="20,20,10,0" FontSize="13">Đến:</TextBlock>
-                <TextBlock Margin="0,20,20,0" FontSize="13"
-                       Text="{Binding SelectedItem.NHANVIEN1.HoTen}"></TextBlock>
+                <TextBlock Margin="0,20,20,0" FontSize="13" TextWrapping="WrapWithOverflow"
+                       Text="{Binding SelectedNguoiNhan}"></TextBlock>
             </StackPanel>
-            <TextBlock FontSize="15" Margin="20,20,20,0"
+            <TextBlock FontSize="15" Margin="20,20,20,0" TextWrapping="WrapWithOverflow"
                        Text="{Binding SelectedItem.NoiDung}"></TextBlock>
         </StackPanel>
     </Grid>

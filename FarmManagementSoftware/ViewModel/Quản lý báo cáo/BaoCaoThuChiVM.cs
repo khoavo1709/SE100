@@ -20,8 +20,6 @@ namespace FarmManagementSoftware.ViewModel
     public class BaoCaoThuChiVM : BaseViewModel
     {
         #region Atributes
-        private Func<ChartPoint, string> pointLabel;
-
         private int yearThuChiChart;
 
         private int monthChiChart;
@@ -59,7 +57,8 @@ namespace FarmManagementSoftware.ViewModel
         public SeriesCollection DoiTacChartViews { get; }
 
         #endregion
-
+        Func<ChartPoint, string> labelPoint = chartPoint =>
+        string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
         #region Commands
         public ICommand ThuChiChartCommand { get; set; }
         public ICommand ThuChartCommand { get; set; }
@@ -97,7 +96,7 @@ namespace FarmManagementSoftware.ViewModel
             TuNgayChart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
             DenNgayChart = DateTime.Now;
-            ThuChartViews = new SeriesCollection();
+            ThuChartViews = new SeriesCollection ();
             ChiChartViews = new SeriesCollection();
             DoiTacChartViews = new SeriesCollection();
 
@@ -122,6 +121,7 @@ namespace FarmManagementSoftware.ViewModel
             LoadChiChart();
             LoadDoiTacChart();
             LoadThuChart();
+            LoadListThuChi();
             #endregion
         }
 
@@ -133,7 +133,10 @@ namespace FarmManagementSoftware.ViewModel
             ChiPhiGraphValues.Clear();
             //Load sqldata phieu thu, chi
             var PhieuHangHoa = (from d in DataProvider.Ins.DB.PHIEUHANGHOAs
-                                where (d.NgayLap.Value.Year == YearThuChiChart)
+                                where (
+                                d.NgayLap.Value.Year == YearThuChiChart
+                                                                && d.MaDoiTac != null
+                                )
                                 group d by new
                                 {
                                     Year = d.NgayLap.Value.Year,
@@ -233,7 +236,7 @@ namespace FarmManagementSoftware.ViewModel
                                where (
                                        d.NgayLap.Value.Year == YearThuChart
                                        && d.NgayLap.Value.Month == MonthThuChart
-                                       //&& d.LoaiPhieu.ToString() == ""
+                                       && d.LoaiPhieu.ToString() == "Phiếu xuất heo"
                                        )
                                group d by new
                                {
@@ -250,23 +253,25 @@ namespace FarmManagementSoftware.ViewModel
             {
                 Title = "Bán heo",
                 Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
-                DataLabels = true
+                DataLabels = true,
+                LabelPoint = labelPoint
             };
 
             if (valueBanHeo.Count > 0)
             {
                 pieBanHeo.Values.Clear();
                 pieBanHeo.Values.Add(new ObservableValue(valueBanHeo.ElementAt(0).Total.Value));
+
             }
             ThuChartViews.Add(pieBanHeo);
-
-            //Load Value BanHeo tu hoa don ban heo
+           
+            //Load Value HangHoa tu hoa don ban heo
             var valueHangHoa = (from d in DataProvider.Ins.DB.PHIEUHANGHOAs
                                 where (
                                         d.NgayLap.Value.Year == YearThuChart
                                         && d.NgayLap.Value.Month == MonthThuChart
-                                        //&& d.LoaiPhieu.ToString() == ""
-                                        )
+&& d.LoaiPhieu.ToString() == "Phiếu xuất ngoại"
+)
                                 group d by new
                                 {
                                     Year = d.NgayLap.Value.Year,
@@ -282,7 +287,9 @@ namespace FarmManagementSoftware.ViewModel
             {
                 Title = "Bán hàng hóa",
                 Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
-                DataLabels = true
+                DataLabels = true,
+                LabelPoint = labelPoint,
+                
             };
             if (valueHangHoa.Count > 0)
             {
@@ -301,7 +308,7 @@ namespace FarmManagementSoftware.ViewModel
                                where (
                                        d.NgayLap.Value.Year == YearChiChart
                                        && d.NgayLap.Value.Month == MonthChiChart
-                                       //&& d.LoaiPhieu.ToString() == ""
+                                       && d.LoaiPhieu.ToString() == "Phiếu nhập heo"
                                        )
                                group d by new
                                {
@@ -318,7 +325,8 @@ namespace FarmManagementSoftware.ViewModel
             {
                 Title = "Mua heo",
                 Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
-                DataLabels = true
+                DataLabels = true,
+                    LabelPoint = labelPoint
             };
 
             if (valueBanHeo.Count > 0)
@@ -333,7 +341,7 @@ namespace FarmManagementSoftware.ViewModel
                                 where (
                                         d.NgayLap.Value.Year == YearChiChart
                                         && d.NgayLap.Value.Month == MonthChiChart
-                                        //&& d.LoaiPhieu.ToString() == ""
+                                        && d.LoaiPhieu.ToString() == "Phiếu nhập kho"
                                         )
                                 group d by new
                                 {
@@ -350,7 +358,9 @@ namespace FarmManagementSoftware.ViewModel
             {
                 Title = "Mua hàng hóa",
                 Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
-                DataLabels = true
+                DataLabels = true,
+                LabelPoint = labelPoint
+
             };
             if (valueHangHoa.Count > 0)
             {
@@ -382,7 +392,8 @@ namespace FarmManagementSoftware.ViewModel
             {
                 Title = "Sữa chữa",
                 Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
-                DataLabels = true
+                DataLabels = true,
+                LabelPoint = labelPoint
             };
             if (valueSuaChua.Count > 0)
             {
@@ -401,7 +412,7 @@ namespace FarmManagementSoftware.ViewModel
                                  where (
                                          d.NgayLap.Value.Year == YearDoiTacChart
                                          && d.NgayLap.Value.Month == MonthDoiTacChart
-                                         //&& d.LoaiPhieu.ToString() == ""
+
                                          )
                                  group d by new
                                  {
@@ -418,7 +429,7 @@ namespace FarmManagementSoftware.ViewModel
                                   where (
                                           d.NgayLap.Value.Year == YearDoiTacChart
                                           && d.NgayLap.Value.Month == MonthDoiTacChart
-                                          //&& d.LoaiPhieu.ToString() == ""
+                                          && d.MaDoiTac != null
                                           )
                                   group d by new
                                   {
@@ -448,7 +459,8 @@ namespace FarmManagementSoftware.ViewModel
                 {
                     Title = i.TenDoiTac,
                     Values = new ChartValues<ObservableValue> { new ObservableValue(i.total.Value) },
-                    DataLabels = true
+                    DataLabels = true,
+                    LabelPoint = labelPoint
                 };
 
                 DoiTacChartViews.Add(pieDoiTac);
@@ -461,7 +473,9 @@ namespace FarmManagementSoftware.ViewModel
             LstPhieuThuChi.Clear();
 
             var PhieuHangHoa = (from d in DataProvider.Ins.DB.PHIEUHANGHOAs
-                                where (d.NgayLap <= DenNgayChart && d.NgayLap >= TuNgayChart)
+                                where (d.NgayLap <= DenNgayChart && d.NgayLap >= TuNgayChart
+                                && d.MaDoiTac != null
+                                )
                                 select new PhieuThuChi
                                 {
                                     IDPhieu = d.SoPhieu,
@@ -469,7 +483,7 @@ namespace FarmManagementSoftware.ViewModel
                                     NhanVien = d.NHANVIEN.HoTen,
                                     DoiTac = d.DOITAC.TenDoiTac,
                                     LoaiPhieu = d.LoaiPhieu,
-                                    TongTien = d.TongTien.ToString()
+                                    TongTien = d.TongTien.Value
 
                                 }).ToList();
             var PhieuHeo = (from d in DataProvider.Ins.DB.PHIEUHEOs
@@ -481,7 +495,7 @@ namespace FarmManagementSoftware.ViewModel
                                 NhanVien = d.NHANVIEN.HoTen,
                                 DoiTac = d.DOITAC.TenDoiTac,
                                 LoaiPhieu = d.LoaiPhieu,
-                                TongTien = d.TongTien.ToString()
+                                TongTien = d.TongTien.Value
 
                             }).ToList();
             var PhieuSuaChua = (from d in DataProvider.Ins.DB.PHIEUSUACHUAs
@@ -493,7 +507,7 @@ namespace FarmManagementSoftware.ViewModel
                                     NhanVien = d.NHANVIEN.HoTen,
                                     DoiTac = d.DOITAC.TenDoiTac,
                                     LoaiPhieu = "Phiếu sữa chữa",
-                                    TongTien = d.TongTien.ToString()
+                                    TongTien = d.TongTien.Value
 
                                 }).ToList();
 
@@ -578,7 +592,7 @@ namespace FarmManagementSoftware.ViewModel
             public string NhanVien { get; set; }
             public string DoiTac { get; set; }
            public string LoaiPhieu { get; set; }    
-            public string TongTien { get; set; }
+            public int TongTien { get; set; }
         }
     }
 }

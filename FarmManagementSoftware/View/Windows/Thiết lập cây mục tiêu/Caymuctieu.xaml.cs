@@ -1,4 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
+using Microsoft.Win32;
 using FarmManagementSoftware.Model;
 using System;
 using System.Collections.Generic;
@@ -59,17 +60,20 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
         /// <summary>
         /// Giá trị mặc định
         /// </summary>
-        public static double Tylede_muctieu = 86;
-        public static double SoHeoConSinhRa_muctieu = 12.5;
-        public static double ODeItCon_muctieu = 12;
-        public static double SoHeoConSong_MucTieu = 11;
-        public static double SoHeoCaiSua_muctieu = 9.5;
-        public static double SoConChetTruocKhiCaiSua_MucTieu = 18;
-        public static string ThoiGianMangThai_MucTieu = "110-117";
-        public static string SoNgayCaiSua_MucTieu = "20-28";
-        public static string SoNgayKhongLamViec_MucTieu = "12";
-        public static double TrungBnhLua_MucTieu = 2.3;
-        public static double SoHeoTrongNam_MucTieu = 22;
+
+        #region chiSoMucTieu
+        public static double Tylede_muctieu;
+        public static double SoHeoConSinhRa_muctieu;
+        public static double ODeItCon_muctieu;
+        public static double SoHeoConSong_MucTieu;
+        public static double SoHeoCaiSua_muctieu;
+        public static double SoConChetTruocKhiCaiSua_MucTieu;
+        public static string ThoiGianMangThai_MucTieu;
+        public static string SoNgayCaiSua_MucTieu;
+        public static string SoNgayKhongLamViec_MucTieu;
+        public static double TrungBnhLua_MucTieu;
+        public static double SoHeoTrongNam_MucTieu;
+        #endregion
 
         public double Tylede_muctieuClone = Tylede_muctieu;
         public double SoHeoConSinhRa_muctieuClone = SoHeoConSinhRa_muctieu;
@@ -83,12 +87,46 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
         public double TrungBnhLua_MucTieuClone = TrungBnhLua_MucTieu;
         public double SoHeoTrongNam_MucTieuClone = SoHeoTrongNam_MucTieu;
 
+        //Constructer
         public Caymuctieu(int? yearStart, int? yearEnd)
         {
             Heo = DataProvider.Ins.DB.HEOs.ToList();
             LichPhoiGiong = DataProvider.Ins.DB.LICHPHOIGIONGs.ToList();
+            setGiaTriStatic();
+            cloneStatic();
             InitializeComponent();
             Input(yearStart, yearEnd);
+            AddEvent();
+        }
+        //Method
+        void cloneStatic()
+        {
+            Tylede_muctieuClone = Tylede_muctieu;
+            SoHeoConSinhRa_muctieuClone = SoHeoConSinhRa_muctieu;
+            ODeItCon_muctieuClone = ODeItCon_muctieu;
+            SoHeoConSong_MucTieuClone = SoHeoConSong_MucTieu;
+            SoHeoCaiSua_muctieuClone = SoHeoCaiSua_muctieu;
+            SoConChetTruocKhiCaiSua_MucTieuClone = SoConChetTruocKhiCaiSua_MucTieu;
+            ThoiGianMangThai_MucTieuClone = ThoiGianMangThai_MucTieu;
+            SoNgayCaiSua_MucTieuClone = SoNgayCaiSua_MucTieu;
+            SoNgayKhongLamViec_MucTieuClone = SoNgayKhongLamViec_MucTieu;
+            TrungBnhLua_MucTieuClone = TrungBnhLua_MucTieu;
+            SoHeoTrongNam_MucTieuClone = SoHeoTrongNam_MucTieu;
+    }
+
+        void setGiaTriStatic()
+        {
+            Tylede_muctieu = 86;
+            SoHeoConSinhRa_muctieu = 12.5;
+            ODeItCon_muctieu = 12;
+            SoHeoConSong_MucTieu = 11;
+            SoHeoCaiSua_muctieu = 9.5;
+            SoConChetTruocKhiCaiSua_MucTieu = 18;
+            ThoiGianMangThai_MucTieu = "110-117";
+            SoNgayCaiSua_MucTieu = "20-28";
+            SoNgayKhongLamViec_MucTieu = "12";
+            TrungBnhLua_MucTieu = 2.3;
+            SoHeoTrongNam_MucTieu = 22;
         }
         public void Input(int? yearStart, int? yearEnd)
         {
@@ -137,6 +175,20 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             Songaycaisua_muctieu.Content = "Mục tiêu: " + SoNgayCaiSua_MucTieu + " ngày";
             SoHeoTrongNam_MucTieu = SoHeoTrongNam_MucTieuClone;
             Soheotrongnam_muctieu.Content = "Mục tiêu: " + SoHeoTrongNam_MucTieu + " con";
+        }
+        void setValue(ThamSo thamSo)
+        {
+            Tylede_muctieu = thamSo.Tylede_muctieuClone;
+            SoHeoConSinhRa_muctieu = thamSo.SoHeoConSinhRa_muctieuClone;
+            ODeItCon_muctieu = thamSo.ODeItCon_muctieuClone;
+            SoHeoConSong_MucTieu = thamSo.SoHeoConSong_MucTieuClone;
+            SoHeoCaiSua_muctieu = thamSo.SoHeoCaiSua_muctieuClone;
+            SoConChetTruocKhiCaiSua_MucTieu = thamSo.SoConChetTruocKhiCaiSua_MucTieuClone;
+            ThoiGianMangThai_MucTieu = thamSo.ThoiGianMangThai_MucTieuClone;
+            SoNgayCaiSua_MucTieu = thamSo.SoNgayCaiSua_MucTieuClone;
+            SoNgayKhongLamViec_MucTieu = thamSo.SoNgayKhongLamViec_MucTieuClone;
+            TrungBnhLua_MucTieu = thamSo.TrungBnhLua_MucTieuClone;
+            SoHeoTrongNam_MucTieu = thamSo.SoHeoTrongNam_MucTieuClone;
         }
 
         void hamHienView(int y1, int y2)
@@ -281,14 +333,14 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 Tylede_main.Foreground = Brushes.Red;
                 Tylede_main.FontWeight = FontWeights.Bold;
-                Tylede_icon.Source = imageSource;
+                Tylede_button_image.Source = imageSource;
             }
             else
             {
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 Tylede_main.Foreground = Brushes.Green;
                 Tylede_main.FontWeight = FontWeights.Bold;
-                Tylede_icon.Source = imageSource;
+                Tylede_button_image.Source = imageSource;
             }
         }
 
@@ -305,14 +357,14 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 Soheoconsinhra_lua.Foreground = Brushes.Red;
                 Soheoconsinhra_lua.FontWeight = FontWeights.Bold;
-                Soheoconsinhra_lua_Icon.Source = imageSource;
+                Soheoconsinhra_lua_button_image.Source = imageSource;
             }
             else
             {
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 Soheoconsinhra_lua.Foreground = Brushes.Green;
                 Soheoconsinhra_lua.FontWeight = FontWeights.Bold;
-                Soheoconsinhra_lua_Icon.Source = imageSource;
+                Soheoconsinhra_lua_button_image.Source = imageSource;
             }
         }
 
@@ -329,14 +381,14 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 Odeitcon.Foreground = Brushes.Red;
                 Odeitcon.FontWeight = FontWeights.Bold;
-                Odeitcon_Icon.Source = imageSource;
+                Odeitcon_button_image.Source = imageSource;
             }
             else
             {
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 Odeitcon.Foreground = Brushes.Green;
                 Odeitcon.FontWeight = FontWeights.Bold;
-                Odeitcon_Icon.Source = imageSource;
+                Odeitcon_button_image.Source = imageSource;
             }
         }
 
@@ -357,14 +409,14 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 Soheoconsong.Foreground = Brushes.Red;
                 Soheoconsong.FontWeight = FontWeights.Bold;
-                Soheoconsong_Icon.Source = imageSource;
+                Soheoconsong_button_image.Source = imageSource;
             }
             else
             {
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 Soheoconsong.Foreground = Brushes.Green;
                 Soheoconsong.FontWeight = FontWeights.Bold;
-                Soheoconsong_Icon.Source = imageSource;
+                Soheoconsong_button_image.Source = imageSource;
             }
         }
 
@@ -381,14 +433,14 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 Soheocaisua.Foreground = Brushes.Red;
                 Soheocaisua.FontWeight = FontWeights.Bold;
-                Soheocaisua_Icon.Source = imageSource;
+                Soheocaisua_button_image.Source = imageSource;
             }
             else
             {
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 Soheocaisua.Foreground = Brushes.Green;
                 Soheocaisua.FontWeight = FontWeights.Bold;
-                Soheocaisua_Icon.Source = imageSource;
+                Soheocaisua_button_image.Source = imageSource;
             }
 
         }
@@ -407,14 +459,14 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 Tylechet.Foreground = Brushes.Red;
                 Tylechet.FontWeight = FontWeights.Bold;
-                Tylechet_Icon.Source = imageSource;
+                Tylechet_button_image.Source = imageSource;
             }
             else
             {
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 Tylechet.Foreground = Brushes.Green;
                 Tylechet.FontWeight = FontWeights.Bold;
-                Tylechet_Icon.Source = imageSource;
+                Tylechet_button_image.Source = imageSource;
             }
         }
 
@@ -433,14 +485,14 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 Thoigianmangthai.Foreground = Brushes.Red;
                 Thoigianmangthai.FontWeight = FontWeights.Bold;
-                Thoigianmangthai_Icon.Source = imageSource;
+                Thoigianmangthai_button_image.Source = imageSource;
             }
             else
             {
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 Thoigianmangthai.Foreground = Brushes.Green;
                 Thoigianmangthai.FontWeight = FontWeights.Bold;
-                Thoigianmangthai_Icon.Source = imageSource;
+                Thoigianmangthai_button_image.Source = imageSource;
             }
         }
 
@@ -457,14 +509,14 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 Songaycaisua.Foreground = Brushes.Red;
                 Songaycaisua.FontWeight = FontWeights.Bold;
-                Songaycaisua_Icon.Source = imageSource;
+                Songaycaisua_button_image.Source = imageSource;
             }
             else
             {
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 Songaycaisua.Foreground = Brushes.Green;
                 Songaycaisua.FontWeight = FontWeights.Bold;
-                Songaycaisua_Icon.Source = imageSource;
+                Songaycaisua_button_image.Source = imageSource;
             }
         }
 
@@ -481,14 +533,14 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 SoNgayKhongLamViec.Foreground = Brushes.Red;
                 SoNgayKhongLamViec.FontWeight = FontWeights.Bold;
-                SoNgayKhongLamViec_Icon.Source = imageSource;
+                SoNgayKhongLamViec_button_image.Source = imageSource;
             }
             else
             {
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 SoNgayKhongLamViec.Foreground = Brushes.Green;
                 SoNgayKhongLamViec.FontWeight = FontWeights.Bold;
-                SoNgayKhongLamViec_Icon.Source = imageSource;
+                SoNgayKhongLamViec_button_image.Source = imageSource;
             }
         }
 
@@ -505,14 +557,14 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 TrungbinhLua.Foreground = System.Windows.Media.Brushes.Red;
                 TrungbinhLua.FontWeight = FontWeights.Bold;
-                TrungbinhLua_Icon.Source = imageSource;
+                TrungbinhLua_button_image.Source = imageSource;
             }
             else
             {
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 TrungbinhLua.Foreground = System.Windows.Media.Brushes.Green;
                 TrungbinhLua.FontWeight = FontWeights.Bold;
-                TrungbinhLua_Icon.Source = imageSource;
+                TrungbinhLua_button_image.Source = imageSource;
             }
         }
 
@@ -526,7 +578,6 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 Soheotrongnam.Foreground = System.Windows.Media.Brushes.Red;
                 Soheotrongnam.FontWeight = FontWeights.Bold;
-                //Soheotrongnam_Icon.Source = imageSource;
                 Soheotrongnam_button_image.Source = imageSource;
             }
             else
@@ -534,7 +585,6 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 Soheotrongnam.Foreground = System.Windows.Media.Brushes.Green;
                 Soheotrongnam.FontWeight = FontWeights.Bold;
-                //Soheotrongnam_Icon.Source = imageSource;
                 Soheotrongnam_button_image.Source = imageSource;
             }
         }
@@ -553,23 +603,94 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
                 DoanhThuUocTinh.Foreground = System.Windows.Media.Brushes.Red;
                 DoanhThuUocTinh.FontWeight = FontWeights.Bold;
-                DoanhThuUocTinh_Icon.Source = imageSource;
+                DoanhThuUocTinh_button_image.Source = imageSource;
             }
             else
             {
                 ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
                 DoanhThuUocTinh.Foreground = System.Windows.Media.Brushes.Green;
                 DoanhThuUocTinh.FontWeight = FontWeights.Bold;
-                DoanhThuUocTinh_Icon.Source = imageSource;
+                DoanhThuUocTinh_button_image.Source = imageSource;
             }
         }
+        
+        void AddEvent()
+        {
+            //the1
+            the1.MouseEnter += MouseEnter_1;
+            the1.MouseLeave += MouseLeave_1;
+            the1.MouseDown += ClickOn;
+            DoanhThuUocTinh_button.Click += WhenClick;
+            //the2
+            the2.MouseEnter += MouseEnter_2;
+            the2.MouseLeave += MouseLeave_2;
+            the2.MouseDown += ClickOn;
+            Soheotrongnam_button.Click += WhenClick;
+            //the3
+            the3.MouseEnter += MouseEnter_3;
+            the3.MouseLeave += MouseLeave_3;
+            the3.MouseDown += ClickOn;
+            Soheocaisua_button.Click += WhenClick;
+            //the4
+            the4.MouseEnter += MouseEnter_4;
+            the4.MouseLeave += MouseLeave_4;
+            the4.MouseDown += ClickOn;
+            TrungbinhLua_button.Click += WhenClick;
+            //the5
+            the5.MouseEnter += MouseEnter_5;
+            the5.MouseLeave += MouseLeave_5;
+            the5.MouseDown += ClickOn;
+            Soheoconsong_button.Click += WhenClick;
+            //the6
+            the6.MouseEnter += MouseEnter_6;
+            the6.MouseLeave += MouseLeave_6;
+            the6.MouseDown += ClickOn;
+            Tylechet_button.Click += WhenClick;
+            //the7
+            the7.MouseEnter += MouseEnter_7;
+            the7.MouseLeave += MouseLeave_7;
+            the7.MouseDown += ClickOn;
+            Soheoconsinhra_lua_button.Click += WhenClick;
+            //the8
+            the8.MouseEnter += MouseEnter_8;
+            the8.MouseLeave += MouseLeave_8;
+            the8.MouseDown += ClickOn;
+            Odeitcon_button.Click += WhenClick;
+            //the9
+            the9.MouseEnter += MouseEnter_9;
+            the9.MouseLeave += MouseLeave_9;
+            the9.MouseDown += ClickOn;
+            SoNgayKhongLamViec_button.Click += WhenClick;
+            //the10
+            the10.MouseEnter += MouseEnter_10;
+            the10.MouseLeave += MouseLeave_10;
+            the10.MouseDown += ClickOn;
+            Thoigianmangthai_button.Click += WhenClick;
+            //the11
+            the11.MouseEnter += MouseEnter_11;
+            the11.MouseLeave += MouseLeave_11;
+            the11.MouseDown += ClickOn;
+            Songaycaisua_button.Click += WhenClick;
+            //the12
+            the12.MouseEnter += MouseEnter_12;
+            the12.MouseLeave += MouseLeave_12;
+            the12.MouseDown += ClickOn;
+            Tylede_button.Click += WhenClick;
+            //the13
+            the13.MouseEnter += MouseEnter_13;
+            the13.MouseLeave += MouseLeave_13;
+            the13.MouseDown += ClickOn;
+        }
 
+        #region Event
+        //Test
         private void _1_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show("Doanh số không đạt chỉ tiêu dự kiến, không đủ tiền chi trả cho nhân viên và chi phí vận hành", "Chi tiết", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
-        private void zoom_in_Click(object sender, RoutedEventArgs e)
+        //zoom in zoom out button
+        public void zoom_in_Click(object sender, RoutedEventArgs e)
         {
 
             var scaler = Zoomviewbox.LayoutTransform as ScaleTransform;
@@ -605,47 +726,7 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 }
             }
         }
-
-        void enterCard(ToggleButton toggle, Card c)
-        {
-            toggle.IsChecked = true;
-            toggle.Background = System.Windows.Media.Brushes.Yellow;
-            c.Background = Brushes.WhiteSmoke;
-        }
-
-        void leaveCard(ToggleButton toggle, Card c)
-        {
-            toggle.IsChecked = false;
-            toggle.Background = System.Windows.Media.Brushes.White;
-            c.Background = Brushes.White;
-        }
-        void checkclick(ToggleButton toggle)
-        {
-            if (Soheotrongnam_button.IsChecked == true)
-            {
-                toggle.Background = System.Windows.Media.Brushes.Yellow;
-            }
-            else
-            {
-                toggle.Background = System.Windows.Media.Brushes.White;
-            }
-        }
-        private void the2_MouseEnter(object sender, MouseEventArgs e)
-        {
-            enterCard(Soheotrongnam_button, the2);
-        }
-
-        private void the2_MouseLeave(object sender, MouseEventArgs e)
-        {
-            leaveCard(Soheotrongnam_button, the2);
-        }
-
-        private void Soheotrongnam_button_Click(object sender, RoutedEventArgs e)
-        {
-            checkclick(Soheotrongnam_button);
-        }
-
-        private void zoom_out_Click(object sender, RoutedEventArgs e)
+        public void zoom_out_Click(object sender, RoutedEventArgs e)
         {
             var scaler = Zoomviewbox.LayoutTransform as ScaleTransform;
 
@@ -680,6 +761,205 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 }
             }
         }
+
+        //method when enter card
+        void enterCard(ToggleButton toggle, Card c)
+        {
+            toggle.IsChecked = true;
+            toggle.Background = System.Windows.Media.Brushes.Yellow;
+            c.Background = Brushes.WhiteSmoke;
+        }
+
+        void leaveCard(ToggleButton toggle, Card c)
+        {
+            toggle.IsChecked = false;
+            toggle.Background = System.Windows.Media.Brushes.White;
+            c.Background = Brushes.White;            
+        }
+        void checkclick(ToggleButton toggle)
+        {
+            if (Soheotrongnam_button.IsChecked == true)
+            {
+                toggle.Background = System.Windows.Media.Brushes.Yellow;
+            }
+            else
+            {
+                toggle.Background = System.Windows.Media.Brushes.White;
+            }
+        }
+        #region EventCard
+        //Event for card
+        //2
+        private void MouseEnter_2(object sender, MouseEventArgs e)
+        {
+            enterCard(Soheotrongnam_button, e.Source as Card);
+        }
+        private void MouseLeave_2(object sender, MouseEventArgs e)
+        {
+            leaveCard(Soheotrongnam_button, e.Source as Card);
+        }
+        //1
+        private void MouseEnter_1(object sender, MouseEventArgs e)
+        {
+            enterCard(DoanhThuUocTinh_button, e.Source as Card);
+        }
+        private void MouseLeave_1(object sender, MouseEventArgs e)
+        {
+            leaveCard(DoanhThuUocTinh_button, e.Source as Card);
+        }
+        //3
+        private void MouseEnter_3(object sender, MouseEventArgs e)
+        {
+            enterCard(Soheocaisua_button, e.Source as Card);
+        }
+        private void MouseLeave_3(object sender, MouseEventArgs e)
+        {
+            leaveCard(Soheocaisua_button, e.Source as Card);
+        }
+
+        private void MouseEnter_4(object sender, MouseEventArgs e)
+        {
+            enterCard(TrungbinhLua_button, e.Source as Card);
+        }
+        private void MouseLeave_4(object sender, MouseEventArgs e)
+        {
+            leaveCard(TrungbinhLua_button, e.Source as Card);
+        }
+
+        private void MouseEnter_5(object sender, MouseEventArgs e)
+        {
+            enterCard(Soheoconsong_button, e.Source as Card);
+        }
+        private void MouseLeave_5(object sender, MouseEventArgs e)
+        {
+            leaveCard(Soheoconsong_button, e.Source as Card);
+        }
+
+        private void MouseEnter_6(object sender, MouseEventArgs e)
+        {
+            enterCard(Tylechet_button, e.Source as Card);
+        }
+        private void MouseLeave_6(object sender, MouseEventArgs e)
+        {
+            leaveCard(Tylechet_button, e.Source as Card);
+        }
+
+        private void MouseEnter_7(object sender, MouseEventArgs e)
+        {
+            enterCard(Soheoconsinhra_lua_button, e.Source as Card);
+        }
+        private void MouseLeave_7(object sender, MouseEventArgs e)
+        {
+            leaveCard(Soheoconsinhra_lua_button, e.Source as Card);
+        }
+
+        private void MouseEnter_8(object sender, MouseEventArgs e)
+        {
+            enterCard(Odeitcon_button, e.Source as Card);
+        }
+        private void MouseLeave_8(object sender, MouseEventArgs e)
+        {
+            leaveCard(Odeitcon_button, e.Source as Card);
+        }
+
+        private void MouseEnter_9(object sender, MouseEventArgs e)
+        {
+            enterCard(SoNgayKhongLamViec_button, e.Source as Card);
+        }
+        private void MouseLeave_9(object sender, MouseEventArgs e)
+        {
+            leaveCard(SoNgayKhongLamViec_button, e.Source as Card);
+        }
+
+        private void MouseEnter_10(object sender, MouseEventArgs e)
+        {
+            enterCard(Thoigianmangthai_button, e.Source as Card);
+        }
+        private void MouseLeave_10(object sender, MouseEventArgs e)
+        {
+            leaveCard(Thoigianmangthai_button, e.Source as Card);
+        }
+
+        private void MouseEnter_11(object sender, MouseEventArgs e)
+        {
+            enterCard(Songaycaisua_button, e.Source as Card);
+        }
+        private void MouseLeave_11(object sender, MouseEventArgs e)
+        {
+            leaveCard(Songaycaisua_button, e.Source as Card);
+        }
+
+        private void MouseEnter_12(object sender, MouseEventArgs e)
+        {
+            enterCard(Tylede_button, e.Source as Card);
+        }
+        private void MouseLeave_12(object sender, MouseEventArgs e)
+        {
+            leaveCard(Tylede_button, e.Source as Card);
+        }
+
+        private void MouseEnter_13(object sender, MouseEventArgs e)
+        {
+            enterCard(temp_button, e.Source as Card);
+        }
+        private void MouseLeave_13(object sender, MouseEventArgs e)
+        {
+            leaveCard(temp_button, e.Source as Card);
+        } 
+        #endregion
+        private void WhenClick(object sender, RoutedEventArgs e)
+        {
+            checkclick(e.Source as ToggleButton);
+        }
+
+        private void ClickOn(object sender, RoutedEventArgs e)
+        {
+            switch (e.Source as Card)
+            {
+                case var value when value == the1: //nice trick
+                    MessageBox.Show("the1");
+                    break;
+                case var value when value == the2:
+                    MessageBox.Show("the2");
+                    break;
+                case var value when value == the3:
+                    MessageBox.Show("the3");
+                    break;
+                case var value when value == the4:
+                    MessageBox.Show("the4");
+                    break;
+                case var value when value == the5:
+                    MessageBox.Show("the5");
+                    break;
+                case var value when value == the6:
+                    MessageBox.Show("the6");
+                    break;
+                case var value when value == the7:
+                    MessageBox.Show("the7");
+                    break;
+                case var value when value == the8:
+                    MessageBox.Show("the8");
+                    break;
+                case var value when value == the9:
+                    MessageBox.Show("the9");
+                    break;
+                case var value when value == the10:
+                    MessageBox.Show("the10");
+                    break;
+                case var value when value == the11:
+                    MessageBox.Show("the11");
+                    break;
+                case var value when value == the12:
+                    MessageBox.Show("the12");
+                    break;
+                case var value when value == the13:
+                    MessageBox.Show("the13");
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
     }
 }
 

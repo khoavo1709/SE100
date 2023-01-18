@@ -1,15 +1,19 @@
-﻿using FarmManagementSoftware.Model;
-using FarmManagementSoftware.ViewModel;
+﻿using AutoMapper;
+using FarmManagementSoftware.Model;
+using FarmManagementSoftware.View.Windows.Quản_lý_kho;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows;
-using FarmManagementSoftware.View.Windows.Quản_lý_kho;
+using System.Windows.Markup.Localizer;
 
 namespace FarmManagementSoftware.ViewModel
 {
@@ -118,7 +122,7 @@ namespace FarmManagementSoftware.ViewModel
             #region command sửa số lượng
             editSoLuongcommand = new RelayCommand<TextBox>((p) => { return true; }, p =>
             {
-                if (int.Parse(soluong) > selectCTHH.HANGHOA.SoLuongTonKho)
+                if(int.Parse(soluong) > selectCTHH.HANGHOA.SoLuongTonKho)
                 {
                     MessageBox.Show("Số lượng của mặt hàng này không đủ!");
                     return;
@@ -204,21 +208,21 @@ namespace FarmManagementSoftware.ViewModel
             #region command btn hoàn tất
             btnHoanTatcommand = new RelayCommand<Window>((p) => { return true; }, p =>
             {
-                if (selectedLoaiPhieu == null)
+                if(selectedLoaiPhieu == null)
                 {
                     MessageBox.Show("Bạn chưa chọn loại phiếu để thực hiện");
                     return;
                 }
-                if (NgayLap >= DateTime.Now)
+                if(NgayLap>= DateTime.Now)
                 {
                     MessageBox.Show("Ngày lập không thể lớn hơn hôm nay");
                     return;
                 }
                 var baocaotonkho = DataProvider.Ins.DB.BAOCAOTONKHOes.Where(x => x.Thang == NgayLap.Month && x.Nam == NgayLap.Year).Count();
-                if (baocaotonkho <= 0)
+                if(baocaotonkho <= 0)
                 {
                     var dsHangHoa = DataProvider.Ins.DB.HANGHOAs.ToList();
-                    foreach (var d in dsHangHoa)
+                    foreach(var d in dsHangHoa)
                     {
                         BAOCAOTONKHO bctk = new BAOCAOTONKHO();
                         bctk.MaBCTK = createMaBCTK();
@@ -232,7 +236,7 @@ namespace FarmManagementSoftware.ViewModel
                         DataProvider.Ins.DB.BAOCAOTONKHOes.Add(bctk);
                         DataProvider.Ins.DB.SaveChanges();
                     }
-
+                    
                 }
                 switch (selectedLoaiPhieu)
                 {
@@ -253,7 +257,7 @@ namespace FarmManagementSoftware.ViewModel
                             p.Close();
                         break;
                 }
-
+                
             });
             #endregion
         }
@@ -417,7 +421,7 @@ namespace FarmManagementSoftware.ViewModel
         public void TinhTongTien()
         {
             TongTien = 0;
-            foreach (var item in CTHHs)
+            foreach(var item in CTHHs)
             {
                 TongTien += item._donGia * item._soLuong;
             }
@@ -464,7 +468,7 @@ namespace FarmManagementSoftware.ViewModel
         bool AddphieuXuatNoi()
         {
             if (maNVN == null)
-            {
+            { 
                 MessageBox.Show("Bạn chưa nhập thông tin nhân viên");
                 return false;
             }
@@ -489,7 +493,7 @@ namespace FarmManagementSoftware.ViewModel
             phieu.MaNhanVienNhan = maNVN;
             phieu.NHANVIEN1 = DataProvider.Ins.DB.NHANVIENs.Where(x => x.MaNhanVien == maNVN).SingleOrDefault();
             phieu.MaNhanVien = NVThucHien.MaNhanVien;
-            phieu.NHANVIEN = DataProvider.Ins.DB.NHANVIENs.Where(x => x.MaNhanVien == NVThucHien.MaNhanVien).SingleOrDefault();
+            phieu.NHANVIEN = DataProvider.Ins.DB.NHANVIENs.Where(x=>x.MaNhanVien == NVThucHien.MaNhanVien).SingleOrDefault();
             phieu.NgayLap = NgayLap;
             phieu.LoaiPhieu = selectedLoaiPhieu.ToString();
             phieu.TrangThai = "Chưa hoàn thành";
@@ -542,7 +546,7 @@ namespace FarmManagementSoftware.ViewModel
 
         bool AddphieuKiemKho()
         {
-            if (KQ == null || KQ.Content.ToString() == "")
+            if(KQ == null || KQ.Content.ToString()=="")
             {
                 MessageBox.Show("Bạn chưa nhập kết quả kiểm kho");
                 return false;
@@ -554,11 +558,11 @@ namespace FarmManagementSoftware.ViewModel
                 ct.SoPhieu = SoPhieu;
                 ct.SoLuongHienCo = item.SoLuongHienCo;
                 ct._soLuongKiemTra = item._soLuongKiemTra;
-                if (item._soLuongKiemTra == null)
+                if(item._soLuongKiemTra==null)
                 {
                     MessageBox.Show("Bạn chưa nhập số lượng kiểm tra của hàng hoá có mã: " + ct.MaHangHoa);
                     return false;
-                }
+                }    
 
                 DataProvider.Ins.DB.CT_PHIEUKIEMKHO.Add(ct);
             }
@@ -577,7 +581,7 @@ namespace FarmManagementSoftware.ViewModel
 
             MessageBox.Show("Đã thêm phiếu thành công");
             vm.dsPhieuKiem.Add(phieu);
-
+            
             return true;
         }
     }

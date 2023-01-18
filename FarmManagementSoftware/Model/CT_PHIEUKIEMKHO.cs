@@ -9,18 +9,16 @@
 
 namespace FarmManagementSoftware.Model
 {
-    using FarmManagementSoftware.ViewModel;
     using System;
     using System.Collections.Generic;
-
-    public partial class CT_PHIEUKIEMKHO : BaseViewModel
+    
+    public partial class CT_PHIEUKIEMKHO
     {
         public string SoPhieu { get; set; }
         public string MaHangHoa { get; set; }
         public Nullable<int> SoLuongHienCo { get; set; }
-        private Nullable<int> SoLuongKiemTra { get; set; }
-        public Nullable<int> _soLuongKiemTra { get => SoLuongKiemTra; set { SoLuongKiemTra = value; OnPropertyChanged(); } }
-
+        public Nullable<int> SoLuongKiemTra { get; set; }
+    
         public virtual HANGHOA HANGHOA { get; set; }
         public virtual PHIEUKIEMKHO PHIEUKIEMKHO { get; set; }
     }

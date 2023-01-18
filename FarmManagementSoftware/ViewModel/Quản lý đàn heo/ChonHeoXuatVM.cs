@@ -30,11 +30,7 @@ namespace FarmManagementSoftware.ViewModel
         private ObservableCollection<HEOPHIEU> _ListHeoX;
         public ObservableCollection<HEOPHIEU> ListHeoX { get => _ListHeoX; set { _ListHeoX = value; OnPropertyChanged(); } }
         private List<HEOPHIEU> _ListHeoTimKiem;
-        public HEOPHIEU SelectedHeo
-        {
-            get => _SelectedHeo; set
-            {
-                _SelectedHeo = value;
+        public HEOPHIEU SelectedHeo { get => _SelectedHeo; set { _SelectedHeo = value;
                 if (_SelectedHeo != null)
                 {
                     dongia = _SelectedHeo.DonGia;
@@ -123,10 +119,10 @@ namespace FarmManagementSoftware.ViewModel
             ListNguonGoc.Add("Nhập ngoài");
             ListNguonGoc.Add("Sinh trong trang trại");
 
-
+            
             _ListHeoTimKiem = new List<HEOPHIEU>();
-            if (_ListHeoTimKiem.Count <= 0)
-                _ListHeoTimKiem = ListHeoX.ToList();
+            if(_ListHeoTimKiem.Count<=0)
+                 _ListHeoTimKiem = ListHeoX.ToList();
             TimKiem();
             TimKiemTheoMa_TenCommand = new RelayCommand<TextBox>((p) => { return true; }, p =>
             {
@@ -235,7 +231,7 @@ namespace FarmManagementSoftware.ViewModel
         }
         void TimKiem()
         {
-            List<HEOPHIEU> full = _ListHeoTimKiem.ToList();
+            List<HEOPHIEU> full= _ListHeoTimKiem.ToList();
             List<HEOPHIEU> hEOs;
             List<HEOPHIEU> hEOs1;
             List<HEOPHIEU> hEOs2;
@@ -319,24 +315,24 @@ namespace FarmManagementSoftware.ViewModel
             else
                 hEOs8 = full;
             IEnumerable<HEOPHIEU> heo = from HEOPHIEU a in hEOs
-                                        join HEOPHIEU b in hEOs1
-                                        on a.heo.MaHeo equals b.heo.MaHeo
-                                        join HEOPHIEU c in hEOs2
-                                    on a.heo.MaHeo equals c.heo.MaHeo
-                                        join HEOPHIEU d in hEOs3
-                                    on a.heo.MaHeo equals d.heo.MaHeo
-                                        join HEOPHIEU e in hEOs4
-                                    on a.heo.MaHeo equals e.heo.MaHeo
+                                       join HEOPHIEU b in hEOs1
+                                       on a.heo.MaHeo equals b.heo.MaHeo
+                                       join HEOPHIEU c in hEOs2
+                                   on a.heo.MaHeo equals c.heo.MaHeo
+                                       join HEOPHIEU d in hEOs3
+                                   on a.heo.MaHeo equals d.heo.MaHeo
+                                       join HEOPHIEU e in hEOs4
+                                   on a.heo.MaHeo equals e.heo.MaHeo
                                         join HEOPHIEU f in hEOs5
                                     on a.heo.MaHeo equals f.heo.MaHeo
                                         join HEOPHIEU g in hEOs6
                                     on a.heo.MaHeo equals g.heo.MaHeo
                                         join HEOPHIEU h in hEOs7
                                    on a.heo.MaHeo equals h.heo.MaHeo
-                                        join HEOPHIEU j in hEOs8
-                                    on a.heo.MaHeo equals j.heo.MaHeo
-                                        orderby a.heo.MaHeo descending
-                                        select a;
+                                       join HEOPHIEU j in hEOs8
+                                   on a.heo.MaHeo equals j.heo.MaHeo
+                                       orderby a.heo.MaHeo descending
+                                       select a;
 
             foreach (HEOPHIEU h in heo)
             {
@@ -346,7 +342,7 @@ namespace FarmManagementSoftware.ViewModel
         bool KiemTra()
         {
             string msg;
-
+           
             TimeSpan tuoiheo = (TimeSpan)(DateTime.Now.Date - SelectedHeo.heo.NgaySinh);
             if (tuoiheo.Days < thamso.MonthXuatChuongMin)
             {
@@ -360,7 +356,7 @@ namespace FarmManagementSoftware.ViewModel
                 MessageBox.Show(msg);
                 return false;
             }
-            if (SelectedHeo.heo.TrongLuong < thamso.XuatChuongMin)
+            if (SelectedHeo.heo.TrongLuong<thamso.XuatChuongMin)
             {
                 msg = "Heo chưa đủ cân nặng xuất chuồng";
                 MessageBox.Show(msg);

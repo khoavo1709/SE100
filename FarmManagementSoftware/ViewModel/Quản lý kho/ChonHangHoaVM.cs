@@ -1,15 +1,19 @@
 ﻿using FarmManagementSoftware.Model;
+using FarmManagementSoftware.View.Windows.Quản_lý_kho;
+using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
-using System;
-using System.Windows;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace FarmManagementSoftware.ViewModel
 {
-    public class ChonHangHoaVM : BaseViewModel
+    public class ChonHangHoaVM:BaseViewModel
     {
         TaoPhieuKhoVM vm;
         string _TenHH;
@@ -41,7 +45,7 @@ namespace FarmManagementSoftware.ViewModel
 
             #region load loại hàng hoá
             var loaiHH = DataProvider.Ins.DB.HANGHOAs.Select(x => x.LoaiHangHoa).Distinct().ToList();
-            foreach (var item in loaiHH)
+            foreach(var item in loaiHH)
             {
                 listLoaiHH.Add(item);
             }
@@ -57,20 +61,20 @@ namespace FarmManagementSoftware.ViewModel
             {
                 if (vm.selectedLoaiPhieu != "Phiếu kiểm kho" && !checkListChon())
                     return;
-                foreach (var item in ListHangHoa)
+                foreach(var item in ListHangHoa)
                 {
-                    if (item.IsChecked == true)
+                    if(item.IsChecked == true)
                     {
-                        if (vm.selectedLoaiPhieu == "Phiếu kiểm kho")
+                        if(vm.selectedLoaiPhieu=="Phiếu kiểm kho")
                         {
                             CT_PHIEUKIEMKHO ctkk = new CT_PHIEUKIEMKHO();
                             ctkk.MaHangHoa = item.HangHoa.MaHangHoa;
                             ctkk.SoLuongHienCo = item.HangHoa.SoLuongTonKho;
                             ctkk.HANGHOA = item.HangHoa;
-                            if (CheckListHangHoaKiemKho(ctkk))
+                            if(CheckListHangHoaKiemKho(ctkk))
                             {
                                 vm.CTKKs.Add(ctkk);
-                            }
+                            }    
                         }
                         else
                         {
@@ -83,7 +87,7 @@ namespace FarmManagementSoftware.ViewModel
                             {
                                 vm.CTHHs.Add(cthh);
                             }
-                        }
+                        } 
                     }
                 }
                 vm.TinhTongTien();
@@ -113,9 +117,9 @@ namespace FarmManagementSoftware.ViewModel
                 {
                     _soLuongMax = int.Parse(p.Text);
                 }
-                catch (Exception e)
+                catch(Exception e)
                 {
-                    if (p.Text != null && p.Text != "")
+                    if(p.Text != null && p.Text !="")
                         MessageBox.Show("Nhập số không đúng");
                     p.Text = "";
                     _soLuongMax = -1;
@@ -130,16 +134,16 @@ namespace FarmManagementSoftware.ViewModel
             ListHangHoa.Clear();
 
             var listHH = DataProvider.Ins.DB.HANGHOAs.ToList();
-            if (selectLoaiHH != "Tất cả")
+            if(selectLoaiHH != "Tất cả")
             {
                 listHH = listHH.Where(x => x.LoaiHangHoa == selectLoaiHH).ToList();
             }
-            listHH = listHH.Where(x => x.TenHangHoa.Contains(_TenHH)).ToList();
-            if (_soLuongMax >= 0)
+            listHH = listHH.Where(x=>x.TenHangHoa.Contains(_TenHH)).ToList();
+            if(_soLuongMax >= 0)
             {
-                listHH = listHH.Where(x => x.SoLuongTonKho <= _soLuongMax).ToList();
+                listHH = listHH.Where(x=>x.SoLuongTonKho <= _soLuongMax).ToList();
             }
-            foreach (var item in listHH)
+            foreach(var item in listHH)
             {
                 ChonHangHoa hhselect = new ChonHangHoa();
                 hhselect.IsChecked = false;
@@ -150,9 +154,9 @@ namespace FarmManagementSoftware.ViewModel
 
         bool CheckListHangHoa(CT_PHIEUHANGHOA ct)
         {
-            foreach (var item in vm.CTHHs)
+            foreach(var item in vm.CTHHs)
             {
-                if (item.MaHangHoa == ct.MaHangHoa)
+                if(item.MaHangHoa == ct.MaHangHoa)
                 {
                     return false;
                 }
@@ -186,14 +190,14 @@ namespace FarmManagementSoftware.ViewModel
         }
     }
 
-    public class ChonHangHoa : BaseViewModel
+    public class ChonHangHoa:BaseViewModel
     {
         private bool _IsChecked;
-        public bool IsChecked { get => _IsChecked; set { _IsChecked = value; OnPropertyChanged(); } }
+        public bool IsChecked { get => _IsChecked; set { _IsChecked = value;  OnPropertyChanged(); } }
         public HANGHOA HangHoa { get; set; }
         public ChonHangHoa()
         {
-
+            
         }
 
     }

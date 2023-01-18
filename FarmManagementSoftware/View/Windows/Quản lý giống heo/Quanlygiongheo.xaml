@@ -61,7 +61,7 @@
                         Background="#00de1e"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="btn_ThemClick">
-                        
+
                 </Button>
             </StackPanel>
         </materialDesign:Card>
@@ -125,6 +125,9 @@
                         </ListView.View>
                         <ListView.ContextMenu>
                             <ContextMenu>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Show}" >
+                                    <MenuItem.Header>Xem</MenuItem.Header>
+                                </MenuItem>
                                 <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
                                           Click="btnFix_Click">
                                     <MenuItem.Header>Sửa</MenuItem.Header>
@@ -135,7 +138,7 @@
                                 </MenuItem>
                             </ContextMenu>
                         </ListView.ContextMenu>
-                        <!--ListView.ItemContainerStyle>
+                            <!--ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
                                 <EventSetter Event="PreviewMouseLeftButtonUp" Handler="ListViewItem_PreviewMouseLeftButtonUp" />

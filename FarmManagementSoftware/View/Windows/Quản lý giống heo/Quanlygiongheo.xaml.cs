@@ -79,7 +79,7 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_giống_heo
               .Select(s => s[random.Next(s.Length)]).ToArray()));
             return result;
         }
-
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Timkiem(Find_textbox.Text);
@@ -119,7 +119,7 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_giống_heo
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             GIONGHEO gIONGHEO = (GIONGHEO)listviewHeo.SelectedItem;
-            if (gIONGHEO != null)
+            if(gIONGHEO != null)
                 Delete(gIONGHEO);
         }
         /// <summary>
@@ -145,9 +145,9 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_giống_heo
         {
             try
             {
-                DataProvider.Ins.DB.Entry(giongheo).State = System.Data.Entity.EntityState.Added;
-                DataProvider.Ins.DB.SaveChanges();
-                reloadWithDataprovider();
+                    DataProvider.Ins.DB.Entry(giongheo).State = System.Data.Entity.EntityState.Added;
+                    DataProvider.Ins.DB.SaveChanges();
+                    reloadWithDataprovider();
             }
             catch (Exception)
             {
@@ -162,7 +162,7 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_giống_heo
             {
                 DataProvider.Ins.DB.GIONGHEOs.Remove(giongheo);
                 DataProvider.Ins.DB.SaveChanges();
-                reloadWithDataprovider();
+                reloadWithDataprovider();                
             }
             catch (Exception)
             {

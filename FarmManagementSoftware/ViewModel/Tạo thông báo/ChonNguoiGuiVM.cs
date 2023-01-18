@@ -26,6 +26,7 @@ namespace FarmManagementSoftware.ViewModel
         private string _Ten = "";
         private DateTime _Ngaysinh;
         private DateTime _Ngayvaolam;
+
         #endregion
 
         #region Property
@@ -42,6 +43,8 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand TimKiemTheoNgaySinhCommand { get; set; }
         public ICommand TimKiemTheoNgayVaoLamCommand { get; set; }
         public ICommand btnHuyBoCommand { get; set; }
+        public ICommand isAllselectedCommand { get; set; }
+        public ICommand isAllunselectedCommand { get; set; }
         #endregion
         public ChonNguoiGuiVM()
         {
@@ -54,12 +57,13 @@ namespace FarmManagementSoftware.ViewModel
         {
             vmThongBao = vm;
             #region list Nhân viên
-            if(vmThongBao.selectCHUCVU.TenChucVu != "Tất cả")
+            if (vmThongBao.selectCHUCVU.TenChucVu != "Tất cả")
                 maChucVu = vmThongBao.selectCHUCVU.MaChucVu;
             else maChucVu = null;
             loadDSNhanVien();
             listNGUOIGUI = new ObservableCollection<NHANVIEN>();
             #endregion
+            
 
             #region code button hoàn tất
             HoanTatCommand = new RelayCommand<Window>((p) => { return true; }, p => {
@@ -105,6 +109,37 @@ namespace FarmManagementSoftware.ViewModel
             });
             #endregion
 
+            #region command chọn tất cả
+            isAllselectedCommand = new RelayCommand<Window>((p) => { return true; }, p =>
+            {
+                selectAll();
+            });
+            #endregion
+
+            #region command huỷ chọn tất cả
+            isAllunselectedCommand = new RelayCommand<Window>((p) => { return true; }, p =>
+            {
+                unSelectAll();
+            });
+            #endregion
+
+        }
+
+        void selectAll()
+        {
+            foreach(var item in listNHANVIEN)
+            {
+                item.IsChecked = true;
+            }
+
+        }
+
+        void unSelectAll()
+        {
+            foreach (var item in listNHANVIEN)
+            {
+                item.IsChecked = false;
+            }
         }
 
         void loadDSNhanVien()
@@ -124,7 +159,7 @@ namespace FarmManagementSoftware.ViewModel
                 nguoigui.nhanvien = Nhanvien;
                 nguoigui.IsChecked = false;
                 listNHANVIEN.Add(nguoigui);
-            }   
+            }  
         }
 
 

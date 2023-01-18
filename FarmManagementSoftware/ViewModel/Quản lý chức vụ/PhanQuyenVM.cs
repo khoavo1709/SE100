@@ -1,16 +1,20 @@
-﻿using FarmManagementSoftware.Model;
-using FarmManagementSoftware.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Forms;
 using System.Windows.Input;
+using FarmManagementSoftware.Model;
+using MessageBox = System.Windows.MessageBox;
 
-namespace QuanLyTraiHeo.ViewModel.Quản_lý_chức_vụ
+namespace FarmManagementSoftware.ViewModel
 {
     public class PhanQuyenVM : BaseViewModel
     {
@@ -26,7 +30,7 @@ namespace QuanLyTraiHeo.ViewModel.Quản_lý_chức_vụ
         public ICommand CloseCommand { get; set; }
 
         public ObservableCollection<PermissionModel> permissionModels { get; set; }
-
+        
         public int lstPermissionIndex { get; set; }
         public PhanQuyenVM()
         {
@@ -71,7 +75,7 @@ namespace QuanLyTraiHeo.ViewModel.Quản_lý_chức_vụ
                 return;
             }
             int count = DataProvider.Ins.DB.PERMISIONs.Where(p => (p.Name_Permision == PermissionName && ModifyPermission.ID_Permision != p.ID_Permision)).Count();
-            if (count > 0)
+            if(count > 0)
             {
                 MessageBox.Show("Tên chức vụ bị trùng, vui lòng chọn tên khác!");
                 return;
@@ -79,13 +83,13 @@ namespace QuanLyTraiHeo.ViewModel.Quản_lý_chức_vụ
 
             List<PERMISION_DETAIL> tasdasda = ModifyPermission.PERMISION_DETAIL.ToList();
 
-            foreach (var item in tasdasda)
+            foreach(var item in tasdasda)
             {
                 DataProvider.Ins.DB.PERMISION_DETAIL.Remove(item);
             }
             //DataProvider.Ins.DB.PERMISION_DETAIL.RemoveRange(DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == ModifyPermission.ID_Permision));
             DataProvider.Ins.DB.SaveChanges();
-
+           
             int val = 0;
 
             if (DataProvider.Ins.DB.PERMISION_DETAIL.Count() > 0)
@@ -123,7 +127,7 @@ namespace QuanLyTraiHeo.ViewModel.Quản_lý_chức_vụ
         {
 
             int count = DataProvider.Ins.DB.CHUCVUs.Where(x => x.ID_Permision == ModifyPermission.ID_Permision).Count();
-            if (count > 0)
+            if(count > 0)
             {
                 MessageBox.Show("Đang có chức vụ có quyền này, không thể xóa!");
                 return;
@@ -131,7 +135,7 @@ namespace QuanLyTraiHeo.ViewModel.Quản_lý_chức_vụ
 
 
             DataProvider.Ins.DB.PERMISION_DETAIL.RemoveRange(DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == ModifyPermission.ID_Permision));
-            DataProvider.Ins.DB.PERMISIONs.Remove(ModifyPermission);
+            DataProvider.Ins.DB.PERMISIONs.Remove( ModifyPermission);
 
             DataProvider.Ins.DB.SaveChanges();
             LoadlstPermission();

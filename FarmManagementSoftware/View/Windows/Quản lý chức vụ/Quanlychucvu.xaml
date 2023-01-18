@@ -29,12 +29,17 @@
             <Grid>
                 <ScrollViewer VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <Expander IsExpanded="True"
-                                  Header="Thêm chức vụ mới"
-                                  FontWeight="Bold"
-                                  Background="White">
+                    <Grid>
                             <StackPanel>
+                                <materialDesign:Card Height="48"
+                                                     Margin="0,5,0,0">
+                                    <TextBlock FontWeight="Bold"
+                                               FontSize="16"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Text="Thêm chức vụ mới" />
+                                </materialDesign:Card>
+
                                 <TextBox Margin="10"
                                          materialDesign:HintAssist.Hint="Tên chức vụ"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -46,7 +51,7 @@
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding NewChucVu.LuongCoBan,  StringFormat={}{0:N0} , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        >
+                                     PreviewTextInput="CheckIsNumber">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="TextChanged">
                                             <i:InvokeCommandAction Command="{Binding TextCheckCommand}" />
@@ -54,17 +59,39 @@
                                     </i:Interaction.Triggers>
 
                                 </TextBox>
-                                <ComboBox Margin="10"
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="60" />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox 
                                           materialDesign:HintAssist.Hint="Quyyền"
                                           Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                           ItemsSource="{Binding lstPermission, Mode=OneWay}"
                                           DisplayMemberPath="Name_Permision"
+                                          IsSynchronizedWithCurrentItem="True"
                                           SelectedItem="{Binding NewChucVu.PERMISION, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
+                                <Button  Grid.Column="1"
+                                         Foreground="Black"
+                                         Style="{StaticResource MaterialDesignIconButton}"
+                                         Content="{materialDesign:PackIcon Kind=Pen,Size=25}"
+                                        HorizontalContentAlignment="Center"
+                                        ToolTip="Chỉnh sửa quyền"
+                                        VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding EditPermissionCommand}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+
+                                </Button>
+
+                            </Grid>
                                 <TextBox Margin="10,0,10,0"
                                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                          VerticalAlignment="Top"
-                                         Height="150"
+                                         Height="200"
                                          Text="{Binding NewChucVu.MoTa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          AcceptsReturn="True"
                                          TextWrapping="Wrap"
@@ -82,8 +109,7 @@
                                         materialDesign:ButtonAssist.CornerRadius="5"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
                             </StackPanel>
-                        </Expander>
-                        <Expander IsExpanded="True"
+                        <!--<Expander IsExpanded="True"
                                   Header="Chỉnh sửa phân quyền"
                                   FontWeight="Bold"
                                   Background="White">
@@ -103,22 +129,15 @@
 
                                 </ComboBox>
 
-                                <ListView ItemsSource="{Binding permissionModels}"
+                                <ListBox ItemsSource="{Binding permissionModels}"
                                           Margin="10">
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn Header="">
-                                                <GridViewColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <CheckBox IsChecked="{Binding isSelected, Mode=TwoWay}" />
-                                                    </DataTemplate>
-                                                </GridViewColumn.CellTemplate>
-                                            </GridViewColumn>
-                                            <GridViewColumn Header="Hành động"
-                                                            DisplayMemberBinding="{Binding ActionDetail, Mode=TwoWay}" />
-                                        </GridView>
-                                    </ListView.View>
-                                </ListView>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                                        <CheckBox IsChecked="{Binding isSelected, Mode=TwoWay}"
+                                                                  Content="{Binding ActionDetail, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
 
                                 <Button Margin="20,20,20,0"
                                         Style="{StaticResource MaterialDesignRaisedButton}"
@@ -130,9 +149,9 @@
                                         Background="#00de1e"
                                         materialDesign:ButtonAssist.CornerRadius="5" />
                             </StackPanel>
-                        </Expander>
+                        </Expander>-->
 
-                    </StackPanel>
+                    </Grid>
 
                 </ScrollViewer>
 
@@ -198,23 +217,15 @@
                       SelectedIndex="{Binding ListViewSelectedIndex, Mode=TwoWay}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding MaChucVu}">
-                            <GridViewColumnHeader Content="Mã chức Vụ">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Click">
-                                        <i:InvokeCommandAction Command="{Binding TextTimKiemChangeCommand}"
-                                                               CommandParameter="{Binding ElementName=ListChucVu}" />
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-
-                            </GridViewColumnHeader>
-                        </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding TenChucVu}"
                                         Header="Tên chức vụ" />
+                        <GridViewColumn DisplayMemberBinding="{Binding PERMISION.Name_Permision}"
+                                        Header="Quyền" />
                         <GridViewColumn DisplayMemberBinding="{Binding LuongCoBan, StringFormat=\{0:#\,##0\} VNĐ}"
                                         Header="Lương cơ bản" />
                         <GridViewColumn DisplayMemberBinding="{Binding MoTa}"
-                                        Header="Mô tả công việc" />
+                                        Header="Mô tả công việc"
+                                    Width="500"    />
                     </GridView>
 
                 </ListView.View>
@@ -225,9 +236,10 @@
                                   Command="{Binding EditCommand}">
                             <MenuItem.Header>Xem và chỉnh sửa</MenuItem.Header>
                         </MenuItem>
-                        <!--<MenuItem Icon="{materialDesign:PackIcon Kind=Delete}">
+                        <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"
+                                  Command="{Binding DeleteCommand}">
                                     <MenuItem.Header>Xóa</MenuItem.Header>
-                                </MenuItem>-->
+                                </MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
 

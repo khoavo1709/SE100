@@ -1,5 +1,6 @@
 ﻿using FarmManagementSoftware.Model;
 using FarmManagementSoftware.View.Windows;
+using FarmManagementSoftware.View.Windows.Quản_lý_chuồng_nuôi;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,12 +22,15 @@ namespace FarmManagementSoftware.ViewModel
         private DateTime? _NgaySuaChua1 = new DateTime();
         private DateTime? _NgaySuaChua2 = new DateTime();
         private string _TenDoiTac = "";
+        private string _TrangThai = "";
         private List<string> _ListTrangThai = new List<string>();
         #endregion
 
         #region Property
+        public int listviewSelectedIndex { get; set; }
         public ObservableCollection<PHIEUSUACHUA> ListPhieuSuaChua { get => _ListPhieuSuaChua; set { _ListPhieuSuaChua = value; OnPropertyChanged(); } }
         public string MaNhanVien { get => _MaNhanVien; set { _MaNhanVien = value; OnPropertyChanged(); } }
+        public string TrangThai { get => _TrangThai; set { _TrangThai = value; OnPropertyChanged(); } }
         public DateTime? NgaySuaChua1 { get => _NgaySuaChua1; set { _NgaySuaChua1 = value; OnPropertyChanged(); } }
         public DateTime? NgaySuaChua2 { get => _NgaySuaChua2; set { _NgaySuaChua2 = value; OnPropertyChanged(); } }
         public string TenDoiTac { get => _TenDoiTac; set { _TenDoiTac = value; OnPropertyChanged(); } }
@@ -54,19 +58,24 @@ namespace FarmManagementSoftware.ViewModel
 
         public LapPhieuSuaChuaVM()
         {
+            listviewSelectedIndex = 0;
             _ListPhieuSuaChua = new ObservableCollection<PHIEUSUACHUA>(DataProvider.Ins.DB.PHIEUSUACHUAs);
+
+            ListTrangThai = new List<string>();
+            ListTrangThai.Add("Đã hoàn thành");
+            ListTrangThai.Add("Chưa hoàn thành");
+            ListTrangThai.Add("Đã hủy");
+
+            DateTime Now = DateTime.Now;
+            _NgaySuaChua1 = new DateTime(Now.Year, Now.Month, 1);
+            _NgaySuaChua2 = new DateTime(Now.Year, Now.Month, Now.Day + 1);
             AddCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 PhieuSuaChua phieuSuaChua = new PhieuSuaChua();
                 phieuSuaChua.ShowDialog();
                 ListPhieuSuaChua = new ObservableCollection<PHIEUSUACHUA>(DataProvider.Ins.DB.PHIEUSUACHUAs);
             });
-            EditCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            {
-                PhieuSuaChua phieuSuaChua = new PhieuSuaChua();
-                phieuSuaChua.ShowDialog();
-                ListPhieuSuaChua = new ObservableCollection<PHIEUSUACHUA>(DataProvider.Ins.DB.PHIEUSUACHUAs);
-            });
+            EditCommand = new RelayCommand<Window>((p) => { return true; }, p => { Edit(p); });
             DeleteCommand = new RelayCommand<Window>((p) =>
             {
                 if (SelectedItem == null)
@@ -95,12 +104,12 @@ namespace FarmManagementSoftware.ViewModel
             });
             TimKiemTheoNgaySC1Command = new RelayCommand<DatePicker>((p) => { return true; }, p =>
             {
-                _NgaySuaChua1 = p.SelectedDate;
+                //_NgaySuaChua1 = p.SelectedDate;
                 TimKiem();
             });
             TimKiemTheoNgaySC2Command = new RelayCommand<DatePicker>((p) => { return true; }, p =>
             {
-                _NgaySuaChua2 = p.SelectedDate;
+                //_NgaySuaChua2 = p.SelectedDate;
                 TimKiem();
             });
             TimKiemTheoTrangThaiCommand = new RelayCommand<CheckBox>((p) => { return true; }, p =>
@@ -114,6 +123,20 @@ namespace FarmManagementSoftware.ViewModel
                 TimKiem();
             });
             #endregion
+        }
+
+        private void Edit(Window p)
+        {
+            if (listviewSelectedIndex < 0)
+                return;
+            CTPhieuSuaChuaWindow wc = new CTPhieuSuaChuaWindow();
+            CTPhieuSuaChuaVM vm = new CTPhieuSuaChuaVM(ListPhieuSuaChua[listviewSelectedIndex]);
+            wc.DataContext = vm;
+            wc.ShowDialog();
+            //SuaTrangThaiVM suaTrangThaiVM = new SuaTrangThaiVM(ListPhieuSuaChua[listviewSelectedIndex]);
+            //SuaTrangThai suaTrangThai = new SuaTrangThai();
+            //suaTrangThai.DataContext = suaTrangThaiVM;
+            //suaTrangThai.ShowDialog();
         }
 
         void TimKiem()
@@ -150,13 +173,13 @@ namespace FarmManagementSoftware.ViewModel
                     }
                 }
             }
-            else
-                foreach (var item in PhieuSuaChuas)
-                {
-                    PHIEUSUACHUA pHIEUSUACHUA = new PHIEUSUACHUA();
-                    pHIEUSUACHUA = item;
-                    _ListPhieuSuaChua.Add(pHIEUSUACHUA);
-                }
+            //else
+            //    foreach (var item in PhieuSuaChuas)
+            //    {
+            //        PHIEUSUACHUA pHIEUSUACHUA = new PHIEUSUACHUA();
+            //        pHIEUSUACHUA = item;
+            //        _ListPhieuSuaChua.Add(pHIEUSUACHUA);
+            //    }
         }
     }
 }

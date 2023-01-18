@@ -7,6 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Name="ChiTietPhieuSuaChuak"
+        DataContext="{StaticResource ChiTietPhieuSuaChuaVM}"
         Title="ChiTietPhieuSuaChua" Height="450" Width="350" WindowStartupLocation="CenterScreen" Left = "920" Top = "35">
     <Grid>
         <Grid.Background>
@@ -42,6 +43,9 @@
                             materialDesign:HintAssist.Hint="Mô tả"
                             IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
                                  Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox materialDesign:HintAssist.Hint="Tổng tiền" Height="30" Margin="30,0,20,11"
+                                 PreviewTextInput="NumberValidationTextBox"
+                                 Text="{Binding TienSuaChua, StringFormat={}{0:N0} , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </materialDesign:Card>
                 <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">

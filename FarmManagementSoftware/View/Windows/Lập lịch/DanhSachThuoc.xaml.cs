@@ -23,11 +23,12 @@ namespace FarmManagementSoftware.View.Windows.Lập_lịch
         List<HANGHOA> DanhsachThuoc { get; set; }
         HANGHOA hh { get; set; }
         string Thuoc = "Thuốc";
+        public int check = 0;
         public DanhSachThuoc()
         {
             InitializeComponent();
 
-            DanhsachThuoc = DataProvider.Ins.DB.HANGHOAs.Where(s => s.LoaiHangHoa == Thuoc).ToList();
+            DanhsachThuoc = DataProvider.Ins.DB.HANGHOAs.Where(s => s.LoaiHangHoa == Thuoc || s.LoaiHangHoa == "Vacxin").ToList();
             ListThuoc.ItemsSource = DanhsachThuoc;
         }
 
@@ -54,6 +55,7 @@ namespace FarmManagementSoftware.View.Windows.Lập_lịch
 
         private void check_click(object sender, RoutedEventArgs e)
         {
+            check = 1;
             this.Close();
         }
 
@@ -61,6 +63,11 @@ namespace FarmManagementSoftware.View.Windows.Lập_lịch
         {
             hh = ListThuoc.SelectedItem as HANGHOA;
             return hh.MaHangHoa;
+        }
+        private void Huy_button_Click(object sender, RoutedEventArgs e)
+        {
+            check = 0;
+            this.Close();
         }
     }
 }

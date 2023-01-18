@@ -1,4 +1,5 @@
 ﻿using FarmManagementSoftware.Model;
+using FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +18,7 @@ namespace FarmManagementSoftware.ViewModel
         public ObservableCollection<CHUONGTRAI> ListChuong { get; set; }
 
         public string MaHeoMe { get; set; }
-        public string MaHeoCha { get; set; }
+        public string MaHeoCha {get;set;}
 
         public HEO SelectedHeo { get; set; }
         public LOAIHEO SelectedLoai { get; set; }
@@ -26,7 +27,7 @@ namespace FarmManagementSoftware.ViewModel
         public CHUONGTRAI chuongBanDau { get; set; }
 
         public string _MaHeo;
-        public string _MaLoaiHeo { get; set; }
+        public string _MaLoaiHeo { get; set; }  
         public string _MaGiongHeo { get; set; }
         public string _GioiTinh { get; set; }
         public int? _TrongLuong { get; set; }
@@ -55,11 +56,11 @@ namespace FarmManagementSoftware.ViewModel
             SelectedChuong = SelectedHeo.CHUONGTRAI;
             chuongBanDau = SelectedHeo.CHUONGTRAI;
             SelectedGiong = SelectedHeo.GIONGHEO;
-            if (SelectedHeo.MaHeoCha != null && SelectedHeo.MaHeoMe != null)
+            if(SelectedHeo.MaHeoCha!=null && SelectedHeo.MaHeoMe!=null)
             {
-                MaHeoMe = SelectedHeo.MaHeoMe;
-                MaHeoCha = SelectedHeo.MaHeoCha;
-            }
+                MaHeoMe=SelectedHeo.MaHeoMe;
+                MaHeoCha=SelectedHeo.MaHeoCha;
+            }    
             ListLoai = new ObservableCollection<LOAIHEO>(DataProvider.Ins.DB.LOAIHEOs);
             ListGiong = new ObservableCollection<GIONGHEO>(DataProvider.Ins.DB.GIONGHEOs);
             ListChuong = new ObservableCollection<CHUONGTRAI>(DataProvider.Ins.DB.CHUONGTRAIs);
@@ -100,7 +101,7 @@ namespace FarmManagementSoftware.ViewModel
                 SelectedHeo.LOAIHEO = SelectedLoai;
                 SelectedHeo.CHUONGTRAI = SelectedChuong;
                 DataProvider.Ins.DB.SaveChanges();
-                vm.SelectedHeo = SelectedHeo;
+                vm.SelectedHeo = SelectedHeo; 
                 p.Close();
             });
         }

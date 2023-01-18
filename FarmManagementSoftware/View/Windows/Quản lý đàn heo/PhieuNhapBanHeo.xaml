@@ -180,7 +180,7 @@
                                     Content="Phiếu nhập heo" />
                             <ComboBoxItem
                                     Content="Phiếu xuất heo"  />
-
+                            
                         </ComboBox>
                     </Grid>
                     <Grid>

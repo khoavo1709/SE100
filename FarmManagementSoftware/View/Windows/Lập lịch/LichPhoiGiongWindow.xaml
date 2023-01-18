@@ -29,11 +29,11 @@
         <materialDesign:Card Grid.Column="0" Margin="0,0,10,0">
             <StackPanel Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" CanVerticallyScroll="True" CanHorizontallyScroll="True" ScrollViewer.CanContentScroll="True">
                 <materialDesign:Card Height="64" Margin="0,5,0,0">
-                    <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" Margin="10,0,0,0"><Run Text="Thông tin lịch phối giống"/></TextBlock>
+                    <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="23" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"><Run Text="Thông tin lịch phối giống"/></TextBlock>
                 </materialDesign:Card>
-                <Grid Height="679">
-                    <StackPanel Margin="0,0,0,10">
-                        <StackPanel Orientation="Horizontal" Height="50" Width="281">
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50" Margin="9,0,0,0">
                             <TextBox x:Name="Pigcode_textn" Width="190"
                             materialDesign:HintAssist.Hint="Nhập mã heo nái"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -49,7 +49,7 @@
                             materialDesign:ButtonAssist.CornerRadius="5"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Click="ListHeon_button_Click"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Height="50" Width="282">
+                        <StackPanel Orientation="Horizontal" Height="50" Margin="9,15,0,0">
                             <TextBox x:Name="Pigcode_textd" Width="190"
                             materialDesign:HintAssist.Hint="Nhập mã heo đực"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -70,11 +70,11 @@
                                     HorizontalAlignment="Left"
                           materialDesign:HintAssist.Hint="Nhập ngày phối giống"
                           materialDesign:TextFieldAssist.HasClearButton="True"
-                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="9,15,0,0" />
                         <ComboBox x:Name="TrangThai" Height="35" VerticalContentAlignment="Bottom"
                           Width="200"
                                   HorizontalAlignment="Left"
-                          materialDesign:HintAssist.Hint="Trạng thái">
+                          materialDesign:HintAssist.Hint="Trạng thái" Margin="9,15,0,0">
                             <ComboBoxItem
                             IsSelected="True"
                             Content="Chưa phối giống" />
@@ -83,45 +83,6 @@
                             <ComboBoxItem Content="Đã xảy thai"/>
                             <ComboBoxItem Content="Đã đẻ"/>
                         </ComboBox>
-                        <DatePicker x:Name="Datepicker_ngayde"
-                          Width="200"
-                          materialDesign:HintAssist.Hint="Nhập ngày đẻ dự kiến"
-                                    HorizontalAlignment="Left"
-                          materialDesign:TextFieldAssist.HasClearButton="True"
-                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                        <DatePicker x:Name="Ngaydethucte"
-                          Width="200"
-                          materialDesign:HintAssist.Hint="Nhập ngày đẻ thực tế"
-                          materialDesign:TextFieldAssist.HasClearButton="True"
-                                    HorizontalAlignment="Left"
-                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                        <TextBox x:Name="Socon"
-                          Width="200"
-                                 HorizontalAlignment="Left"
-                          materialDesign:HintAssist.Hint="Nhập số con đẻ"
-                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                        <TextBox x:Name="Sochet"
-                          Width="200"
-                          materialDesign:HintAssist.Hint="Nhập số con chết"
-                                 HorizontalAlignment="Left"
-                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                        <DatePicker x:Name="Ngaycaisua"
-                          Width="200"
-                          materialDesign:HintAssist.Hint="Nhập ngày cai sữa heo con"
-                                    HorizontalAlignment="Left"
-                          materialDesign:TextFieldAssist.HasClearButton="True"
-                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                        <TextBox x:Name="Soconchon"
-                          Width="200"
-                          materialDesign:HintAssist.Hint="Nhập số con chọn"
-                                 HorizontalAlignment="Left"
-                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                        <DatePicker x:Name="NgayPhoiGiongLai"
-                          Width="200"
-                          materialDesign:HintAssist.Hint="Nhập ngày phối giống lại dự kiến"
-                          materialDesign:TextFieldAssist.HasClearButton="True"
-                          HorizontalAlignment="Left"
-                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                         <Button x:Name="Add_button"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         BorderBrush="White"
@@ -129,7 +90,36 @@
                         FontSize="16"
                         Background="#00de1e"
                         materialDesign:ButtonAssist.CornerRadius="5"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Click="add_Button_Click" Height="32" Width="250"/>
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Click="add_Button_Click" Height="32" Width="250" Margin="0,20,0,0" VerticalAlignment="Top"/>
+                        <Expander Margin="0,15,0,0" Header="Thông tin chi tiết" Width="281" Background="White" Height="500">
+                            <StackPanel Background="White" Height="450">
+                                <DatePicker x:Name="Datepicker_ngayde"
+                          materialDesign:HintAssist.Hint="Nhập ngày đẻ dự kiến"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="9,15,9,0" />
+                                <DatePicker x:Name="Ngaydethucte"
+                          materialDesign:HintAssist.Hint="Nhập ngày đẻ thực tế"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="9,15,9,0" />
+                                <TextBox x:Name="Socon"
+                          materialDesign:HintAssist.Hint="Nhập số con đẻ"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="9,15,9,0" />
+                                <TextBox x:Name="Sochet"
+                          materialDesign:HintAssist.Hint="Nhập số con chết"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="9,15,9,0" />
+                                <DatePicker x:Name="Ngaycaisua"
+                          materialDesign:HintAssist.Hint="Nhập ngày cai sữa heo con"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="9,15,9,0" />
+                                <TextBox x:Name="Soconchon"
+                          materialDesign:HintAssist.Hint="Nhập số con chọn"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="9,15,9,0" />
+                                <DatePicker x:Name="NgayPhoiGiongLai"
+                          materialDesign:HintAssist.Hint="Nhập ngày phối giống lại dự kiến"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="9,15,9,0" />
+                            </StackPanel>
+                        </Expander>
                     </StackPanel>
                 </Grid>
             </StackPanel>
@@ -144,7 +134,7 @@
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,5,0,5">Danh sách lịch phối giống</TextBlock>
+                            <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Margin="10,5,0,5">Danh sách lịch phối giống</TextBlock>
 
                             <Grid Grid.Row="1" Margin="0,0,0,10">
                                 <Grid.ColumnDefinitions>
@@ -209,36 +199,37 @@
 
                     </materialDesign:Card>
                     <ListView x:Name="ListPhoigiong"
-                        ItemsSource="{Binding LichPhoiGiong}" SelectedItem="{Binding MaLichPhoi, Mode=OneWayToSource}" >
+                        ItemsSource="{Binding LichPhoiGiong}" SelectedItem="{Binding MaLichPhoi, Mode=OneWayToSource}" Height="666" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Ngày phối giống" DisplayMemberBinding="{Binding NgayPhoiGiong, StringFormat=\{0:d\}}" />
                                 <GridViewColumn Header="Mã heo nái" DisplayMemberBinding="{Binding MaHeoCai}" />
                                 <GridViewColumn Header="Mã heo đực" DisplayMemberBinding="{Binding MaHeoDuc}" />
+                                <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding Trangthai}" />
                                 <GridViewColumn Header="Ngày đẻ dự kiến" DisplayMemberBinding="{Binding NgayDuKienDe, StringFormat=\{0:d\}}" />
                                 <GridViewColumn Header="Ngày đẻ thực tế" DisplayMemberBinding="{Binding NgayDeThucTe, StringFormat=\{0:d\}}" />
                                 <GridViewColumn Header="Số con đẻ" DisplayMemberBinding="{Binding SoCon}" />
                                 <GridViewColumn Header="Số con chết" DisplayMemberBinding="{Binding SoConChet}" />
                                 <GridViewColumn Header="Ngày heo con cai sữa" DisplayMemberBinding="{Binding NgayCaiSua, StringFormat=\{0:d\}}" />
                                 <GridViewColumn Header="Số con chọn" DisplayMemberBinding="{Binding SoConChon}" />
-                                <GridViewColumn Header="" Width="160">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Menu>
-                                                <MenuItem x:Name="fixB" Icon="{materialDesign:PackIcon Kind=Pen}"  Width="48" Click="btnFix_Click"></MenuItem>
-                                                <MenuItem x:Name="deleteB" Icon="{materialDesign:PackIcon Kind=Delete}"  Width="48" Click="btnDelete_Click"></MenuItem>
-                                            </Menu>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
-                                <EventSetter Event="PreviewMouseLeftButtonUp" Handler="ListViewItem_PreviewMouseLeftButtonUp" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Show}" >
+                                    <MenuItem.Header>Xem</MenuItem.Header>
+                                </MenuItem>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
+                                          Click="btnFix_Click">
+                                    <MenuItem.Header>Sửa</MenuItem.Header>
+                                </MenuItem>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"
+                                    Click="btnDelete_Click">
+                                    <MenuItem.Header>Xóa</MenuItem.Header>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                      
                     </ListView>
                 </StackPanel>
 

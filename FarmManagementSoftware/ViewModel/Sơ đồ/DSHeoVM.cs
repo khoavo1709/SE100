@@ -100,7 +100,7 @@ namespace FarmManagementSoftware.ViewModel
             #endregion
 
             #region Lấy danh sách lịch phối giống
-            if (chuong.MaLoaiChuong == "LC03112022000004" && heo.MaLoaiHeo == "LH02112022000001")// Nếu là heo đực và nằm trong chuồng heo đực giống
+            if (chuong.MaLoaiChuong == "LC03112022000005" && heo.MaLoaiHeo == "LH02112022000001")// Nếu là heo đực và nằm trong chuồng heo đực giống
             {
                 foreach (var item in DataProvider.Ins.DB.LICHPHOIGIONGs.Where(x => x.MaHeoDuc == heo.MaHeo))
                 {
@@ -128,9 +128,10 @@ namespace FarmManagementSoftware.ViewModel
             {
                 LichUC lich = new LichUC();
 
-                try 
+                LICHTIEMHEO lichTiem = item.Value as LICHTIEMHEO;
+
+                if (lichTiem != null)
                 {
-                    LICHTIEMHEO lichTiem = item.Value as LICHTIEMHEO;
                     lich.tb_NguoiLap.Text = "";
                     lich.tb_TieuDeLich.Text = "Lịch tiêm";
                     lich.tb_ThoiGian.Text = lichTiem.NgayTiem?.ToString("dd/MM/yyy");
@@ -149,14 +150,14 @@ namespace FarmManagementSoftware.ViewModel
                         lich.border_Lich.BorderBrush = System.Windows.Media.Brushes.AliceBlue;
                     }
                 }
-                catch
+                else
                 {
-                    LICHPHOIGIONG lichPhoi= item.Value as LICHPHOIGIONG;
+                    LICHPHOIGIONG lichPhoi = item.Value as LICHPHOIGIONG;
                     lich.tb_NguoiLap.Text = "";
                     lich.tb_TieuDeLich.Text = "Lịch phối giống";
                     lich.tb_ThoiGian.Text = lichPhoi.NgayPhoiGiong?.ToString("dd/MM/yyy");
                     lich.tb_TinhTrang.Text = lichPhoi.Trangthai;
-                    lich.tb_ChiTietLich.Text = "Heo đực " + lichPhoi.MaHeoDuc + " x Heo cái" + lichPhoi.MaHeoCai;
+                    lich.tb_ChiTietLich.Text = "Heo đực " + lichPhoi.MaHeoDuc + " x Heo cái " + lichPhoi.MaHeoCai;
                     lich.Click += Lich_Click;
                     string chiTiet = "";
                     chiTiet += lich.tb_ChiTietLich.Text + "\n";
@@ -175,6 +176,54 @@ namespace FarmManagementSoftware.ViewModel
                         lich.border_Lich.BorderBrush = System.Windows.Media.Brushes.AliceBlue;
                     }
                 }
+
+                //try 
+                //{
+                //    LICHTIEMHEO lichTiem = item.Value as LICHTIEMHEO;
+                //    lich.tb_NguoiLap.Text = "";
+                //    lich.tb_TieuDeLich.Text = "Lịch tiêm";
+                //    lich.tb_ThoiGian.Text = lichTiem.NgayTiem?.ToString("dd/MM/yyy");
+                //    lich.tb_TinhTrang.Text = lichTiem.TrangThai;
+                //    lich.tb_ChiTietLich.Text = lichTiem.MaThuoc;
+                //    lich.Click += Lich_Click;
+                //    string chiTiet = "";
+                //    chiTiet += "Mã heo tiêm : " + lichTiem.MaHeo + "\n";
+                //    chiTiet += "Loại thuốc : " + lichTiem.MaThuoc + "\n";
+                //    chiTiet += "Liều lượng : " + lichTiem.LieuLuong + "\n";
+                //    chiTiet += "Trạng thái : " + lichTiem.TrangThai + "\n";
+                //    lich.Tag = chiTiet;
+
+                //    if (lichTiem.NgayTiem < DateTime.Today.Date)
+                //    {
+                //        lich.border_Lich.BorderBrush = System.Windows.Media.Brushes.AliceBlue;
+                //    }
+                //}
+                //catch
+                //{
+                //    LICHPHOIGIONG lichPhoi= item.Value as LICHPHOIGIONG;
+                //    lich.tb_NguoiLap.Text = "";
+                //    lich.tb_TieuDeLich.Text = "Lịch phối giống";
+                //    lich.tb_ThoiGian.Text = lichPhoi.NgayPhoiGiong?.ToString("dd/MM/yyy");
+                //    lich.tb_TinhTrang.Text = lichPhoi.Trangthai;
+                //    lich.tb_ChiTietLich.Text = "Heo đực " + lichPhoi.MaHeoDuc + " x Heo cái" + lichPhoi.MaHeoCai;
+                //    lich.Click += Lich_Click;
+                //    string chiTiet = "";
+                //    chiTiet += lich.tb_ChiTietLich.Text + "\n";
+                //    chiTiet += "Ngày đẻ dự kiến : " + lichPhoi.NgayDuKienDe + "\n";
+                //    chiTiet += "Ngày đẻ thức tế : " + lichPhoi.NgayDeThucTe + "\n";
+                //    chiTiet += "Ngày số con : " + lichPhoi.SoCon + "\n";
+                //    chiTiet += "Ngày đẻ con chết : " + lichPhoi.SoConChet + "\n";
+                //    chiTiet += "Ngày cai sữa : " + lichPhoi.NgayCaiSua + "\n";
+                //    chiTiet += "Số con chọn  : " + lichPhoi.SoConChon + "\n";
+                //    chiTiet += "Ngày phối giống lại dự kiến : " + lichPhoi.NgayPhoiGiongLaiDuKien + "\n";
+                //    chiTiet += "Trạng thái : " + lichPhoi.Trangthai + "\n";
+                //    lich.Tag = chiTiet;
+
+                //    if (lichPhoi.NgayPhoiGiong < DateTime.Today.Date)
+                //    {
+                //        lich.border_Lich.BorderBrush = System.Windows.Media.Brushes.AliceBlue;
+                //    }
+                //}
 
                 
 
@@ -207,8 +256,8 @@ namespace FarmManagementSoftware.ViewModel
             wd.rtb_ChiTiet.Document.Blocks.Add(new System.Windows.Documents.Paragraph(new System.Windows.Documents.Run(lichSelected.Tag as string)));
             wd.tb_thoiGian.Visibility = Visibility.Visible;
             wd.tb_nguoiTao.Visibility = Visibility.Visible;
-            wd.btn_Tick.Visibility = Visibility.Visible;
-            wd.btn_Delete.Visibility = Visibility.Visible;
+            //wd.btn_Tick.Visibility = Visibility.Visible;
+            //wd.btn_Delete.Visibility = Visibility.Visible;
         }
     }
 }

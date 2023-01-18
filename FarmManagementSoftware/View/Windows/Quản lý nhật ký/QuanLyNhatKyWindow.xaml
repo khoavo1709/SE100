@@ -98,13 +98,21 @@
                     <materialDesign:Card Grid.Column="0">
                     </materialDesign:Card>
                     <StackPanel>
+                        <materialDesign:Card Height="48"
+                                             Margin="0,5,0,0">
+                            <TextBlock FontWeight="Bold"
+                                       FontSize="16"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="Tìm kiếm nhân viên" />
+                        </materialDesign:Card>
+
                         <DatePicker Margin="10"
                                     Width="280"
                                     SelectedDate="{Binding TuNgay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     HorizontalAlignment="Center"
                                     Grid.Column="0"
                                     materialDesign:HintAssist.Hint="Từ ngày"
-                                    materialDesign:TextFieldAssist.HasClearButton="True"
                                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectedDateChanged">
@@ -118,7 +126,6 @@
                                     Grid.Column="1"
                                     HorizontalAlignment="Center"
                                     materialDesign:HintAssist.Hint="Đến ngày"
-                                    materialDesign:TextFieldAssist.HasClearButton="True"
                                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectedDateChanged">
@@ -129,31 +136,19 @@
 
                         </DatePicker>
 
-                        <ListView ItemsSource="{Binding lstActions , Mode=TwoWay}"
-                                  Name="LVChucVu"
-                                  Margin="10">
-                            <ListView.ItemBindingGroup>
-                                <BindingGroup />
-                            </ListView.ItemBindingGroup>
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Width="40">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <CheckBox IsChecked="{Binding ischecked,  UpdateSourceTrigger=PropertyChanged}"
-                                                          Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                        <ListBox  ItemsSource="{Binding lstActions}"
+                                  Margin="20,20">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding TenHanhDong}"
+                                              IsChecked="{Binding ischecked,  UpdateSourceTrigger=PropertyChanged}"
+                                              Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                                                                                     AncestorType={x:Type ItemsControl}},
                                                                                                     Path= DataContext.TimKiemCommand }"
-                                                          CommandParameter="{Binding Source={x:Reference ListNhatKy}}" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Hành động"
-                                                    DisplayMemberBinding="{Binding TenHanhDong}" />
-                                </GridView>
-                            </ListView.View>
-
-                        </ListView>
+                                              CommandParameter="{Binding Source={x:Reference ListNhatKy}}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
 
                     </StackPanel>
 

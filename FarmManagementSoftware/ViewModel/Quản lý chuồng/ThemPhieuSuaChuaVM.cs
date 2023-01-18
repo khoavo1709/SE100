@@ -29,7 +29,7 @@ namespace FarmManagementSoftware.ViewModel
         private DateTime _NgayLapPhieu = DateTime.Now;
         private string _GhiChu = "";
         private int _TongTien = 0;
-        private string _TrangThai = "";
+        private string _TrangThai = "Đang sửa chữa";
         private string _MaChuongCanTim = "";
         private bool _Flag = false;
         #endregion
@@ -51,10 +51,12 @@ namespace FarmManagementSoftware.ViewModel
         public int TongTien { get => _TongTien; set { _TongTien = value; OnPropertyChanged(); } }
         public string TrangThai { get => _TrangThai; set { _TrangThai = value; OnPropertyChanged(); } }
         public string MaChuongCanTim { get => _MaChuongCanTim; set { _MaChuongCanTim = value; OnPropertyChanged(); } }
+        public int listviewSelectedIndex { get; set; }
         #endregion
 
         #region Command
         public ICommand AddCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand HuyCommand { get; set; }
         public ICommand XacNhanCommand { get; set; }
         public ICommand TimKiemTheoMaChuongCommand { get; set; }
@@ -63,34 +65,51 @@ namespace FarmManagementSoftware.ViewModel
 
         public ThemPhieuSuaChuaVM()
         {
+            listviewSelectedIndex = 0;
             cT_PHIEUSUACHUAs = DataProvider.Ins.DB.CT_PHIEUSUACHUA.ToList();
             ListNhanVien = new ObservableCollection<NHANVIEN>(DataProvider.Ins.DB.NHANVIENs);
             _SoPhieu = TaoSoPhieu();
+            TenNhanVien = Account.TaiKhoan.HoTen;
             AddCommand = new RelayCommand<ListView>((p) => { return true; }, (p) =>
             {
                 ChiTietPhieuSuaChua ctphieuSuaChua = new ChiTietPhieuSuaChua
                 {
                     DataContext = new ChiTietPhieuSuaChuaVM(CTPhieu)
                 };
+                
                 ctphieuSuaChua.ShowDialog();
+                if (CTPhieu.LastOrDefault() != null)
+                    TongTien += int.Parse(CTPhieu.LastOrDefault().TienSuaChua);
+
             });
             XacNhanCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                var temp = new DOITAC() { MaDoiTac = MaDoiTac, TenDoiTac = TenDoiTac, SDT = SDT, DiaChi = DiaChiLienLac, Email = Email, LoaiDoiTac = "Đối tác sửa chữa" };
-                DataProvider.Ins.DB.DOITACs.Add(temp);
-                DataProvider.Ins.DB.SaveChanges();
-                var item = new PHIEUSUACHUA() { MaNhanVien = LayMaNhanVien(TenNhanVien), MaDoiTac = MaDoiTac, NgaySuaChua = NgayLapPhieu, SoPhieu = SoPhieu, GhiChu = GhiChu, TongTien = TongTien, TrangThai = TrangThai };
+                if (DataProvider.Ins.DB.DOITACs.Where(x => x.MaDoiTac == MaDoiTac).Count() == 0)
+                {
+                    var temp = new DOITAC() { MaDoiTac = MaDoiTac, TenDoiTac = TenDoiTac, SDT = SDT, DiaChi = DiaChiLienLac, Email = Email, LoaiDoiTac = "Đối tác sửa chữa" };
+                    DataProvider.Ins.DB.DOITACs.Add(temp);
+                    DataProvider.Ins.DB.SaveChanges();
+                }
+                var item = new PHIEUSUACHUA() { MaNhanVien = LayMaNhanVien(TenNhanVien), MaDoiTac = MaDoiTac, NgaySuaChua = NgayLapPhieu, SoPhieu = SoPhieu, GhiChu = GhiChu, TongTien = TongTien, TrangThai = "Chưa hoàn thành" };
                 DataProvider.Ins.DB.PHIEUSUACHUAs.Add(item);
                 DataProvider.Ins.DB.SaveChanges();
                 cT_PHIEUSUACHUAs.Clear();
                 foreach (var x in CTPhieu)
                 {
-                    var y = new CT_PHIEUSUACHUA() { SoPhieu = SoPhieu, MaChuong = x.MaChuong, MoTa = x.MoTa };
+                    var y = new CT_PHIEUSUACHUA() { SoPhieu = SoPhieu, MaChuong = x.MaChuong, MoTa = x.MoTa, ThanhTien = int.Parse(x.TienSuaChua) };
                     DataProvider.Ins.DB.CT_PHIEUSUACHUA.Add(y);
                     DataProvider.Ins.DB.SaveChanges();
                 }
                 MessageBox.Show("Đã thêm thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 p.Close();
+            });
+            DeleteCommand = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            {
+                if (listviewSelectedIndex < 0)
+                    return;
+                var x = cTPhieuModels[listviewSelectedIndex];
+                TongTien -= int.Parse(x.TienSuaChua);
+                cTPhieuModels.Remove(x);
             });
             HuyCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {

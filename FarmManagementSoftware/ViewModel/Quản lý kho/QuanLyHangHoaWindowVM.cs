@@ -16,7 +16,7 @@ namespace FarmManagementSoftware.ViewModel
     public class QuanLyHangHoaWindowVM : BaseViewModel
     {
         public ObservableCollection<HANGHOA> listHangHoa { get; set; }
-
+        public HANGHOA SelectedHangHoa { get; set; }
         public ObservableCollection<TinhTrangHangHoaModel> listTinhTrang { get; set; }
         public ObservableCollection<LoaiHangHoaModel> listLoaiHangHoa { get; set; }
         public int listviewSelectedIndex { get; set; }
@@ -42,7 +42,11 @@ namespace FarmManagementSoftware.ViewModel
             listTinhTrang = new ObservableCollection<TinhTrangHangHoaModel>();
             listviewSelectedIndex = 0;
             ThemHangHoaCommand = new RelayCommand<Window>((p) => { return true; }, p => { ThemHangHoa(p); });
-            EditCommand = new RelayCommand<Window>((p) => { return true; }, p => { Edit(p); });
+            EditCommand = new RelayCommand<Window>((p) => {
+                if (SelectedHangHoa == null)
+                    return false;
+                else return true; ; }, p => { Edit(p); });
+            DeleteCommand = new RelayCommand<Window>((p) => { return true; }, p => { Delete(p); });
             TextTimKiemChangeCommand = new RelayCommand<ListView>((p) => { return true; }, p => { TextTimKiemChanged(p); });
             DongiatoithieuChangeCommand = new RelayCommand<ListView>((p) => { return true; }, p => { DongiatoithieuChanged(p); });
             DongiatoidaChangeCommand = new RelayCommand<ListView>((p) => { return true; }, p => { DongiatoidaChanged(p); });
@@ -50,6 +54,23 @@ namespace FarmManagementSoftware.ViewModel
             SoluongtoidaChangeCommand = new RelayCommand<ListView>((p) => { return true; }, p => { SoluongtoidaChanged(p); });
             LoadListLoaiHangHoa();
             LoadListTinhTrang();
+        }
+
+        private void Delete(Window p)
+        {
+            if (SelectedHangHoa.CT_PHIEUHANGHOA.Count() > 0 || SelectedHangHoa.CT_PHIEUKIEMKHO.Count() > 0)
+            {
+                MessageBox.Show("Không thể xoá hàng hoá này. Vì đang tồn tại trong phiếu?", "Chú ý");
+                return;
+            }
+            MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn xoá ?", "Cảnh báo", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+                DataProvider.Ins.DB.HANGHOAs.Remove(SelectedHangHoa);
+                listHangHoa.Remove(SelectedHangHoa);
+                DataProvider.Ins.DB.SaveChanges();
+
+            }
         }
 
         private void LoadListLoaiHangHoa()
@@ -99,24 +120,7 @@ namespace FarmManagementSoftware.ViewModel
 
         private void LoadListHangHoa()
         {
-            //listHangHoa.Clear();
-
-            //var listhanghoa = DataProvider.Ins.DB.HANGHOAs.Where(s => s.TenHangHoa.Contains(textTimKiem)).ToList();
-            //foreach (var items in listhanghoa)
-            //{
-            //    int flag = 0;
-            //    foreach (var items2 in listhanghoa)
-            //    {
-            //        if (exLoai== false)
-            //            if ()
-            //            {
-            //                flag = 1;
-            //                break;
-            //            }
-            //    }
-            //    if (flag == 0)
-            //        listHangHoa.Add(items);
-            //}
+            
             listHangHoa.Clear();
             var listhanghoa = DataProvider.Ins.DB.HANGHOAs.Where(s => s.TenHangHoa.Contains(textTimKiem)).ToList();
             if (!string.IsNullOrWhiteSpace(textDonGiaToiDa))
@@ -183,6 +187,7 @@ namespace FarmManagementSoftware.ViewModel
         {
             ThemHangHoawindow themhanghoa = new ThemHangHoawindow();
             themhanghoa.ShowDialog();
+            LoadListHangHoa();
         }
 
         private void Edit(Window p)
@@ -193,6 +198,7 @@ namespace FarmManagementSoftware.ViewModel
             ThongTinHangHoa thongTinHangHoa = new ThongTinHangHoa();
             thongTinHangHoa.DataContext = thongTinHangHoaVM;
             thongTinHangHoa.ShowDialog();
+            LoadListHangHoa();
         }
     }
 }

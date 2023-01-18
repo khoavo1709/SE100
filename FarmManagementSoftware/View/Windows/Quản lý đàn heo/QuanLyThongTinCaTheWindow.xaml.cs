@@ -23,6 +23,7 @@ namespace FarmManagementSoftware.View.Windows
         {
             InitializeComponent();
         }
+
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");

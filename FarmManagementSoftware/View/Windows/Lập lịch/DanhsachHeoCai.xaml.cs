@@ -1,6 +1,7 @@
 ﻿using FarmManagementSoftware.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,16 +21,31 @@ namespace FarmManagementSoftware.View.Windows.Lập_lịch
     /// </summary>
     public partial class DanhsachHeoCai : Window
     {
+        
         List<HEO> Listheo { get; set; }
         public HEO heo { get; set; }
+
+        public int check = 0;
+        
         public DanhsachHeoCai()
         {
             InitializeComponent();
-
-            Listheo = DataProvider.Ins.DB.HEOs.Where(h => h.LOAIHEO.TenLoaiHeo.Contains("ái")).ToList();
+            Listheo = DataProvider.Ins.DB.HEOs.Where(h => h.GioiTinh.Contains("ái")).ToList();
             ListMaHeo_.ItemsSource = Listheo;
         }
 
+        private void Confirm_button_Click(object sender, RoutedEventArgs e)
+        {
+            check = 1;
+            this.Close();
+        }
+
+        private void Huy_button_Click(object sender, RoutedEventArgs e)
+        {
+            check = 0;
+            this.Close();
+        }
+        
         private void ListViewItem_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ListMaHeo_.SelectedItems.Clear();

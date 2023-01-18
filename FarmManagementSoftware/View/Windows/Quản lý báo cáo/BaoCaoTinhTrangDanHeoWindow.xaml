@@ -83,7 +83,7 @@
                             </Grid>
                         </materialDesign:Card>
                         <lvc:PieChart LegendLocation="Bottom" FontSize="10" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Height="250" Margin="10,10,10,0" FontStretch="Medium" Series="{Binding CoCauGiong}">
-
+                           
                         </lvc:PieChart>
                     </StackPanel>
                 </materialDesign:Card>
@@ -208,7 +208,7 @@
                                                     <i:InvokeCommandAction Command="{Binding GiongChanged}"/>
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
-
+                                          
                                         </ComboBox>
                                     </Grid>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">

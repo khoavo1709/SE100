@@ -24,114 +24,114 @@
                 </Grid.RowDefinitions>
 
                 <materialDesign:Card Grid.Row="0" Height="75" Margin="0,5,0,0">
-                    <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" Margin="10,0,0,0">Tìm kiếm thông tin hàng hoá</TextBlock>
-                </materialDesign:Card>
+                        <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" Margin="10,0,0,0">Tìm kiếm thông tin hàng hoá</TextBlock>
+                    </materialDesign:Card>
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <StackPanel Orientation="Vertical">
-                        <Expander IsExpanded="True" Header="Đơn giá" FontWeight="Bold" Background="White">
-                            <StackPanel Orientation="Vertical" Margin="10,0,0,0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox 
+                    <Expander IsExpanded="True" Header="Đơn giá" FontWeight="Bold" Background="White">
+                        <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox 
                                      Text="{Binding textDonGiaToiThieu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" 
                                      materialDesign:HintAssist.Hint="Tối thiểu"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      FontWeight="Normal">
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="TextChanged">
-                                                <i:InvokeCommandAction Command="{Binding DongiatoithieuChangeCommand}"
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding DongiatoithieuChangeCommand}"
                                                                CommandParameter="{Binding ElementName=ListHangHoa}" />
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </TextBox>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
 
 
-                                    <TextBlock Margin="10,0,0,0" VerticalAlignment="Center">VND</TextBlock>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox
+                                <TextBlock Margin="10,0,0,0" VerticalAlignment="Center">VND</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox
                                      Text="{Binding textDonGiaToiDa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" 
                                      materialDesign:HintAssist.Hint="Tối đa"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      FontWeight="Normal">
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="TextChanged">
-                                                <i:InvokeCommandAction Command="{Binding DongiatoidaChangeCommand}"
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding DongiatoidaChangeCommand}"
                                                                CommandParameter="{Binding ElementName=ListHangHoa}" />
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </TextBox>
-                                    <TextBlock Margin="10,0,0,0" VerticalAlignment="Center">VND</TextBlock>
-                                </StackPanel>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+                                <TextBlock Margin="10,0,0,0" VerticalAlignment="Center">VND</TextBlock>
                             </StackPanel>
-                        </Expander>
-                        <Expander IsExpanded="True" Header="Số lượng tồn kho" FontWeight="Bold" Background="White">
-                            <StackPanel Orientation="Vertical" Margin="10,0,0,0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox 
+                        </StackPanel>
+                    </Expander>
+                    <Expander IsExpanded="True" Header="Số lượng tồn kho" FontWeight="Bold" Background="White">
+                        <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox 
                                      Text="{Binding textSoLuongToiThieu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" 
                                      materialDesign:HintAssist.Hint="Số lượng tối thiểu"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      FontWeight="Normal">
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="TextChanged">
-                                                <i:InvokeCommandAction Command="{Binding SoluongtoithieuChangeCommand}"
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding SoluongtoithieuChangeCommand}"
                                                                CommandParameter="{Binding ElementName=ListHangHoa}" />
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </TextBox>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox
                                      Text="{Binding textSoLuongToiDa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" 
                                      materialDesign:HintAssist.Hint="Số lượng tối đa"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      FontWeight="Normal">
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="TextChanged">
-                                                <i:InvokeCommandAction Command="{Binding SoluongtoidaChangeCommand}"
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding SoluongtoidaChangeCommand}"
                                                                CommandParameter="{Binding ElementName=ListHangHoa}" />
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </TextBox>
-                                </StackPanel>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                             </StackPanel>
-                        </Expander>
-
-                        <Expander IsExpanded="False" Header="Loại hàng hoá" FontWeight="Bold" Background="White">
-                            <StackPanel Orientation="Vertical" Margin="20,0,0,0">
-                                <ListBox ItemsSource="{Binding listLoaiHangHoa}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <CheckBox  IsChecked="{Binding isSelected }" Margin="0 5" Content="{Binding loaiHangHoa}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                        </StackPanel>
+                    </Expander>
+                   
+                    <Expander IsExpanded="False" Header="Loại hàng hoá" FontWeight="Bold" Background="White">
+                        <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                            <ListBox ItemsSource="{Binding listLoaiHangHoa}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox  IsChecked="{Binding isSelected }" Margin="0 5" Content="{Binding loaiHangHoa}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                                                                                     AncestorType={x:Type ItemsControl}},
                                                                                                     Path= DataContext.TextTimKiemChangeCommand }" 
                                               ></CheckBox>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-                        </Expander>
-
-                        <Expander IsExpanded="False" Header="Tình Trạng" FontWeight="Bold" Background="White">
-                            <StackPanel Orientation="Vertical" Margin="20,0,0,0">
-                                <ListBox ItemsSource="{Binding listTinhTrang}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <CheckBox  IsChecked="{Binding isSelected }" Margin="0 5" Content="{Binding tinhTrang}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Expander>
+                    
+                    <Expander IsExpanded="False" Header="Tình Trạng" FontWeight="Bold" Background="White">
+                        <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                            <ListBox ItemsSource="{Binding listTinhTrang}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox  IsChecked="{Binding isSelected }" Margin="0 5" Content="{Binding tinhTrang}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                                                                                     AncestorType={x:Type ItemsControl}},
                                                                                                     Path= DataContext.TextTimKiemChangeCommand }" 
                                               ></CheckBox>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-                        </Expander>
-                    </StackPanel>
-                </ScrollViewer>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+               </ScrollViewer>
             </Grid>
         </materialDesign:Card>
 
@@ -226,5 +226,4 @@
             </materialDesign:Card>
         </Grid>
     </Grid>
-
 </Window>

@@ -18,24 +18,27 @@ namespace FarmManagementSoftware.ViewModel
     public class ThemChuongVM : BaseViewModel
     {
         #region Attributes
-        List<CHUONGTRAI> _ChuongTrais = new List<CHUONGTRAI>();
-        List<string> listLoaiChuong;
+        ObservableCollection<CHUONGTRAI> _ChuongTrais = new ObservableCollection<CHUONGTRAI>();
         Themchuong tc;
         string _MaChuong;
         string _MaLoaiChuong;
         string _TinhTrang;
         int _SucChuaToiDa;
         int _SoLuongHeo;
+        private LOAICHUONG _selectedLoaiChuong;
+        public LOAICHUONG selectedLoaiChuong { get => _selectedLoaiChuong; set { _selectedLoaiChuong = value; OnPropertyChanged(); } }
+        private ObservableCollection<LOAICHUONG> _listLoaiChuong;
+        public ObservableCollection<LOAICHUONG> listLoaiChuong2 { get => _listLoaiChuong; set { _listLoaiChuong = value; OnPropertyChanged(); } }
         #endregion
 
-        #region Property
-        public List<string> ListLoaiChuong { get => listLoaiChuong; set { listLoaiChuong = value; OnPropertyChanged(); } }
-        public List<CHUONGTRAI> CHUONGTRAIs { get => _ChuongTrais; set { _ChuongTrais = value; OnPropertyChanged(); } }
+        #region Property}
+        public ObservableCollection<CHUONGTRAI> CHUONGTRAIs { get => _ChuongTrais; set { _ChuongTrais = value; OnPropertyChanged(); } }
         public string MaChuong { get => _MaChuong; set { _MaChuong = value; OnPropertyChanged(); } }
         public string MaLoaiChuong { get => _MaLoaiChuong; set { _MaLoaiChuong = value; OnPropertyChanged(); } }
         public string TinhTrang { get => _TinhTrang; set { _TinhTrang = value; OnPropertyChanged(); } }
         public int SucChuaToiDa { get => _SucChuaToiDa; set { _SucChuaToiDa = value; OnPropertyChanged(); } }
         public int SoLuongHeo { get => _SoLuongHeo; set { _SoLuongHeo = value; OnPropertyChanged(); } }
+        public int listviewSelectedIndex { get; set; }
         #endregion
 
         #region Command
@@ -43,14 +46,17 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand XacNhanCommand { get; set; }
         public ICommand TaoMaChuong { get; set; }
+        public ICommand DeleteCommand { get; set; }
         #endregion
 
         public ThemChuongVM()
         {
-            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, p => { tc = p as Themchuong; Load(); MaChuong = CreatMaChuong(tc.MaLC.SelectedItem as string); });
+            listviewSelectedIndex = 0;
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, p => { tc = p as Themchuong; Load(); });
+
             TaoMaChuong = new RelayCommand<ComboBox>((p) => { return true; }, (p) =>
             {
-                MaChuong = CreatMaChuong(tc.MaLC.SelectedItem as string);
+                MaChuong = CreatMaChuong(selectedLoaiChuong.MaLoaiChuong as string);
             });
             XacNhanCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
@@ -65,26 +71,35 @@ namespace FarmManagementSoftware.ViewModel
             });
             ThemCommand = new RelayCommand<ListView>((p) => { return true; }, (p) =>
             {
-                var ChuongTrai = new CHUONGTRAI() { MaChuong = MaChuong, MaLoaiChuong = MaLoaiChuong, TinhTrang = TinhTrang, SuaChuaToiDa = SucChuaToiDa, SoLuongHeo = SoLuongHeo };
+                var ChuongTrai = new CHUONGTRAI() { MaChuong = MaChuong, MaLoaiChuong = selectedLoaiChuong.MaLoaiChuong, LOAICHUONG = selectedLoaiChuong, TinhTrang = TinhTrang, SuaChuaToiDa = SucChuaToiDa, SoLuongHeo = SoLuongHeo };
                 _ChuongTrais.Add(ChuongTrai);
-                p.Items.Refresh();
+                MaChuong = CreatMaChuong(selectedLoaiChuong.MaLoaiChuong as string);
+                TinhTrang = null;
+                SucChuaToiDa = 0;
+            });
+            DeleteCommand = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            {
+                if (listviewSelectedIndex < 0)
+                    return;
+                var ChuongTrai = _ChuongTrais[listviewSelectedIndex];
+                _ChuongTrais.Remove(ChuongTrai);
             });
         }
 
         void Load()
         {
-            listLoaiChuong = new List<string>();
-            foreach (var item in DataProvider.Ins.DB.LOAICHUONGs)
-            {
-                ListLoaiChuong.Add(item.MaLoaiChuong);
-            }
-            tc.MaLC.ItemsSource = ListLoaiChuong;
-            tc.MaLC.SelectedIndex = 0;
+            listLoaiChuong2 = new ObservableCollection<LOAICHUONG>(DataProvider.Ins.DB.LOAICHUONGs);
+            selectedLoaiChuong = listLoaiChuong2[0];
+            MaChuong = CreatMaChuong(selectedLoaiChuong.MaLoaiChuong as string);
         }
 
         string CreatMaChuong(string maLC)
         {
             ObservableCollection<CHUONGTRAI> Chuongs = new ObservableCollection<CHUONGTRAI>(DataProvider.Ins.DB.CHUONGTRAIs.Where(x => x.MaLoaiChuong.Equals(maLC)).ToList());
+            foreach(var chuongtrai in _ChuongTrais)
+            {
+                Chuongs.Add(chuongtrai);
+            }
             int sl = Chuongs.Count + 1;
             string maChuong = "";
             if (maLC == "LC03112022000001")

@@ -1,4 +1,5 @@
 ﻿using FarmManagementSoftware.Model;
+using FarmManagementSoftware.View.Windows.Quản_lý_kho;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace FarmManagementSoftware.ViewModel
 {
-    public class ChiTietPhieuKhoVM : BaseViewModel
+    public class ChiTietPhieuKhoVM:BaseViewModel
     {
         public NHANVIEN NVThucHien { get; set; }
         // list Loại phiếu
@@ -76,7 +78,7 @@ namespace FarmManagementSoftware.ViewModel
             listTrangThai.Add("Chưa hoàn thành");
             listTrangThai.Add("Đã hủy");
 
-
+         
 
             loadPhieuHangHoa(phieuhanghoa);
             defineCommand(phieuhanghoa);
@@ -108,10 +110,10 @@ namespace FarmManagementSoftware.ViewModel
             {
                 if (selectedLoaiPhieu != "Phiếu kiểm kho" && phieuhanghoa != null)
                 {
-                    if (selectedLoaiPhieu == "Phiếu nhập kho")
+                    if(selectedLoaiPhieu == "Phiếu nhập kho")
                     {
                         updateHangHoaTrongKhoPhieuNhap(phieuhanghoa);
-                    }
+                    }   
                     else
                     {
                         updateHangHoaTrongKhoPhieuXuat(phieuhanghoa);
@@ -139,7 +141,7 @@ namespace FarmManagementSoftware.ViewModel
             selectedTrangThai = phieuhanghoa.TrangThai;
             TongTien = phieuhanghoa.TongTien;
 
-            if (phieuhanghoa.DOITAC != null)
+            if(phieuhanghoa.DOITAC != null)
             {
                 maKH = phieuhanghoa.MaDoiTac;
                 tenKH = phieuhanghoa.DOITAC.TenDoiTac;
@@ -148,7 +150,7 @@ namespace FarmManagementSoftware.ViewModel
                 sdt = phieuhanghoa.DOITAC.SDT;
             }
 
-            if (phieuhanghoa.NHANVIEN1 != null)
+            if(phieuhanghoa.NHANVIEN1 != null)
             {
                 maNVN = phieuhanghoa.MaNhanVienNhan;
                 tenNVN = phieuhanghoa.NHANVIEN1.HoTen;
@@ -170,16 +172,16 @@ namespace FarmManagementSoftware.ViewModel
         }
         void updateHangHoaTrongKhoPhieuNhap(PHIEUHANGHOA phieunhap = null)
         {
-            if (phieunhap != null)
+            if(phieunhap != null)
             {
-                if (phieunhap.TrangThai == "Đã hoàn thành" && selectedTrangThai != "Đã hoàn thành")
+                if (phieunhap.TrangThai == "Đã hoàn thành" && selectedTrangThai!= "Đã hoàn thành")
                 {
                     foreach (var item in phieunhap.CT_PHIEUHANGHOA)
                     {
                         item.HANGHOA.SoLuongTonKho -= item._soLuong;
                     }
                 }
-                else if (phieunhap.TrangThai != "Đã hoàn thành" && selectedTrangThai == "Đã hoàn thành")
+                else if(phieunhap.TrangThai != "Đã hoàn thành" && selectedTrangThai == "Đã hoàn thành")
                 {
                     foreach (var item in phieunhap.CT_PHIEUHANGHOA)
                     {
@@ -193,7 +195,7 @@ namespace FarmManagementSoftware.ViewModel
         }
         void updateHangHoaTrongKhoPhieuXuat(PHIEUHANGHOA phieuxuat = null)
         {
-            if (phieuxuat != null)
+            if(phieuxuat != null)
             {
                 if (phieuxuat.TrangThai == "Đã hoàn thành" && selectedTrangThai != "Đã hoàn thành")
                 {

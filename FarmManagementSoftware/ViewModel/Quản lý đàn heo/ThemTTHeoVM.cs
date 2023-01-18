@@ -1,9 +1,13 @@
-﻿using FarmManagementSoftware.Model;
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
+using FarmManagementSoftware.Model;
+using FarmManagementSoftware.View.Windows;
+using FarmManagementSoftware.View.Windows.Quản_lý_giống_heo;
+using FarmManagementSoftware.View.Windows.Quản_lý_loại_heo;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,6 +21,7 @@ namespace FarmManagementSoftware.ViewModel
 {
     public class ThemTTHeoVM : BaseViewModel
     {
+        private string matim;
         private string _MaHeo;
         private string _MaLoaiHeo;
         private string _MaGiongHeo;
@@ -45,7 +50,7 @@ namespace FarmManagementSoftware.ViewModel
         public LOAIHEO SelectedLoai { get; set; }
         public GIONGHEO SelectedGiong { get; set; }
         public CHUONGTRAI SelectedChuong { get; set; }
-        public string MaHeo { get => _MaHeo; set { _MaHeo = value; OnPropertyChanged(); } }
+        public string MaHeo { get => _MaHeo; set { _MaHeo=value;OnPropertyChanged(); } }
         public string MaLoaiHeo { get => _MaLoaiHeo; set { _MaLoaiHeo = value; OnPropertyChanged(); } }
         public string MaGiongHeo { get => _MaGiongHeo; set { _MaGiongHeo = value; OnPropertyChanged(); } }
         public string GioiTinh { get => _GioiTinh; set { _GioiTinh = value; OnPropertyChanged(); } }
@@ -70,7 +75,7 @@ namespace FarmManagementSoftware.ViewModel
         public ThemTTHeoVM()
         {
             thamso = DataProvider.Ins.DB.THAMSOes.First();
-            HEO X = new HEO();
+            HEO X=new HEO();
             X.MaHeo = "Không chọn";
             SelectedMe = SelectedCha = X;
             NguonGoc = "Sinh trong trang trại";
@@ -79,11 +84,10 @@ namespace FarmManagementSoftware.ViewModel
             ListMe = new ObservableCollection<HEO>().ToList();
             ListCha = new ObservableCollection<HEO>().ToList();
             ListLoai = new ObservableCollection<LOAIHEO>(DataProvider.Ins.DB.LOAIHEOs);
-            ListCha.Add(X);
-            var Cha = new ObservableCollection<HEO>(DataProvider.Ins.DB.HEOs.Where(x => x.GioiTinh == "Đực")).ToList();
-
-            foreach (HEO x in Cha)
-            {
+            ListCha.Add(X); 
+            var Cha = new ObservableCollection<HEO>(DataProvider.Ins.DB.HEOs.Where(x=>x.GioiTinh=="Đực")).ToList();
+            
+            foreach(HEO x in Cha){
                 ListCha.Add(x);
             }
             ListMe.Add(X);
@@ -93,7 +97,7 @@ namespace FarmManagementSoftware.ViewModel
                 ListMe.Add(x);
             }
             ListGiong = new ObservableCollection<GIONGHEO>(DataProvider.Ins.DB.GIONGHEOs);
-            ListChuong = new ObservableCollection<CHUONGTRAI>(DataProvider.Ins.DB.CHUONGTRAIs.Where(x => x.SuaChuaToiDa > x.SoLuongHeo).ToList());
+            ListChuong = new ObservableCollection<CHUONGTRAI>(DataProvider.Ins.DB.CHUONGTRAIs.Where(x=>x.SuaChuaToiDa>x.SoLuongHeo).ToList());
             MaHeo = LayMa();
 
             AddCommand = new RelayCommand<TextBox>((p) => {
@@ -150,7 +154,7 @@ namespace FarmManagementSoftware.ViewModel
                 HeoAdd.LOAIHEO = SelectedLoai;
                 HeoAdd.GIONGHEO = new GIONGHEO();
                 HeoAdd.GIONGHEO = SelectedGiong;
-                if (SelectedMe.MaHeo != "Không chọn")
+                if(SelectedMe.MaHeo!="Không chọn")
                     HeoAdd.MaHeoMe = SelectedMe.MaHeo;
                 if (SelectedCha.MaHeo != "Không chọn")
                     HeoAdd.MaHeoCha = SelectedCha.MaHeo; ;
@@ -162,7 +166,7 @@ namespace FarmManagementSoftware.ViewModel
                     return;
                 ListHeoAdd.Add(HeoAdd);
                 ClearForm();
-
+               
             });
 
             HuyCommand = new RelayCommand<Window>((p) => { return true; }, p =>
@@ -188,7 +192,7 @@ namespace FarmManagementSoftware.ViewModel
                 string filePath = "";
                 OpenFileDialog dialog = new OpenFileDialog();
                 dialog.Filter = "Excel | *.xlsx";
-                if (dialog.ShowDialog() == DialogResult.OK)
+                if (dialog.ShowDialog()==DialogResult.OK)
                 {
                     filePath = dialog.FileName;
                 }
@@ -203,13 +207,15 @@ namespace FarmManagementSoftware.ViewModel
 
                     var package = new ExcelPackage(dialog.FileName);
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-                    for (int i = worksheet.Dimension.Start.Row + 1; i <= worksheet.Dimension.End.Row; i++)
+                    if (worksheet.Dimension == null || worksheet.Dimension.End.Row<=1)
+                        throw new Exception();
+                    for(int i=worksheet.Dimension.Start.Row+1;i<=worksheet.Dimension.End.Row;i++)
                     {
                         int j = 1;
                         HeoAdd = new HEO();
                         HeoAdd.MaHeo = LayMa();
                         HeoAdd.GioiTinh = worksheet.Cells[i, j++].Value.ToString();
-                        HeoAdd.NgaySinh = DateTime.Parse(worksheet.Cells[i, j++].Value.ToString());
+                        HeoAdd.NgaySinh = DateTime.Parse( worksheet.Cells[i, j++].Value.ToString());
 
                         HeoAdd.TrongLuong = int.Parse(worksheet.Cells[i, j++].Value.ToString());
 
@@ -217,12 +223,12 @@ namespace FarmManagementSoftware.ViewModel
                         HeoAdd.LOAIHEO = new LOAIHEO();
                         foreach (LOAIHEO loai in ListLoai)
                         {
-                            if (tenloai == loai.TenLoaiHeo)
+                            if(tenloai == loai.TenLoaiHeo)
                             {
-                                HeoAdd.LOAIHEO = loai;
-                                break;
+                                HeoAdd.LOAIHEO= loai;
+                                 break;
                             }
-
+                           
                         }
                         var tengiong = worksheet.Cells[i, j++].Value.ToString();
                         HeoAdd.GIONGHEO = new GIONGHEO();
@@ -234,9 +240,9 @@ namespace FarmManagementSoftware.ViewModel
                                 break;
                             }
                         }
-                        if (worksheet.Cells[i, j++].Value != null)
-                            HeoAdd.MaHeoMe = worksheet.Cells[i, j].Value.ToString();
-
+                        if(worksheet.Cells[i, j++].Value!=null)
+                             HeoAdd.MaHeoMe = worksheet.Cells[i, j].Value.ToString();
+                        
                         if (worksheet.Cells[i, j++].Value != null)
                             HeoAdd.MaHeoCha = worksheet.Cells[i, j].Value.ToString();
                         var mchuong = worksheet.Cells[i, j++].Value.ToString();
@@ -251,8 +257,7 @@ namespace FarmManagementSoftware.ViewModel
                         }
                         HeoAdd.TinhTrang = worksheet.Cells[i, j++].Value.ToString();
                         HeoAdd.NguonGoc = worksheet.Cells[i, j++].Value.ToString();
-                        if (HeoAdd.CHUONGTRAI.MaChuong == null)
-                        {
+                        if(HeoAdd.CHUONGTRAI.MaChuong == null) {
                             MessageBox.Show("Chuồng nuôi " + mchuong + " đã đầy!");
                             return;
                         }
@@ -280,7 +285,7 @@ namespace FarmManagementSoftware.ViewModel
                     else
                     {
                         MessageBox.Show("Sức chứa của chuồng không đủ. Heo" + item.MaHeo + " chưa được lưu");
-                    }
+                    }    
                 }
                 DataProvider.Ins.DB.SaveChanges();
                 MessageBox.Show("Thêm thành công");
@@ -333,7 +338,7 @@ namespace FarmManagementSoftware.ViewModel
         bool KiemTra()
         {
             string msg;
-            if (HeoAdd.GioiTinh == "Cái" && HeoAdd.LOAIHEO.TenLoaiHeo.Contains("đực"))
+            if (HeoAdd.GioiTinh=="Cái" && HeoAdd.LOAIHEO.TenLoaiHeo.Contains("đực"))
             {
                 msg = "Chọn sai giới tính hoặc loại heo";
                 MessageBox.Show(msg);
@@ -346,7 +351,7 @@ namespace FarmManagementSoftware.ViewModel
                 return false;
             }
             TimeSpan tuoiheo = (TimeSpan)(DateTime.Now.Date - HeoAdd.NgaySinh);
-            if (tuoiheo.Days < thamso.TuoiNhapDan && HeoAdd.LOAIHEO.TenLoaiHeo != "Heo con")
+            if(tuoiheo.Days < thamso.TuoiNhapDan && HeoAdd.LOAIHEO.TenLoaiHeo != "Heo con")
             {
                 msg = "Heo còn quá nhỏ, chưa thể nhập đàn";
                 MessageBox.Show(msg);
@@ -381,7 +386,7 @@ namespace FarmManagementSoftware.ViewModel
                 MessageBox.Show(msg);
                 return false;
             }
-            else if (HeoAdd.LOAIHEO.TenLoaiHeo.Contains("đực") && (HeoAdd.CHUONGTRAI.MaChuong.Contains("N") || HeoAdd.CHUONGTRAI.MaChuong.Contains("HD")))
+            else if (HeoAdd.LOAIHEO.TenLoaiHeo.Contains("đực") && (HeoAdd.CHUONGTRAI.MaChuong.Contains("N")||HeoAdd.CHUONGTRAI.MaChuong.Contains("HD")))
             {
                 msg = "Heo đực không thể ở chuồng heo nái khác";
                 MessageBox.Show(msg);
@@ -399,15 +404,15 @@ namespace FarmManagementSoftware.ViewModel
         {
             HeoAdd = null;
             MaHeo = LayMa();
-            GioiTinh = null;
-            NgaySinh = null;
-            TrongLuong = 0;
-            SelectedLoai = null;
-            MaLoaiHeo = null;
-            SelectedGiong = null;
-            MaGiongHeo = null;
+            GioiTinh=null;
+            NgaySinh=null;
+            TrongLuong=0;
+            SelectedLoai=null;
+            MaLoaiHeo=null;
+            SelectedGiong=null;
+            MaGiongHeo=null;
             MaHeoCha = MaHeoMe = "Không chọn";
-            SelectedChuong = null;
+            SelectedChuong=null;
             MaChuong = null;
             HEO X = new HEO();
             X.MaHeo = "Không chọn";

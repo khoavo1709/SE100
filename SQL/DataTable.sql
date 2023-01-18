@@ -122,7 +122,6 @@ create table HANGHOA
 	CONSTRAINT PK_HH PRIMARY KEY (MaHangHoa)
 )
 
-
 Go 
 create table NHANVIEN 
 (
@@ -224,6 +223,7 @@ create table CT_PHIEUSUACHUA
 	SoPhieu char(16),
 	MaChuong char(16),
 	MoTa ntext,
+	ThanhTien int,
 	constraint PK_CT_PSC PRIMARY KEY (SoPhieu, MaChuong)
 )
 
@@ -305,8 +305,8 @@ CREATE TABLE THAMSO
 	id INT IDENTITY primary key,
 	XuatChuongMin	int,
 	XuatChuongMax	int,
-	MonthXuatChuongMin	int,
-	MonthXuatChuongMax int,
+	XuatChuongMin	int,
+	XuatChuongMax int,
 	TuoiNhapDan		int,
 	CanHuyet	int,
 	TuoiPhoiGiongDuc int,
@@ -314,10 +314,9 @@ CREATE TABLE THAMSO
 	RePhoiGiongDuc int,
 	RePhoiGiongCai int,
 	ThucAnMotNgay int,
-	ThucAnMax int
+	ThucAnMax int,
+	SoNgayMangThai int,
 )
-
-insert into THAMSO values (0,0,0,0,0,0,0,0,0,0,0,0)
 
 Go 
 Create Table QuyDinhTiemHeo
@@ -490,5 +489,7 @@ INSERT INTO ListActionDetail VALUES (N'Quản lý kho ');
 INSERT INTO ListActionDetail VALUES (N'Quản lý tài chính');
 INSERT INTO ListActionDetail VALUES (N'Quản lý cây mục tiêu');
 INSERT INTO ListActionDetail VALUES (N'Quản lý nhật ký');
+
+INSERT INTO THAMSO  VALUES (80,120,90,120,21,3,120,120,2,2,20,25,98);
 
 

@@ -67,6 +67,11 @@ namespace FarmManagementSoftware.ViewModel
                 {
                     lich.border_Lich.BorderBrush = Brushes.AliceBlue;
                 }
+                else if (item.NgayLam == DateTime.Today.Date && item.TrangThai == "Chưa làm")
+                {
+                    var bc = new BrushConverter();
+                    lich.border_Lich.BorderBrush = (Brush)bc.ConvertFrom("#F57C00");
+                }
 
                 wd.sp_ListLich.Children.Add(lich);
             }

@@ -9,7 +9,7 @@ namespace FarmManagementSoftware.Model
 {
     public class NguoiGui: BaseViewModel
     {
-        public bool _IsChecked;
+        private bool _IsChecked;
         public bool IsChecked { get => _IsChecked; set { _IsChecked = value; OnPropertyChanged(); } } 
         public NHANVIEN nhanvien { get; set; }  
         public NguoiGui()

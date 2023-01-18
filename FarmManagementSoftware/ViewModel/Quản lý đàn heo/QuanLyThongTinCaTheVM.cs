@@ -16,10 +16,10 @@ using Microsoft.Expression.Interactivity.Media;
 namespace FarmManagementSoftware.ViewModel
 {
     public class QuanLyThongTinCaTheVM : BaseViewModel
-    {
+    {       
         private ObservableCollection<HEO> _ListHeo;
 
-        public ObservableCollection<HEO> ListHeo { get => _ListHeo; set { _ListHeo = value; OnPropertyChanged(); } }
+        public ObservableCollection<HEO> ListHeo { get => _ListHeo; set{ _ListHeo = value; OnPropertyChanged(); } }
         public ObservableCollection<LOAIHEO> ListLoai { get; set; }
         public ObservableCollection<GIONGHEO> ListGiong { get; set; }
 
@@ -30,7 +30,7 @@ namespace FarmManagementSoftware.ViewModel
         public GIONGHEO SelectedGiong { get; set; }
         public List<string> ListTenLoai { get; set; }
         public List<string> ListTenGiong { get; set; }
-        public List<string> ListTinhTrang { get; set; }
+        public List <string> ListTinhTrang { get; set; }
         public List<string> ListNguonGoc { get; set; }
 
         public ICommand AddCommand { get; set; }
@@ -64,9 +64,9 @@ namespace FarmManagementSoftware.ViewModel
         {
             DateTime Now = DateTime.Now;
             mindate = new DateTime(Now.Year, Now.Month, 1);
-            maxdate = new DateTime(Now.Year, Now.Month, Now.Day + 1);
+            maxdate = new DateTime(Now.Year, Now.Month, Now.Day+1);
             ListHeo = new ObservableCollection<HEO>(DataProvider.Ins.DB.HEOs);
-            minTL = (int)ListHeo.Min(x => x.TrongLuong);
+            minTL= (int)ListHeo.Min(x => x.TrongLuong);
             maxTL = (int)ListHeo.Max(x => x.TrongLuong);
 
             ListLoai = new ObservableCollection<LOAIHEO>(DataProvider.Ins.DB.LOAIHEOs);
@@ -74,7 +74,7 @@ namespace FarmManagementSoftware.ViewModel
             foreach (LOAIHEO l in ListLoai)
             {
                 ListTenLoai.Add(l.TenLoaiHeo);
-            }
+            }    
             ListGiong = new ObservableCollection<GIONGHEO>(DataProvider.Ins.DB.GIONGHEOs);
             ListTenGiong = new List<string>();
             foreach (GIONGHEO l in ListGiong)
@@ -145,7 +145,7 @@ namespace FarmManagementSoftware.ViewModel
             });
             TimKiemTheoNgaySinhMinCommand = new RelayCommand<DatePicker>((p) => { return true; }, p =>
             {
-                if (p.Text.Count() > 0)
+                if ( p.Text.Count()>0)
                 {
                     mindate = p.SelectedDate;
                 }
@@ -155,7 +155,7 @@ namespace FarmManagementSoftware.ViewModel
             });
             TimKiemTheoNgaySinhMaxCommand = new RelayCommand<DatePicker>((p) => { return true; }, p =>
             {
-                if (p.SelectedDate < mindate)
+                if(p.SelectedDate < mindate)
                 {
                     MessageBox.Show("Ngày đến phải sau ngày từ");
                     return;
@@ -181,8 +181,8 @@ namespace FarmManagementSoftware.ViewModel
                 return true;
             }, p =>
             {
-                if (p.Text.Count() > 0)
-                    maxTL = int.Parse(p.Text);
+                if(p.Text.Count()>0)
+                     maxTL=int.Parse(p.Text);
                 else maxTL = 0;
                 TimKiem();
             });
@@ -204,8 +204,8 @@ namespace FarmManagementSoftware.ViewModel
             });
             TTCheck = new RelayCommand<CheckBox>((p) => { return true; }, p =>
             {
-                if (p.IsChecked == true)
-                    ListTinhTrang.Add(p.Content.ToString());
+               if(p.IsChecked==true)
+                   ListTinhTrang.Add(p.Content.ToString());
                 else ListTinhTrang.Remove(p.Content.ToString());
                 TimKiem();
             });
@@ -319,8 +319,7 @@ namespace FarmManagementSoftware.ViewModel
                                    on a.MaHeo equals h.MaHeo
                                    join HEO j in hEOs8
                                    on a.MaHeo equals j.MaHeo
-                                   orderby a.MaHeo descending
-                                   select a;
+                                   orderby a.MaHeo descending select a;
 
             foreach (HEO h in heo)
             {

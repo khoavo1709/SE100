@@ -24,12 +24,15 @@ namespace FarmManagementSoftware.ViewModel
         public ObservableCollection<PHIEUHEO> ListPhieuXuat { get => _ListPhieuXuat; set { _ListPhieuXuat = value; OnPropertyChanged(); } }
 
         private PHIEUHEO selectedPhieu;
+        private DateTime? _mindate;
+        private DateTime? _maxdate;
+
         public PHIEUHEO SelectedPhieu { get => selectedPhieu; set => selectedPhieu = value; }
         public List<string> ListTrangThai { get; set; }
         public string TenNV { get; set; }
         public string TenKH { get; set; }
-        public DateTime? mindate;
-        public DateTime? maxdate;
+        public DateTime? mindate { get => _mindate; set { _mindate = value; OnPropertyChanged(); } }
+        public DateTime? maxdate { get => _maxdate; set { _maxdate = value; OnPropertyChanged(); } }
 
         public ICommand TaoPhieuCommand { get; set; }
         public ICommand TimKiemTheoTenNVCommand { get; set; }
@@ -41,7 +44,14 @@ namespace FarmManagementSoftware.ViewModel
 
         public LapPhieuBanNhapHeoVM()
         {
+            DateTime Now = DateTime.Now;
+            mindate = new DateTime(Now.Year, Now.Month, 1);
+            maxdate = new DateTime(Now.Year, Now.Month, Now.Day + 1);
             ListTrangThai = new List<string>();
+            ListTrangThai.Add("Đã hoàn thành");
+            ListTrangThai.Add("Chưa hoàn thành");
+            ListTrangThai.Add("Đã huỷ");
+
             ListPhieuNhap = new ObservableCollection<PHIEUHEO>(DataProvider.Ins.DB.PHIEUHEOs.Where(x => x.LoaiPhieu == "Phiếu nhập heo"));
             ListPhieuXuat = new ObservableCollection<PHIEUHEO>(DataProvider.Ins.DB.PHIEUHEOs.Where(x => x.LoaiPhieu == "Phiếu xuất heo"));
 
@@ -51,23 +61,23 @@ namespace FarmManagementSoftware.ViewModel
                 PhieuBanNhapHeoVM Ph = new PhieuBanNhapHeoVM();
                 PhieuNhapBanHeo.DataContext = Ph;
                 PhieuNhapBanHeo.ShowDialog();
-                
+                TimKiem();
             });
             TimKiemTheoNgayMinCommand = new RelayCommand<DatePicker>((p) => { return true; }, p =>
             {
                 if (p.SelectedDate != DateTime.Today && p.SelectedDate != null)
                 {
                     mindate = p.SelectedDate;
-                    TimKiem();
                 }
+                TimKiem();
             });
             TimKiemTheoNgayMaxCommand = new RelayCommand<DatePicker>((p) => { return true; }, p =>
             {
                 if (p.SelectedDate != DateTime.Today && p.SelectedDate != null)
                 {
                     maxdate = p.SelectedDate;
-                    TimKiem();
                 }
+                TimKiem();
             });
             TimKiemTheoTenNVCommand = new RelayCommand<TextBox>((p) => { return true; }, p =>
             {

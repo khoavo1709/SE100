@@ -17,6 +17,7 @@ namespace FarmManagementSoftware.Model
         public string SoPhieu { get; set; }
         public string MaChuong { get; set; }
         public string MoTa { get; set; }
+        public Nullable<int> ThanhTien { get; set; }
     
         public virtual CHUONGTRAI CHUONGTRAI { get; set; }
         public virtual PHIEUSUACHUA PHIEUSUACHUA { get; set; }

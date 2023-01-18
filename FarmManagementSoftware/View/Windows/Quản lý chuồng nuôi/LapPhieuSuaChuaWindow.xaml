@@ -33,8 +33,10 @@
                     <StackPanel Orientation="Vertical" Margin="10,0,0,0">
                         <DatePicker Grid.Column="0"
                                     x:Name="DTPK_1"
+                                     FontWeight="Normal"
                         HorizontalAlignment="Left"
                         Width="250"
+                                    SelectedDate="{Binding NgaySuaChua1}"
                         materialDesign:HintAssist.Hint="Từ ngày"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
@@ -50,7 +52,9 @@
                         <DatePicker Grid.Column="1"
                                     x:Name="DTPK_2"
                         Width="250"
+                                    FontWeight="Normal"
                         HorizontalAlignment="Left"
+                                    SelectedDate="{Binding NgaySuaChua2}"
                         materialDesign:HintAssist.Hint="Đến ngày"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
@@ -68,17 +72,17 @@
                 <Expander IsExpanded="True" Header="Trạng thái" FontWeight="Bold" Background="White">
                     <StackPanel Orientation="Vertical" Margin="25,0,0,0">
                         <Grid Margin="0,0,0,10">
-                            <CheckBox Name="Ck_1"
+                            <CheckBox Name="Ck_1" IsChecked="True"
                                       Content="Chưa hoàn thành"
                                       Command="{Binding TimKiemTheoTrangThaiCommand}" CommandParameter="{Binding ElementName=Ck_1}"/>
                         </Grid>
                         <Grid Margin="0,0,0,10">
-                            <CheckBox Name="Ck_2"
+                            <CheckBox Name="Ck_2" IsChecked="True"
                                       Content="Đã hoàn thành"
                                       Command="{Binding TimKiemTheoTrangThaiCommand}" CommandParameter="{Binding ElementName=Ck_2}"/>
                         </Grid>
                         <Grid Margin="0,0,0,10">
-                            <CheckBox Name="Ck_3"
+                            <CheckBox Name="Ck_3" IsChecked="True"
                                       Content="Đã hủy"
                                       Command="{Binding TimKiemTheoTrangThaiCommand}" CommandParameter="{Binding ElementName=Ck_3}"/>
                         </Grid>
@@ -159,30 +163,24 @@
                         <ListView AllowDrop="True"
                                       x:Name="Listviewk"
                                       ItemsSource="{Binding ListPhieuSuaChua}"
-                                      SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                                      SelectedIndex="{Binding listviewSelectedIndex, Mode=TwoWay}">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Số phiếu" DisplayMemberBinding="{Binding SoPhieu}"></GridViewColumn>
-                                    <GridViewColumn Header="Ngày sửa chữa" DisplayMemberBinding="{Binding NgaySuaChua}"></GridViewColumn>
-                                    <GridViewColumn Header="Mã nhân viên" DisplayMemberBinding="{Binding MaNhanVien}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày sửa chữa" DisplayMemberBinding="{Binding NgaySuaChua, StringFormat= {} {0: dd/MM/yyyy}}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên nhân viên" DisplayMemberBinding="{Binding NHANVIEN.HoTen}"></GridViewColumn>
                                     <GridViewColumn Header="Tên đối tác" DisplayMemberBinding="{Binding DOITAC.TenDoiTac}"></GridViewColumn>
                                     <GridViewColumn Header="Ghi chú" DisplayMemberBinding="{Binding GhiChu}"></GridViewColumn>
                                     <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
-                                    <GridViewColumn Header="Tổng tiền" DisplayMemberBinding="{Binding TongTien}"></GridViewColumn>
-                                    <GridViewColumn Header="Thao tác" Width="160">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Menu>
-                                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"  Width="48" DataContext="{StaticResource LapPhieuSuaChuaVM}" Command="{Binding EditCommand}"></MenuItem>
-                                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"  Width="48" DataContext="{StaticResource LapPhieuSuaChuaVM}" Command="{Binding DeleteCommand}"></MenuItem>
-                                                </Menu>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
+                                    <GridViewColumn Header="Tổng tiền" DisplayMemberBinding="{Binding TongTien,StringFormat={}{0:#,##0}}"></GridViewColumn>
                                 </GridView>
                             </ListView.View>
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}" Header="Sửa" Command="{Binding EditCommand}"></MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
                         </ListView>
-
                     </materialDesign:Card>
 
                 </StackPanel>

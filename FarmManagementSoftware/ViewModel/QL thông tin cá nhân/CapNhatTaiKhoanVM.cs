@@ -144,6 +144,12 @@ namespace FarmManagementSoftware.ViewModel
         }
         void UpdateInformation()
         {
+            if (!IsValidEmail(Email))
+            {
+                MessageBox.Show("Email không hợp lệ");
+                return;
+            }
+
             if (MessageBox.Show("Bạn có chắc muốn thay đổi thông tin?", "Chú ý", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 MainWindowMD.NhanVien.HoTen = HoTen;
@@ -231,6 +237,25 @@ namespace FarmManagementSoftware.ViewModel
             {
                 imageIn.Save(ms, imageIn.RawFormat);
                 return ms.ToArray();
+            }
+        }
+
+        bool IsValidEmail(string email)
+        {
+            var trimmedEmail = email.Trim();
+
+            if (trimmedEmail.EndsWith("."))
+            {
+                return false; // suggested by @TK-421
+            }
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == trimmedEmail;
+            }
+            catch
+            {
+                return false;
             }
         }
 

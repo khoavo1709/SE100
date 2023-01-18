@@ -86,7 +86,7 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_loại_heo
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             LOAIHEO lOAIHEO = (LOAIHEO)listviewHeo.SelectedItem;
-            if (lOAIHEO != null)
+            if(lOAIHEO != null)
                 Delete(lOAIHEO);
         }
 
@@ -114,7 +114,7 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_loại_heo
                 DataProvider.Ins.DB.SaveChanges();
                 reloadUsingDTProvider();
             }
-
+            
             catch (Exception)
             {
 
@@ -147,7 +147,7 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_loại_heo
         }
 
         private void Delete(LOAIHEO lOAIHEO)
-        {
+        {          
             try
             {
                 DataProvider.Ins.DB.LOAIHEOs.Remove(lOAIHEO);

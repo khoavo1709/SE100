@@ -98,4 +98,61 @@
             </StackPanel>
         </materialDesign:Card>
     </Grid>
+    <!--<Grid Margin="25 10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="251*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="493*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="0,0,0,56.6" Grid.RowSpan="2"> Mã hàng hoá</TextBlock>
+        <TextBlock Margin="99,0,0,56.6" Grid.Row="0" Text="{Binding hangHoa.MaHangHoa, Mode=TwoWay}" Grid.ColumnSpan="4" Grid.RowSpan="2"></TextBlock>
+        <TextBox Grid.Row="1"
+                 Margin="10,7.2,10,12.6"
+                 Text="{Binding hangHoa.TenHangHoa, Mode=TwoWay}" 
+                 materialDesign:HintAssist.Hint="Tên hàng hoá"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 VerticalAlignment="Center" Grid.ColumnSpan="4" />
+        <TextBox Grid.Row="2"
+                 Margin="10,8.4,10,12.2"
+                 Text="{Binding hangHoa.DonGia, Mode=TwoWay}" 
+                 materialDesign:HintAssist.Hint="Đơn giá"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 VerticalAlignment="Center" Grid.ColumnSpan="4" />
+        <TextBox Grid.Row="3"
+                 Margin="10,7.8,10,12.8"
+                 Text="{Binding hangHoa.SoLuongTonKho, Mode=TwoWay}" 
+                 materialDesign:HintAssist.Hint="Số lượng tồn kho"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 VerticalAlignment="Center" Grid.ColumnSpan="4" />
+        <TextBox Grid.Row="4"
+                 Margin="10,8.2,10,12.4"
+                 Text="{Binding hangHoa.TinhTrang, Mode=TwoWay}" 
+                 materialDesign:HintAssist.Hint="Tình trạng"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 VerticalAlignment="Center" Grid.ColumnSpan="4" />
+        <TextBox Grid.Row="5"
+                 Margin="10,7.6,10,12.2"
+                 Text="{Binding hangHoa.LoaiHangHoa, Mode=TwoWay}" 
+                 materialDesign:HintAssist.Hint="Loại hàng hoá"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 VerticalAlignment="Center" Grid.ColumnSpan="4" />
+        <Button Grid.Row="6"
+                Background="#3ab19b"
+                Content="Hoàn tất"
+                Width="150"
+                VerticalAlignment="Bottom"
+                Command="{Binding SuaCommand}"
+                CommandParameter="{Binding ElementName=TTHangHoa}" Grid.Column="2" Margin="45.8,0,297,0" Grid.ColumnSpan="2" />
+    </Grid>-->
 </Window>

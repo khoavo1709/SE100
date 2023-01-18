@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WPFWindow = System.Windows;
+using System.Collections.ObjectModel;
 
 namespace FarmManagementSoftware.View.Windows
 {
@@ -24,6 +25,7 @@ namespace FarmManagementSoftware.View.Windows
     /// </summary>
     public partial class LichPhoiGiongWindow : WPFWindow.Window
     {
+        public ObservableCollection<HEO> HeodaChon { get; set; }
         public List<LICHPHOIGIONG> LichPhoiGiong { get; set; }
         public LICHPHOIGIONG lICHPHOIGIONG { get; set; }
         public LichPhoiGiongWindow()
@@ -51,18 +53,18 @@ namespace FarmManagementSoftware.View.Windows
         {
             ShowListHeoc();
         }
-        
+
         void Add_LichPhoiGiong()
         {
             LICHPHOIGIONG lichphoigiong = new LICHPHOIGIONG();
             lichphoigiong.MaLichPhoi = Lichphoigiongcode_generate();
-            
+
             lichphoigiong.MaHeoDuc = Pigcode_textd.Text;
             lichphoigiong.MaHeoCai = Pigcode_textn.Text;
             lichphoigiong.Trangthai = TrangThai.Text;
-            
-            //try
-            //{
+
+            try
+            {
             //1
             if (Datepicker_ngayde.SelectedDate == null)
             {
@@ -108,60 +110,61 @@ namespace FarmManagementSoftware.View.Windows
             {
                 lichphoigiong.NgayPhoiGiongLaiDuKien = NgayPhoiGiongLai.SelectedDate;
             }
-            /*}
-            catch (Exception)
+            }
+                    catch (Exception)
             {
                 MessageBox.Show("Ngày nhập không hợp lệ");
                 return;
             }
             try
-            {*/
-            //1
-            if (Socon.Text == "")
             {
-                lichphoigiong.SoCon = null;
+                //1
+                if (Socon.Text == "")
+                {
+                    lichphoigiong.SoCon = null;
+                }
+                else
+                {
+                    lichphoigiong.SoCon = int.Parse(Socon.Text);
+                }
+                //2
+                if (Sochet.Text == "")
+                {
+                    lichphoigiong.SoConChet = null;
+                }
+                else
+                {
+                    lichphoigiong.SoConChet = int.Parse(Sochet.Text);
+                }
+                //3
+                if (Soconchon.Text == "")
+                {
+                    lichphoigiong.SoConChon = null;
+                }
+                else
+                {
+                    lichphoigiong.SoConChon = int.Parse(Soconchon.Text);
+                }
+
             }
-            else
-            {
-                lichphoigiong.SoCon = int.Parse(Socon.Text);
-            }
-            //2
-            if (Sochet.Text == "")
-            {
-                lichphoigiong.SoConChet = null;
-            }
-            else
-            {
-                lichphoigiong.SoConChet = int.Parse(Sochet.Text);
-            }
-            //3
-            if (Soconchon.Text == "")
-            {
-                lichphoigiong.SoConChon = null;
-            }
-            else
-            {
-                lichphoigiong.SoConChon = int.Parse(Soconchon.Text);
-            }
-            
-            /*}
             catch (Exception)
             {
 
                 MessageBox.Show("Hãy nhập giá trị số", "", MessageBoxButton.OK);
-            }*/
-                try
-                {
-                    DataProvider.Ins.DB.LICHPHOIGIONGs.Add(lichphoigiong);
-                    DataProvider.Ins.DB.SaveChanges();
-                }
-                catch (Exception)
-                {
+            }
+            try
+            {
+                DataProvider.Ins.DB.LICHPHOIGIONGs.Add(lichphoigiong);
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch (Exception)
+            {
 
-                    MessageBox.Show("Có thông tin nhập bị lỗi, yêu cầu nhập lại.", "", MessageBoxButton.OK);
-                }
-                reloadWithData();
+                MessageBox.Show("Có thông tin nhập bị lỗi, yêu cầu nhập lại.", "", MessageBoxButton.OK);
+            }
+            reloadWithData();
         }
+
 
         string Lichphoigiongcode_generate()
         {
@@ -183,6 +186,10 @@ namespace FarmManagementSoftware.View.Windows
         {
             DanhsachHeoDuc duc = new DanhsachHeoDuc();
             duc.ShowDialog();
+            if (duc.check == 0)
+            {
+                return;
+            }
             Pigcode_textd.Text = duc.TranferCode();
         }
 
@@ -190,6 +197,10 @@ namespace FarmManagementSoftware.View.Windows
         {
             DanhsachHeoCai cai = new DanhsachHeoCai();
             cai.ShowDialog();
+            if (cai.check == 0)
+            {
+                return;
+            }
             Pigcode_textn.Text = cai.TranferCode();
         }
 
@@ -240,17 +251,17 @@ namespace FarmManagementSoftware.View.Windows
             {
                 t.MaHeoDuc = tt.MaHeoDuc;
                 t.MaHeoCai = tt.MaHeoCai;
-                
+
                 t.NgayCaiSua = tt.NgayCaiSua;
                 t.NgayDuKienDe = tt.NgayDuKienDe;
                 t.NgayDeThucTe = tt.NgayDeThucTe;
                 t.NgayPhoiGiong = tt.NgayPhoiGiong;
                 t.NgayPhoiGiongLaiDuKien = tt.NgayPhoiGiongLaiDuKien;
-                
+
                 t.SoCon = tt.SoCon;
                 t.SoConChet = tt.SoConChet;
                 t.SoConChon = tt.SoConChon;
-                
+
                 t.Trangthai = tt.Trangthai;
                 try
                 {
@@ -285,9 +296,9 @@ namespace FarmManagementSoftware.View.Windows
             }
         }
 
-        private void Timkiem()
+        /*private void Timkiem()
         {
-            if ((Heoduc_code.Text != "")/*&&(Find_loaiheo.Text != "") */&& (Heocai_code.Text != ""))
+            if ((Heoduc_code.Text != "") && (Find_loaiheo.Text != "") && (Heocai_code.Text != ""))
             {
                 var ti = DataProvider.Ins.DB.LICHPHOIGIONGs.Where(s => s.MaHeoDuc.Contains(Find_date.Text)).ToList();
                 //ti = ti.Where(s => s.HEO.LOAIHEO.TenLoaiHeo.Contains(Find_loaiheo.Text)).ToList();
@@ -295,7 +306,7 @@ namespace FarmManagementSoftware.View.Windows
                 ListPhoigiong.ItemsSource = ti;
             }
 
-            /*if (FindLoaiThuoc.Text != "")
+            if (FindLoaiThuoc.Text != "")
             {
                 var ti = DataProvider.Ins.DB.LICHTIEMHEOs.Where(s => s.MaThuoc.Contains(FindLoaiThuoc.Text)).ToList();
                 Listtiemheo.ItemsSource = ti;
@@ -304,11 +315,12 @@ namespace FarmManagementSoftware.View.Windows
                 var ti = DataProvider.Ins.DB.LICHTIEMHEOs.Where(s => s.HEO.GIONGHEO.TenGiongHeo.Contains(Find_giongheo.Text)).ToList();
                 Listtiemheo.ItemsSource = ti;
             }
-        }
-    }
-    var t = DataProvider.Ins.DB.LICHTIEMHEOs.Where(s => s.MaLichTiem.Contains(Timkiem_text.Text));
-            Listtiemheo.ItemsSource = t;*/
-        }
+
+
+            var t = DataProvider.Ins.DB.LICHTIEMHEOs.Where(s => s.MaLichTiem.Contains(Timkiem_text.Text));
+            Listtiemheo.ItemsSource = t;
+        }*/
+
 
         private void Output_excel_Click(object sender, RoutedEventArgs e)
         {
@@ -350,10 +362,15 @@ namespace FarmManagementSoftware.View.Windows
                     MessageBox.Show("Dữ liệu đã được lưu thành công", "", MessageBoxButton.OK);
                 }
             }
+
+
         }
         private void FindButton_Click(object sender, RoutedEventArgs e)
         {
-            Timkiem();
+            //Timkiem();
         }
     }
 }
+
+
+

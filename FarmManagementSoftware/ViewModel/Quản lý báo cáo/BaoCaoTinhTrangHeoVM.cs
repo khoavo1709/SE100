@@ -1,6 +1,7 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
 using Microsoft.Win32;
+using FarmManagementSoftware.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,8 +19,6 @@ using DataTable = System.Data.DataTable;
 using OfficeOpenXml.Style;
 using Microsoft.Office.Interop.Excel;
 using Window = System.Windows.Window;
-using FarmManagementSoftware.Model;
-using FarmManagementSoftware.ViewModel;
 
 namespace FarmManagementSoftware.ViewModel
 {
@@ -71,7 +70,7 @@ namespace FarmManagementSoftware.ViewModel
 
             foreach (HEO item in ListHeo)
             {
-                if (!Nam.Contains(item.NgaySinh.Value.Year))
+                if(!Nam.Contains(item.NgaySinh.Value.Year))
                 {
                     Nam.Add(item.NgaySinh.Value.Year);
                 }
@@ -95,7 +94,7 @@ namespace FarmManagementSoftware.ViewModel
                 pieSeries.LabelPoint = chartPoint =>
                 string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
                 CoCauLoai.Add(pieSeries);
-
+                
             }
 
             foreach (var Giong in ListGiong)
@@ -115,7 +114,7 @@ namespace FarmManagementSoftware.ViewModel
 
             SLNam = new RelayCommand<Window>((p) =>
             {
-                return true;
+                    return true;
             }, p =>
             {
 
@@ -250,7 +249,7 @@ namespace FarmManagementSoftware.ViewModel
             {
                 Title = "Số heo nhập"
             };
-            for (int i = 0; i <= 12; i++)
+            for (int i = 0; i <=12; i++)
             {
                 int slnhap = 0;
                 foreach (var phieu in PN)

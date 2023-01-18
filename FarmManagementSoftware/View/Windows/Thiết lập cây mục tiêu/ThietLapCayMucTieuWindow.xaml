@@ -7,8 +7,9 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:FarmManagementSoftware"
         mc:Ignorable="d"
-        Title="ThietLapCayMucTieuWindow" Height="450" Width="800">
-    <Grid RenderTransformOrigin="0.501,0.492">
+        Title="ThietLapCayMucTieuWindow" Height="768"
+        Width="1024">
+    <Grid DataContext="{StaticResource ThietLapCayMucTieuVM}" RenderTransformOrigin="0.501,0.492">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -16,7 +17,7 @@
             <RowDefinition Height="80"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="0,13,0.333,0" >
+        <Grid Grid.Row="0" Margin="0,13,0.333,0" Background="White" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="cot1" Width="23*"/>
                 <ColumnDefinition Width="243*"/>
@@ -28,26 +29,724 @@
                     x:Name="OutlinedComboBox"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     materialDesign:HintAssist.Hint="Chọn năm bắt đầu"
+                    ItemsSource="{Binding lstNamBD}"
+                    SelectedItem="{Binding NamBD}"
                     Padding="50 5" Margin="10,15,10,12" VerticalAlignment="Stretch" Grid.Column="1" VerticalContentAlignment="Center"  >
-                <ComboBoxItem Content="2020"/>
-                <ComboBoxItem Content="2021"/>
-                <ComboBoxItem Content="2022"/>
             </ComboBox>
             <ComboBox
                     x:Name="OutlinedComboBox1"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     materialDesign:HintAssist.Hint="Chọn năm kết thúc"
+                    ItemsSource="{Binding lstNamKT}"
+                    SelectedItem="{Binding NamKT}"
                     Padding="50 5" Margin="22,14,22,13" VerticalAlignment="Stretch" Grid.Column="2" VerticalContentAlignment="Center"  >
-                <ComboBoxItem Content="2020"/>
-                <ComboBoxItem Content="2021"/>
-                <ComboBoxItem Content="2022"/>
             </ComboBox>
 
-            <Button x:Name="Boloc" Grid.Column="3" Background="#3ab19b" Content="Bộ Lọc" Margin="20,19,20,16" Click="BoLoc"/>
-            <Button x:Name="Muctieu_button_1" Grid.Column="4" Background="#3ab19b" Content="Đặt mục tiêu" Margin="8,18,10,17" Click="Muctieu_button"/>
+            <Button x:Name="Boloc" Grid.Column="3" Background="#3ab19b" Content="Bộ Lọc" Margin="20,19,20,16" Command="{Binding LocCommand}"/>
+            <Button x:Name="Muctieu_button_1" Grid.Column="4" Background="#3ab19b" Content="Đặt mục tiêu" Margin="8,18,10,17" Command="{Binding DatMucTieuCommand}"/>
         </Grid>
-        <ScrollViewer Margin="0,0,0.333,-0.333" Grid.Row="1" HorizontalScrollBarVisibility="Auto">
-            <Grid x:Name="showmake" RenderTransformOrigin="0.5,0.5" Background="#FFF8F6F6" ScrollViewer.CanContentScroll="True" Margin="10,0,10,10"/>
-        </ScrollViewer>
+        <Grid Grid.Row="1">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <Grid x:Name="showmake" RenderTransformOrigin="0.5,0.5" Background="#FFF8F6F6" ScrollViewer.CanContentScroll="True" Margin="10,0,10,10">
+                    <Viewbox x:Name="Zoomviewbox" Margin="0,0,-6.667,0.667">
+                        <Grid RenderTransformOrigin="0.5,0.5" Background="#FFF8F6F6" ScrollViewer.CanContentScroll="True" Height="710" Width="811">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <Path Stretch="Fill" Fill="black" 
+          Data="M -250,110 70,110 45,90 75,90 120,120 75,150 45,150 70,130 -250,130 Z" Margin="382.156,127.355,375.844,0"
+          RenderTransformOrigin=".5,.5" Width="35" Height="6" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="270"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <materialDesign:Card x:Name="the1" Height="87" Margin="313,21,304,0" VerticalAlignment="Top" Width="200" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <TextBlock x:Name="DoanhThuUocTinh" Text="{Binding Doanhthu, StringFormat={}{0:N0}}" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="17">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding isDoanhthu}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <Label Content="Mục tiêu: " Margin="10,52,0,0"></Label>
+                                    <TextBlock x:Name="DoanhThuUocTinh_uoctinh" Text="{Binding thamso.Doanhthu_muctieu, StringFormat={}{0:N0}}" HorizontalAlignment="Left" Margin="70,58,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label Content="Doanh thu ước tính" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0"/>
+                                    <ToggleButton
+                        x:Name="DoanhThuUocTinh_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,7,8" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="DoanhThuUocTinh_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding isDoanhthu}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the2" Height="70" Margin="273,146,260,0" VerticalAlignment="Top" Width="260" Background="White" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <Label x:Name="Soheotrongnam" Content="{Binding soheoconCaisuaNam}" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding issoheoconCaisuaNam}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label x:Name="Soheotrongnam_muctieu" Content="{Binding thamso.SoHeoTrongNam_MucTieu}" HorizontalAlignment="Left" Margin="70,35,0,0" VerticalAlignment="Top" FontSize="12"></Label>
+                                    <Label Content="Heo con cai sữa/nái/năm" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                                    <ToggleButton
+                        x:Name="Soheotrongnam_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="Soheotrongnam_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding issoheoconCaisuaNam}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the3" Height="70" Margin="514,254,113,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <Label x:Name="Soheocaisua" Content="{Binding soheoconCaisua}" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding issoheoconCaisua}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label x:Name="Soheocaisua_muctieu" Content="{Binding thamso.SoHeoCaiSua_muctieu}" HorizontalAlignment="Left" Margin="70,37,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label x:Name="Soheocaisua_textbox" Content="Số heo con cai sữa/nái" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                                    <ToggleButton
+                        x:Name="Soheocaisua_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="Soheocaisua_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding issoheoconCaisua}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the4" Height="70" Margin="115,254,512,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <Label x:Name="TrungbinhLua" Content="{Binding TBLuaNam}" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding isTBLuaNam}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label x:Name="TrungbinhLua_muctieu" Content="{Binding thamso.TrungBnhLua_MucTieu}" HorizontalAlignment="Left" Margin="70,37,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label x:Name="TrungbinhLua_textbox" Content="Trung bình lứa/nái/năm" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                                    <ToggleButton
+                        x:Name="TrungbinhLua_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,7,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="TrungbinhLua_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding isTBLuaNam}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the5" Height="70" Margin="413,365,214,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <Label x:Name="Soheoconsong" Content="{Binding soheoconsong}" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding issoheoconsong}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label x:Name="Soheoconsong_muctieu" Content="{Binding thamso.SoHeoConSong_MucTieu}" HorizontalAlignment="Left" Margin="70,37,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label x:Name="Soheoconsong_textbox" Content="Số heo con còn sống/lứa" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                                    <ToggleButton
+                        x:Name="Soheoconsong_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="Soheoconsong_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding issoheoconsong}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the6" Height="70" Margin="617,365,-16,0" VerticalAlignment="Top" Cursor="Hand">
+                                <Grid Margin="0,0,-8,0">
+                                    <Label x:Name="Tylechet" Content="{Binding soheochet}" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding issoheochet}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label x:Name="Tylechet_muctieu" Content="{Binding thamso.SoConChetTruocKhiCaiSua_MucTieu}" HorizontalAlignment="Left" Margin="70,37,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label x:Name="Tylechet_textbox" Content="Tỷ lệ heo con chết trước khi cai sữa/lứa" VerticalAlignment="Top" FontSize="10" Margin="10,0,8,0" Height="32"/>
+                                    <ToggleButton
+                        x:Name="Tylechet_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,8,3" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="Tylechet_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding issoheochet}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the7" Height="70" Margin="413,475,214,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <Label x:Name="Soheoconsinhra_lua" Content="{Binding soheosinhra}" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding issoheosinhra}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label x:Name="Soheoconsinhra_lua_muctieu" Content="{Binding thamso.SoHeoConSinhRa_muctieu}" HorizontalAlignment="Left" Margin="70,35,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label x:Name="Soheoconsinhra_lua_textbox" Content="Số heo con sinh ra/lứa" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                                    <ToggleButton
+                        x:Name="Soheoconsinhra_lua_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="Soheoconsinhra_lua_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding issoheosinhra}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the8" Height="70" Margin="617,475,10,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <Label x:Name="Odeitcon" Content="{Binding odeitcon}" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding isodeitcon}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label x:Name="Odeitcon_muctieu" Content="{Binding thamso.ODeItCon_muctieu}" HorizontalAlignment="Left" Margin="70,35,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label x:Name="Odeitcon_textbox" Content="Ổ đẻ ít con" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                                    <ToggleButton
+                        x:Name="Odeitcon_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="Odeitcon_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding isodeitcon}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the9" Height="70" Margin="10,365,617,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <Label x:Name="SoNgayKhongLamViec" Content="{Binding songayheonaikolamviec}" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding issongayheonaikolamviec}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label x:Name="SoNgayKhongLamViec_muctieu" Content="{Binding thamso.SoNgayKhongLamViec_MucTieu_Min}" HorizontalAlignment="Left" Margin="70,37,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label Content=" -> " Margin="85,35,0,0"></Label>
+                                    <Label Content="{Binding thamso.SoNgayKhongLamViec_MucTieu_Max}" HorizontalAlignment="Left" Margin="102,37,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label x:Name="SoNgayKhongLamViec_textbox" Content="Số ngày heo nái không làm việc" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                                    <ToggleButton
+                        x:Name="SoNgayKhongLamViec_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="SoNgayKhongLamViec_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding issongayheonaikolamviec}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the10" Height="70" Margin="219,365,408,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <Label x:Name="Thoigianmangthai" Content="{Binding thoigianmangthai}" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding isthoigianmangthai}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label x:Name="Thoigianmangthai_muctieu" Content="{Binding thamso.ThoiGianMangThai_MucTieu_Min}" HorizontalAlignment="Left" Margin="68,37,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label Content=" -> " Margin="85,35,0,0"></Label>
+                                    <Label Content="{Binding thamso.ThoiGianMangThai_MucTieu_Max}" HorizontalAlignment="Left" Margin="102,37,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label x:Name="Thoigianmangthai_textbox" Content="Thời gian mang thai/lứa" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                                    <ToggleButton
+                        x:Name="Thoigianmangthai_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="Thoigianmangthai_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding isthoigianmangthai}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the11" Height="70" Margin="10,475,617,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <Label x:Name="Songaycaisua" Content="{Binding thoigianchobu}" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding isthoigianchobu}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label x:Name="Songaycaisua_muctieu" Content="{Binding thamso.SoNgayCaiSua_MucTieu_Min}" HorizontalAlignment="Left" Margin="70,37,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label Content=" -> " Margin="85,35,0,0"></Label>
+                                    <Label Content="{Binding thamso.SoNgayCaiSua_MucTieu_Max}" HorizontalAlignment="Left" Margin="102,37,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label x:Name="Songaycaisua_textbox" Content="Thời gian cho bú/lứa" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                                    <ToggleButton
+                        x:Name="Songaycaisua_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="Songaycaisua_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding isthoigianchobu}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the12" Height="70" Margin="413,596,214,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <Label x:Name="Tylede_main" Content="{Binding tylede}" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Foreground" Value="#DD0CC41B" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding istylede}" Value="false">
+                                                        <Setter Property="Foreground" Value="#DDF22828" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label x:Name="Tylede_muctieu_textbox" Content="{Binding thamso.Tylede_muctieu}" HorizontalAlignment="Left" Margin="70,35,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label x:Name="Tylede_textbox" Content="Tỷ lệ đẻ" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                                    <ToggleButton
+                        x:Name="Tylede_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="Tylede_button_image" Stretch="UniformToFill" Height="22" Width="22" >
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding istylede}" Value="false">
+                                                            <Setter Property="Source" Value="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="the13" Height="70" Margin="617,596,10,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
+                                <Grid Margin="0,0,-0.333,0">
+                                    <Label Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DDF22828"/>
+                                    <Label Content="Mục tiêu: " Margin="10,35,0,0"></Label>
+                                    <Label Content="0" HorizontalAlignment="Left" Margin="70,35,0,0" VerticalAlignment="Top" FontSize="12"/>
+                                    <Label Content="Tỷ lệ thay đàn" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                                    <ToggleButton
+                        x:Name="temp_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                                        <Image x:Name="temp_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                                    </ToggleButton>
+                                </Grid>
+                            </materialDesign:Card>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110 45,90 75,90 120,120 75,150 45,150 70,130 -250,130 Z" Margin="235.934,344.244,521.066,0"
+            RenderTransformOrigin=".5,.5" Width="36" Height="6" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="270"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110 45,90 75,90 120,120 75,150 45,150 70,130 -250,130 Z" Margin="121.712,344.244,635.288,0"
+            RenderTransformOrigin=".5,.5" Width="36" Height="6" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="270"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110 45,90 75,90 120,120 75,150 45,150 70,130 -250,130 Z" Margin="523.934,343.799,232.066,0"
+            RenderTransformOrigin=".5,.5" Width="37" Height="6" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="270"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110 45,90 75,90 120,120 75,150 45,150 70,130 -250,130 Z" Margin="621.599,343.132,134.4,0"
+            RenderTransformOrigin=".5,.5" Width="37" Height="6" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="270"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110   70,130 -250,130 Z" Margin="125.936,430.301,527.064,0"
+            RenderTransformOrigin=".5,.5" Height="2" Width="140" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="270"/>
+                                        <TranslateTransform X="0.112" Y="0.357"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110 45,90 75,90 120,120 75,150 45,150 70,130 -250,130 Z" Margin="176.891,343.188,576.108,0"
+            RenderTransformOrigin=".5,.5" Height="6" Width="40" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="270"/>
+                                        <TranslateTransform X="-0.94" Y="-1.214"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110   70,130 -250,130 Z" Margin="155.908,215.778,561.758,0"
+            RenderTransformOrigin=".5,.5" Width="75.3333333333333" Height="2" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="270"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110   70,130 -250,130 Z" Margin="555.03,125.231,194.969,0"
+            RenderTransformOrigin=".5,.5" Width="43" Height="2" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="179.968"/>
+                                        <TranslateTransform X="19.156" Y="53.132"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110   70,130 -250,130 Z" Margin="500.074,217.611,216.926,0"
+            RenderTransformOrigin=".5,.5" Width="76" Height="2" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="89.968"/>
+                                        <TranslateTransform X="78.577" Y="-1.892"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110 45,90 75,90 120,120 75,150 45,150 70,130 -250,130 Z" Margin="555.24,85.521,196.765,0"
+            RenderTransformOrigin=".5,.5" Height="5.974" VerticalAlignment="Top" Width="41.3333333333333">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="179.968"/>
+                                        <TranslateTransform X="-21.115" Y="91.035"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110   70,130 -250,130 Z" Margin="211.991,197.87,537.009,0"
+            RenderTransformOrigin=".5,.5" Height="2" Width="44" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="360"/>
+                                        <TranslateTransform X="-19.136" Y="-18.819"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110 45,90 75,90 120,120 75,150 45,150 70,130 -250,130 Z" Margin="216.46,157.966,541.539,0"
+            RenderTransformOrigin=".5,.5" Width="35" Height="6" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="360"/>
+                                        <TranslateTransform X="19.579" Y="19.142"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110   70,130 -250,130 Z" Margin="195.322,518.405,576.677,0"
+            RenderTransformOrigin=".5,.5" Height="2" Width="21" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="360"/>
+                                        <TranslateTransform X="-19.136" Y="-18.819"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110 45,90 75,90 120,120 75,150 45,150 70,130 -250,130 Z" Margin="493.754,452.743,261.246,0"
+            RenderTransformOrigin=".5,.5" Width="38" Height="6" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="270"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -250,110 70,110 45,90 75,90 120,120 75,150 45,150 70,130 -250,130 Z" Margin="579.589,510.91,176.41,0"
+            RenderTransformOrigin=".5,.5" Width="37" Height="6" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="180"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Stretch="Fill" Fill="black" 
+            Data="M -320,110 70,110 45,90 75,90 120,120 75,150 45,150 70,130 -320,130 Z" Margin="491.306,568.897,255.693,0"
+            RenderTransformOrigin=".5,.5" Width="46" Height="6" VerticalAlignment="Top">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="270"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </Grid>
+            </ScrollViewer>
+            <Button x:Name="zoomIn" Content="+" HorizontalAlignment="Left" Margin="49,0,0,97" Width="50" Height="50" VerticalAlignment="Bottom" FontSize="30" Click="zoomIn_Click"/>
+            <Button x:Name="zoomOut" Content="-" HorizontalAlignment="Left" Margin="49,0,0,28" Width="50" Height="50" VerticalAlignment="Bottom" FontSize="30" Click="zoomOut_Click"/>
+        </Grid>
     </Grid>
 </Window>

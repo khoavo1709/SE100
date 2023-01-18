@@ -24,7 +24,13 @@ namespace FarmManagementSoftware.ViewModel
         //public ObservableCollection<ThongBao> listTHONGBAOs { get => _listTHONGBAOs; set { _listTHONGBAOs = value; OnPropertyChanged(); } }
 
         private ThongBao _SelectedItem;
-        public ThongBao SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
+        public ThongBao SelectedItem { get => _SelectedItem; set { 
+                _SelectedItem = value; OnPropertyChanged();
+                LoadNguoiNhan();
+            } }
+
+        private string _selectedNguoiNhan;
+        public string SelectedNguoiNhan { get => _selectedNguoiNhan; set { _selectedNguoiNhan = value; OnPropertyChanged(); } }
 
         private listThongBaoTrongNgayVM _selectedNgay;
         public listThongBaoTrongNgayVM selectedNgay { get => _selectedNgay; set { _selectedNgay = value; OnPropertyChanged(); } }
@@ -61,6 +67,7 @@ namespace FarmManagementSoftware.ViewModel
 
             CloseChiTietThongBaoW = new RelayCommand<Window>((p) => { return true; }, p => {
                 vmMainW.selectedItem = null;
+                vmMainW.loadTHONGBAO();
                 vmMainW.loadCountThongBao();
             });
             TimKiemTheoTieuDeCommand = new RelayCommand<TextBox>((p) => { return true; }, p => {
@@ -105,9 +112,10 @@ namespace FarmManagementSoftware.ViewModel
                     {
                         if (listThongBao[i].MaThongBao == deleteTB.MaThongBao)
                         {
-                            DataProvider.Ins.DB.ThongBaos.Remove(deleteTB);
+                            //DataProvider.Ins.DB.ThongBaos.Remove(deleteTB);
+                            delThongBao(deleteTB);
                             DataProvider.Ins.DB.SaveChanges();
-                            if (listThongBao.Count > 1)
+                            if (listThongBao.Count > 2)
                             {
                                 SelectedItem = listThongBao[i + 1];
                             }
@@ -126,6 +134,20 @@ namespace FarmManagementSoftware.ViewModel
 
 
                 });
+        }
+
+        void delThongBao(ThongBao deleteTB)
+        {
+            DateTime thoigian = deleteTB.ThoiGian.Value;
+            string manguoiGui = deleteTB.C_MaNguoiGui;
+            var thongbaos = DataProvider.Ins.DB.ThongBaos.ToList();
+            foreach(var thongbao in thongbaos)
+            {
+                if(thongbao.C_MaNguoiGui == manguoiGui && thongbao.ThoiGian.Value == thoigian)
+                {
+                    DataProvider.Ins.DB.ThongBaos.Remove(thongbao);
+                }
+            }
         }
         void LoadDSThongBao()
         {
@@ -146,6 +168,22 @@ namespace FarmManagementSoftware.ViewModel
             {
                 listThongBaoTrongNgay.TimKiem(txtTieuDe, cbTinhTrang.Content.ToString());
 
+            }
+        }
+        void LoadNguoiNhan()
+        {
+            SelectedNguoiNhan = "";
+            if(SelectedItem == null)
+            {
+                SelectedNguoiNhan = null;
+            }
+            else
+            {
+                var Thongbaos = DataProvider.Ins.DB.ThongBaos.Where(x => x.ThoiGian == SelectedItem.ThoiGian && x.C_MaNguoiGui == SelectedItem.C_MaNguoiGui).ToList();
+                foreach(var item in Thongbaos)
+                {
+                    SelectedNguoiNhan += item.NHANVIEN1.HoTen + ", ";
+                }
             }
         }
     }

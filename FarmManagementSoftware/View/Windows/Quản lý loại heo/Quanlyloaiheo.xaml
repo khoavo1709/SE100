@@ -130,6 +130,9 @@
                         </ListView.View>
                         <ListView.ContextMenu>
                             <ContextMenu>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Show}" >
+                                    <MenuItem.Header>Xem</MenuItem.Header>
+                                </MenuItem>
                                 <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
                                           Click="btnFix_Click">
                                     <MenuItem.Header>Sửa</MenuItem.Header>

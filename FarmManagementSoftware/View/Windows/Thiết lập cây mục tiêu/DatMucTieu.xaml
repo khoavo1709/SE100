@@ -7,7 +7,9 @@
         xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu"
         mc:Ignorable="d"
         Title="" Height="770" Width="526"
+        Name="DatMucTieuW"
         WindowStartupLocation="CenterScreen"
+        DataContext="{StaticResource DatMucTieuVM}"
         ResizeMode="NoResize" WindowStyle="None">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -33,14 +35,14 @@
                     <StackPanel Margin="0,0,0,-225" Grid.Column="1">
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Tỷ lệ đẻ: " VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu12"
+                            <TextBox x:Name="muctieu12" Text="{Binding thamso.Tylede_muctieu}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="122" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Số heo con sinh ra/lứa" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu2" Width="190"
+                            <TextBox x:Name="muctieu2" Width="190" Text="{Binding thamso.SoHeoConSinhRa_muctieu}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
@@ -48,7 +50,7 @@
                         
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Ổ đẻ ít con" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu1" Width="190"
+                            <TextBox x:Name="muctieu1" Width="190" Text="{Binding thamso.ODeItCon_muctieu}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
@@ -56,7 +58,7 @@
                         
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Tỷ lệ thay đàn" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu3" Width="190"
+                            <TextBox x:Name="muctieu3" Width="190" 
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
@@ -64,7 +66,7 @@
                         
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Số heo con sinh ra còn sống/lứa" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu" Width="190"
+                            <TextBox x:Name="muctieu" Width="190" Text="{Binding thamso.SoHeoConSong_MucTieu}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
@@ -72,7 +74,7 @@
 
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Tỷ lệ heo con chết trước khi cai sữa/lứa" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu4" Width="190"
+                            <TextBox x:Name="muctieu4" Width="190" Text="{Binding thamso.SoConChetTruocKhiCaiSua_MucTieu}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
@@ -80,7 +82,7 @@
 
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Số heo con cai sữa/nái" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu5" Width="190"
+                            <TextBox x:Name="muctieu5" Width="190" Text="{Binding thamso.SoHeoCaiSua_muctieu}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
@@ -88,7 +90,7 @@
 
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Trung bình lứa đẻ/nái/năm" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu6" Width="190"
+                            <TextBox x:Name="muctieu6" Width="190" Text="{Binding thamso.TrungBnhLua_MucTieu}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
@@ -96,7 +98,12 @@
 
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Thời gian cho con bú/lứa" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu7" Width="190"
+                            <TextBox x:Name="muctieu7" Width="80" Text="{Binding thamso.SoNgayCaiSua_MucTieu_Min}" PreviewTextInput="CheckIsNumber"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                            <Label Content="Đến" VerticalAlignment="Bottom"/>
+                            <TextBox Width="80" Text="{Binding thamso.SoNgayCaiSua_MucTieu_Max}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
@@ -104,15 +111,25 @@
 
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Thời gian mang thai/lứa" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu8" Width="190"
+                            <TextBox x:Name="muctieu8" Width="80" Text="{Binding thamso.ThoiGianMangThai_MucTieu_Min}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                            <Label Content="Đến" VerticalAlignment="Bottom"/>
+                            <TextBox Width="80" Text="{Binding thamso.ThoiGianMangThai_MucTieu_Max}" PreviewTextInput="CheckIsNumber"
+                            materialDesign:HintAssist.Hint="" 
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Số ngày heo nái không làm việc" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu9" Width="190"
+                            <TextBox x:Name="muctieu9" Width="80" Text="{Binding thamso.SoNgayKhongLamViec_MucTieu_Min}" PreviewTextInput="CheckIsNumber"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                            <Label Content="Đến" VerticalAlignment="Bottom"/>
+                            <TextBox Width="80" Text="{Binding thamso.SoNgayKhongLamViec_MucTieu_Max}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
@@ -120,7 +137,7 @@
 
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Số heo con cai sữa/nái/năm" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu10" Width="190"
+                            <TextBox x:Name="muctieu10" Width="190" Text="{Binding thamso.SoHeoTrongNam_MucTieu}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
@@ -128,7 +145,7 @@
 
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Content="Doanh thu ước tính" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="muctieu11" Width="190"
+                            <TextBox x:Name="muctieu11" Width="190" Text="{Binding thamso.Doanhthu_muctieu}" PreviewTextInput="CheckIsNumber"
                             materialDesign:HintAssist.Hint=""
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
@@ -140,8 +157,8 @@
             <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">
                 <Border Margin="20" BorderBrush="#3ab19b" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                     <Grid Width="270">
-                        <Button x:Name="Confirm_button_Copy" Background="#3ab19b" Content="Xác nhận" Height="40" VerticalAlignment="Center" Click="Confirm_button_Click" Margin="0,0,140,0"/>
-                        <Button x:Name="huy_button"  Background="#FFB13A3A" Content="Hủy" Height="40" VerticalAlignment="Center" Click="Huy_button_Click" Margin="140,0,0,0" Width="130"/>
+                        <Button x:Name="Confirm_button_Copy" Background="#3ab19b" Content="Xác nhận" Height="40" VerticalAlignment="Center" Margin="0,0,140,0" Command="{Binding HoanTatCommand}" CommandParameter="{Binding ElementName=DatMucTieuW}"/>
+                        <Button x:Name="huy_button"  Background="#FFB13A3A" Content="Hủy" Height="40" VerticalAlignment="Center" Margin="140,0,0,0" Width="130" Command="{Binding HuyCommand}" CommandParameter="{Binding ElementName=DatMucTieuW}"/>
                     </Grid>
                 </Border>
             </materialDesign:Card>

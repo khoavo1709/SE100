@@ -1,0 +1,41 @@
+﻿<Window x:Class="FarmManagementSoftware.View.Windows.SuaTrangThai"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Name="SuaTrangThaiw"
+        WindowStartupLocation="CenterScreen"
+        Title="SuaTrangThai" Height="250" Width="300">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                <GradientStop Color="#3ab19b" Offset="0.05"/>
+                <GradientStop Color="#2d708c" Offset="0.25"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
+        <StackPanel VerticalAlignment="Center" Margin="5">
+            <materialDesign:Card Margin="5" VerticalAlignment="Center">
+                <StackPanel VerticalAlignment="Center">
+                    <ComboBox Margin="20 10 20 10"
+                                  materialDesign:HintAssist.Hint="Trạng thái"
+                                  VerticalAlignment="Center"
+                                  Text="{Binding pHIEUSUACHUA.TrangThai, Mode=TwoWay}"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  SelectedIndex="0">
+                        <ComboBoxItem>Chưa hoàn thành</ComboBoxItem>
+                        <ComboBoxItem>Đã hoàn thành</ComboBoxItem>
+                        <ComboBoxItem>Đã hủy</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Center">
+                <Border Margin="20" BorderBrush="#3ab19b" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Button Background="#3ab19b" Content="Xác nhận" Width="150" Height="40" VerticalAlignment="Bottom" Command="{Binding XacNhanCommand}" CommandParameter="{Binding ElementName=SuaTrangThaiw}"></Button>
+                </Border>
+            </materialDesign:Card>
+        </StackPanel>
+    </Grid>
+</Window>

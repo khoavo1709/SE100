@@ -67,8 +67,8 @@ namespace FarmManagementSoftware.ViewModel
 
         public PhieuBanNhapHeoVM()
         {
-            NgayLap = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-            ListHeo = new ObservableCollection<HEOPHIEU>();
+            NgayLap = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day);
+            ListHeo=new ObservableCollection<HEOPHIEU>();
             PhieuHeo = new PHIEUHEO();
             KhachHang = new DOITAC();
             NhanVien = new NHANVIEN();
@@ -89,7 +89,7 @@ namespace FarmManagementSoftware.ViewModel
                     MessageBox.Show("Vui lòng chọn loại phiếu trước");
                     return;
                 }
-                else if (ListHeo.Count > 0 && loaiPhieu == "Phiếu xuất heo")
+                else if(ListHeo.Count>0 && loaiPhieu== "Phiếu xuất heo")
                 {
                     MessageBox.Show("Chỉ được thêm heo vào một lần mỗi phiếu");
                     return;
@@ -101,7 +101,7 @@ namespace FarmManagementSoftware.ViewModel
                         DataContext = new ThemHeoPhieuVM(this),
                     };
                     them.ShowDialog();
-                    foreach (HEOPHIEU h in ListHeo)
+                    foreach(HEOPHIEU h in ListHeo)
                     {
                         TongTien += h.DonGia * h.heo.TrongLuong;
                     }
@@ -111,7 +111,7 @@ namespace FarmManagementSoftware.ViewModel
                     ChonHeoXuat chon = new ChonHeoXuat
                     {
                         DataContext = new ChonHeoXuatVM(this),
-                    };
+                     };
                     chon.ShowDialog();
                     foreach (HEOPHIEU h in ListHeo)
                     {
@@ -145,17 +145,17 @@ namespace FarmManagementSoftware.ViewModel
                 return true;
             }, (p) =>
             {
-                if (MaKH == null || Ten == null || SDT == null || Mail == null || DiaChi == null)
+                if(MaKH == null || Ten == null || SDT == null || Mail == null || DiaChi == null)
                 {
                     MessageBox.Show("Vui lùng nhập đủ thông tin khách hàng");
                     return;
-                }
-                if (ListHeo.Count < 0)
+                } 
+                if(ListHeo.Count < 0)
                 {
                     MessageBox.Show("Phiếu phải có ít nhất một cá thể heo");
                     return;
-                }
-
+                }    
+                
                 if (DataProvider.Ins.DB.DOITACs.Where(x => x.MaDoiTac == KhachHang.MaDoiTac).Count() != 1)
                 {
                     KhachHang.MaDoiTac = MaKH;
@@ -195,7 +195,7 @@ namespace FarmManagementSoftware.ViewModel
                             MessageBox.Show("Sức chứa của chuồng không đủ. Heo" + x.heo.MaHeo + " chưa được lưu");
                             ListHeo.Remove(x);
                         }
-
+                       
                     }
                 }
                 if (loaiPhieu == "Phiếu xuất heo")

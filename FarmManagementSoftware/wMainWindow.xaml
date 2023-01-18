@@ -337,7 +337,7 @@
                              ToolTip="Thiết lập cây mục tiêu"
                              Selected="MenuCayMucTieu_Selected" />
                 <ListBoxItem Name="Menu_QuyDinh"
-                             Content="{materialDesign:PackIcon Kind=BullseyeArrow,Size=25}"
+                             Content="{materialDesign:PackIcon Kind=cog,Size=25}"
                              Foreground="LightGray"
                              ToolTip="Quy Định"
                              Selected="Menu_QuyDinh_Selected" />

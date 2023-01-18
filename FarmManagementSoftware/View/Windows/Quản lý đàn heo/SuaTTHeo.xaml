@@ -10,6 +10,7 @@
         Name="SuaTTHeoW"
         Title="SuaTTHeo" Height="700" Width="500"
         WindowStartupLocation="CenterScreen"
+        DataContext="{StaticResource SuaTTHeoVM}"
         ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
@@ -24,7 +25,7 @@
                 <StackPanel VerticalAlignment="Center">
                     <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding SelectedHeo.MaHeo}" IsReadOnly="True"/>
                     <ComboBox Margin="10 5 10 10"
-                                  Text="{Binding SelectedHeo.GioiTinh, Mode=TwoWay}"
+                                  Text="{Binding _GioiTinh, Mode=TwoWay}"
                                   materialDesign:HintAssist.Hint="Giới tính"
                                   VerticalAlignment="Center"
                                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
@@ -32,8 +33,9 @@
                         <ComboBoxItem>Đực</ComboBoxItem>
                         <ComboBoxItem>Cái</ComboBoxItem>
                     </ComboBox>
-                    <DatePicker Margin="10 5 10 10" materialDesign:HintAssist.Hint="Ngày sinh" materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding SelectedHeo.NgaySinh}"/>
-                    <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Trọng lượng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding SelectedHeo.TrongLuong}"/>
+                    <DatePicker Margin="10 5 10 10" materialDesign:HintAssist.Hint="Ngày sinh" materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding _NgaySinh}"/>
+                    <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Trọng lượng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding _TrongLuong}" PreviewTextInput="NumberValidationTextBox"
+                                             MaxLength="9"/>
 
                     <ComboBox Margin="10 5 10 10"
                                   Name="CBLoaiHeo"
@@ -53,8 +55,8 @@
                                   DisplayMemberPath="TenGiongHeo"
                                   SelectedItem="{Binding SelectedGiong, Mode=TwoWay}">
                     </ComboBox>
-                    <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo mẹ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding MaHeoMe}"/>
-                    <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo cha" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding MaHeoCha}"/>
+                    <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo mẹ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding MaHeoMe}" IsReadOnly="True"/>
+                    <TextBox Margin="10 5 10 10" materialDesign:HintAssist.Hint="Mã heo cha" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding MaHeoCha}" IsReadOnly="True"/>
                     <ComboBox Margin="10 5 10 10"
                                   materialDesign:HintAssist.Hint="Mã chuồng"
                                   VerticalAlignment="Center"
@@ -64,7 +66,7 @@
                                   SelectedItem="{Binding SelectedChuong, Mode=TwoWay}">
                     </ComboBox>
                     <ComboBox Margin="10 5 10 10"
-                                  Text="{Binding SelectedHeo.TinhTrang, Mode=TwoWay}"
+                                  Text="{Binding _TinhTrang, Mode=TwoWay}"
                                   materialDesign:HintAssist.Hint="Tình trạng"
                                   VerticalAlignment="Center"
                                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
@@ -76,7 +78,7 @@
                         <ComboBoxItem>Đã đào thải</ComboBoxItem>
                     </ComboBox>
                     <ComboBox Margin="10 5 10 10"
-                                  Text="{Binding SelectedHeo.NguonGoc, Mode=TwoWay}"
+                                  Text="{Binding _NguonGoc, Mode=TwoWay}"
                                   materialDesign:HintAssist.Hint="Nguồn gốc"
                                   VerticalAlignment="Center"
                                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"

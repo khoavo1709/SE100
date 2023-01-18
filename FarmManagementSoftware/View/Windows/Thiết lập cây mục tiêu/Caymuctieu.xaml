@@ -29,15 +29,23 @@
                     </TransformGroup>
                 </Path.RenderTransform>
             </Path>
-            <materialDesign:Card x:Name="the1" Height="87" Margin="313,21,304,0" VerticalAlignment="Top" Width="176">
+            <materialDesign:Card x:Name="the1" Height="87" Margin="313,21,304,0" VerticalAlignment="Top" Width="176" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label x:Name="DoanhThuUocTinh" Content="0" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="17" Foreground="#DDF22828"/>
                     <Label x:Name="DoanhThuUocTinh_uoctinh" Content="Mục tiêu: 2.000.000vnd" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label Content="Doanh thu ước tính" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0"/>
-                    <Image x:Name="DoanhThuUocTinh_Icon" Margin="0,0,10.333,9.667" HorizontalAlignment="Right" Width="24" Height="22" VerticalAlignment="Bottom" Source="/FarmManagementSoftware;component/Image/thumbs-down-solid.png" MouseDown="_1_MouseDown"/>
+                    <ToggleButton
+                        x:Name="DoanhThuUocTinh_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,7,8" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="DoanhThuUocTinh_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the2" Height="70" Margin="273,146,260,0" VerticalAlignment="Top" Width="260" MouseEnter="the2_MouseEnter" MouseLeave="the2_MouseLeave" Background="White" Cursor="Hand">
+            <materialDesign:Card x:Name="the2" Height="70" Margin="273,146,260,0" VerticalAlignment="Top" Width="260" Background="White" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label x:Name="Soheotrongnam" Content="25" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DD0CC41B"/>
                     <Label x:Name="Soheotrongnam_muctieu" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
@@ -47,98 +55,186 @@
                         Style="{StaticResource MaterialDesignActionToggleButton}"
                         ToolTip="MaterialDesignActionToggleButton"
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
-                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" Click="Soheotrongnam_button_Click" >
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="Soheotrongnam_button_image"
                             Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the3" Height="70" Margin="514,254,113,0" VerticalAlignment="Top" Width="166">
+            <materialDesign:Card x:Name="the3" Height="70" Margin="514,254,113,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label x:Name="Soheocaisua" Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DD0CC41B"/>
                     <Label x:Name="Soheocaisua_muctieu" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label x:Name="Soheocaisua_textbox" Content="Số heo con cai sữa/nái" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
-                    <Image x:Name="Soheocaisua_Icon" Margin="0,0,10.333,10" HorizontalAlignment="Right" Width="24" Height="22" VerticalAlignment="Bottom" Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png"/>
+                    <ToggleButton
+                        x:Name="Soheocaisua_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="Soheocaisua_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the4" Height="70" Margin="115,254,512,0" VerticalAlignment="Top" Width="166">
+            <materialDesign:Card x:Name="the4" Height="70" Margin="115,254,512,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label x:Name="TrungbinhLua" Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DD0CC41B"/>
                     <Label x:Name="TrungbinhLua_muctieu" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label x:Name="TrungbinhLua_textbox" Content="Trung bình lứa/nái/năm" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
-                    <Image x:Name="TrungbinhLua_Icon" HorizontalAlignment="Left" Height="22" Margin="132,38,0,0" VerticalAlignment="Top" Width="24" Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png"/>
+                    <ToggleButton
+                        x:Name="TrungbinhLua_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,7,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="TrungbinhLua_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the5" Height="70" Margin="413,365,214,0" VerticalAlignment="Top" Width="166">
+            <materialDesign:Card x:Name="the5" Height="70" Margin="413,365,214,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label x:Name="Soheoconsong" Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DD0CC41B"/>
                     <Label x:Name="Soheoconsong_muctieu" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label x:Name="Soheoconsong_textbox" Content="Số heo con còn sống/lứa" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
-                    <Image x:Name="Soheoconsong_Icon" Margin="0,0,10.333,10" HorizontalAlignment="Right" Width="24" Height="22" VerticalAlignment="Bottom" Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png"/>
+                    <ToggleButton
+                        x:Name="Soheoconsong_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="Soheoconsong_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the6" Height="70" Margin="617,365,-16,0" VerticalAlignment="Top">
+            <materialDesign:Card x:Name="the6" Height="70" Margin="617,365,-16,0" VerticalAlignment="Top" Cursor="Hand">
                 <Grid Margin="0,0,-8,0">
                     <Label x:Name="Tylechet" Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DD0CC41B"/>
                     <Label x:Name="Tylechet_muctieu" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label x:Name="Tylechet_textbox" Content="Tỷ lệ heo con chết trước khi cai sữa/lứa" VerticalAlignment="Top" FontSize="10" Margin="10,0,8,0" Height="32"/>
-                    <Image x:Name="Tylechet_Icon" Margin="0,0,10.333,10" HorizontalAlignment="Right" Width="24" Height="22" VerticalAlignment="Bottom" Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png"/>
+                    <ToggleButton
+                        x:Name="Tylechet_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,8,3" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="Tylechet_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the7" Height="70" Margin="413,475,214,0" VerticalAlignment="Top" Width="166">
+            <materialDesign:Card x:Name="the7" Height="70" Margin="413,475,214,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label x:Name="Soheoconsinhra_lua" Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DDF22828"/>
                     <Label x:Name="Soheoconsinhra_lua_muctieu" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label x:Name="Soheoconsinhra_lua_textbox" Content="Số heo con sinh ra/lứa" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
-                    <Image x:Name="Soheoconsinhra_lua_Icon" Margin="0,0,10.333,10" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="24" Source="/FarmManagementSoftware;component/Image/thumbs-down-solid.png"/>
+                    <ToggleButton
+                        x:Name="Soheoconsinhra_lua_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="Soheoconsinhra_lua_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the8" Height="70" Margin="617,475,10,0" VerticalAlignment="Top" Width="166">
+            <materialDesign:Card x:Name="the8" Height="70" Margin="617,475,10,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label x:Name="Odeitcon" Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DDF22828"/>
                     <Label x:Name="Odeitcon_muctieu" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label x:Name="Odeitcon_textbox" Content="Ổ đẻ ít con" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
-                    <Image x:Name="Odeitcon_Icon" Margin="0,0,10.333,10" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="24" Source="/FarmManagementSoftware;component/Image/thumbs-down-solid.png"/>
+                    <ToggleButton
+                        x:Name="Odeitcon_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="Odeitcon_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the9" Height="70" Margin="10,365,617,0" VerticalAlignment="Top" Width="166">
+            <materialDesign:Card x:Name="the9" Height="70" Margin="10,365,617,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label x:Name="SoNgayKhongLamViec" Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DD0CC41B"/>
                     <Label x:Name="SoNgayKhongLamViec_muctieu" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label x:Name="SoNgayKhongLamViec_textbox" Content="Số ngày heo nái không làm việc" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
-                    <Image x:Name="SoNgayKhongLamViec_Icon" Margin="0,0,10.333,10" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="24" Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png"/>
+                    <ToggleButton
+                        x:Name="SoNgayKhongLamViec_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="SoNgayKhongLamViec_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the10" Height="70" Margin="219,365,408,0" VerticalAlignment="Top" Width="166">
+            <materialDesign:Card x:Name="the10" Height="70" Margin="219,365,408,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label x:Name="Thoigianmangthai" Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DD0CC41B"/>
                     <Label x:Name="Thoigianmangthai_muctieu" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label x:Name="Thoigianmangthai_textbox" Content="Thời gian mang thai/lứa" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
-                    <Image x:Name="Thoigianmangthai_Icon" Margin="0,0,10.333,10" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="24" Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png"/>
+                    <ToggleButton
+                        x:Name="Thoigianmangthai_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="Thoigianmangthai_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the11" Height="70" Margin="10,475,617,0" VerticalAlignment="Top" Width="166">
+            <materialDesign:Card x:Name="the11" Height="70" Margin="10,475,617,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label x:Name="Songaycaisua" Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DD0CC41B"/>
                     <Label x:Name="Songaycaisua_muctieu" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label x:Name="Songaycaisua_textbox" Content="Thời gian cho bú/lứa" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
-                    <Image x:Name="Songaycaisua_Icon" Margin="0,0,10.333,10" HorizontalAlignment="Right" Width="24" Height="22" VerticalAlignment="Bottom" Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png"/>
+                    <ToggleButton
+                        x:Name="Songaycaisua_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="Songaycaisua_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the12" Height="70" Margin="413,596,214,0" VerticalAlignment="Top" Width="166">
+            <materialDesign:Card x:Name="the12" Height="70" Margin="413,596,214,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label x:Name="Tylede_main" Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DDF22828"/>
                     <Label x:Name="Tylede_muctieu_textbox" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label x:Name="Tylede_textbox" Content="Tỷ lệ đẻ" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
-                    <Image x:Name="Tylede_icon" Margin="0,0,10.333,10" HorizontalAlignment="Right" Width="24" Height="22" VerticalAlignment="Bottom" Source="/FarmManagementSoftware;component/Image/thumbs-down-solid.png"/>
+                    <ToggleButton
+                        x:Name="Tylede_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="Tylede_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="the13" Height="70" Margin="617,596,10,0" VerticalAlignment="Top" Width="166">
+            <materialDesign:Card x:Name="the13" Height="70" Margin="617,596,10,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
                     <Label Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DDF22828"/>
                     <Label Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
                     <Label Content="Tỷ lệ thay đàn" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
-                    <Image x:Name="_13" Margin="0,0,10.333,10" HorizontalAlignment="Right" Width="24" Height="22" VerticalAlignment="Bottom" Source="/FarmManagementSoftware;component/Image/thumbs-down-solid.png"/>
+                    <ToggleButton
+                        x:Name="temp_button"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionToggleButton"
+                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
+                        Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
+                        <Image x:Name="temp_button_image"
+                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                    </ToggleButton>
                 </Grid>
             </materialDesign:Card>
             <Path Stretch="Fill" Fill="black" 
@@ -333,8 +429,6 @@
                     </TransformGroup>
                 </Path.RenderTransform>
             </Path>
-            <Button x:Name="zoom_in" Content="-|-" Margin="59,0,0,18" Height="32" HorizontalAlignment="Left" Width="32" Click="zoom_in_Click" VerticalAlignment="Bottom"/>
-            <Button x:Name="zoom_out" Content="--" HorizontalAlignment="Left" Width="33" Margin="10,0,0,18" Height="32" VerticalAlignment="Bottom" Click="zoom_out_Click"/>
         </Grid>
     </Viewbox>
 </Window>

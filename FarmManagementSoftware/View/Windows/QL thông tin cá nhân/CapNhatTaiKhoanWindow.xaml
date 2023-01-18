@@ -187,14 +187,10 @@
                                                 Width="180"
                                                 Name="dp_NgaySinh"
                                                 materialDesign:HintAssist.Hint="Pick Date"
-                                                materialDesign:HintAssist.HelperText="Helper text"
                                                 Style="{StaticResource MaterialDesignOutlinedDatePicker}">
                                         <DatePicker.SelectedDate>
                                             <Binding Path="NgaySinh"
                                                      UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <local:NotEmptyValidationRule    ValidatesOnTargetUpdated="True" />
-                                                </Binding.ValidationRules>
                                             </Binding>
                                         </DatePicker.SelectedDate>
                                         <i:Interaction.Triggers>
@@ -280,14 +276,11 @@
                                                 Width="180"
                                                 Name="dp_NgayVaoLam"
                                                 materialDesign:HintAssist.Hint="Pick Date"
-                                                materialDesign:HintAssist.HelperText="Helper text"
                                                 Style="{StaticResource MaterialDesignOutlinedDatePicker}">
                                         <DatePicker.SelectedDate>
                                             <Binding Path="NgayVaoLam"
                                                      UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <local:NotEmptyValidationRule    ValidatesOnTargetUpdated="True" />
-                                                </Binding.ValidationRules>
+                                                
                                             </Binding>
                                         </DatePicker.SelectedDate>
                                         <i:Interaction.Triggers>

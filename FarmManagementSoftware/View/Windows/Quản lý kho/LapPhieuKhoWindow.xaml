@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FarmManagementSoftware"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        x:Name="LapPhieuKhoW"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Height="768"
         Width="1024"
+        x:Name="LapPhieuKhoW"
         Title="LapPhieuKhoWindow">
     <Grid x:Name="grb_LapPhieuKho" Margin="20,0,20,0"
           DataContext="{StaticResource LapPhieuKhoVM}">
@@ -144,7 +145,7 @@
                     </materialDesign:Card>
                     <ScrollViewer Height="630" Width="auto">
                         <StackPanel>
-                            <materialDesign:Card >
+                        <materialDesign:Card >
                                 <Expander x:Name="exp_dsNhap" IsExpanded="True" Header="Danh sách phiếu nhập kho" FontWeight="Bold" Background="White">
                                     <ListView x:Name="Lw_dsNhap" SelectedItem="{Binding Selectedphieuhanghoa}"
                                           AllowDrop="True"
@@ -175,13 +176,13 @@
                                             </ContextMenu>
                                         </ListView.ContextMenu>
                                     </ListView>
-                                </Expander>
+                            </Expander>
 
-                            </materialDesign:Card>
+                        </materialDesign:Card>
 
-                            <materialDesign:Card Margin="0,20,0,0">
-                                <Expander x:Name="exp_dsXuat" IsExpanded="False" Header="Danh sách phiếu xuất kho" FontWeight="Bold" Background="White">
-                                    <ListView x:Name="lW_dsXuat" AllowDrop="True" SelectedItem="{Binding Selectedphieuhanghoa}"
+                        <materialDesign:Card Margin="0,20,0,0">
+                            <Expander x:Name="exp_dsXuat" IsExpanded="False" Header="Danh sách phiếu xuất kho" FontWeight="Bold" Background="White">
+                                <ListView x:Name="lW_dsXuat" AllowDrop="True" SelectedItem="{Binding Selectedphieuhanghoa}"
                                           ItemsSource="{Binding dsPhieuXuat}"
                                           ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                           ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -211,10 +212,10 @@
                                             </ContextMenu>
                                         </ListView.ContextMenu>
                                     </ListView>
-                                </Expander>
-                            </materialDesign:Card>
+                            </Expander>
+                        </materialDesign:Card>
 
-                            <materialDesign:Card Margin="0,20,0,0">
+                        <materialDesign:Card Margin="0,20,0,0">
                                 <Expander x:Name="exp_dsKiem" IsExpanded="False" Header="Danh sách phiếu kiểm kho" FontWeight="Bold" Background="White">
                                     <ListView x:Name="lW_dsKiem" AllowDrop="True" SelectedItem="{Binding Selectedphieukiemkho}"
                                           ItemsSource="{Binding dsPhieuKiem}"

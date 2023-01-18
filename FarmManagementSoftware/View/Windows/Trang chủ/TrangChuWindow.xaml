@@ -22,7 +22,12 @@
         Width="1024"
         Name="TrangChuW"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
-    <Grid Background="#f3f3f9" DataContext="{StaticResource TrangChuVM}">
+    <Grid x:Name="grb_TrangChu" Background="#f3f3f9" DataContext="{StaticResource TrangChuVM}">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=snb_ThongBaoMuaBenh}"></i:InvokeCommandAction>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -43,7 +48,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        
+
                         <StackPanel DockPanel.Dock="Left">
                             <Grid Margin="10">
                                 <Grid.ColumnDefinitions>
@@ -89,7 +94,7 @@
                                     Kind="EmoticonSick" />
                                 </Button>
                             </Grid>
-                            <StackPanel Orientation="Horizontal"> 
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock FontWeight="Bold" FontSize="22" Margin="10,0,0,0" Text="{Binding SoLuongHeoBenhChet}"></TextBlock>
                                 <TextBlock FontWeight="Bold" FontSize="22" Margin="10,0,0,0">con</TextBlock>
                             </StackPanel>
@@ -228,7 +233,7 @@
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsGiamChiPhi}" Value="false">
                                                     <Setter Property="Kind" Value="ArrowTopRightThin"></Setter>
-                                                    <Setter Property="Foreground" Value="#f06548"></Setter> 
+                                                    <Setter Property="Foreground" Value="#f06548"></Setter>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -339,7 +344,7 @@
                     </materialDesign:Card>
                     <lvc:CartesianChart Series="{Binding SeriesCollectionDSCPChart}" LegendLocation="Bottom" Height="196" >
                         <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Title="VND"></lvc:Axis>
+                            <lvc:Axis Title="VND" LabelFormatter="{Binding formatFunc}"></lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis Title="Tháng" Labels="{Binding LabelsDSCPChart}"></lvc:Axis>
@@ -418,7 +423,7 @@
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                       
+
                                     </GridView>
                                 </ListView.View>
                             </ListView>
@@ -444,6 +449,11 @@
                     </lvc:CartesianChart>
                 </StackPanel>
             </materialDesign:Card>
+            <materialDesign:Snackbar Grid.Column="1" x:Name="snb_ThongBaoMuaBenh"
+                    IsActive="True"
+                                     Width="450"
+                    MessageQueue="{Binding messageQueue}">
+            </materialDesign:Snackbar>
         </Grid>
     </Grid>
 </Window>

@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows.Lập_lịch"
         mc:Ignorable="d"
-        Title="DanhsachHeo" Height="336" Width="326" HorizontalContentAlignment="Stretch" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="DanhsachHeo" Height="402" Width="326" HorizontalContentAlignment="Stretch" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
@@ -18,21 +18,12 @@
             <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
         </Grid>
         <Grid Grid.Column="1">
-            <materialDesign:Card Margin="5">
+            <materialDesign:Card Margin="5,5,5,105">
                 <ListView x:Name="ListMaHeo_">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn x:Name="ListMaHeo" Header="Mã heo" DisplayMemberBinding="{Binding MaHeo}" HeaderContainerStyle="{Binding ElementName=window, Mode=OneWay}" />
                             <GridViewColumn x:Name="ListTenHeo" Header="Loại heo" DisplayMemberBinding="{Binding LOAIHEO.TenLoaiHeo}" HeaderContainerStyle="{Binding ElementName=window, Mode=OneWay}" />
-                            <GridViewColumn Header="" Width="160">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Menu>
-                                            <MenuItem x:Name="check" Icon="{materialDesign:PackIcon Kind=Check}"  Width="48" Click="check_click"/>
-                                        </Menu>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                     <ListView.ItemContainerStyle>
@@ -42,6 +33,14 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
+            </materialDesign:Card>
+            <materialDesign:Card Margin="5,308,5,0" Height="80" VerticalAlignment="Top">
+                <Border Margin="20" BorderBrush="#3ab19b" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Grid Width="270">
+                        <Button x:Name="Confirm_button_Copy" Background="#3ab19b" Content="Xác nhận" Height="40" VerticalAlignment="Center" Click="Confirm_button_Click" Margin="0,0,140,0"/>
+                        <Button x:Name="huy_button"  Background="#FFB13A3A" Content="Hủy" Height="40" VerticalAlignment="Center" Click="Huy_button_Click" Margin="140,0,0,0" Width="130"/>
+                    </Grid>
+                </Border>
             </materialDesign:Card>
         </Grid>
     </Grid>

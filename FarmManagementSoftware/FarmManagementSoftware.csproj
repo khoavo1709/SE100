@@ -140,6 +140,7 @@
     <Compile Include="Model\BAOCAOTONKHO.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ChonHeo.cs" />
     <Compile Include="Model\CHUCVU.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -183,6 +184,7 @@
     <Compile Include="Model\LICHTIEMHEO.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\LichTiem_TenThuoc.cs" />
     <Compile Include="Model\ListActionDetail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -246,30 +248,34 @@
     <Compile Include="ViewModel\Account\Account.cs" />
     <Compile Include="Model\TinhTrangHangHoaModel.cs" />
     <Compile Include="Model\TrangThaiPhieuKhoModel.cs" />
-    <Compile Include="ViewModel\QuyDinhVM.cs" />
-    <Compile Include="ViewModel\Quản lý chuồng\ChiTietPhieuSuaChuaVM.cs" />
-    <Compile Include="ViewModel\Quản lý chuồng\LapPhieuSuaChuaVM.cs" />
-    <Compile Include="ViewModel\Quản lý chuồng\ThemPhieuSuaChuaVM.cs" />
-    <Compile Include="ViewModel\Quản lý giống heo\QuanlygiongheoVM.cs" />
+    <Compile Include="ViewModel\Quản lý chuồng\CTPhieuSuaChuaVM.cs" />
+    <Compile Include="ViewModel\DatMucTieuVM.cs" />
+    <Compile Include="ViewModel\Quản lý lập lịch\LapLichPhoiGiongVM.cs" />
     <Compile Include="ViewModel\Quản lý kho\ChiTietPhieuKhoVM.cs" />
     <Compile Include="ViewModel\Quản lý kho\ChonHangHoaVM.cs" />
     <Compile Include="ViewModel\Quản lý kho\LapPhieuKhoVM.cs" />
-    <Compile Include="ViewModel\Quản lý kho\LapPhieuKhoWindowVM.cs" />
-    <Compile Include="ViewModel\Quản lý kho\QuanLyHangHoaWindowVM.cs" />
-    <Compile Include="ViewModel\Quản lý kho\TaoPhieuKhoVM.cs" />
-    <Compile Include="ViewModel\Quản lý kho\ThemHangHoaVM.cs" />
-    <Compile Include="ViewModel\Quản lý kho\ThongTinHangHoaVM.cs" />
-    <Compile Include="ViewModel\Quản lý lập lịch\LapLichTiemVM.cs" />
     <Compile Include="ViewModel\Quản lý đàn heo\ChiTietPhieuVM.cs" />
+    <Compile Include="ViewModel\Quản lý lập lịch\LaplichtiemVM.cs" />
+    <Compile Include="ViewModel\QuyDinhVM.cs" />
+    <Compile Include="ViewModel\Quản lý chuồng\ChiTietPhieuSuaChuaVM.cs" />
+    <Compile Include="ViewModel\Quản lý chuồng\LapPhieuSuaChuaVM.cs" />
+    <Compile Include="ViewModel\Quản lý chuồng\SuaTrangThaiVM.cs" />
+    <Compile Include="ViewModel\Quản lý chuồng\ThemPhieuSuaChuaVM.cs" />
+    <Compile Include="ViewModel\Quản lý chức vụ\PhanQuyenVM.cs" />
+    <Compile Include="ViewModel\Quản lý đàn heo\QuanlygiongheoVM.cs" />
     <Compile Include="ViewModel\Quản lý đàn heo\ChonHeoXuatVM.cs" />
     <Compile Include="ViewModel\Quản lý đàn heo\LapPhieuBanNhapHeoVM.cs" />
-    <Compile Include="ViewModel\Quản lý đàn heo\PhieuBanNhapHeoVM.cs" />
     <Compile Include="ViewModel\Quản lý đàn heo\ThemHeoPhieuVM.cs" />
+    <Compile Include="ViewModel\Quản lý kho\QuanLyHangHoaWindowVM.cs" />
+    <Compile Include="ViewModel\Quản lý kho\ThemHangHoaVM.cs" />
+    <Compile Include="ViewModel\Quản lý kho\ThongTinHangHoaVM.cs" />
     <Compile Include="ViewModel\Sơ đồ\ChuongUC_VM.cs" />
     <Compile Include="ViewModel\Sơ đồ\DSHeoVM.cs" />
     <Compile Include="ViewModel\Sơ đồ\DSLichChuongVM.cs" />
     <Compile Include="ViewModel\Sơ đồ\SoDoVM.cs" />
     <Compile Include="ViewModel\Sơ đồ\ThemLichMoiVM.cs" />
+    <Compile Include="ViewModel\Quản lý kho\TaoPhieuKhoVM.cs" />
+    <Compile Include="ViewModel\ThietLapCayMucTieuVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\listThongBaoTrongNgayVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\ChiTietThongBaoVM.cs" />
     <Compile Include="ViewModel\QL thông tin cá nhân\DoiMatKhauVM.cs" />
@@ -277,6 +283,7 @@
     <Compile Include="ViewModel\Quản lý chức vụ\ChucVuVM.cs" />
     <Compile Include="ViewModel\Quản lý chức vụ\SuaChucVuVM.cs" />
     <Compile Include="ViewModel\Quản lý nhân viên\NhanVienVM.cs" />
+    <Compile Include="ViewModel\Quản lý đàn heo\PhieuBanNhapHeoVM.cs" />
     <Compile Include="ViewModel\QuanLyNhatKyVM.cs" />
     <Compile Include="ViewModel\Quản lý báo cáo\BaoCaoThuChiVM.cs" />
     <Compile Include="ViewModel\Quản lý báo cáo\BaoCaoTonKhoVM.cs" />
@@ -284,14 +291,29 @@
     <Compile Include="ViewModel\Quản lý báo cáo\BaoCaoTinhTrangHeoVM.cs" />
     <Compile Include="ViewModel\QL thông tin cá nhân\CapNhatTaiKhoanVM.cs" />
     <Compile Include="ViewModel\Tạo thông báo\TaoThongBaoVM.cs" />
+    <Compile Include="View\Windows\Quy Định\EditMDBWindow.xaml.cs">
+      <DependentUpon>EditMDBWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Quy Định\EditQDTHWindow.xaml.cs">
+      <DependentUpon>EditQDTHWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Quy Định\QuyDinhWindow.xaml.cs">
+      <DependentUpon>QuyDinhWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Quản lý chuồng nuôi\CTPhieuSuaChuaWindow.xaml.cs">
+      <DependentUpon>CTPhieuSuaChuaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\Quản lý chức vụ\PhanQuyenWindow.xaml.cs">
+      <DependentUpon>PhanQuyenWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\Quản lý kho\ChiTietPhieuKhoWindow.xaml.cs">
       <DependentUpon>ChiTietPhieuKhoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\Quản lý kho\ChonHangHoaWindow.xaml.cs">
       <DependentUpon>ChonHangHoaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Windows\Quy Định\QuyDinhWindow.xaml.cs">
-      <DependentUpon>QuyDinhWindow.xaml</DependentUpon>
+    <Compile Include="View\Windows\Quản lý chuồng nuôi\SuaTrangThai.xaml.cs">
+      <DependentUpon>SuaTrangThai.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\Quản lý kho\ThemHangHoawindow.xaml.cs">
       <DependentUpon>ThemHangHoawindow.xaml</DependentUpon>
@@ -350,6 +372,7 @@
     <Compile Include="View\Windows\Thiết lập cây mục tiêu\DatMucTieu.xaml.cs">
       <DependentUpon>DatMucTieu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Windows\Thiết lập cây mục tiêu\ThamSo.cs" />
     <Compile Include="View\Windows\Thiết lập cây mục tiêu\ThongTinCanBiet.xaml.cs">
       <DependentUpon>ThongTinCanBiet.xaml</DependentUpon>
     </Compile>
@@ -506,6 +529,26 @@
     <Compile Include="View\Windows\wLogin.xaml.cs">
       <DependentUpon>wLogin.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Windows\Quy Định\EditMDBWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Quy Định\EditQDTHWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Quy Định\QuyDinhWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Quản lý chuồng nuôi\CTPhieuSuaChuaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Quản lý chức vụ\PhanQuyenWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\Quản lý kho\ChiTietPhieuKhoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -514,7 +557,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Windows\Quy Định\QuyDinhWindow.xaml">
+    <Page Include="View\Windows\Quản lý chuồng nuôi\SuaTrangThai.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -902,6 +945,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="View\Windows\Quy Định\tooltip.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.6.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.6.1\build\MaterialDesignThemes.targets')" />

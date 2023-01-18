@@ -92,7 +92,18 @@ namespace FarmManagementSoftware.ViewModel
             ListLoaiHH = new List<string>();
 
             #region lấy dữ liệu cho comboBox Tháng
-            ListThang = DataProvider.Ins.DB.BAOCAOTONKHOes.Select(x => x.Thang.Value).Distinct().ToList();
+            ListThang.Add(1);
+            ListThang.Add(2);
+            ListThang.Add(3);
+            ListThang.Add(4);
+            ListThang.Add(5);
+            ListThang.Add(6);
+            ListThang.Add(7);
+            ListThang.Add(8);
+            ListThang.Add(9);
+            ListThang.Add(10);
+            ListThang.Add(11);
+            ListThang.Add(12);
             SelectedThang = DateTime.Today.Month;
             #endregion
 
@@ -106,6 +117,7 @@ namespace FarmManagementSoftware.ViewModel
             ListLoaiHH.Add("Tất cả");
             SelectedLoaiHH = "Tất cả";
             #endregion
+
             #region binding dữ liệu cho danh sách hàng hoá trong kho
             LoadBCTK();
 
@@ -113,6 +125,7 @@ namespace FarmManagementSoftware.ViewModel
             //lstHangHoa.Add(new HangHoa() { STT = "2", IDHangHoa = "TA02", TenHangHoa = "B52/AMPI-COL", LoaiHangHoa = "Thuốc", Soluong = "50", DVT = "chai", TonDau = "5", NhapThem = "45" });
             //lstHangHoa.Add(new HangHoa() { STT = "", IDHangHoa = "", TenHangHoa = "TỔNG SỐ LƯỢNG", LoaiHangHoa = "", Soluong = "70", DVT = "", TonDau = "", NhapThem = "" });
             #endregion
+
             #region command Tìm kiếm theo tháng
             TimKiemTheoThang = new RelayCommand<Window>((p) => { return true; }, p => {
                 LoadBCTK();
@@ -143,6 +156,7 @@ namespace FarmManagementSoftware.ViewModel
                 {
                     filePath = dialog.FileName;
                 }
+                else return;
                 if (string.IsNullOrEmpty(filePath))
                 {
                     MessageBox.Show("Đường dẫn không hợp lệ!");

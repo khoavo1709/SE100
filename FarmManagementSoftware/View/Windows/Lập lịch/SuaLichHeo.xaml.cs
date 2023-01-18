@@ -84,6 +84,18 @@ namespace FarmManagementSoftware.View.Windows.Lập_lịch
             check = 0;
             this.Close();
         }
+
+        private void Trangthai_combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Trangthai_combobox.SelectedIndex == 1)
+            {
+                if(Datepicker_Ngaytiem.SelectedDate > DateTime.Now.Date)
+                {
+                    MessageBox.Show("Heo chỉ được tiêm với ngày tiềm trước ngày hiện tại.");
+                    Trangthai_combobox.SelectedIndex = 0;
+                }
+            }
+        }
     }
     
 }

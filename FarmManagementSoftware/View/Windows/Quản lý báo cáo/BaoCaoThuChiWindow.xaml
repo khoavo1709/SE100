@@ -82,10 +82,14 @@
                                       FontSize="10"
                                       DataClick="Chart_OnDataClick"
                                       Hoverable="False"
+                                     
                                       Height="250"
                                       Margin="10,10,10,20"
                                       FontStretch="Medium"
-                                      Series="{Binding ThuChartViews}">
+                                      Series="{Binding ThuChartViews}"
+                                     
+                                      >
+                            
                         </lvc:PieChart>
                     </StackPanel>
                 </materialDesign:Card>
@@ -359,7 +363,7 @@
                                     <GridViewColumn DisplayMemberBinding="{Binding LoaiPhieu}"
                                                     Header="Loại phiếu" />
 
-                                    <GridViewColumn DisplayMemberBinding="{Binding TongTien}"
+                                    <GridViewColumn DisplayMemberBinding="{Binding TongTien,  StringFormat=\{0:#\,##0\} VNĐ}"
                                                     Header="Tổng tiền" />
 
                                 </GridView>

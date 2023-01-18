@@ -6,25 +6,146 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows.Lập_lịch"
         mc:Ignorable="d"
-        Title="DanhsachHeo" Height="336" Width="326" HorizontalContentAlignment="Stretch" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="DanhsachHeo" Height="679" Width="886" HorizontalContentAlignment="Stretch" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-                <GradientStop Color="#3ab19b" Offset="0.05"/>
-                <GradientStop Color="#2d708c" Offset="0.25"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <Image Source="/Image/bachground.jpg" Stretch="UniformToFill" Opacity="0.2"></Image>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="270"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Grid.Row="0" Margin="0,0,10,0">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0">Chọn chuồng trại cần tiêm</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="HoopHouse" Margin="10 15 0 0 "/>
+                        <ComboBox x:Name="MaChuong_CB" materialDesign:HintAssist.Hint="Mã chuồng" Height="30" Margin="30,10,20,11" IsReadOnly="True" SelectionChanged="MaChuong_CB_SelectionChanged"/>
+                    </Grid>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Margin="0,20,10,0">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0">Thông tin tiêm heo</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Reload" Margin="10 5 0 0 "/>
+                        <TextBox x:Name="LichSuTiem_TB" Margin="30,0,20,11"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            VerticalAlignment="Top"
+                            Height="210"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Auto"
+                            materialDesign:HintAssist.Hint="Lịch sử tiêm heo"
+                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                                 Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="3" Margin="0,10,10,0">
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card Height="30">
+                        <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0">Tra cứu</TextBlock>
+                    </materialDesign:Card>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="QuestionAnswer" Margin="10 15 0 0 "/>
+                        <ComboBox x:Name="TrangThai_CB" materialDesign:HintAssist.Hint="Đã tiêm/Chưa tiêm" Text="" Height="30" Margin="30,10,20,11" IsReadOnly="True" SelectedValuePath="Content" SelectionChanged="TrangThai_CB_SelectionChanged">
+                            <ComboBoxItem x:Name="cbi1">Đã tiêm</ComboBoxItem>
+                            <ComboBoxItem x:Name="cbi2">Chưa tiêm</ComboBoxItem>
+                        </ComboBox>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="Needle" Margin="10 5 0 0 "/>
+                        <ComboBox x:Name="TiemVacxin_CB" Height="30" Margin="30,0,20,11"
+                                materialDesign:HintAssist.Hint="Thuốc/Vacxin"
+                                  SelectedValuePath="Content"
+                                  IsReadOnly="True" SelectionChanged="TiemVacxin_CB_SelectionChanged">
+                        </ComboBox>
+                    </Grid>
+                    <Grid>
+                        <materialDesign:PackIcon Kind="DateRange" Margin="10 5 0 0 "/>
+                        <TextBox x:Name="tb_TuoiMin" materialDesign:HintAssist.Hint="Ngày tuổi tối thiểu" Height="30" Margin="30,0,20,11" TextChanged="TbTuoiMin_TextChanged" />
+                    </Grid>
+
+                    <Grid>
+                        <materialDesign:PackIcon Kind="DateRange" Margin="10 5 0 0 "/>
+                        <TextBox x:Name="tb_TuoiMax" materialDesign:HintAssist.Hint="Ngày tuổi tối đa" Height="30" Margin="30,0,20,11" TextChanged="TuoiMax_TextChanged" />
+                    </Grid>
+
+                    <Button Margin="20,20,20,0"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Height="30"
+                        BorderBrush="White"
+                        Content="Hoàn tất"
+                        FontSize="16"
+                        Background="#00de1e"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        Click="Confirm_button_Click"
+                            >
+
+                    </Button>
+                    <Button Margin="20,10,20,0"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Height="30"
+                        BorderBrush="White"
+                        Content="Huỷ bỏ"
+                        FontSize="16"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        Foreground="#00de1e"
+                        Background="#dcf7e0"
+                        Click="Huy_button_Click"
+>
+
+                    </Button>
+                </StackPanel>
+            </materialDesign:Card>
+
         </Grid>
         <Grid Grid.Column="1">
-            <materialDesign:Card Margin="5">
-                <ListView x:Name="ListMaHeo_">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn x:Name="ListMaHeo" Header="Mã heo" DisplayMemberBinding="{Binding MaHeo}" HeaderContainerStyle="{Binding ElementName=window, Mode=OneWay}" />
-                            <GridViewColumn x:Name="ListTenHeo" Header="Loại heo" DisplayMemberBinding="{Binding LOAIHEO.TenLoaiHeo}" HeaderContainerStyle="{Binding ElementName=window, Mode=OneWay}" />
-                            <GridViewColumn Header="" Width="160">
+            <DataGrid x:Name="ListMaHeo_" 
+                          ItemsSource ="{Binding _listChonHeo}"
+                            Grid.Row="1" CanUserAddRows="False"
+                            AutoGenerateColumns="False"
+                            HeadersVisibility="All"                               
+                            SelectionUnit="{Binding ElementName=selectionUnitComboBox, Path=SelectedValue}" Background="White">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn 
+                                                Binding="{Binding IsChecked}" 
+                                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
+                        <DataGridCheckBoxColumn.Header>
+                            <Border
+                                            Background="Transparent">
+                                <CheckBox />
+                            </Border>
+                        </DataGridCheckBoxColumn.Header>
+                        <DataGridCheckBoxColumn.HeaderStyle>
+                            <Style
+                                          TargetType="{x:Type DataGridColumnHeader}"
+                                          BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter
+                                            Property="HorizontalContentAlignment"
+                                            Value="Center" />
+                            </Style>
+                        </DataGridCheckBoxColumn.HeaderStyle>
+                    </DataGridCheckBoxColumn>
+                    <DataGridTextColumn x:Name="ListMaHeo" Header="Mã heo" 
+                                            Binding="{Binding heo.MaHeo}" IsReadOnly="True"/>
+                    <DataGridTextColumn x:Name="ListTenHeo" Header="Loại heo" 
+                                            Binding="{Binding heo.LOAIHEO.TenLoaiHeo}" IsReadOnly="True"/>
+                    <DataGridTextColumn x:Name="Tuoi" Header="Tuổi" 
+                                            Binding="{Binding ShowTuoi}" IsReadOnly="True"/>
+                    <DataGridTemplateColumn x:Name="Trangthai" Header="Trạng thái" IsReadOnly="True">
+
+                    </DataGridTemplateColumn>
+                    <!--GridViewColumn Header="" Width="160">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Menu>
@@ -32,17 +153,16 @@
                                         </Menu>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <EventSetter Event="UIElement.PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
-                            <EventSetter Event="UIElement.PreviewMouseLeftButtonUp" Handler="ListViewItem_PreviewMouseLeftButtonUp" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
-            </materialDesign:Card>
+                            </GridViewColumn-->
+                </DataGrid.Columns>
+                <DataGrid.ItemContainerStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <EventSetter Event="UIElement.PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                        <EventSetter Event="UIElement.PreviewMouseLeftButtonUp" Handler="ListViewItem_PreviewMouseLeftButtonUp" />
+                    </Style>
+                </DataGrid.ItemContainerStyle>
+            </DataGrid>
+
         </Grid>
     </Grid>
 </Window>

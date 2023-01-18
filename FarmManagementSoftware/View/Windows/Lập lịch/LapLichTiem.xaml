@@ -21,7 +21,7 @@
         Height="768"
         Width="1024"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
-    <Grid Margin="20,0,20,0">
+    <Grid Margin="10,0,10,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -30,13 +30,13 @@
         <materialDesign:Card Grid.Column="0" Margin="0,0,10,0">
             <StackPanel Orientation="Vertical">
                 <materialDesign:Card Height="64" Margin="0,5,0,0">
-                    <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" Margin="10,0,0,0">Thông tin lịch tiêm heo</TextBlock>
+                    <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="23" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">Thông tin lịch tiêm heo</TextBlock>
                 </materialDesign:Card>
-                <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Height="60">
                     <TextBox x:Name="Pigcode_text" Width="190"
                             materialDesign:HintAssist.Hint="Nhập danh sách mã heo"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                            VerticalAlignment="Center" Height="36" />
                     <Button x:Name="ListHeo_button" Margin="5,0,10,0"
                             Style="{StaticResource MaterialDesignRaisedButton}"
                             Height="30"
@@ -50,7 +50,7 @@
                     </Button>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Height="60">
                     <TextBox x:Name="Drugcode_text" Width="190"
                             materialDesign:HintAssist.Hint="Nhập mã thuốc"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -69,26 +69,16 @@
                 </StackPanel>
 
                 <DatePicker x:Name="Datepicker_Ngaytiem" Margin="10,10,0,0"
-                          Width="200" HorizontalAlignment="Left"
+                          Width="258" HorizontalAlignment="Left"
                           materialDesign:HintAssist.Hint="Nhập ngày tiêm"
                           materialDesign:TextFieldAssist.HasClearButton="True"
-                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                <TextBox x:Name="Lieuluong_text"  Margin="10,10,0,0"
-                          Width="200" HorizontalAlignment="Left"
+                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="60" />
+                <TextBox x:Name="Lieuluong_text"  Margin="10,30,0,0"
+                          Width="258"
                           materialDesign:HintAssist.Hint="Nhập liều lượng"
-                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                          VerticalAlignment="Center" />
-                <ComboBox x:Name="Trangthai_combobox" Margin="10,10,0,0" Height="35" VerticalContentAlignment="Bottom"
-                          Width="200" HorizontalAlignment="Left"
-                          materialDesign:HintAssist.Hint="Trạng thái">
-                    <ComboBoxItem
-                            IsSelected="True"
-                            Content="Chưa tiêm" />
-                    <ComboBoxItem
-                            Content="Đã tiêm" />
-                </ComboBox>
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="50" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-                <Button x:Name="add_Button" Margin="20,20,20,0"
+                <Button x:Name="add_Button" Margin="20,40,20,0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Height="30"
                         BorderBrush="White"
@@ -111,7 +101,7 @@
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="10,5,0,5">Danh sách lịch tiêm heo</TextBlock>
+                            <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Margin="10,5,0,5">Danh sách lịch tiêm heo</TextBlock>
 
                             <Grid Grid.Row="1" Margin="0,0,0,10">
                                 <Grid.ColumnDefinitions>
@@ -134,36 +124,21 @@
                                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                                 materialDesign:ColorZoneAssist.Mode="SecondaryLight"
                                                 materialDesign:HintAssist.Hint="Loại heo">
-                                        <ComboBoxItem
-                                                Content="Heo nái" />
-                                        <ComboBoxItem
-                                                Content="Heo đực giống" />
-                                        <ComboBoxItem
-                                                Content="Heo con" />
-                                        <ComboBoxItem
-                                                Content="Heo thịt" />
+                                        
                                     </ComboBox>
                                     <ComboBox x:Name="Find_giongheo" Grid.Column="2" Margin="5,0,5,0"
                                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                                 materialDesign:ColorZoneAssist.Mode="SecondaryLight"
                                                 materialDesign:HintAssist.Hint="Giống heo">
-                                        <ComboBoxItem
-                                                Content="Móng Cái" />
-                                        <ComboBoxItem
-                                                Content="Ỉ" />
-                                        <ComboBoxItem
-                                                Content="Cỏ" />
+                                        
                                     </ComboBox>
                                     <ComboBox x:Name="FindLoaiThuoc" Grid.Column="3" Margin="5,0,5,0"
                                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                                 materialDesign:ColorZoneAssist.Mode="SecondaryLight"
                                                 materialDesign:HintAssist.Hint="Tên thuốc">
-                                        <ComboBoxItem
-                                                Content="Thức ăn HH cao cấp cho heo nái mang thai 8042" />
-                                        <ComboBoxItem
-                                                Content="B52/AMPI-COL" />
+                                        
                                     </ComboBox>
                                 </Grid>
                                 <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="5,0,5,0">
@@ -201,34 +176,35 @@
                         </Grid>
 
                     </materialDesign:Card>
-                    <ListView x:Name="Listtiemheo" ItemsSource="{Binding Lichtiem}" SelectedItem="{Binding MaHeo, Mode=OneWayToSource}" Margin="15,0,10,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionMode="Multiple">
+                    <ListView x:Name="Listtiemheo" ItemsSource="{Binding Lichtiem}" SelectedItem="{Binding MaHeo, Mode=OneWayToSource}" Margin="15,0,10,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionMode="Multiple" Height="666">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Ngày tiêm heo" DisplayMemberBinding="{Binding NgayTiem, StringFormat=\{0:d\}}" />
-                                <GridViewColumn Header="Mã heo" DisplayMemberBinding="{Binding MaHeo}" />
-                                <GridViewColumn Header="Loại heo" DisplayMemberBinding="{Binding HEO.LOAIHEO.TenLoaiHeo}" />
-                                <GridViewColumn Header="Giống heo" DisplayMemberBinding="{Binding HEO.GIONGHEO.TenGiongHeo}" />
-                                <GridViewColumn Header="Loại thuốc" DisplayMemberBinding="{Binding hh.TenHangHoa}" />
-                                <GridViewColumn Header="Liều lượng" DisplayMemberBinding="{Binding LieuLuong}" />
-                                <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding TrangThai}" />
-                                <GridViewColumn Header="" Width="160">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Menu>
-                                                <MenuItem x:Name="fixB" Icon="{materialDesign:PackIcon Kind=Pen}"  Width="48" Click="btnFix_Click"></MenuItem>
-                                                <MenuItem x:Name="deleteB" Icon="{materialDesign:PackIcon Kind=Delete}"  Width="48" Click="btnDelete_Click"></MenuItem>
-                                            </Menu>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                                <GridViewColumn Header="Ngày tiêm heo" DisplayMemberBinding="{Binding lichtiem.NgayTiem, StringFormat=\{0:d\}}" />
+                                <GridViewColumn Header="Mã heo" DisplayMemberBinding="{Binding lichtiem.MaHeo}" />
+                                <GridViewColumn Header="Loại heo" DisplayMemberBinding="{Binding lichtiem.HEO.LOAIHEO.TenLoaiHeo}" />
+                                <GridViewColumn Header="Giống heo" DisplayMemberBinding="{Binding lichtiem.HEO.GIONGHEO.TenGiongHeo}" />
+                                <GridViewColumn Header="Loại thuốc" DisplayMemberBinding="{Binding hanghoa.TenHangHoa}" />
+                                <GridViewColumn Header="Liều lượng" DisplayMemberBinding="{Binding lichtiem.LieuLuong}" />
+                                <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding lichtiem.TrangThai}" />
+                                
                             </GridView>
                         </ListView.View>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
-                                <EventSetter Event="PreviewMouseLeftButtonUp" Handler="ListViewItem_PreviewMouseLeftButtonUp" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Show}" >
+                                    <MenuItem.Header>Xem</MenuItem.Header>
+                                </MenuItem>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"
+                                          Click="btnFix_Click">
+                                    <MenuItem.Header>Sửa</MenuItem.Header>
+                                </MenuItem>
+                                <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"
+                                    Click="btnDelete_Click">
+                                    <MenuItem.Header>Xóa</MenuItem.Header>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+
                     </ListView>
                 </StackPanel>
 

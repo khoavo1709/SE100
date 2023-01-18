@@ -3,12 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows.Quản_lý_kho"
+        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
         Title="ChiTietPhieuWindow" Height="800" Width="1000"
         Name="CTPhieuKhoW"
         WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource ChiTietPhieuKhoVM}"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350"></ColumnDefinition>
@@ -273,13 +274,13 @@
                     </Grid>
                     <Grid>
                         <Grid.Style>
-                            <Style TargetType="Grid">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding selectedLoaiPhieu}" Value="Phiếu kiểm kho">
-                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding selectedLoaiPhieu}" Value="Phiếu kiểm kho">
+                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
                         </Grid.Style>
                         <materialDesign:PackIcon Kind="ReceiptText"
                                                  Margin="10 5 0 0 " />
@@ -368,7 +369,7 @@
                             Command="{Binding btnHoanTatcommand}"
                             CommandParameter="{Binding ElementName=CTPhieuKhoW}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
-
+                
 
             </Button>
             <Button Margin="20,10,20,0"
@@ -398,21 +399,21 @@
                         </Style.Triggers>
                     </Style>
                 </Grid.Style>
-                <ListView HorizontalAlignment="Left" ItemsSource="{Binding CTPhieuHangHoa}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Mã hàng hóa" DisplayMemberBinding="{Binding MaHangHoa}" />
-                            <GridViewColumn Header="Tên hàng hóa" DisplayMemberBinding="{Binding HANGHOA.TenHangHoa}" />
-                            <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding _soLuong}"/>
-                            <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding _donGia}"/>
-                        </GridView>
-                    </ListView.View>
-                    <ListView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Delete" Command="{Binding DeleteCommand}" />
-                        </ContextMenu>
-                    </ListView.ContextMenu>
-                </ListView>
+            <ListView HorizontalAlignment="Left" ItemsSource="{Binding CTPhieuHangHoa}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Mã hàng hóa" DisplayMemberBinding="{Binding MaHangHoa}" />
+                        <GridViewColumn Header="Tên hàng hóa" DisplayMemberBinding="{Binding HANGHOA.TenHangHoa}" />
+                        <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding _soLuong}"/>
+                        <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding _donGia}"/>
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Delete" Command="{Binding DeleteCommand}" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
             </Grid>
             <Grid>
                 <Grid.Style>
@@ -426,20 +427,20 @@
                     </Style>
                 </Grid.Style>
                 <ListView HorizontalAlignment="Left" ItemsSource="{Binding CTPhieuKiemKho}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Mã hàng hóa" DisplayMemberBinding="{Binding MaHangHoa}" />
-                            <GridViewColumn Header="Tên hàng hóa" DisplayMemberBinding="{Binding HANGHOA.TenHangHoa}" />
-                            <GridViewColumn Header="Số lượng tồn kho" DisplayMemberBinding="{Binding SoLuongHienCo}"/>
-                            <GridViewColumn Header="Số lượng kiểm tra" DisplayMemberBinding="{Binding _soLuongKiemTra}"/>
-                        </GridView>
-                    </ListView.View>
-                    <ListView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Delete" Command="{Binding DeleteCommand}" />
-                        </ContextMenu>
-                    </ListView.ContextMenu>
-                </ListView>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Mã hàng hóa" DisplayMemberBinding="{Binding MaHangHoa}" />
+                        <GridViewColumn Header="Tên hàng hóa" DisplayMemberBinding="{Binding HANGHOA.TenHangHoa}" />
+                        <GridViewColumn Header="Số lượng tồn kho" DisplayMemberBinding="{Binding SoLuongHienCo}"/>
+                        <GridViewColumn Header="Số lượng kiểm tra" DisplayMemberBinding="{Binding _soLuongKiemTra}"/>
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Delete" Command="{Binding DeleteCommand}" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
             </Grid>
         </Grid>
     </Grid>

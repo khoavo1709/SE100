@@ -32,7 +32,7 @@
                             <ListBox ItemsSource="{Binding ListLoaiChuong}" Grid.ColumnSpan="3">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <CheckBox x:Name="Check_LoaiChuong" Content="{Binding TenLoai}" 
+                                        <CheckBox IsChecked="True" x:Name="Check_LoaiChuong" Content="{Binding TenLoai}" 
                                                   Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                                                                                     AncestorType={x:Type ItemsControl}},
                                                                                                     Path= DataContext.TimKiemTheoLoaiChuongCommand }"
@@ -45,6 +45,55 @@
                     </StackPanel>
                 </Expander>
                 <Expander IsExpanded="True" Header="Sức chứa" FontWeight="Bold" Background="White">
+                    <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                        <TextBox x:Name="txt_SucChuaTu" PreviewTextInput="IsNumberic_only" Margin="10 0 40 0" materialDesign:HintAssist.Hint="Sức chứa từ">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction
+                                                    Command="{Binding TimKiemTheoSucChua1Command}"
+                                                    CommandParameter="{Binding ElementName=txt_SucChuaTu}">
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                        <TextBox x:Name="txt_SucChuaDen" PreviewTextInput="IsNumberic_only" Margin="10 10 40 0" materialDesign:HintAssist.Hint="Sức chứa đến">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction
+                                                    Command="{Binding TimKiemTheoSucChua2Command}"
+                                                    CommandParameter="{Binding ElementName=txt_SucChuaDen}">
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </StackPanel>
+                </Expander>
+
+                <Expander IsExpanded="True" Margin="0 10 0 0" Header="Số heo" FontWeight="Bold" Background="White">
+                    <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                        <TextBox x:Name="txt_Tu" PreviewTextInput="IsNumberic_only" Margin="10 0 40 0" materialDesign:HintAssist.Hint="Số heo từ">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction
+                                                    Command="{Binding TimKiemTheoSoHeo1Command}"
+                                                    CommandParameter="{Binding ElementName=txt_Tu}">
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                        <TextBox x:Name="txt_Den" PreviewTextInput="IsNumberic_only" Margin="10 10 40 0" materialDesign:HintAssist.Hint="Số heo đến">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction
+                                                    Command="{Binding TimKiemTheoSoHeo2Command}"
+                                                    CommandParameter="{Binding ElementName=txt_Den}">
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </StackPanel>
+                </Expander>
+                <!--<Expander IsExpanded="True" Header="Sức chứa" FontWeight="Bold" Background="White">
                     <Grid>
                         <Label Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal">0</Label>
                         <Slider x:Name="Slider_SucChua" Value="{Binding SucChuaCanTim}" Width="230" HorizontalAlignment="Right" VerticalAlignment="Top" Maximum="{Binding MaxSC, UpdateSourceTrigger=PropertyChanged, Mode= TwoWay}" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="0" Margin="0,0,30,0">
@@ -75,7 +124,7 @@
                         </Slider>
                         <Label Margin="265 0 0 0 " VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Normal" Content="{Binding MaxSH, UpdateSourceTrigger=PropertyChanged, Mode= TwoWay}"></Label>
                     </Grid>
-                </Expander>
+                </Expander>-->
             </StackPanel>
         </materialDesign:Card>
 
@@ -129,39 +178,27 @@
                             </Grid>
                         </Grid>
                     </materialDesign:Card>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <Grid Height="700">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="82*"/>
-                                <ColumnDefinition Width="391*"/>
-                                <ColumnDefinition Width="473*"/>
-                            </Grid.ColumnDefinitions>
-                            <ListView Margin="25,0,25,0" x:Name="listviewk"
+                    <ScrollViewer Height="600" Width="auto">
+                        <ListView Margin="25,0,25,0" x:Name="listviewk"
                                       ItemsSource="{Binding ListChuongTrai}" 
-                                      SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" 
+                                      SelectedIndex="{Binding listviewSelectedIndex, Mode=TwoWay}"
                                       Grid.ColumnSpan="3">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong}"></GridViewColumn>
-                                        <GridViewColumn Header="Mã loại chuồng" DisplayMemberBinding="{Binding MaLoaiChuong}"></GridViewColumn>
-                                        <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding TinhTrang}"></GridViewColumn>
-                                        <GridViewColumn Header="Sức chứa tối đa" DisplayMemberBinding="{Binding SuaChuaToiDa}"></GridViewColumn>
-                                        <GridViewColumn Header="Số heo hiện có" DisplayMemberBinding="{Binding SoLuongHeo}"></GridViewColumn>
-                                        <GridViewColumn Header="Thao tác" Width="160">
-                                            <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <Menu>
-                                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Show}" Width="48" DataContext="{StaticResource QuanLyThongTinChuongVM}" Command="{Binding ShowCommand}"></MenuItem>
-                                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}"  Width="48" DataContext="{StaticResource QuanLyThongTinChuongVM}" Command="{Binding EditCommand}"></MenuItem>
-                                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}"  Width="48" DataContext="{StaticResource QuanLyThongTinChuongVM}" Command="{Binding DeleteCommand}"></MenuItem>
-                                                    </Menu>
-                                                </DataTemplate>
-                                            </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </Grid>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã chuồng" DisplayMemberBinding="{Binding MaChuong}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên loại chuồng" DisplayMemberBinding="{Binding LOAICHUONG.TenLoai}"></GridViewColumn>
+                                    <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding TinhTrang}"></GridViewColumn>
+                                    <GridViewColumn Header="Sức chứa tối đa" DisplayMemberBinding="{Binding SuaChuaToiDa}"></GridViewColumn>
+                                    <GridViewColumn Header="Số heo hiện có" DisplayMemberBinding="{Binding SoLuongHeo}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Edit}" Header="Sửa" DataContext="{StaticResource QuanLyThongTinChuongVM}" Command="{Binding EditCommand}"></MenuItem>
+                                    <!--<MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Xóa" DataContext="{StaticResource QuanLyThongTinChuongVM}" Command="{Binding DeleteCommand}"></MenuItem>-->
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                        </ListView>
                     </ScrollViewer>
                 </StackPanel>
             </materialDesign:Card>
