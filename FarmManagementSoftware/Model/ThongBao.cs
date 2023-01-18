@@ -11,17 +11,19 @@ namespace FarmManagementSoftware.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class ThongBao
+    using FarmManagementSoftware.ViewModel;
+
+    public partial class ThongBao : BaseViewModel
     {
         public string MaThongBao { get; set; }
         public string C_MaNguoiGui { get; set; }
         public string C_MaNguoiNhan { get; set; }
         public string TinhTrang { get; set; }
+        public string _TinhTrang { get => TinhTrang; set { TinhTrang = value; OnPropertyChanged(); } }
         public string TieuDe { get; set; }
         public string NoiDung { get; set; }
         public Nullable<System.DateTime> ThoiGian { get; set; }
-    
+
         public virtual NHANVIEN NHANVIEN { get; set; }
         public virtual NHANVIEN NHANVIEN1 { get; set; }
     }
