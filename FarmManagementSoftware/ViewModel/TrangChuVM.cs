@@ -233,12 +233,14 @@ namespace FarmManagementSoftware.ViewModel
         {
             lstTBMuaBenh.Clear();
             var Muabenhs = DataProvider.Ins.DB.MuaDichBenhs.Where(x => x.NgayBatDau <= DateTime.Now && DateTime.Now <= x.NgayKetThuc).ToList();
-            foreach(var muabenh in Muabenhs)
-            {
-                string tb = "Hiện giờ mùa bệnh " + muabenh.TenDichBenh + " đã tới! Hãy đến xem cách phòng tránh trong quy định mùa bệnh";
-                lstTBMuaBenh.Add(tb);
-            }
-            lstTBMuaBenh.Add("c");
+            if (Muabenhs.Count > 0)
+                foreach (var muabenh in Muabenhs)
+                {
+                    string tb = "Hiện giờ mùa bệnh " + muabenh.TenDichBenh + " đã tới! Hãy đến xem cách phòng tránh trong quy định mùa bệnh";
+                    lstTBMuaBenh.Add(tb);
+                }
+            else
+                lstTBMuaBenh.Add("Hiện tại không có mùa bệnh nào cả");
         }
 
         void loadSoLuongHeoTot()

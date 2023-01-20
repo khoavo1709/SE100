@@ -592,7 +592,6 @@
                                            Fill="White"
                                            Width="2" />
                                 <Button Name="btn_OpenSoDo"
-                                        Click="btn_OpenSoDo_Click"
                                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                         ToolTip="{Binding NhanVien.HoTen}"
                                         Background="Transparent"

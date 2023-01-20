@@ -148,6 +148,11 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_loại_heo
 
         private void Delete(LOAIHEO lOAIHEO)
         {          
+            if(lOAIHEO.HEOs.Count > 0)
+            {
+                MessageBox.Show("Không thể xóa loại heo này vì có heo loại này tại trang trại");
+                return;
+            }
             try
             {
                 DataProvider.Ins.DB.LOAIHEOs.Remove(lOAIHEO);

@@ -48,10 +48,11 @@ namespace FarmManagementSoftware.ViewModel
             permissionModels.Clear();
             permissionModels.Add(new PermissionModel(false, "Quản lý nhân viên", 1));
             permissionModels.Add(new PermissionModel(false, "Quản lý đàn heo", 2));
-            permissionModels.Add(new PermissionModel(false, "Quản lý kho", 3));
-            permissionModels.Add(new PermissionModel(false, "Quản lý tài chính", 4));
-            permissionModels.Add(new PermissionModel(false, "Quản lý cây mục tiêu", 5));
-            permissionModels.Add(new PermissionModel(false, "Quản lý nhật ký", 6));
+            permissionModels.Add(new PermissionModel(false, "Quản lý chuồng nuôi", 3));
+            permissionModels.Add(new PermissionModel(false, "Quản lý kho", 4));
+            permissionModels.Add(new PermissionModel(false, "Quản lý tài chính", 5));
+            permissionModels.Add(new PermissionModel(false, "Quản lý cây mục tiêu", 6));
+            permissionModels.Add(new PermissionModel(false, "Quản lý nhật ký", 7));
         }
         private void LoadlstPermission()
         {
@@ -193,10 +194,11 @@ namespace FarmManagementSoftware.ViewModel
                 permissionModels.Clear();
                 permissionModels.Add(new PermissionModel(false, "Quản lý nhân viên", 1));
                 permissionModels.Add(new PermissionModel(false, "Quản lý đàn heo", 2));
-                permissionModels.Add(new PermissionModel(false, "Quản lý kho", 3));
-                permissionModels.Add(new PermissionModel(false, "Quản lý tài chính", 4));
-                permissionModels.Add(new PermissionModel(false, "Quản lý cây mục tiêu", 5));
-                permissionModels.Add(new PermissionModel(false, "Quản lý nhật ký", 6));
+                permissionModels.Add(new PermissionModel(false, "Quản lý chuồng nuôi", 3));
+                permissionModels.Add(new PermissionModel(false, "Quản lý kho", 4));
+                permissionModels.Add(new PermissionModel(false, "Quản lý tài chính", 5));
+                permissionModels.Add(new PermissionModel(false, "Quản lý cây mục tiêu", 6));
+                permissionModels.Add(new PermissionModel(false, "Quản lý nhật ký", 7));
 
                 return;
             }
@@ -204,10 +206,11 @@ namespace FarmManagementSoftware.ViewModel
             permissionModels.Clear();
             permissionModels.Add(new PermissionModel(false, "Quản lý nhân viên", 1));
             permissionModels.Add(new PermissionModel(false, "Quản lý đàn heo", 2));
-            permissionModels.Add(new PermissionModel(false, "Quản lý kho", 3));
-            permissionModels.Add(new PermissionModel(false, "Quản lý tài chính", 4));
-            permissionModels.Add(new PermissionModel(false, "Quản lý cây mục tiêu", 5));
-            permissionModels.Add(new PermissionModel(false, "Quản lý nhật ký", 6));
+            permissionModels.Add(new PermissionModel(false, "Quản lý chuồng nuôi", 3));
+            permissionModels.Add(new PermissionModel(false, "Quản lý kho", 4));
+            permissionModels.Add(new PermissionModel(false, "Quản lý tài chính", 5));
+            permissionModels.Add(new PermissionModel(false, "Quản lý cây mục tiêu", 6));
+            permissionModels.Add(new PermissionModel(false, "Quản lý nhật ký", 7));
             foreach (var item in ModifyPermission.PERMISION_DETAIL)
                 foreach (var item2 in permissionModels)
                     if (item.ActionDetail == item2.ActionDetail)

@@ -305,8 +305,8 @@ CREATE TABLE THAMSO
 	id INT IDENTITY primary key,
 	XuatChuongMin	int,
 	XuatChuongMax	int,
-	XuatChuongMin	int,
-	XuatChuongMax int,
+	MonthXuatChuongMin	int,
+	MonthXuatChuongMax int,
 	TuoiNhapDan		int,
 	CanHuyet	int,
 	TuoiPhoiGiongDuc int,
@@ -484,12 +484,13 @@ go
 
 
 INSERT INTO ListActionDetail VALUES (N'Quản lý nhân viên');
-INSERT INTO ListActionDetail VALUES (N'Quản lý đàn heo ');
-INSERT INTO ListActionDetail VALUES (N'Quản lý kho ');
+INSERT INTO ListActionDetail VALUES (N'Quản lý đàn heo');
+INSERT INTO ListActionDetail VALUES (N'Quản lý chuồng nuôi');
+INSERT INTO ListActionDetail VALUES (N'Quản lý kho');
 INSERT INTO ListActionDetail VALUES (N'Quản lý tài chính');
 INSERT INTO ListActionDetail VALUES (N'Quản lý cây mục tiêu');
 INSERT INTO ListActionDetail VALUES (N'Quản lý nhật ký');
 
-INSERT INTO THAMSO  VALUES (80,120,90,120,21,3,120,120,2,2,20,25,98);
+INSERT INTO THAMSO  VALUES (0,120,0,120,0,3,120,120,2,2,20,25,98);
 
 

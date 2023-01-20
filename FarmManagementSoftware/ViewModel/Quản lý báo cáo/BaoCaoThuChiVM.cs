@@ -78,7 +78,7 @@ namespace FarmManagementSoftware.ViewModel
             {
                 monthList.Add(i);
             }
-
+            yearList.Add(2023);
             yearList.Add(2022);
             yearList.Add(2021);
             yearList.Add(2020);

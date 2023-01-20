@@ -24,7 +24,7 @@ using WpfApp_MVVM.View.Windows;
 
 namespace FarmManagementSoftware.ViewModel
 {
-    public class MainWindowVM: BaseViewModel
+    public class MainWindowVM : BaseViewModel
     {
         #region Attributes
         public bool IsLoaded = false;
@@ -42,7 +42,7 @@ namespace FarmManagementSoftware.ViewModel
         public System.Windows.Media.Imaging.BitmapImage MyImage { get => image; set { image = value; OnPropertyChanged(); } }
         public ObservableCollection<ThongBao> listTHONGBAO { get => _listTHONGBAO; set { _listTHONGBAO = value; OnPropertyChanged(); } }
         public int countThongBaoChuaDoc { get => _countThongBaoChuaDoc; set { _countThongBaoChuaDoc = value; OnPropertyChanged(); } }
-        public ThongBao selectedItem { get => _selectedItem; set { _selectedItem = value; OnPropertyChanged(); } }  
+        public ThongBao selectedItem { get => _selectedItem; set { _selectedItem = value; OnPropertyChanged(); } }
         #endregion
 
         #region CommandOpenWindow
@@ -51,8 +51,8 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand OpenQuanLyLoaiHeo { get; set; }
         public ICommand OpenQuanLyGiongHeo { get; set; }
         public ICommand OpenLapPhieuBanNhapHeoWIndow { get; set; }
-        public ICommand OpenLapLichTiemWindow { get; set; } 
-        public ICommand OpenLaplichPhoiGiongWindow { get; set; }   
+        public ICommand OpenLapLichTiemWindow { get; set; }
+        public ICommand OpenLaplichPhoiGiongWindow { get; set; }
         public ICommand OpenQuanLyThongTinChuongWindow { get; set; }
         public ICommand OpenSoDoChuongWindow { get; set; }
         public ICommand OpenLapPhieuSuaChuaWindow { get; set; }
@@ -80,20 +80,21 @@ namespace FarmManagementSoftware.ViewModel
         public ICommand XemthemTHONGBAOcommand { get; set; }
         #endregion]
 
-        public MainWindowVM()   
+        public MainWindowVM()
         {
             currentWindow = "Trang chủ";
-            
+
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, p => { Login(p); });
 
             CodeCommandOpenWindow();
 
             #region command xem thêm thông báo
-            XemthemTHONGBAOcommand = new RelayCommand<Grid>((p) => { return true; }, p => {
+            XemthemTHONGBAOcommand = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 var listthongbaocount = listTHONGBAO.Count;
                 listthongbaocount += 3;
                 var thongbaos = DataProvider.Ins.DB.ThongBaos.Where(x => x.C_MaNguoiNhan == NhanVien.MaNhanVien).Take(listthongbaocount).ToList();
-                if(thongbaos.Count() == listTHONGBAO.Count)
+                if (thongbaos.Count() == listTHONGBAO.Count)
                 {
                     MessageBox.Show("Đã hiện toàn bộ thông báo hiện có");
                 }
@@ -134,7 +135,8 @@ namespace FarmManagementSoftware.ViewModel
 
         void CodeCommandOpenWindow()
         {
-            OpenTrangChuWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenTrangChuWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 TrangChuWindow wc = new TrangChuWindow();
                 TrangChuVM vm = new TrangChuVM();
                 (wc as TrangChuWindow).grb_TrangChu.DataContext = vm;
@@ -143,192 +145,574 @@ namespace FarmManagementSoftware.ViewModel
                 wc.Content = null;
                 p.Children.Clear();
                 p.Children.Add(content as UIElement);
-                
+
 
                 currentWindow = "Trang chủ";
             });
-            OpenQuanLyThongTinCaTheWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenQuanLyThongTinCaTheWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 QuanLyThongTinCaTheWindow wc = new QuanLyThongTinCaTheWindow();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Quản lý thông tin cá thể";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 2).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Quản lý thông tin cá thể";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenQuanLyLoaiHeo = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenQuanLyLoaiHeo = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 Quanlyloaiheo wc = new Quanlyloaiheo();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Quản lý thông tin loại heo";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 2).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Quản lý thông tin loại heo";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenQuanLyGiongHeo = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenQuanLyGiongHeo = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 Quanlygiongheo wc = new Quanlygiongheo();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Quản lý thông tin giống heo";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 2).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Quản lý thông tin giống heo";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenLapPhieuBanNhapHeoWIndow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenLapPhieuBanNhapHeoWIndow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 LapPhieuBanNhapHeoWindow wc = new LapPhieuBanNhapHeoWindow();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Lập phiếu bán/nhập heo";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 2).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Lập phiếu bán/nhập heo";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenLapLichTiemWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenLapLichTiemWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 LapLichTiem wc = new LapLichTiem();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Lập lịch tiêm heo";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 2).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Lập lịch tiêm heo";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenLaplichPhoiGiongWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenLaplichPhoiGiongWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 LichPhoiGiongWindow wc = new LichPhoiGiongWindow();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Lập lịch phối giống heo";
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 2).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Lập lịch phối giống heo";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenQuanLyThongTinChuongWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenQuanLyThongTinChuongWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 QuanLyThongTinChuong wc = new QuanLyThongTinChuong();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Quản lý thông tin chuồng nuôi";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 3).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Quản lý thông tin chuồng nuôi";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenSoDoChuongWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenSoDoChuongWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 wSoDo wc = new wSoDo();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Sơ đồ chuồng nuôi";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 3).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Sơ đồ chuồng nuôi";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenLapPhieuSuaChuaWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenLapPhieuSuaChuaWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 LapPhieuSuaChuaWindow wc = new LapPhieuSuaChuaWindow();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Lập phiếu sửa chữa";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 3).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Lập phiếu sửa chữa";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenQuanLyHangHoaTrongKhoWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenQuanLyHangHoaTrongKhoWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 QuanLyHangHoaWindow wc = new QuanLyHangHoaWindow();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Quản lý hàng hoá trong kho";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 4).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Quản lý hàng hoá trong kho";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenLapPhieuKhoWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenLapPhieuKhoWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 LapPhieuKhoWindow wc = new LapPhieuKhoWindow();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Lập phiếu kho";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 4).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Lập phiếu kho";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenBaoCaoTinhTrangDanHeoWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenBaoCaoTinhTrangDanHeoWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 BaoCaoTinhTrangDanHeoWindow wc = new BaoCaoTinhTrangDanHeoWindow();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Lập báo cáo tình trạng đàn heo";
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 5).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Lập báo cáo tình trạng đàn";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenBaoCaoSuaChuaWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenBaoCaoSuaChuaWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 BaoCaoSuaChuaWindow wc = new BaoCaoSuaChuaWindow();
                 wc.Close();
+
                 Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Lập báo cáo sửa chữa";
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 5).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Lập báo cáo sửa chữa";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
+
+
             });
-            OpenBaoCaoThuChiWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenBaoCaoThuChiWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 BaoCaoThuChiWindow wc = new BaoCaoThuChiWindow();
                 wc.Close();
+
                 Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Lập lịch tiêm/phối giống heo";
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 5).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Lập báo cáo thu chi";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
+
             });
-            OpenBaoCaoTonKhoWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenBaoCaoTonKhoWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 BaoCaoTonKhoWindow wc = new BaoCaoTonKhoWindow();
                 wc.Close();
                 Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Lập báo cáo tồn kho";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 5).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Lập báo cáo tồn kho";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                } 
             });
-            OpenQuanLyThongTinNhanVienWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenQuanLyThongTinNhanVienWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 QuanLyThongTinNhanVienWindow wc = new QuanLyThongTinNhanVienWindow();
                 wc.Close();
                 Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Quản lý thông tin nhân viên";
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 1).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Quản lý thông tin nhân viên";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
+
             });
-            OpenQuanLyChucVu = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenQuanLyChucVu = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 Quanlychucvu wc = new Quanlychucvu();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Quản lý thông tin chức vụ";
+
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 1).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Quản lý thông tin chức vụ";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenQuanLyNhatKyWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenQuanLyNhatKyWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 QuanLyNhatKyWindow wc = new QuanLyNhatKyWindow();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Quản lý nhật ký";
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 7).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Quản lý nhật ký";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
             });
-            OpenThietLapCayMucTieuWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenThietLapCayMucTieuWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 ThietLapCayMucTieuWindow wc = new ThietLapCayMucTieuWindow();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Thiết lập cây mục tiêu";
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 6).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Thiết lập cây mục tiêu";
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
+
             });
-            OpenQuyDinhWindow = new RelayCommand<Grid>((p) => { return true; }, p => {
+            OpenQuyDinhWindow = new RelayCommand<Grid>((p) => { return true; }, p =>
+            {
                 QuyDinhWindow wc = new QuyDinhWindow();
                 wc.Close();
-                Object content = wc.Content;
-                wc.Content = null;
-                p.Children.Clear();
-                p.Children.Add(content as UIElement);
-                currentWindow = "Thiết lập cây mục tiêu";
+                ListActionDetail actionDetail = new ListActionDetail();
+                actionDetail = DataProvider.Ins.DB.ListActionDetails.Where(x => x.id == 6).First();
+                List<PERMISION_DETAIL> dETAIL = new List<PERMISION_DETAIL>();
+                dETAIL = DataProvider.Ins.DB.PERMISION_DETAIL.Where(x => x.ID_Permision == NhanVien.CHUCVU.ID_Permision).ToList();
+                bool flag = false;
+                foreach (PERMISION_DETAIL d in dETAIL)
+                {
+                    if (d.ActionDetail == actionDetail.ActionDetail)
+                        flag = true;
+                }
+                if (flag == true)
+                {
+                    Object content = wc.Content;
+                    wc.Content = null;
+                    p.Children.Clear();
+                    p.Children.Add(content as UIElement);
+                    currentWindow = "Thiết lập cây mục tiêu";
+
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có quyền làm việc này");
+                }
+
             });
 
-            OpenCapNhatTaiKhoan = new RelayCommand<Window>((p) => { return true; }, p => {
+            OpenCapNhatTaiKhoan = new RelayCommand<Window>((p) => { return true; }, p =>
+            {
                 CapNhatTaiKhoanWindow wc = new CapNhatTaiKhoanWindow();
                 CapNhatTaiKhoanVM capNhatTaiKhoanVM = new CapNhatTaiKhoanVM(this);
                 wc.DataContext = capNhatTaiKhoanVM;
@@ -336,7 +720,8 @@ namespace FarmManagementSoftware.ViewModel
 
             });
 
-            OpenDoiMatKhau = new RelayCommand<Window>((p) => { return true; }, p => {
+            OpenDoiMatKhau = new RelayCommand<Window>((p) => { return true; }, p =>
+            {
                 DoiMatKhau wc = new DoiMatKhau();
                 DoiMatKhauVM capNhatTaiKhoanVM = new DoiMatKhauVM(this);
                 wc.DataContext = capNhatTaiKhoanVM;
@@ -344,7 +729,8 @@ namespace FarmManagementSoftware.ViewModel
 
             });
 
-            OpenCTThongBaoCommand = new RelayCommand<Window>((p) => { return true; }, p => {
+            OpenCTThongBaoCommand = new RelayCommand<Window>((p) => { return true; }, p =>
+            {
                 if (selectedItem != null)
                 {
                     ChitTietThongBaoWindow wc = new ChitTietThongBaoWindow();
@@ -353,7 +739,8 @@ namespace FarmManagementSoftware.ViewModel
                     wc.ShowDialog();
                 }
             });
-            OpenTaoThongBaoCommand = new RelayCommand<Window>((p) => { return true; }, p => {
+            OpenTaoThongBaoCommand = new RelayCommand<Window>((p) => { return true; }, p =>
+            {
                 TaoThongBaoWindow wc = new TaoThongBaoWindow();
                 TaoThongBaoVM vm = new TaoThongBaoVM();
                 vm.nguoigui = NhanVien;
@@ -361,7 +748,7 @@ namespace FarmManagementSoftware.ViewModel
                 wc.ShowDialog();
             });
         }
-        
+
         void Login(Window p)
         {
             IsLoaded = true;

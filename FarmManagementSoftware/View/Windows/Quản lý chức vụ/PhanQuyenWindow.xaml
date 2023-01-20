@@ -8,7 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows.Quản_lý_chức_vụ"
         mc:Ignorable="d"
-        DataContext="{StaticResource PhanQuyenVM }"
+        DataContext="{StaticResource PhanQuyenVM}"
         ResizeMode="NoResize"
         Width="700"
         Height="430">

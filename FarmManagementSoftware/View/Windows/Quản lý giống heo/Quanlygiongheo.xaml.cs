@@ -158,6 +158,11 @@ namespace FarmManagementSoftware.View.Windows.Quản_lý_giống_heo
 
         private void Delete(GIONGHEO giongheo)
         {
+            if(giongheo.HEOs.Count > 0)
+            {
+                MessageBox.Show("Không thể xóa giống heo này vì có heo giống này tại trang trại");
+                return;
+            }
             try
             {
                 DataProvider.Ins.DB.GIONGHEOs.Remove(giongheo);
