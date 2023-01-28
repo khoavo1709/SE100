@@ -2,7 +2,7 @@
 using MaterialDesignThemes.Wpf;
 using OfficeOpenXml.ConditionalFormatting;
 using FarmManagementSoftware.Model;
-using FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu;
+using FarmManagementSoftware.View.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -141,7 +141,7 @@ namespace FarmManagementSoftware.ViewModel
             #endregion
 
             #region command đặt mục tiêu
-            DatMucTieuCommand = new RelayCommand<Window>((p) => { return true; }, p => {
+                DatMucTieuCommand = new RelayCommand<Window>((p) => { return true; }, p => {
                 DatMucTieu wc = new DatMucTieu();
                 DatMucTieuVM vm = new DatMucTieuVM(thamso);
                 wc.DataContext = vm;

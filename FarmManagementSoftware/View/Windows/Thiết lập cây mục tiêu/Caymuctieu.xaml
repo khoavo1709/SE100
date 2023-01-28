@@ -1,10 +1,10 @@
-﻿<Window x:Class="FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu.Caymuctieu"
+﻿<Window x:Class="FarmManagementSoftware.View.Windows.Caymuctieu"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu"
+        xmlns:local="clr-namespace:FarmManagementSoftware.View.Windows"
         mc:Ignorable="d"
         Title="Caymuctieu" Height="723.867" Width="800" ScrollViewer.CanContentScroll="True">
     <Viewbox x:Name="Zoomviewbox" Margin="0,0,-6.667,0.667">
@@ -41,7 +41,7 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,7,8" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="DoanhThuUocTinh_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
@@ -57,7 +57,7 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="Soheotrongnam_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
@@ -73,7 +73,7 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="Soheocaisua_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
@@ -89,7 +89,7 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,7,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="TrungbinhLua_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
@@ -105,7 +105,7 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="Soheoconsong_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
@@ -121,7 +121,7 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,8,3" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="Tylechet_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
@@ -137,7 +137,7 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="Soheoconsinhra_lua_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
@@ -153,7 +153,7 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="Odeitcon_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
@@ -169,7 +169,7 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="SoNgayKhongLamViec_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
@@ -185,7 +185,7 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="Thoigianmangthai_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
@@ -201,7 +201,7 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,5,5" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="Songaycaisua_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
@@ -217,23 +217,23 @@
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
                         <Image x:Name="Tylede_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>
             <materialDesign:Card x:Name="the13" Height="70" Margin="617,596,10,0" VerticalAlignment="Top" Width="166" Cursor="Hand">
                 <Grid Margin="0,0,-0.333,0">
-                    <Label Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DDF22828"/>
-                    <Label Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
-                    <Label Content="Tỷ lệ thay đàn" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
+                    <Label x:Name="Tylethaydan" Content="0" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="#DDF22828"/>
+                    <Label x:Name="Tylethaydan_muctieu" Content="Mục tiêu: 0" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontSize="9"/>
+                    <Label x:Name="Tylethaydan_textbox" Content="Tỷ lệ thay đàn" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Margin="10,0,0,0"/>
                     <ToggleButton
-                        x:Name="temp_button"
+                        x:Name="Tylethaydan_button"
                         Style="{StaticResource MaterialDesignActionToggleButton}"
                         ToolTip="MaterialDesignActionToggleButton"
                         materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=QuestionMark}" 
                         Background="#DDFFFFFF" Margin="0,0,5,7" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" IsChecked="False" Cursor="Hand" >
-                        <Image x:Name="temp_button_image"
-                            Source="/FarmManagementSoftware;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
+                        <Image x:Name="Tylethaydan_icon"
+                            Source="/QuanLyTraiHeo;component/Image/thumbs-up-solid.png" Stretch="UniformToFill" Height="22" Width="22" />
                     </ToggleButton>
                 </Grid>
             </materialDesign:Card>

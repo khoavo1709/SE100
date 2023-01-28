@@ -118,42 +118,30 @@
                                     <DatePicker x:Name="Find_date" Grid.Column="0" Margin="5,0,5,0"
                                             materialDesign:HintAssist.Hint="Ngày tiêm heo"
                                             materialDesign:TextFieldAssist.HasClearButton="True"
-                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDateChanged="Find_date_SelectedDateChanged" />
                                     <ComboBox x:Name="Find_loaiheo" Grid.Column="1" Margin="5,0,5,0"
                                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                                 materialDesign:ColorZoneAssist.Mode="SecondaryLight"
-                                                materialDesign:HintAssist.Hint="Loại heo">
-                                        
+                                                materialDesign:HintAssist.Hint="Loại heo" SelectionChanged="Find_loaiheo_SelectionChanged" >
+
                                     </ComboBox>
                                     <ComboBox x:Name="Find_giongheo" Grid.Column="2" Margin="5,0,5,0"
                                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                                 materialDesign:ColorZoneAssist.Mode="SecondaryLight"
-                                                materialDesign:HintAssist.Hint="Giống heo">
-                                        
+                                                materialDesign:HintAssist.Hint="Giống heo" SelectionChanged="Find_giongheo_SelectionChanged" >
+
                                     </ComboBox>
                                     <ComboBox x:Name="FindLoaiThuoc" Grid.Column="3" Margin="5,0,5,0"
                                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                                 materialDesign:ColorZoneAssist.Mode="SecondaryLight"
-                                                materialDesign:HintAssist.Hint="Tên thuốc">
-                                        
+                                                materialDesign:HintAssist.Hint="Tên thuốc" SelectionChanged="FindLoaiThuoc_SelectionChanged">
+
                                     </ComboBox>
                                 </Grid>
                                 <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="5,0,5,0">
-                                    <Button x:Name="FindButton"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Height="30"
-                                    Width="120"
-                                    BorderBrush="White"
-                                    Content="Tìm"
-                                    FontSize="16"
-                                    Background="#00de1e"
-                                    materialDesign:ButtonAssist.CornerRadius="5"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="FindButton_Click">
-
-                                    </Button>
 
                                     <Button x:Name="Output_excel"
                                     Margin="20,0,0,0"
@@ -186,7 +174,7 @@
                                 <GridViewColumn Header="Loại thuốc" DisplayMemberBinding="{Binding hanghoa.TenHangHoa}" />
                                 <GridViewColumn Header="Liều lượng" DisplayMemberBinding="{Binding lichtiem.LieuLuong}" />
                                 <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding lichtiem.TrangThai}" />
-                                
+
                             </GridView>
                         </ListView.View>
                         <ListView.ContextMenu>

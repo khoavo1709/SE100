@@ -16,8 +16,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 
-namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
+namespace FarmManagementSoftware.View.Windows
 {
     /// <summary>
     /// Interaction logic for Caymuctieu.xaml
@@ -29,6 +30,8 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
         public List<LICHPHOIGIONG> LichPhoiGiong { get; set; }
         public List<CT_PHIEUHEO> BanHeo { get; set; }
 
+        List<string> GiaTriMucTieuList = new List<string>();
+        #region Tính toán
         public static int SoHeo = 0;
         public static int SoHeoDe = 0;
         public static int SoHeoNai = 0;
@@ -57,25 +60,36 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
         public static double SoConHeoSuaTrongMotNam = 0;
 
         public static int SoHeoDuocban = 0;
+
+        public static float TyLeDe = 0;
+        public static double ODeItCon = 0;
+        public static double SoConChetTruocKhiCaiSua_ = 0;
+        public static int DoanhThu = 0;
+
+        public static int SoHeoDuocBan = 0;
+        public static double TyLeThayDan_ = 0;
+
+        #endregion
         /// <summary>
         /// Giá trị mặc định
         /// </summary>
 
         #region chiSoMucTieu
-        public static double Tylede_muctieu;
-        public static double SoHeoConSinhRa_muctieu;
-        public static double ODeItCon_muctieu;
-        public static double SoHeoConSong_MucTieu;
-        public static double SoHeoCaiSua_muctieu;
-        public static double SoConChetTruocKhiCaiSua_MucTieu;
-        public static string ThoiGianMangThai_MucTieu;
-        public static string SoNgayCaiSua_MucTieu;
-        public static string SoNgayKhongLamViec_MucTieu;
-        public static double TrungBnhLua_MucTieu;
-        public static double SoHeoTrongNam_MucTieu;
+        public double Tylede_muctieu;
+        public double SoHeoConSinhRa_muctieu;
+        public double ODeItCon_muctieu;
+        public double SoHeoConSong_MucTieu;
+        public double SoHeoCaiSua_muctieu;
+        public double SoConChetTruocKhiCaiSua_MucTieu;
+        public double ThoiGianMangThai_MucTieu;
+        public double SoNgayCaiSua_MucTieu;
+        public string SoNgayKhongLamViec_MucTieu;
+        public double TrungBnhLua_MucTieu;
+        public double SoHeoTrongNam_MucTieu;
+        public double TyLeThayDan_MucTieu;
         #endregion
 
-        public double Tylede_muctieuClone = Tylede_muctieu;
+        /*public double Tylede_muctieuClone = Tylede_muctieu;
         public double SoHeoConSinhRa_muctieuClone = SoHeoConSinhRa_muctieu;
         public double ODeItCon_muctieuClone = ODeItCon_muctieu;
         public double SoHeoConSong_MucTieuClone = SoHeoConSong_MucTieu;
@@ -85,34 +99,21 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
         public string SoNgayCaiSua_MucTieuClone = SoNgayCaiSua_MucTieu;
         public string SoNgayKhongLamViec_MucTieuClone = SoNgayKhongLamViec_MucTieu;
         public double TrungBnhLua_MucTieuClone = TrungBnhLua_MucTieu;
-        public double SoHeoTrongNam_MucTieuClone = SoHeoTrongNam_MucTieu;
+        public double SoHeoTrongNam_MucTieuClone = SoHeoTrongNam_MucTieu;*/
 
         //Constructer
         public Caymuctieu(int? yearStart, int? yearEnd)
         {
             Heo = DataProvider.Ins.DB.HEOs.ToList();
+            BanHeo = DataProvider.Ins.DB.CT_PHIEUHEO.ToList();
             LichPhoiGiong = DataProvider.Ins.DB.LICHPHOIGIONGs.ToList();
-            setGiaTriStatic();
-            cloneStatic();
+            Window_Loaded();
+            //setGiaTriStatic();
             InitializeComponent();
             Input(yearStart, yearEnd);
             AddEvent();
         }
         //Method
-        void cloneStatic()
-        {
-            Tylede_muctieuClone = Tylede_muctieu;
-            SoHeoConSinhRa_muctieuClone = SoHeoConSinhRa_muctieu;
-            ODeItCon_muctieuClone = ODeItCon_muctieu;
-            SoHeoConSong_MucTieuClone = SoHeoConSong_MucTieu;
-            SoHeoCaiSua_muctieuClone = SoHeoCaiSua_muctieu;
-            SoConChetTruocKhiCaiSua_MucTieuClone = SoConChetTruocKhiCaiSua_MucTieu;
-            ThoiGianMangThai_MucTieuClone = ThoiGianMangThai_MucTieu;
-            SoNgayCaiSua_MucTieuClone = SoNgayCaiSua_MucTieu;
-            SoNgayKhongLamViec_MucTieuClone = SoNgayKhongLamViec_MucTieu;
-            TrungBnhLua_MucTieuClone = TrungBnhLua_MucTieu;
-            SoHeoTrongNam_MucTieuClone = SoHeoTrongNam_MucTieu;
-    }
 
         void setGiaTriStatic()
         {
@@ -122,11 +123,12 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             SoHeoConSong_MucTieu = 11;
             SoHeoCaiSua_muctieu = 9.5;
             SoConChetTruocKhiCaiSua_MucTieu = 18;
-            ThoiGianMangThai_MucTieu = "110-117";
-            SoNgayCaiSua_MucTieu = "20-28";
+            ThoiGianMangThai_MucTieu = 110;
+            SoNgayCaiSua_MucTieu = 20;
             SoNgayKhongLamViec_MucTieu = "12";
             TrungBnhLua_MucTieu = 2.3;
             SoHeoTrongNam_MucTieu = 22;
+            TyLeThayDan_MucTieu = 40;
         }
         public void Input(int? yearStart, int? yearEnd)
         {
@@ -134,8 +136,8 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             {
                 //yearEnd = DateTime.Today.Year;
                 //yearStart = DateTime.Today.Year - 1;
-                hamHienView(DateTime.Today.Year - 1, DateTime.Today.Year);
                 ResetView();
+                hamHienView(DateTime.Today.Year - 1, DateTime.Today.Year);
             }
         }
         public void Caculate(int y1, int y2)
@@ -147,11 +149,11 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             }
             else
             {
-                hamHienView(y1, y2);
                 ResetView();
+                hamHienView(y1, y2);
             }
         }
-        public void clone()
+        /*public void clone()
         {
             Tylede_muctieu = Tylede_muctieuClone;
             Tylede_muctieu_textbox.Content = "Mục tiêu: " + Tylede_muctieu + "%";
@@ -175,7 +177,7 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             Songaycaisua_muctieu.Content = "Mục tiêu: " + SoNgayCaiSua_MucTieu + " ngày";
             SoHeoTrongNam_MucTieu = SoHeoTrongNam_MucTieuClone;
             Soheotrongnam_muctieu.Content = "Mục tiêu: " + SoHeoTrongNam_MucTieu + " con";
-        }
+        }*/
         void setValue(ThamSo thamSo)
         {
             Tylede_muctieu = thamSo.Tylede_muctieuClone;
@@ -284,6 +286,8 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 SongayHeoNaiKhongLamViec();
                 Trungbinhlua();
                 SoHeoConTrongNam();
+                DoanhThuTrungBinh(y1, y2);
+                TyLeThayDan();
             }
             catch (Exception)
             {
@@ -318,26 +322,31 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
 
             SoLuaDeTrongMotNam = 0;
             SoConHeoSuaTrongMotNam = 0;
+
+            TyLeDe = 0;
+            ODeItCon = 0;
+            SoConChetTruocKhiCaiSua_ = 0;
+            DoanhThu = 0;
         }
         void Tylede()
         {
-            float tyle;
+            //float tyle;
             if (SoHeoNai != 0)
-            { tyle = ((float)SoHeoDe / SoHeoNai) * 100; }
+            { TyLeDe = ((float)SoHeoDe / SoHeoNai) * 100; }
             else
-            { tyle = 0; }
-            Tylede_main.Content = Math.Round(tyle, 2) + "%";
+            { TyLeDe = 0; }
+            Tylede_main.Content = Math.Round(TyLeDe, 2) + "%";
             Tylede_muctieu_textbox.Content = "Mục tiêu: " + Tylede_muctieu + "%";
-            if (tyle < 82)
+            if (TyLeDe < Tylede_muctieu)
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 Tylede_main.Foreground = Brushes.Red;
                 Tylede_main.FontWeight = FontWeights.Bold;
                 Tylede_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 Tylede_main.Foreground = Brushes.Green;
                 Tylede_main.FontWeight = FontWeights.Bold;
                 Tylede_button_image.Source = imageSource;
@@ -354,14 +363,14 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             Soheoconsinhra_lua.Content = SoConDe_Lua_TB + " con";
             if (SoConDe_Lua_TB < SoHeoConSinhRa_muctieu)
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 Soheoconsinhra_lua.Foreground = Brushes.Red;
                 Soheoconsinhra_lua.FontWeight = FontWeights.Bold;
                 Soheoconsinhra_lua_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 Soheoconsinhra_lua.Foreground = Brushes.Green;
                 Soheoconsinhra_lua.FontWeight = FontWeights.Bold;
                 Soheoconsinhra_lua_button_image.Source = imageSource;
@@ -370,22 +379,22 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
 
         void TinhsocondeIt()
         {
-            double tyle;
+            //double tyle;
             Odeitcon_muctieu.Content = "Mục tiêu: " + ODeItCon_muctieu + "%";
             if (SoLuaDe != 0)
-            { tyle = (double)(SoODeItCon / SoLuaDe) * 100; }
-            else { tyle = 0; }
-            Odeitcon.Content = Math.Round(tyle, 2) + "%";
-            if (tyle > ODeItCon_muctieu)
+            { ODeItCon = (double)(SoODeItCon / SoLuaDe) * 100; }
+            else { ODeItCon = 0; }
+            Odeitcon.Content = Math.Round(ODeItCon, 2) + "%";
+            if (ODeItCon > ODeItCon_muctieu)
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 Odeitcon.Foreground = Brushes.Red;
                 Odeitcon.FontWeight = FontWeights.Bold;
                 Odeitcon_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 Odeitcon.Foreground = Brushes.Green;
                 Odeitcon.FontWeight = FontWeights.Bold;
                 Odeitcon_button_image.Source = imageSource;
@@ -404,16 +413,16 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             }
             Soheoconsong_muctieu.Content = "Mục tiêu: " + SoHeoConSong_MucTieu + " con";
             Soheoconsong.Content = Math.Round(SoConDeThucTe_TB, 2) + " con";
-            if (SoConDeThucTe_TB < 11)
+            if (SoConDeThucTe_TB < SoHeoConSong_MucTieu)
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 Soheoconsong.Foreground = Brushes.Red;
                 Soheoconsong.FontWeight = FontWeights.Bold;
                 Soheoconsong_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 Soheoconsong.Foreground = Brushes.Green;
                 Soheoconsong.FontWeight = FontWeights.Bold;
                 Soheoconsong_button_image.Source = imageSource;
@@ -428,16 +437,16 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             else
             { SoConCaiSua_TB = 0; }
             Soheocaisua.Content = Math.Round(SoConCaiSua_TB, 2) + " con";
-            if (SoConCaiSua_TB < 9.5)
+            if (SoConCaiSua_TB < SoHeoCaiSua_muctieu)
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 Soheocaisua.Foreground = Brushes.Red;
                 Soheocaisua.FontWeight = FontWeights.Bold;
                 Soheocaisua_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 Soheocaisua.Foreground = Brushes.Green;
                 Soheocaisua.FontWeight = FontWeights.Bold;
                 Soheocaisua_button_image.Source = imageSource;
@@ -447,23 +456,23 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
 
         void SoConChetTruocKhiCaiSua()
         {
-            double tyle;
+            //double tyle;
             double temp = SoConDeThucTe_TB - SoConCaiSua_TB;
             Tylechet_muctieu.Content = "Mục tiêu: " + SoConChetTruocKhiCaiSua_MucTieu + "%";
             if (SoConDeThucTe_TB != 0)
-            { tyle = (double)(temp / SoConDeThucTe_TB) * 100; }
-            else { tyle = 0; }
-            Tylechet.Content = Math.Round(tyle, 2) + "%";
-            if (tyle > 18)
+            { SoConChetTruocKhiCaiSua_ = (double)(temp / SoConDeThucTe_TB) * 100; }
+            else { SoConChetTruocKhiCaiSua_ = 0; }
+            Tylechet.Content = Math.Round(SoConChetTruocKhiCaiSua_, 2) + "%";
+            if (SoConChetTruocKhiCaiSua_ > SoConChetTruocKhiCaiSua_MucTieu)
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 Tylechet.Foreground = Brushes.Red;
                 Tylechet.FontWeight = FontWeights.Bold;
                 Tylechet_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 Tylechet.Foreground = Brushes.Green;
                 Tylechet.FontWeight = FontWeights.Bold;
                 Tylechet_button_image.Source = imageSource;
@@ -480,16 +489,16 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
                 Songaymangthai_tb = 0;
             }
             Thoigianmangthai.Content = Math.Round(Songaymangthai_tb, 2) + " ngày";
-            if (Songaymangthai_tb < 110 || Songaymangthai_tb > 117)
+            if (Songaymangthai_tb < ThoiGianMangThai_MucTieu)
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 Thoigianmangthai.Foreground = Brushes.Red;
                 Thoigianmangthai.FontWeight = FontWeights.Bold;
                 Thoigianmangthai_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 Thoigianmangthai.Foreground = Brushes.Green;
                 Thoigianmangthai.FontWeight = FontWeights.Bold;
                 Thoigianmangthai_button_image.Source = imageSource;
@@ -504,16 +513,16 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             else
                 Songaycaisua_tb = 0;
             Songaycaisua.Content = Math.Round(Songaycaisua_tb, 2) + " ngày";
-            if (Songaycaisua_tb < 20 || Songaycaisua_tb > 28)
+            if (Songaycaisua_tb < SoNgayCaiSua_MucTieu)
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 Songaycaisua.Foreground = Brushes.Red;
                 Songaycaisua.FontWeight = FontWeights.Bold;
                 Songaycaisua_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 Songaycaisua.Foreground = Brushes.Green;
                 Songaycaisua.FontWeight = FontWeights.Bold;
                 Songaycaisua_button_image.Source = imageSource;
@@ -528,16 +537,16 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             else
                 Songaychophoigiong_tb = 0;
             SoNgayKhongLamViec.Content = Math.Round(Songaychophoigiong_tb, 2) + " ngày";
-            if (Songaychophoigiong_tb > 12)
+            if (Songaychophoigiong_tb > double.Parse(SoNgayKhongLamViec_MucTieu))
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 SoNgayKhongLamViec.Foreground = Brushes.Red;
                 SoNgayKhongLamViec.FontWeight = FontWeights.Bold;
                 SoNgayKhongLamViec_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 SoNgayKhongLamViec.Foreground = Brushes.Green;
                 SoNgayKhongLamViec.FontWeight = FontWeights.Bold;
                 SoNgayKhongLamViec_button_image.Source = imageSource;
@@ -552,16 +561,16 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             else
                 SoLuaDeTrongMotNam = 0;
             TrungbinhLua.Content = Math.Round(SoLuaDeTrongMotNam, 2) + " lứa";
-            if (SoLuaDeTrongMotNam < 2.3)
+            if (SoLuaDeTrongMotNam < TrungBnhLua_MucTieu)
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 TrungbinhLua.Foreground = System.Windows.Media.Brushes.Red;
                 TrungbinhLua.FontWeight = FontWeights.Bold;
                 TrungbinhLua_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 TrungbinhLua.Foreground = System.Windows.Media.Brushes.Green;
                 TrungbinhLua.FontWeight = FontWeights.Bold;
                 TrungbinhLua_button_image.Source = imageSource;
@@ -573,47 +582,72 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             Soheotrongnam_muctieu.Content = "Mục tiêu: " + SoHeoTrongNam_MucTieu + " con";
             SoConHeoSuaTrongMotNam = (double)(SoConCaiSua_TB * SoLuaDeTrongMotNam);
             Soheotrongnam.Content = Math.Round(SoConHeoSuaTrongMotNam, 2) + " con";
-            if (SoConHeoSuaTrongMotNam < 22)
+            if (SoConHeoSuaTrongMotNam < SoHeoTrongNam_MucTieu)
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 Soheotrongnam.Foreground = System.Windows.Media.Brushes.Red;
                 Soheotrongnam.FontWeight = FontWeights.Bold;
                 Soheotrongnam_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 Soheotrongnam.Foreground = System.Windows.Media.Brushes.Green;
                 Soheotrongnam.FontWeight = FontWeights.Bold;
                 Soheotrongnam_button_image.Source = imageSource;
             }
         }
 
-        void DoanhThuTrungBinh()
+        void DoanhThuTrungBinh(int a, int b)
         {
-            int temp = 0;
             foreach (var item in BanHeo)
             {
-                temp += int.Parse(item.DonGia.ToString());
+                if (item.DonGia != null && item.PHIEUHEO.NgayLap.Value.Year <= b && item.PHIEUHEO.NgayLap.Value.Year >= a)
+                {
+                    SoHeoDuocBan++;
+                    DoanhThu += item.DonGia.Value;
+                }
             }
-            DoanhThuUocTinh_uoctinh.Content = "Mục tiêu: " + (1400000 * SoConHeoSuaTrongMotNam) + " triệu";
-            DoanhThuUocTinh.Content = (double)temp / SoHeoDuocban + " triệu";
-            if ((temp / SoHeoDuocban) < (1400000 * SoConHeoSuaTrongMotNam))
+            DoanhThuUocTinh_uoctinh.Content = "Mục tiêu: " + (1400000 * SoConHeoSuaTrongMotNam).ToString("n0") + " triệu";
+            DoanhThuUocTinh.Content = DoanhThu.ToString("n0") + " triệu";
+            if ((DoanhThu /*/ SoHeoDuocban*/) < (1400000 * SoConHeoSuaTrongMotNam))
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-down-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
                 DoanhThuUocTinh.Foreground = System.Windows.Media.Brushes.Red;
                 DoanhThuUocTinh.FontWeight = FontWeights.Bold;
                 DoanhThuUocTinh_button_image.Source = imageSource;
             }
             else
             {
-                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/FarmManagementSoftware;component/Image/thumbs-up-solid.png"));
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
                 DoanhThuUocTinh.Foreground = System.Windows.Media.Brushes.Green;
                 DoanhThuUocTinh.FontWeight = FontWeights.Bold;
                 DoanhThuUocTinh_button_image.Source = imageSource;
             }
         }
-        
+        void TyLeThayDan()
+        {
+            if (SoHeoDuocBan != 0)
+            { TyLeThayDan_ = ((float)SoHeo / SoHeoDuocBan) * 100; }
+            else
+            { TyLeThayDan_ = 0; }
+            Tylethaydan.Content = Math.Round(TyLeDe, 2) + "%";
+            Tylethaydan_muctieu.Content = "Mục tiêu: " + TyLeThayDan_MucTieu + "%";
+            if (TyLeThayDan_ < TyLeThayDan_MucTieu || TyLeThayDan_ > TyLeThayDan_MucTieu + 10)
+            {
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-down-solid.png"));
+                Tylethaydan.Foreground = System.Windows.Media.Brushes.Red;
+                Tylethaydan.FontWeight = FontWeights.Bold;
+                Tylethaydan_icon.Source = imageSource;
+            }
+            else
+            {
+                ImageSource imageSource = new BitmapImage(new Uri("pack://application:,,,/QuanLyTraiHeo;component/Image/thumbs-up-solid.png"));
+                Tylethaydan.Foreground = System.Windows.Media.Brushes.Green;
+                Tylethaydan.FontWeight = FontWeights.Bold;
+                Tylethaydan_icon.Source = imageSource;
+            }
+        }
         void AddEvent()
         {
             //the1
@@ -686,7 +720,7 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
         //Test
         private void _1_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Doanh số không đạt chỉ tiêu dự kiến, không đủ tiền chi trả cho nhân viên và chi phí vận hành", "Chi tiết", MessageBoxButton.OK, MessageBoxImage.Warning);
+
         }
 
         //zoom in zoom out button
@@ -774,11 +808,11 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
         {
             toggle.IsChecked = false;
             toggle.Background = System.Windows.Media.Brushes.White;
-            c.Background = Brushes.White;            
+            c.Background = Brushes.White;
         }
         void checkclick(ToggleButton toggle)
         {
-            if (Soheotrongnam_button.IsChecked == true)
+            if (toggle.IsChecked == true)
             {
                 toggle.Background = System.Windows.Media.Brushes.Yellow;
             }
@@ -900,12 +934,12 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
 
         private void MouseEnter_13(object sender, MouseEventArgs e)
         {
-            enterCard(temp_button, e.Source as Card);
+            enterCard(Tylethaydan_button, e.Source as Card);
         }
         private void MouseLeave_13(object sender, MouseEventArgs e)
         {
-            leaveCard(temp_button, e.Source as Card);
-        } 
+            leaveCard(Tylethaydan_button, e.Source as Card);
+        }
         #endregion
         private void WhenClick(object sender, RoutedEventArgs e)
         {
@@ -917,49 +951,114 @@ namespace FarmManagementSoftware.View.Windows.Thiết_lập_cây_mục_tiêu
             switch (e.Source as Card)
             {
                 case var value when value == the1: //nice trick
-                    MessageBox.Show("the1");
+                    if ((DoanhThu /*/ SoHeoDuocban*/) < (1400000 * SoConHeoSuaTrongMotNam))
+                    {
+                        MessageBox.Show("Doanh số không đạt chỉ tiêu dự kiến, không đủ tiền chi trả cho nhân viên và chi phí vận hành", "Chi tiết", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                     break;
                 case var value when value == the2:
-                    MessageBox.Show("the2");
+                    if (SoConHeoSuaTrongMotNam < SoHeoTrongNam_MucTieu)
+                    {
+                        MessageBox.Show("Biện pháp:\n- Tăng số lần đẻ của nái trong năm (hay còn gọi là tăng số lứa đẻ/năm) để tăng tổng số heo con cai sữa trong năm.\n- Tăng số heo con sơ sinh ra để tăng tổng số heo con cai sữa tỏng năm.\n- Giảm tỷ lệ chết heo con ở trại đẻ để tăng tổng số heo con cai sữa trong năm.");
+                    }
                     break;
                 case var value when value == the3:
-                    MessageBox.Show("the3");
+                    if (SoConCaiSua_TB < SoHeoCaiSua_muctieu)
+                    {
+                        MessageBox.Show("Biện pháp:\n- Nâng cao sức khỏe của toàn bộ heo con đủ tốt để có thể cai sữa\n- Chọn thời gian cai sữa cho heo hợp lý\n- Chuẩn bị chuồng nuôi hợp lý\n- Lưu ý chuyển heo và chế phẩm hỗ trợ");
+                    }
                     break;
                 case var value when value == the4:
-                    MessageBox.Show("the4");
+                    if (SoLuaDeTrongMotNam < TrungBnhLua_MucTieu)
+                    {
+                        MessageBox.Show("Biện pháp:\n- Cho nái ăn đầy đủ dinh dưỡng và chất\n- Đảm bảo chuồng trại phù hợp với mùa trong năm\n- Điều chỉnh ngày nuôi con phù hợp( không quá ngắn hay quá dài");
+
+                    }
                     break;
                 case var value when value == the5:
-                    MessageBox.Show("the5");
+                    if (SoConDeThucTe_TB < SoHeoConSong_MucTieu)
+                    {
+                        MessageBox.Show("Biện pháp:\n- Nên theo dõi chặt chẽ heo nái trong thời gian đẻ và ngay sau khi sinh để phát hiện sớm xem chân heo nái có vững không?, nó có bị stress gì không?... nhằm phát hiện sớm nguy cơ heo nái có thể sẽ đè chết heo con hay không.\n- Tăng cường các biện pháp giúp heo nái có 4 chân khỏe mạnh như bổ sung đầy đủ dinh dưỡng, khoáng, Canxi…\n- Giữ cho môi trường luôn yên tĩnh, không làm heo nái căng thẳng là việc vô cùng cần thiết.\n- Để ý quan sát một số heo nái có hành vi bất thường như không muốn heo con bú, đụng vào người (nhất là heo nái đẻ lứa đầu) để đề phòng.\n- Theo dõi hồ sơ ghi chép của từng heo nái xem trong những lứa đẻ trước heo nái đó có đè chết con bao giờ chưa? Nếu có thì xác suất là bao nhêu để có phương án dự phòng thích hợp.\n- Thiết kế ô chuồng heo nái đẻ sao cho kìm hãm heo nái và giúp bảo vệ heo con được tốt nhất.");
+                    }
                     break;
                 case var value when value == the6:
-                    MessageBox.Show("the6");
+                    if (SoConChetTruocKhiCaiSua_ > SoConChetTruocKhiCaiSua_MucTieu)
+                    {
+                        MessageBox.Show("Biện pháp:\n- Hiểu rõ tập tính tự nhiên của lợn nái\n- Lựa chọn cho sức đề kháng của cơ thể\n- Lưu ý việc cho lợn con bú\n- Áp dụng phương pháp bồi dưỡng chéo\n- Quản lý nhiệt độ heo con.");
+                    }
                     break;
                 case var value when value == the7:
-                    MessageBox.Show("the7");
+                    if (SoConDe_Lua_TB < SoHeoConSinhRa_muctieu)
+                    {
+                        MessageBox.Show("Biện pháp:\n– Heo cai sữa sau 4 tuần phải được chích ngừa.\n– Chỉ chọn heo của những heo nái đẻ từ lứa 2 trở lên và số con đẻ ra trên lứa cao.\n– Với heo nái tơ, chỉ cho phối vào lần lên giống thứ 2. Nên cho phối 2 lần cách nhau 10-12 giờ. Giữa hai lần lên giống, nên cho heo nái ăn nhiều hơn từ 0,5-0,75 kg thức ăn vào ngày thứ 10 sau khi heo lên giống lần trước.\n– Chú ý chọn giống để phối là những heo nọc có tỷ lệ phối đậu phôi cao, đẻ sai và được chích ngừa đầy đủ.\n– Sau khi phối, không cho ăn nhiều. Nếu như heo đòi ăn nhiều thì cho ăn thêm rau xanh. Thời gian này duy trì ít nhất là 3 tuần.");
+                    }
                     break;
                 case var value when value == the8:
-                    MessageBox.Show("the8");
+                    if (ODeItCon > ODeItCon_muctieu)
+                    {
+                        MessageBox.Show("Biện pháp:\n- Nên theo dõi chặt chẽ heo nái trong thời gian đẻ và ngay sau khi sinh để phát hiện sớm xem chân heo nái có vững không?, nó có bị stress gì không?... nhằm phát hiện sớm nguy cơ heo nái có thể sẽ đè chết heo con hay không.\n- Tăng cường các biện pháp giúp heo nái có 4 chân khỏe mạnh như bổ sung đầy đủ dinh dưỡng, khoáng, Canxi…\n- Giữ cho môi trường luôn yên tĩnh, không làm heo nái căng thẳng là việc vô cùng cần thiết.\n- Để ý quan sát một số heo nái có hành vi bất thường như không muốn heo con bú, đụng vào người (nhất là heo nái đẻ lứa đầu) để đề phòng.\n- Theo dõi hồ sơ ghi chép của từng heo nái xem trong những lứa đẻ trước heo nái đó có đè chết con bao giờ chưa? Nếu có thì xác suất là bao nhêu để có phương án dự phòng thích hợp.\n- Thiết kế ô chuồng heo nái đẻ sao cho kìm hãm heo nái và giúp bảo vệ heo con được tốt nhất.");
+                    }
                     break;
                 case var value when value == the9:
-                    MessageBox.Show("the9");
+                    if (Songaychophoigiong_tb > double.Parse(SoNgayKhongLamViec_MucTieu))
+                    {
+                        MessageBox.Show("Lưu ý cần đẩy heo nái không làm việc cho phối giống, tăng chu kì đẻ và tránh không đẻ heo nhàn rỗi dẫn tới stress");
+                    }
                     break;
                 case var value when value == the10:
-                    MessageBox.Show("the10");
+                    if (Songaymangthai_tb < ThoiGianMangThai_MucTieu)
+                    {
+                        MessageBox.Show("Thời gian mang thai không đạt yêu cầu chứng tỏ tới việc chất lượng heo nái đang gặp vấn đề, cần xem xét kĩ.");
+                    }
                     break;
                 case var value when value == the11:
-                    MessageBox.Show("the11");
+                    if (Songaycaisua_tb < SoNgayCaiSua_MucTieu)
+                    {
+                        MessageBox.Show("Thời gian cho bú không đảm bảo, dễ dẫn heo chết nhiều và không lớn nhanh năng suất chất lượng sụt giảm.");
+                    }
                     break;
                 case var value when value == the12:
-                    MessageBox.Show("the12");
+                    if (TyLeDe < Tylede_muctieu)
+                    {
+                        MessageBox.Show("Tỷ lệ đẻ đang bị thấp, phương pháp khắc phục:\n-Phối lúc sáng sớm.\n-Bấm răng.\n-Sử dụng heo đực lai.\n-Duy trì chất lượng thức ăn.\n-Điều chỉnh vệ sinh và ánh sáng.");
+                    }
                     break;
                 case var value when value == the13:
-                    MessageBox.Show("the13");
+                    if (true)
+                    {
+                        MessageBox.Show("Tỷ lệ thay đàn của trang trại hiện tại không đạt chỉ tiêu, dẫn tới chất lượng không được đảm bảo, ảnh hưởng nguồn năng suất đầu ra và đầu vào", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                     break;
                 default:
                     break;
             }
         }
         #endregion
+
+        public void Window_Loaded()
+        {
+            string applicationPath = System.IO.Path.GetFullPath(System.AppDomain.CurrentDomain.BaseDirectory); // the directory that your program is installed in
+            string saveFilePath = System.IO.Path.Combine(applicationPath, "1.txt");
+            if (File.Exists(saveFilePath))
+            {
+                Tylede_muctieu = double.Parse(File.ReadLines(saveFilePath).First());
+                SoHeoConSinhRa_muctieu = double.Parse(File.ReadLines(saveFilePath).Skip(1).Take(1).First());
+                ODeItCon_muctieu = double.Parse(File.ReadLines(saveFilePath).Skip(2).Take(1).First());
+                SoHeoConSong_MucTieu = double.Parse(File.ReadLines(saveFilePath).Skip(3).Take(1).First());
+                SoHeoCaiSua_muctieu = double.Parse(File.ReadLines(saveFilePath).Skip(4).Take(1).First());
+                SoConChetTruocKhiCaiSua_MucTieu = double.Parse(File.ReadLines(saveFilePath).Skip(5).Take(1).First());
+                ThoiGianMangThai_MucTieu = double.Parse(File.ReadLines(saveFilePath).Skip(6).Take(1).First());
+                SoNgayCaiSua_MucTieu = double.Parse(File.ReadLines(saveFilePath).Skip(7).Take(1).First());
+                SoNgayKhongLamViec_MucTieu = File.ReadLines(saveFilePath).Skip(8).Take(1).First();
+                TrungBnhLua_MucTieu = double.Parse(File.ReadLines(saveFilePath).Skip(9).Take(1).First());
+                SoHeoTrongNam_MucTieu = double.Parse(File.ReadLines(saveFilePath).Skip(10).Take(1).First());
+                TyLeThayDan_MucTieu = double.Parse(File.ReadLines(saveFilePath).Skip(11).Take(1).First());
+            }
+            else
+            {
+                setGiaTriStatic();
+            }
+        }
     }
 }
 
